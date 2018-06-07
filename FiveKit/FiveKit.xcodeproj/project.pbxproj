@@ -12,8 +12,9 @@
 		0754531420C3881A00EFEC4A /* FKGame.h in Headers */ = {isa = PBXBuildFile; fileRef = 0754531020C3880D00EFEC4A /* FKGame.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0754531720C4511B00EFEC4A /* FKRoundScore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0754531520C4511B00EFEC4A /* FKRoundScore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0754531820C4511B00EFEC4A /* FKRoundScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0754531620C4511B00EFEC4A /* FKRoundScore.m */; };
-		0754532020C4528B00EFEC4A /* FiveKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0754531F20C4528B00EFEC4A /* FiveKitTests.m */; };
+		0754532020C4528B00EFEC4A /* FKRoundScoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0754531F20C4528B00EFEC4A /* FKRoundScoreTests.m */; };
 		0754532220C4528B00EFEC4A /* libFiveKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0754530420C387E500EFEC4A /* libFiveKit.a */; };
+		0795B94120C8DC1200A6A428 /* FKGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0795B94020C8DC1200A6A428 /* FKGameTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,8 +48,9 @@
 		0754531520C4511B00EFEC4A /* FKRoundScore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FKRoundScore.h; sourceTree = "<group>"; };
 		0754531620C4511B00EFEC4A /* FKRoundScore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FKRoundScore.m; sourceTree = "<group>"; };
 		0754531D20C4528B00EFEC4A /* FiveKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FiveKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0754531F20C4528B00EFEC4A /* FiveKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FiveKitTests.m; sourceTree = "<group>"; };
+		0754531F20C4528B00EFEC4A /* FKRoundScoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FKRoundScoreTests.m; sourceTree = "<group>"; };
 		0754532120C4528B00EFEC4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0795B94020C8DC1200A6A428 /* FKGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FKGameTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +105,8 @@
 		0754531E20C4528B00EFEC4A /* FiveKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				0754531F20C4528B00EFEC4A /* FiveKitTests.m */,
+				0795B94020C8DC1200A6A428 /* FKGameTests.m */,
+				0754531F20C4528B00EFEC4A /* FKRoundScoreTests.m */,
 				0754532120C4528B00EFEC4A /* Info.plist */,
 			);
 			path = FiveKitTests;
@@ -219,7 +222,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0754532020C4528B00EFEC4A /* FiveKitTests.m in Sources */,
+				0795B94120C8DC1200A6A428 /* FKGameTests.m in Sources */,
+				0754532020C4528B00EFEC4A /* FKRoundScoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

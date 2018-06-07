@@ -6,24 +6,26 @@
 //  Copyright © 2018 Varun Santhanam. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 #import "FiveKit.h"
 
-@interface FiveKitTests : XCTestCase
+@interface FKRoundScoreTests : XCTestCase
 
 @end
 
-@implementation FiveKitTests
+@implementation FKRoundScoreTests
 
 - (void)setUp {
+    
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+
     [super tearDown];
+    
 }
 
 - (void)testRoundCreate {
@@ -100,6 +102,24 @@
     
     XCTAssertThrows([round setScore:@(-1) forPlayer:@"Mom"]);
     XCTAssertThrows([round setScore:@51 forPlayer:@"Dad"]);
+    
+}
+
+- (void)testRoundScoreKeyedSubscripting {
+    
+    NSOrderedSet<NSString *> *players = [NSOrderedSet<NSString *> orderedSetWithArray:@[@"Mom", @"Dad", @"God", @"Bro"]];
+    
+    FKRoundScore *round = [FKRoundScore roundScoreWithPlayers:players];
+    
+    [round setScore:@23 forPlayer:@"Mom"];
+    [round setScore:@0 forPlayer:@"Dad"];
+    [round setScore:@12 forPlayer:@"God"];
+    [round setScore:@19 forPlayer:@"Bro"];
+    
+    XCTAssertEqual(round[@"Mom"], @23);
+    XCTAssertEqual(round[@"Dad"], @0);
+    XCTAssertEqual(round[@"God"], @12);
+    XCTAssertEqual(round[@"Bro"], @19);
     
 }
 
