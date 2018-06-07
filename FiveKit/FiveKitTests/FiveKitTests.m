@@ -77,6 +77,21 @@
     
 }
 
+- (void)testRoundScoringCompleteness {
+    
+    NSOrderedSet<NSString *> *players = [NSOrderedSet<NSString *> orderedSetWithArray:@[@"Mom", @"Dad", @"God", @"Bro"]];
+    
+    FKRoundScore *round = [FKRoundScore roundScoreWithPlayers:players];
+    
+    [round setScore:@23 forPlayer:@"Mom"];
+    [round setScore:@0 forPlayer:@"Dad"];
+    [round setScore:@12 forPlayer:@"God"];
+    [round setScore:@19 forPlayer:@"Bro"];
+    
+    XCTAssertTrue(round.complete);
+    
+}
+
 - (void)testRoundInvalidScoring {
     
     NSOrderedSet<NSString *> *players = [NSOrderedSet<NSString *> orderedSetWithArray:@[@"Mom", @"Dad", @"God", @"Bro"]];
