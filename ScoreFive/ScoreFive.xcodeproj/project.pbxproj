@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		075452D620C387AF00EFEC4A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 075452D520C387AF00EFEC4A /* AppDelegate.m */; };
+		075452D920C387AF00EFEC4A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075452D820C387AF00EFEC4A /* ViewController.m */; };
+		075452DC20C387AF00EFEC4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075452DA20C387AF00EFEC4A /* Main.storyboard */; };
+		075452DF20C387AF00EFEC4A /* ScoreFive.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 075452DD20C387AF00EFEC4A /* ScoreFive.xcdatamodeld */; };
+		075452E120C387B000EFEC4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 075452E020C387B000EFEC4A /* Assets.xcassets */; };
+		075452E420C387B000EFEC4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075452E220C387B000EFEC4A /* LaunchScreen.storyboard */; };
+		075452E720C387B000EFEC4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 075452E620C387B000EFEC4A /* main.m */; };
+		075452F120C387B000EFEC4A /* ScoreFiveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 075452F020C387B000EFEC4A /* ScoreFiveTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		075452ED20C387B000EFEC4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 075452C920C387AF00EFEC4A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 075452D020C387AF00EFEC4A;
+			remoteInfo = ScoreFive;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		075452D120C387AF00EFEC4A /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		075452D420C387AF00EFEC4A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		075452D520C387AF00EFEC4A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		075452D720C387AF00EFEC4A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		075452D820C387AF00EFEC4A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		075452DB20C387AF00EFEC4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		075452DE20C387AF00EFEC4A /* ScoreFive.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScoreFive.xcdatamodel; sourceTree = "<group>"; };
+		075452E020C387B000EFEC4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		075452E320C387B000EFEC4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		075452E520C387B000EFEC4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		075452E620C387B000EFEC4A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		075452EC20C387B000EFEC4A /* ScoreFiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScoreFiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		075452F020C387B000EFEC4A /* ScoreFiveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreFiveTests.m; sourceTree = "<group>"; };
+		075452F220C387B000EFEC4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		075452CE20C387AF00EFEC4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		075452E920C387B000EFEC4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		075452C820C387AF00EFEC4A = {
+			isa = PBXGroup;
+			children = (
+				075452D320C387AF00EFEC4A /* ScoreFive */,
+				075452EF20C387B000EFEC4A /* ScoreFiveTests */,
+				075452D220C387AF00EFEC4A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		075452D220C387AF00EFEC4A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				075452D120C387AF00EFEC4A /* ScoreFive.app */,
+				075452EC20C387B000EFEC4A /* ScoreFiveTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		075452D320C387AF00EFEC4A /* ScoreFive */ = {
+			isa = PBXGroup;
+			children = (
+				075452D420C387AF00EFEC4A /* AppDelegate.h */,
+				075452D520C387AF00EFEC4A /* AppDelegate.m */,
+				075452D720C387AF00EFEC4A /* ViewController.h */,
+				075452D820C387AF00EFEC4A /* ViewController.m */,
+				075452DA20C387AF00EFEC4A /* Main.storyboard */,
+				075452E020C387B000EFEC4A /* Assets.xcassets */,
+				075452E220C387B000EFEC4A /* LaunchScreen.storyboard */,
+				075452E520C387B000EFEC4A /* Info.plist */,
+				075452E620C387B000EFEC4A /* main.m */,
+				075452DD20C387AF00EFEC4A /* ScoreFive.xcdatamodeld */,
+			);
+			path = ScoreFive;
+			sourceTree = "<group>";
+		};
+		075452EF20C387B000EFEC4A /* ScoreFiveTests */ = {
+			isa = PBXGroup;
+			children = (
+				075452F020C387B000EFEC4A /* ScoreFiveTests.m */,
+				075452F220C387B000EFEC4A /* Info.plist */,
+			);
+			path = ScoreFiveTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		075452D020C387AF00EFEC4A /* ScoreFive */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 075452F520C387B000EFEC4A /* Build configuration list for PBXNativeTarget "ScoreFive" */;
+			buildPhases = (
+				075452CD20C387AF00EFEC4A /* Sources */,
+				075452CE20C387AF00EFEC4A /* Frameworks */,
+				075452CF20C387AF00EFEC4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScoreFive;
+			productName = ScoreFive;
+			productReference = 075452D120C387AF00EFEC4A /* ScoreFive.app */;
+			productType = "com.apple.product-type.application";
+		};
+		075452EB20C387B000EFEC4A /* ScoreFiveTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 075452F820C387B000EFEC4A /* Build configuration list for PBXNativeTarget "ScoreFiveTests" */;
+			buildPhases = (
+				075452E820C387B000EFEC4A /* Sources */,
+				075452E920C387B000EFEC4A /* Frameworks */,
+				075452EA20C387B000EFEC4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				075452EE20C387B000EFEC4A /* PBXTargetDependency */,
+			);
+			name = ScoreFiveTests;
+			productName = ScoreFiveTests;
+			productReference = 075452EC20C387B000EFEC4A /* ScoreFiveTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		075452C920C387AF00EFEC4A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Varun Santhanam";
+				TargetAttributes = {
+					075452D020C387AF00EFEC4A = {
+						CreatedOnToolsVersion = 9.4;
+					};
+					075452EB20C387B000EFEC4A = {
+						CreatedOnToolsVersion = 9.4;
+						TestTargetID = 075452D020C387AF00EFEC4A;
+					};
+				};
+			};
+			buildConfigurationList = 075452CC20C387AF00EFEC4A /* Build configuration list for PBXProject "ScoreFive" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 075452C820C387AF00EFEC4A;
+			productRefGroup = 075452D220C387AF00EFEC4A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				075452D020C387AF00EFEC4A /* ScoreFive */,
+				075452EB20C387B000EFEC4A /* ScoreFiveTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		075452CF20C387AF00EFEC4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				075452E420C387B000EFEC4A /* LaunchScreen.storyboard in Resources */,
+				075452E120C387B000EFEC4A /* Assets.xcassets in Resources */,
+				075452DC20C387AF00EFEC4A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		075452EA20C387B000EFEC4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		075452CD20C387AF00EFEC4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				075452DF20C387AF00EFEC4A /* ScoreFive.xcdatamodeld in Sources */,
+				075452D920C387AF00EFEC4A /* ViewController.m in Sources */,
+				075452E720C387B000EFEC4A /* main.m in Sources */,
+				075452D620C387AF00EFEC4A /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		075452E820C387B000EFEC4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				075452F120C387B000EFEC4A /* ScoreFiveTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		075452EE20C387B000EFEC4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 075452D020C387AF00EFEC4A /* ScoreFive */;
+			targetProxy = 075452ED20C387B000EFEC4A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		075452DA20C387AF00EFEC4A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				075452DB20C387AF00EFEC4A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		075452E220C387B000EFEC4A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				075452E320C387B000EFEC4A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		075452F320C387B000EFEC4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		075452F420C387B000EFEC4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		075452F620C387B000EFEC4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y88YPD4RJA;
+				INFOPLIST_FILE = ScoreFive/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		075452F720C387B000EFEC4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y88YPD4RJA;
+				INFOPLIST_FILE = ScoreFive/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		075452F920C387B000EFEC4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y88YPD4RJA;
+				INFOPLIST_FILE = ScoreFiveTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFiveTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScoreFive.app/ScoreFive";
+			};
+			name = Debug;
+		};
+		075452FA20C387B000EFEC4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y88YPD4RJA;
+				INFOPLIST_FILE = ScoreFiveTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFiveTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScoreFive.app/ScoreFive";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		075452CC20C387AF00EFEC4A /* Build configuration list for PBXProject "ScoreFive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				075452F320C387B000EFEC4A /* Debug */,
+				075452F420C387B000EFEC4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		075452F520C387B000EFEC4A /* Build configuration list for PBXNativeTarget "ScoreFive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				075452F620C387B000EFEC4A /* Debug */,
+				075452F720C387B000EFEC4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		075452F820C387B000EFEC4A /* Build configuration list for PBXNativeTarget "ScoreFiveTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				075452F920C387B000EFEC4A /* Debug */,
+				075452FA20C387B000EFEC4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		075452DD20C387AF00EFEC4A /* ScoreFive.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				075452DE20C387AF00EFEC4A /* ScoreFive.xcdatamodel */,
+			);
+			currentVersion = 075452DE20C387AF00EFEC4A /* ScoreFive.xcdatamodel */;
+			path = ScoreFive.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 075452C920C387AF00EFEC4A /* Project object */;
+}
