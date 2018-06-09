@@ -9,6 +9,9 @@
 #import "FKGame.h"
 
 NSString * const FKGameIncompleteRoundScoreException = @"kFKGameIncompleteRoundScoreException";
+NSString * const FKGameInvalidPlayerCountException = @"kFKGameInvalidPlayerCountException";
+NSString * const FKGameInvalidScoreLimitException = @"kFKGameInvalidScoreLimitException";
+NSString * const FKGameInvalidPlayerException = @"kFKGameInvalidPlayerException";
 
 @interface FKGame ()
 
@@ -163,6 +166,22 @@ NSString * const FKGameIncompleteRoundScoreException = @"kFKGameIncompleteRoundS
 
 - (instancetype)initWithPlayers:(NSOrderedSet<NSString *> *)players scoreLimit:(NSUInteger)scoreLimit {
     
+    if (players.count < 2) {
+        
+        [NSException raise:FKGameInvalidPlayerCountException format:@"A game must contain at minimum 2 playesr"];
+        
+        return nil;
+        
+    }
+    
+    if (scoreLimit < 50) {
+        
+        [NSException raise:FKGameInvalidScoreLimitException format:@"Score limit must be 50 or more"];
+        
+        return nil;
+        
+    }
+    
     self = [super init];
     
     if (self) {
@@ -195,13 +214,18 @@ NSString * const FKGameIncompleteRoundScoreException = @"kFKGameIncompleteRoundS
 
 - (void)addRoundScore:(FKRoundScore *)roundScore {
     
-    if (roundScore.complete && [self.alivePlayers isEqualToOrderedSet:roundScore.players]) {
+    if (!roundScore.complete) {
         
-        [self.rounds addObject:roundScore];
+        [NSException raise:FKGameIncompleteRoundScoreException format:@"%@ does not contain a score for every player", roundScore];
         
-    } else {
+        return;
+    }
+    
+    if (![self.alivePlayers isEqualToOrderedSet:roundScore.players]) {
         
-        [NSException raise:FKGameIncompleteRoundScoreException format:@"%@ is an incomplete or invalid round", roundScore];
+        [NSException raise:FKGameInvalidPlayerException format:@"%@ contains invalid players", roundScore];
+        
+        return;
         
     }
     
@@ -209,6 +233,14 @@ NSString * const FKGameIncompleteRoundScoreException = @"kFKGameIncompleteRoundS
 
 - (NSNumber *)totalScoreForPlayer:(NSString *)player {
 
+    if (![self.players containsObject:player]) {
+        
+        [NSException raise:FKGameInvalidPlayerException format:@"Game does not container player %@", player];
+        
+        return nil;
+        
+    }
+    
     NSUInteger total = 0;
 
     for (FKRoundScore *score in self) {

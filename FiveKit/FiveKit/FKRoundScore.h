@@ -9,6 +9,7 @@
 @import Foundation;
 
 extern NSString * const FKRoundScoreInvalidScoreException;
+extern NSString * const FKRoundScoreInvalidPlayerException;
 
 @interface FKRoundScore : NSObject<NSSecureCoding, NSCopying>
 

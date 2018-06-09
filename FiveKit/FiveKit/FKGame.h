@@ -11,6 +11,9 @@
 #import "FKRoundScore.h"
 
 extern NSString * const FKGameIncompleteRoundScoreException;
+extern NSString * const FKGameInvalidPlayerCountException;
+extern NSString * const FKGameInvalidScoreLimitException;
+extern NSString * const FKGameInvalidPlayerException;
 
 @interface FKGame : NSObject<NSCopying, NSSecureCoding, NSFastEnumeration>
 

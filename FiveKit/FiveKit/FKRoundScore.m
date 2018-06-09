@@ -9,6 +9,7 @@
 #import "FKRoundScore.h"
 
 NSString * const FKRoundScoreInvalidScoreException = @"kFKRoundScoreInvalidScoreException";
+NSString * const FKRoundScoreInvalidPlayerException = @"kFKRoundScoreInvalidPlayerException";
 
 @interface FKRoundScore ()
 
@@ -168,11 +169,27 @@ NSString * const FKRoundScoreInvalidScoreException = @"kFKRoundScoreInvalidScore
 
 - (NSNumber *)scoreForPlayer:(NSString *)player {
     
+    if (![self.players containsObject:player]) {
+        
+        [NSException raise:FKRoundScoreInvalidPlayerException format:@"Round does not contain player %@", player];
+        
+        return nil;
+        
+    }
+    
     return self.scores[player];
     
 }
 
 - (void)setScore:(NSNumber *)score forPlayer:(NSString *)player {
+    
+    if (![self.players containsObject:player]) {
+        
+        [NSException raise:FKRoundScoreInvalidPlayerException format:@"Round does not contain player %@", player];
+        
+        return;
+        
+    }
     
     if (!score) {
         
@@ -199,6 +216,14 @@ NSString * const FKRoundScoreInvalidScoreException = @"kFKRoundScoreInvalidScore
 }
 
 - (void)removeScoreForPlayer:(NSString *)player {
+    
+    if (![self.players containsObject:player]) {
+        
+        [NSException raise:FKRoundScoreInvalidPlayerException format:@"Round does not container player %@", player];
+        
+        return;
+        
+    }
     
     [self.scores removeObjectForKey:player];
     

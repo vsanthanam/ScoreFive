@@ -97,6 +97,15 @@
     
 }
 
+- (void)testInvalidPlayers {
+    
+    FKRoundScore *round = [FKRoundScore roundScoreWithPlayers:self.testPlayers];
+    
+    XCTAssertThrows([round scoreForPlayer:@"Bob"]);
+    XCTAssertThrows([round setScore:@50 forPlayer:@"Bob"]);
+    
+}
+
 - (void)testRoundScoreKeyedSubscripting {
     
     FKRoundScore *round = [FKRoundScore roundScoreWithPlayers:self.testPlayers];
