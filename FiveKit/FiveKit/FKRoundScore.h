@@ -6,7 +6,7 @@
 //  Copyright © 2018 Varun Santhanam. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 extern NSString * const FKRoundScoreInvalidScoreException;
 

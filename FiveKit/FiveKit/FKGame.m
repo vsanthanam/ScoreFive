@@ -47,6 +47,28 @@ NSString * const FKGameIncompleteRoundScoreException = @"kFKGameIncompleteRoundS
     
 }
 
+- (NSUInteger)hash {
+    
+    return self.players.hash ^ self.rounds.hash ^ @(self.scoreLimit).hash;
+    
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    if (self == object) {
+        
+        return YES;
+        
+    } else if (![object isKindOfClass:[FKGame class]]) {
+        
+        return NO;
+        
+    }
+    
+    return [self isEqualToGame:(FKGame *)object];
+    
+}
+
 #pragma mark - Property Access Methods
 
 - (NSUInteger)numberOfRounds {
@@ -72,6 +94,12 @@ NSString * const FKGameIncompleteRoundScoreException = @"kFKGameIncompleteRoundS
     }
     
     return [NSOrderedSet<NSString *> orderedSetWithArray:players];
+    
+}
+
+- (BOOL)isFinished {
+    
+    return self.alivePlayers.count == 1;
     
 }
 
@@ -146,6 +174,22 @@ NSString * const FKGameIncompleteRoundScoreException = @"kFKGameIncompleteRoundS
     }
     
     return self;
+    
+}
+
+- (BOOL)isEqualToGame:(FKGame *)game {
+    
+    if (!game) {
+        
+        return NO;
+        
+    }
+    
+    BOOL equalPlayers = [self.players isEqualToOrderedSet:game.players];
+    BOOL equalRounds = [self.rounds isEqualToArray:game.rounds];
+    BOOL equalScoreLimits = self.scoreLimit == game.scoreLimit;
+    
+    return equalPlayers && equalRounds && equalScoreLimits;
     
 }
 

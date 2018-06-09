@@ -6,7 +6,7 @@
 //  Copyright © 2018 Varun Santhanam. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #import "FKRoundScore.h"
 
@@ -24,6 +24,8 @@ extern NSString * const FKGameIncompleteRoundScoreException;
 + (nullable instancetype)gameWithPlayers:(nonnull NSOrderedSet<NSString *> *)players scoreLimit:(NSUInteger)scoreLimit;
 
 - (nullable instancetype)initWithPlayers:(nonnull NSOrderedSet<NSString *> *)players scoreLimit:(NSUInteger)scoreLimit NS_DESIGNATED_INITIALIZER;
+
+- (BOOL)isEqualToGame:(nullable FKGame *)game;
 
 - (void)addRoundScore:(nonnull FKRoundScore *)roundScore;
 

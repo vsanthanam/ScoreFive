@@ -132,4 +132,17 @@
     
 }
 
+- (void)testRoundHash {
+    
+    FKRoundScore *round1 = [FKRoundScore roundScoreWithPlayers:self.testPlayers];
+    FKRoundScore *round2 = [FKRoundScore roundScoreWithPlayers:self.testPlayers];
+
+    XCTAssertTrue(round1.hash == round2.hash);
+    
+    round1[@"Mom"] = @23;
+    
+    XCTAssertFalse(round1.hash == round2.hash);
+    
+}
+
 @end

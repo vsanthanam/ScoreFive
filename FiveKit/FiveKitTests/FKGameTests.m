@@ -6,34 +6,38 @@
 //  Copyright © 2018 Varun Santhanam. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+
+#import "FiveKit.h"
 
 @interface FKGameTests : XCTestCase
+
+@property (nonatomic, strong) NSOrderedSet<NSString *> *testPlayers;
 
 @end
 
 @implementation FKGameTests
 
 - (void)setUp {
+    
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    self.testPlayers = [NSOrderedSet<NSString *> orderedSetWithArray:@[@"Mom", @"Dad", @"God", @"Bro"]];
+
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+
+    self.testPlayers = nil;
     [super tearDown];
+    
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testCreateGame {
+    
+    FKGame *game = [[FKGame alloc] initWithPlayers:self.testPlayers scoreLimit:300];
+    XCTAssertTrue([game.players isEqualToOrderedSet:self.testPlayers]);
+    XCTAssertTrue(game.scoreLimit == 300);
+    
 }
 
 @end
