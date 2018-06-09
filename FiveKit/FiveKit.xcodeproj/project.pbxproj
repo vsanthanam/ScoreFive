@@ -6,6 +6,21 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		070B338F20CB5A770050A869 /* Framework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 070B339020CB5A770050A869 /* Build configuration list for PBXAggregateTarget "Framework" */;
+			buildPhases = (
+				070B339520CB5A830050A869 /* Multi-Platform Bind */,
+			);
+			dependencies = (
+				070B339420CB5A800050A869 /* PBXTargetDependency */,
+			);
+			name = Framework;
+			productName = Framework;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		070B338E20CB50680050A869 /* FKGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B338D20CB50680050A869 /* FKGameTests.m */; };
 		0754530A20C387E500EFEC4A /* FiveKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0754530720C387E500EFEC4A /* FiveKit.h */; };
@@ -18,6 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		070B339320CB5A800050A869 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 075452FC20C387E500EFEC4A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0754530320C387E500EFEC4A;
+			remoteInfo = FiveKit;
+		};
 		0754532320C4528B00EFEC4A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 075452FC20C387E500EFEC4A /* Project object */;
@@ -42,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		070B338D20CB50680050A869 /* FKGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FKGameTests.m; sourceTree = "<group>"; };
+		070B339620CB5AC00050A869 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		0754530420C387E500EFEC4A /* libFiveKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFiveKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0754530720C387E500EFEC4A /* FiveKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FiveKit.h; sourceTree = "<group>"; };
 		0754531020C3880D00EFEC4A /* FKGame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FKGame.h; sourceTree = "<group>"; };
@@ -93,6 +116,7 @@
 		0754530620C387E500EFEC4A /* FiveKit */ = {
 			isa = PBXGroup;
 			children = (
+				070B339620CB5AC00050A869 /* module.modulemap */,
 				0754530720C387E500EFEC4A /* FiveKit.h */,
 				0754531020C3880D00EFEC4A /* FKGame.h */,
 				0754531120C3880D00EFEC4A /* FKGame.m */,
@@ -135,6 +159,7 @@
 				0754530120C387E500EFEC4A /* Frameworks */,
 				0754530220C387E500EFEC4A /* CopyFiles */,
 				0754531320C3881400EFEC4A /* Headers */,
+				070B339720CB5BA90050A869 /* Build Framework */,
 			);
 			buildRules = (
 			);
@@ -172,6 +197,9 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Varun Santhanam";
 				TargetAttributes = {
+					070B338F20CB5A770050A869 = {
+						CreatedOnToolsVersion = 9.4;
+					};
 					0754530320C387E500EFEC4A = {
 						CreatedOnToolsVersion = 9.4;
 					};
@@ -194,6 +222,7 @@
 			targets = (
 				0754530320C387E500EFEC4A /* FiveKit */,
 				0754531C20C4528B00EFEC4A /* FiveKitTests */,
+				070B338F20CB5A770050A869 /* Framework */,
 			);
 		};
 /* End PBXProject section */
@@ -207,6 +236,37 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		070B339520CB5A830050A869 /* Multi-Platform Bind */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Multi-Platform Bind";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set +u\n\nif [[ $SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SCRIPT_RUNNING=1\n\n# Environment Variables\nFRAMEWORK_NAME=${PROJECT_NAME}\nSTATIC_LIB=\"lib${PROJECT_NAME}.a\" # Product of other target\nFRAMEWORK_LOCATION=\"${BUILT_PRODUCTS_DIR}/${FRAMEWORK_NAME}.framework\" # Product of script in other target build phase\nOUTPUT_DIR=${PROJECT_DIR}/Release\n\n# Encapsulate Xcode Build Process\nfunction build_static_library_and_framework {\n    \n    xcrun xcodebuild -project \"${PROJECT_FILE_PATH}\" \\\n    -target \"${PROJECT_NAME}\" \\\n    -configuration \"${CONFIGURATION}\" \\\n    -sdk \"${1}\" \\\n    ONLY_ACTIVE_ARCH=NO \\\n    BUILD_DIR=\"${BUILD_DIR}\" \\\n    OBJROOT=\"${OBJROOT}\" \\\n    BUILD_ROOT=\"${BUILD_ROOT}\" \\\n    SYMROOT=\"${SYMROOT}\" $ACTION\n    \n}\n\n# Encapsulate Lipo\nfunction merge_binaries {\n    \n    xcrun lipo -create \"${1}\" \"${2}\" -output \"${3}\"\n    \n}\n\n# 1 - Get SDK to determine platform (iphoneos or iphonesimulator)\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]; then\nSDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\n# 2 - Get Opposite Platform (iphonesimulator --> iphoneos, iphoneos --> iphonesimulator)\nif [ \"$SDK_PLATFORM\" == \"iphoneos\" ]; then\nOTHER_PLATFORM=iphonesimulator\nelse\nOTHER_PLATFORM=iphoneos\nfi\n\n# 3 - Get the build directories\nCURRENT_DIR=${BUILD_DIR}/${CONFIGURATION}-${SDK_PLATFORM}\nOTHER_DIR=${BUILD_DIR}/${CONFIGURATION}-${OTHER_PLATFORM}\n\n# 4 - Build Opposite Platform\nbuild_static_library_and_framework \"${OTHER_PLATFORM}\"\n\n# 5 - Copy Framework Structure\nrm -rf \"${OUTPUT_DIR}\"\nmkdir -p \"${OUTPUT_DIR}\"\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-${SDK_PLATFORM}/${PROJECT_NAME}.framework\" \"${OUTPUT_DIR}/${PROJECT_NAME}.framework\"\n\n# 6 - Merge Into /Release\nmerge_binaries \"${CURRENT_DIR}/${STATIC_LIB}\" \"${OTHER_DIR}/${STATIC_LIB}\" \"${OUTPUT_DIR}/${PROJECT_NAME}.framework/${PROJECT_NAME}\"";
+		};
+		070B339720CB5BA90050A869 /* Build Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nexport FRAMEWORK_LOCN=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework\"\n\n# Create Directory for Actual Headers Location for Version A\nmkdir -p \"${FRAMEWORK_LOCN}/Versions/A/Headers\"\n\n# Symbolically Link the Headers to their Parse Directory\nln -sfh A \"${FRAMEWORK_LOCN}/Versions/Current\"\nln -sfh Versions/Current/Headers \"${FRAMEWORK_LOCN}/Headers\"\nln -sfh \"Versions/Current/${PRODUCT_NAME}\" \\\n\"${FRAMEWORK_LOCN}/${PRODUCT_NAME}\"\n\n# Copy Public Headers Into Their Directory\ncp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \\\n\"${FRAMEWORK_LOCN}/Versions/A/Headers\"\n\n# Create Module Directory\nmkdir -p \"${FRAMEWORK_LOCN}/Modules\"\n\n# Copy Module Map\ncp -f \"${SRCROOT}/${PRODUCT_NAME}/module.modulemap\" \"${FRAMEWORK_LOCN}/Modules/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0754530020C387E500EFEC4A /* Sources */ = {
@@ -230,6 +290,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		070B339420CB5A800050A869 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0754530320C387E500EFEC4A /* FiveKit */;
+			targetProxy = 070B339320CB5A800050A869 /* PBXContainerItemProxy */;
+		};
 		0754532420C4528B00EFEC4A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0754530320C387E500EFEC4A /* FiveKit */;
@@ -238,6 +303,24 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		070B339120CB5A770050A869 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y88YPD4RJA;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		070B339220CB5A770050A869 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y88YPD4RJA;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		0754530B20C387E500EFEC4A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -353,10 +436,13 @@
 			buildSettings = {
 				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = Y88YPD4RJA;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -366,10 +452,13 @@
 			buildSettings = {
 				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = Y88YPD4RJA;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -411,6 +500,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		070B339020CB5A770050A869 /* Build configuration list for PBXAggregateTarget "Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				070B339120CB5A770050A869 /* Debug */,
+				070B339220CB5A770050A869 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		075452FF20C387E500EFEC4A /* Build configuration list for PBXProject "FiveKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
