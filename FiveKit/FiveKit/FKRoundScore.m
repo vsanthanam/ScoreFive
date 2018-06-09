@@ -182,7 +182,7 @@ NSString * const FKRoundScoreInvalidScoreException = @"kFKRoundScoreInvalidScore
         
     }
     
-    if (score.integerValue < kWinningScore || score.integerValue > kLosingScore) {
+    if (score.integerValue < 0|| score.integerValue > 50) {
         
         [NSException raise:FKRoundScoreInvalidScoreException format:@"%@ is an invalid score", score];
         

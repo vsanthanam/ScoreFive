@@ -35,7 +35,7 @@ NSString * const FKGameIncompleteRoundScoreException = @"kFKGameIncompleteRoundS
 
 - (instancetype)init {
     
-    self = [self initWithPlayers:[[NSOrderedSet<NSString *> alloc] init] scoreLimit:kWinningScore * 2];
+    self = [self initWithPlayers:[[NSOrderedSet<NSString *> alloc] init] scoreLimit:100];
     
     return self;
     
@@ -85,12 +85,24 @@ NSString * const FKGameIncompleteRoundScoreException = @"kFKGameIncompleteRoundS
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     
+    [aCoder encodeObject:self.players forKey:NSStringFromSelector(@selector(players))];
+    [aCoder encodeObject:@(self.scoreLimit) forKey:NSStringFromSelector(@selector(scoreLimit))];
+    [aCoder encodeObject:self.rounds forKey:NSStringFromSelector(@selector(rounds))];
     
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     
-    self = [self init];
+    NSOrderedSet<NSString *> *players = [aDecoder decodeObjectOfClass:[NSOrderedSet<NSString *> class] forKey:NSStringFromSelector(@selector(players))];
+    NSUInteger scoreLimit = ((NSNumber *)[aDecoder decodeObjectOfClass:[NSNumber class] forKey:NSStringFromSelector(@selector(scoreLimit))]).unsignedIntegerValue;
+    
+    self = [self initWithPlayers:players scoreLimit:scoreLimit];
+    
+    if (self) {
+        
+        self->_rounds = (NSMutableArray<FKRoundScore *> *)[aDecoder decodeObjectOfClass:[NSMutableArray<FKRoundScore *> class] forKey:NSStringFromSelector(@selector(rounds))];
+        
+    }
     
     return self;
     
@@ -100,7 +112,12 @@ NSString * const FKGameIncompleteRoundScoreException = @"kFKGameIncompleteRoundS
 
 - (id)copyWithZone:(NSZone *)zone {
     
-    return nil;
+    FKGame *copy = [[[self class] allocWithZone:zone] init];
+    copy->_players = [self.players copyWithZone:zone];
+    copy->_scoreLimit = self.scoreLimit;
+    copy->_rounds = [self.rounds copyWithZone:zone];
+    
+    return copy;
     
 }
 

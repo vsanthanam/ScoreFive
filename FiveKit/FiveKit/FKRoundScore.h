@@ -8,9 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define kWinningScore   0
-#define kLosingScore    50
-
 extern NSString * const FKRoundScoreInvalidScoreException;
 
 @interface FKRoundScore : NSObject<NSSecureCoding, NSCopying>
