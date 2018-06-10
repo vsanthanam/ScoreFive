@@ -6,7 +6,5 @@
 //  Copyright © 2018 Varun Santhanam. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import <FiveKit/FKGame.h>
 #import <FiveKit/FKRoundScore.h>

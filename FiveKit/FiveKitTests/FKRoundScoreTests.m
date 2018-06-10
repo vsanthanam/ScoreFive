@@ -36,7 +36,7 @@
     
     FKRoundScore *round = [FKRoundScore roundScoreWithPlayers:self.testPlayers];
     
-    XCTAssertEqual(round.players, self.testPlayers);
+    XCTAssertEqual(round.players, self.testPlayers, @"Players %@ don't match %@", round.players, self.testPlayers);
     
 }
 
@@ -44,7 +44,7 @@
     
     FKRoundScore *round = [FKRoundScore roundScoreWithPlayers:self.testPlayers];
     
-    XCTAssertFalse(round.complete);
+    XCTAssertFalse(round.complete, @"Round is complete when it shouldn't be");
     
 }
 
@@ -146,11 +146,11 @@
     FKRoundScore *round1 = [FKRoundScore roundScoreWithPlayers:self.testPlayers];
     FKRoundScore *round2 = [FKRoundScore roundScoreWithPlayers:self.testPlayers];
 
-    XCTAssertTrue(round1.hash == round2.hash);
+    XCTAssertTrue(round1.hash == round2.hash, @"Inequal Hashes");
     
     round1[@"Mom"] = @23;
     
-    XCTAssertFalse(round1.hash == round2.hash);
+    XCTAssertFalse(round1.hash == round2.hash, @"Inequal Hashes");
     
 }
 

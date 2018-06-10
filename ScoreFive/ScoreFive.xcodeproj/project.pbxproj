@@ -15,6 +15,9 @@
 		075452E420C387B000EFEC4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075452E220C387B000EFEC4A /* LaunchScreen.storyboard */; };
 		075452E720C387B000EFEC4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 075452E620C387B000EFEC4A /* main.m */; };
 		075452F120C387B000EFEC4A /* ScoreFiveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 075452F020C387B000EFEC4A /* ScoreFiveTests.m */; };
+		07DD56CD20CCA54D003BC549 /* FiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DD56CC20CCA54D003BC549 /* FiveKit.framework */; };
+		07DD56CF20CCA555003BC549 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DD56CE20CCA555003BC549 /* UIKit.framework */; };
+		07DD56D120CCA559003BC549 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DD56D020CCA559003BC549 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +45,9 @@
 		075452EC20C387B000EFEC4A /* ScoreFiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScoreFiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		075452F020C387B000EFEC4A /* ScoreFiveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreFiveTests.m; sourceTree = "<group>"; };
 		075452F220C387B000EFEC4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07DD56CC20CCA54D003BC549 /* FiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FiveKit.framework; path = ScoreFive/Frameworks/FiveKit.framework; sourceTree = "<group>"; };
+		07DD56CE20CCA555003BC549 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		07DD56D020CCA559003BC549 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +55,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07DD56D120CCA559003BC549 /* Foundation.framework in Frameworks */,
+				07DD56CF20CCA555003BC549 /* UIKit.framework in Frameworks */,
+				07DD56CD20CCA54D003BC549 /* FiveKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +77,7 @@
 				075452D320C387AF00EFEC4A /* ScoreFive */,
 				075452EF20C387B000EFEC4A /* ScoreFiveTests */,
 				075452D220C387AF00EFEC4A /* Products */,
+				07DD56CB20CCA54C003BC549 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +114,16 @@
 				075452F220C387B000EFEC4A /* Info.plist */,
 			);
 			path = ScoreFiveTests;
+			sourceTree = "<group>";
+		};
+		07DD56CB20CCA54C003BC549 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				07DD56D020CCA559003BC549 /* Foundation.framework */,
+				07DD56CE20CCA555003BC549 /* UIKit.framework */,
+				07DD56CC20CCA54D003BC549 /* FiveKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,6 +387,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y88YPD4RJA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ScoreFive/Frameworks",
+				);
 				INFOPLIST_FILE = ScoreFive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -384,6 +408,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y88YPD4RJA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ScoreFive/Frameworks",
+				);
 				INFOPLIST_FILE = ScoreFive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

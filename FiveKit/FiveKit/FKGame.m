@@ -229,6 +229,8 @@ NSString * const FKGameInvalidPlayerException = @"kFKGameInvalidPlayerException"
         
     }
     
+    [self.rounds addObject:roundScore];
+    
 }
 
 - (NSNumber *)totalScoreForPlayer:(NSString *)player {

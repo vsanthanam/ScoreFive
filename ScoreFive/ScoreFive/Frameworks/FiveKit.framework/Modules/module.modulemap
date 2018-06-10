@@ -1,0 +1,8 @@
+framework module FiveKit {
+    
+    umbrella header "FiveKit.h"
+    
+    export *
+    module * { export * }
+    
+}

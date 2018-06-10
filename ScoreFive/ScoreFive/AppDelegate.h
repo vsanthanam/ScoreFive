@@ -6,8 +6,8 @@
 //  Copyright © 2018 Varun Santhanam. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
+@import UIKit;
+@import CoreData;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -16,7 +16,7 @@
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 
 - (void)saveContext;
-
+- (void)saveContextWithError:(NSError **)error;
 
 @end
 

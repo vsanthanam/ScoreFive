@@ -10,10 +10,16 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
+
 @end
 
 @implementation AppDelegate
 
+@synthesize persistentContainer = _persistentContainer;
+@synthesize managedObjectModel = _managedObjectModel;
+
+#pragma mark - UIApplicationDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -49,50 +55,76 @@
     [self saveContext];
 }
 
-
-#pragma mark - Core Data stack
-
-@synthesize persistentContainer = _persistentContainer;
+#pragma mark - Property Access Methods
 
 - (NSPersistentContainer *)persistentContainer {
-    // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
-    @synchronized (self) {
-        if (_persistentContainer == nil) {
-            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"ScoreFive"];
-            [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
-                if (error != nil) {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        if (!self->_persistentContainer) {
+            
+            self->_persistentContainer = [[NSPersistentContainer alloc] initWithName:@"ScoreFive" managedObjectModel:self.managedObjectModel];
+            
+            [self->_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
+               
+                if (error) {
                     
-                    /*
-                     Typical reasons for an error here include:
-                     * The parent directory does not exist, cannot be created, or disallows writing.
-                     * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                     * The device is out of space.
-                     * The store could not be migrated to the current model version.
-                     Check the error message to determine what the actual problem was.
-                    */
-                    NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+                    // handle and abort
                     abort();
+                    
                 }
+                
             }];
+            
         }
-    }
+        
+    });
     
     return _persistentContainer;
+    
 }
 
-#pragma mark - Core Data Saving support
+- (NSManagedObjectModel *)managedObjectModel {
+    
+    if (!_managedObjectModel) {
+        
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"ScoreFive" withExtension:@"momd"];
+        _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:url];
+        
+    }
+    
+    return _managedObjectModel;
+    
+}
+
+#pragma mark - Public Instance Methods
 
 - (void)saveContext {
-    NSManagedObjectContext *context = self.persistentContainer.viewContext;
-    NSError *error = nil;
-    if ([context hasChanges] && ![context save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+    
+    NSError *error;
+    [self saveContextWithError:&error];
+    
+    if (error) {
+        
+        // handle and abort
         abort();
+        
     }
+    
+}
+
+- (void)saveContextWithError:(NSError *__autoreleasing *)error {
+    
+    NSManagedObjectContext *context = self.persistentContainer.viewContext;
+    NSError *errorObj;
+    
+    if (context.hasChanges && ![context save:&errorObj]) {
+        
+        *error = errorObj;
+        
+    }
+    
 }
 
 @end
