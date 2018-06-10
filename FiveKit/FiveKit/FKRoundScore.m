@@ -209,7 +209,7 @@ NSString * const FKRoundScoreInvalidPlayerException = @"kFKRoundScoreInvalidPlay
     
     if (score) {
         
-         self.scores[player] = score;
+        self.scores[player] = score;
         
     }
     
