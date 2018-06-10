@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		075452D620C387AF00EFEC4A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 075452D520C387AF00EFEC4A /* AppDelegate.m */; };
-		075452D920C387AF00EFEC4A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075452D820C387AF00EFEC4A /* ViewController.m */; };
 		075452DC20C387AF00EFEC4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075452DA20C387AF00EFEC4A /* Main.storyboard */; };
 		075452DF20C387AF00EFEC4A /* ScoreFive.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 075452DD20C387AF00EFEC4A /* ScoreFive.xcdatamodeld */; };
 		075452E120C387B000EFEC4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 075452E020C387B000EFEC4A /* Assets.xcassets */; };
@@ -18,6 +17,9 @@
 		07DD56CD20CCA54D003BC549 /* FiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DD56CC20CCA54D003BC549 /* FiveKit.framework */; };
 		07DD56CF20CCA555003BC549 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DD56CE20CCA555003BC549 /* UIKit.framework */; };
 		07DD56D120CCA559003BC549 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DD56D020CCA559003BC549 /* Foundation.framework */; };
+		07DD56D320CCABEF003BC549 /* NewGame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07DD56D220CCABEF003BC549 /* NewGame.storyboard */; };
+		07DD56D620CCAC25003BC549 /* NewGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DD56D520CCAC25003BC549 /* NewGameViewController.m */; };
+		07DD56D920CCAC3E003BC549 /* NewGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DD56D820CCAC3E003BC549 /* NewGameController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,8 +36,6 @@
 		075452D120C387AF00EFEC4A /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		075452D420C387AF00EFEC4A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		075452D520C387AF00EFEC4A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		075452D720C387AF00EFEC4A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		075452D820C387AF00EFEC4A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		075452DB20C387AF00EFEC4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		075452DE20C387AF00EFEC4A /* ScoreFive.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScoreFive.xcdatamodel; sourceTree = "<group>"; };
 		075452E020C387B000EFEC4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -48,6 +48,11 @@
 		07DD56CC20CCA54D003BC549 /* FiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FiveKit.framework; path = ScoreFive/Frameworks/FiveKit.framework; sourceTree = "<group>"; };
 		07DD56CE20CCA555003BC549 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		07DD56D020CCA559003BC549 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		07DD56D220CCABEF003BC549 /* NewGame.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewGame.storyboard; sourceTree = "<group>"; };
+		07DD56D420CCAC25003BC549 /* NewGameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewGameViewController.h; sourceTree = "<group>"; };
+		07DD56D520CCAC25003BC549 /* NewGameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewGameViewController.m; sourceTree = "<group>"; };
+		07DD56D720CCAC3E003BC549 /* NewGameController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewGameController.h; sourceTree = "<group>"; };
+		07DD56D820CCAC3E003BC549 /* NewGameController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewGameController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,14 +100,17 @@
 			children = (
 				075452D420C387AF00EFEC4A /* AppDelegate.h */,
 				075452D520C387AF00EFEC4A /* AppDelegate.m */,
-				075452D720C387AF00EFEC4A /* ViewController.h */,
-				075452D820C387AF00EFEC4A /* ViewController.m */,
 				075452DA20C387AF00EFEC4A /* Main.storyboard */,
+				07DD56D220CCABEF003BC549 /* NewGame.storyboard */,
 				075452E020C387B000EFEC4A /* Assets.xcassets */,
 				075452E220C387B000EFEC4A /* LaunchScreen.storyboard */,
 				075452E520C387B000EFEC4A /* Info.plist */,
 				075452E620C387B000EFEC4A /* main.m */,
 				075452DD20C387AF00EFEC4A /* ScoreFive.xcdatamodeld */,
+				07DD56D420CCAC25003BC549 /* NewGameViewController.h */,
+				07DD56D520CCAC25003BC549 /* NewGameViewController.m */,
+				07DD56D720CCAC3E003BC549 /* NewGameController.h */,
+				07DD56D820CCAC3E003BC549 /* NewGameController.m */,
 			);
 			path = ScoreFive;
 			sourceTree = "<group>";
@@ -207,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				075452E420C387B000EFEC4A /* LaunchScreen.storyboard in Resources */,
+				07DD56D320CCABEF003BC549 /* NewGame.storyboard in Resources */,
 				075452E120C387B000EFEC4A /* Assets.xcassets in Resources */,
 				075452DC20C387AF00EFEC4A /* Main.storyboard in Resources */,
 			);
@@ -226,8 +235,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07DD56D920CCAC3E003BC549 /* NewGameController.m in Sources */,
 				075452DF20C387AF00EFEC4A /* ScoreFive.xcdatamodeld in Sources */,
-				075452D920C387AF00EFEC4A /* ViewController.m in Sources */,
+				07DD56D620CCAC25003BC549 /* NewGameViewController.m in Sources */,
 				075452E720C387B000EFEC4A /* main.m in Sources */,
 				075452D620C387AF00EFEC4A /* AppDelegate.m in Sources */,
 			);
