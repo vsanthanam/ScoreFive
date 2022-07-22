@@ -5,20 +5,20 @@
 //  Created by Varun Santhanam on 7/16/22.
 //
 
-import SwiftUI
 import Collections
 import Five
+import SwiftUI
 
 struct ScoreRow: View {
-    
+
     // MARK: - API
-    
+
     let players: [Game.Player]
-    
+
     let round: Round
-    
+
     // MARK: - View
-    
+
     var body: some View {
         HStack {
             ForEach(players, id: \.self) { player in
@@ -42,9 +42,9 @@ struct ScoreRow_Previews: PreviewProvider {
         round["Bro"] = 0
         return round
     }
-    
+
     static var previews: some View {
-        
+
         ScoreRow(players: ["Mom", "Dad", "God", "Bro"],
                  round: round)
     }

@@ -5,24 +5,24 @@
 //  Created by Varun Santhanam on 7/10/22.
 //
 
-import SwiftUI
 import Five
+import SwiftUI
 
 struct ScoreCard: View {
-    
+
     // MARK: - Initializers
-    
+
     init(game: Game) {
         self.game = game
     }
-    
+
     // MARK: - API
-    
+
     @EnvironmentObject
     var gameManager: GameManager
-    
+
     // MARK: - View
-    
+
     var body: some View {
         NavigationView {
             VStack {
@@ -35,7 +35,7 @@ struct ScoreCard: View {
                     }
                 }
                 .listStyle(PlainListStyle())
-                
+
                 Button(action: showAddRound) {
                     Text("Add Round")
                         .frame(maxWidth: .infinity)
@@ -58,19 +58,19 @@ struct ScoreCard: View {
             }
         }
     }
-    
+
     // MARK: - Private
-    
+
     @State
     private var game: Game
-    
+
     @State
     private var showingAddRound = false
-    
+
     private func showAddRound() {
         showingAddRound.toggle()
     }
-    
+
     private func close() {
         withAnimation {
             try! gameManager.deactivateGame()
@@ -79,7 +79,7 @@ struct ScoreCard: View {
 }
 
 struct ScoreCard_Previews: PreviewProvider {
-    
+
     static var testGame: Game {
         var game = Game(players: ["Mom", "Dad", "God", "Bro"])
         var round = game.newRound()
@@ -90,7 +90,7 @@ struct ScoreCard_Previews: PreviewProvider {
         game.addRound(round)
         return game
     }
-    
+
     static var previews: some View {
         ScoreCard(game: testGame)
             .environmentObject(GameManager.preview)

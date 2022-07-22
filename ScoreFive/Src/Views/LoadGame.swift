@@ -5,21 +5,21 @@
 //  Created by Varun Santhanam on 7/16/22.
 //
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct LoadGame: View {
-    
+
     // MARK: - API
-    
+
     @EnvironmentObject
     var gameManager: GameManager
-    
+
     @Environment(\.presentationMode)
     var presentationMode
-    
+
     // MARK: - View
-    
+
     var body: some View {
         NavigationView {
             List(gameRecords) { game in
@@ -39,12 +39,12 @@ struct LoadGame: View {
             .navigationTitle("Load Game")
         }
     }
-    
+
     // MARK: - Private
-    
+
     @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)])
     private var gameRecords: FetchedResults<GameRecord>
-    
+
     private let formatter = ListFormatter()
 }
 

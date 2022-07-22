@@ -5,29 +5,29 @@
 //  Created by Varun Santhanam on 7/10/22.
 //
 
-import Foundation
 import CoreData
 import Five
+import Foundation
 
 final class GameManager: ObservableObject {
-    
+
     // MARK: - Factories
-    
+
     static let preview: GameManager = .init()
-    
+
     static let shared: GameManager = .init()
-    
+
     // MARK: - API
-    
+
     enum Error: Swift.Error {
         case noGameFound
         case noActiveGame
     }
-    
+
     var viewContext: NSManagedObjectContext {
         store.viewContext
     }
-    
+
     func storeNewGame(_ game: Game) throws -> NSManagedObjectID {
         let record = GameRecord(context: viewContext)
         let data = try JSONEncoder().encode(game)
@@ -36,7 +36,7 @@ final class GameManager: ObservableObject {
         record.playerNames = .init(game.allPlayers())
         return record.objectID
     }
-    
+
     func game(for id: NSManagedObjectID) throws -> Game {
         guard let result = viewContext.registeredObject(for: id),
               let record = result as? GameRecord,
@@ -46,7 +46,7 @@ final class GameManager: ObservableObject {
         let game = try JSONDecoder().decode(Game.self, from: gameData)
         return game
     }
-    
+
     func activateGame(with id: NSManagedObjectID) throws {
         guard let result = viewContext.registeredObject(for: id),
               let _ = result as? GameRecord else {
@@ -54,35 +54,35 @@ final class GameManager: ObservableObject {
         }
         activeGameIdentifier = id
     }
-    
+
     func deactivateGame() throws {
         guard activeGameIdentifier != nil else {
             throw Error.noActiveGame
         }
         activeGameIdentifier = nil
     }
-    
+
     func deleteGame(identifier: NSManagedObjectID) throws {
         guard let record = viewContext.registeredObject(for: identifier) else {
             throw Error.noGameFound
         }
         viewContext.delete(record)
     }
-    
+
     func save() throws {
         guard viewContext.hasChanges else { return }
         try viewContext.save()
     }
-    
+
     // MARK: - Private
-    
+
     @Published
     private(set) var activeGameIdentifier: NSManagedObjectID?
-    
+
     private init(inMemory: Bool = false) {
         setUp(inMemory: inMemory)
     }
-    
+
     private func setUp(inMemory: Bool) {
         guard let url = Bundle.main.url(forResource: "ScoreFive", withExtension: "momd") else { fatalError() }
         guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError() }
@@ -98,6 +98,6 @@ final class GameManager: ObservableObject {
             }
         }
     }
-    
+
     private var store: NSPersistentContainer!
 }

@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct Root: View {
-    
+
     // MARK: - Initializers
-    
+
     init(gameManager: GameManager) {
-        self._gameManager = .init(wrappedValue: gameManager)
+        _gameManager = .init(wrappedValue: gameManager)
     }
-    
+
     // MARK: - View
-    
+
     var body: some View {
         MainMenu()
             .environmentObject(gameManager)
     }
-    
+
     // MARK: - Private
-    
+
     @StateObject
     private var gameManager: GameManager
 }
