@@ -20,8 +20,8 @@ struct LoadGame: View {
     @EnvironmentObject
     var gameManager: GameManager
 
-    @Environment(\.presentationMode)
-    var presentationMode
+    @Environment(\.dismiss)
+    var dismiss
 
     // MARK: - View
 
@@ -35,7 +35,7 @@ struct LoadGame: View {
                             .font(.caption)
                     }
                     .onTapGesture {
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                         withAnimation {
                             try! gameManager.activateGame(with: record)
                         }

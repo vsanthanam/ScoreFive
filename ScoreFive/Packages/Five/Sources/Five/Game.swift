@@ -91,12 +91,14 @@ public struct Game: Sequence, Sendable, Equatable, Hashable, Codable, CustomStri
         }
     }
 
-    public var activePlayers: OrderedSet<Player> {
-        activePlayers(withSort: .playingOrder)
-    }
-
+    /// All players in the game
     public var allPlayers: OrderedSet<Player> {
         allPlayers(withSort: .playingOrder)
+    }
+
+    /// Players which are still in the game
+    public var activePlayers: OrderedSet<Player> {
+        activePlayers(withSort: .playingOrder)
     }
 
     /// The game's current winners

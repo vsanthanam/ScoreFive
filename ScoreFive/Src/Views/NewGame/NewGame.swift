@@ -13,8 +13,8 @@ struct NewGame: View {
 
     // MARK: - API
 
-    @Environment(\.presentationMode)
-    var presentationMode
+    @Environment(\.dismiss)
+    var dismiss
 
     @EnvironmentObject
     var gameManager: GameManager
@@ -93,7 +93,7 @@ struct NewGame: View {
         withAnimation {
             let game = Game(players: players, scoreLimit: scoreLimit)
             let record = try! gameManager.storeNewGame(game)
-            presentationMode.wrappedValue.dismiss()
+            dismiss()
             try! gameManager.activateGame(with: record)
             try! gameManager.save()
         }
