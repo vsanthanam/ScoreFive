@@ -25,6 +25,9 @@ struct RoundEditor: View {
 
     // MARK: - API
 
+    @EnvironmentObject
+    var gameManager: GameManager
+
     @Binding
     var game: Game
 

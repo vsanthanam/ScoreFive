@@ -92,9 +92,10 @@ struct NewGame: View {
     private func save() {
         withAnimation {
             let game = Game(players: players, scoreLimit: scoreLimit)
-            let id = try! gameManager.storeNewGame(game)
+            let record = try! gameManager.storeNewGame(game)
             presentationMode.wrappedValue.dismiss()
-            try! gameManager.activateGame(with: id)
+            try! gameManager.activateGame(with: record)
+            try! gameManager.save()
         }
     }
 

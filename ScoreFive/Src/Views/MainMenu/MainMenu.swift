@@ -19,8 +19,10 @@ struct MainMenu: View {
     // MARK: - View
 
     var body: some View {
-        if let identifier = gameManager.activeGameIdentifier {
+        if let identifier = gameManager.activeGameRecord {
+
             ScoreCard(game: try! gameManager.game(for: identifier))
+
         } else {
 
             VStack {
@@ -50,6 +52,11 @@ struct MainMenu: View {
                 }
 
             }
+            .onAppear {
+                if gameRecords.isEmpty {
+                    showingNewGame = true
+                }
+            }
 
         }
 
@@ -62,6 +69,9 @@ struct MainMenu: View {
 
     @State
     private var showingLoadGame = false
+
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)])
+    private var gameRecords: FetchedResults<GameRecord>
 
     private func toggleNewGame() {
         showingNewGame.toggle()

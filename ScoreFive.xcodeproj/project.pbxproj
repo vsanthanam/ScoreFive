@@ -19,7 +19,9 @@
 		0714D2052883735000CE45A3 /* RoundEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D2042883735000CE45A3 /* RoundEditor.swift */; };
 		075F15D8288B147900E238C0 /* PlayerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15D7288B147900E238C0 /* PlayerTextField.swift */; };
 		075F15DA288B155300E238C0 /* FormButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15D9288B155300E238C0 /* FormButton.swift */; };
-		075F15E0288B204500E238C0 /* TotalScoreRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15DF288B204500E238C0 /* TotalScoreRow.swift */; };
+		075F15E0288B204500E238C0 /* TotalScoreBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15DF288B204500E238C0 /* TotalScoreBar.swift */; };
+		075F15EA288B442A00E238C0 /* PlayerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15E9288B442A00E238C0 /* PlayerBar.swift */; };
+		075F15EC288B45A400E238C0 /* AddRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15EB288B45A400E238C0 /* AddRow.swift */; };
 		076A0C40287B35A000A75AE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C3F287B35A000A75AE9 /* AppDelegate.swift */; };
 		076A0C42287B35A000A75AE9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C41287B35A000A75AE9 /* SceneDelegate.swift */; };
 		076A0C49287B35A000A75AE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 076A0C48287B35A000A75AE9 /* Assets.xcassets */; };
@@ -38,7 +40,9 @@
 		0714D2042883735000CE45A3 /* RoundEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundEditor.swift; sourceTree = "<group>"; };
 		075F15D7288B147900E238C0 /* PlayerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTextField.swift; sourceTree = "<group>"; };
 		075F15D9288B155300E238C0 /* FormButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButton.swift; sourceTree = "<group>"; };
-		075F15DF288B204500E238C0 /* TotalScoreRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreRow.swift; sourceTree = "<group>"; };
+		075F15DF288B204500E238C0 /* TotalScoreBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreBar.swift; sourceTree = "<group>"; };
+		075F15E9288B442A00E238C0 /* PlayerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerBar.swift; sourceTree = "<group>"; };
+		075F15EB288B45A400E238C0 /* AddRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRow.swift; sourceTree = "<group>"; };
 		076A0C3C287B35A000A75AE9 /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076A0C3F287B35A000A75AE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		076A0C41287B35A000A75AE9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,12 +86,13 @@
 		075F15CE288B12EB00E238C0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				075F15E3288B23D900E238C0 /* MainMenu */,
+				075F15E2288B23CE00E238C0 /* LoadGame */,
+				075F15E1288B23C200E238C0 /* Round Editor */,
+				075F15DE288B203B00E238C0 /* ScoreCard */,
 				075F15DD288B164000E238C0 /* Root */,
 				075F15DC288B162900E238C0 /* Reusable */,
 				075F15DB288B161C00E238C0 /* NewGame */,
-				0714D2042883735000CE45A3 /* RoundEditor.swift */,
-				0714D1DE2883125D00CE45A3 /* LoadGame.swift */,
-				0714D1D0287B38B600CE45A3 /* MainMenu.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -120,7 +125,6 @@
 		075F15DD288B164000E238C0 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				075F15DE288B203B00E238C0 /* ScoreCard */,
 				075F15D6288B137700E238C0 /* Dependencies */,
 				076A0C53287B35C800A75AE9 /* Root.swift */,
 			);
@@ -132,9 +136,35 @@
 			children = (
 				0714D1D2287B38BD00CE45A3 /* ScoreCard.swift */,
 				0714D1E0288327AA00CE45A3 /* ScoreRow.swift */,
-				075F15DF288B204500E238C0 /* TotalScoreRow.swift */,
+				075F15DF288B204500E238C0 /* TotalScoreBar.swift */,
+				075F15E9288B442A00E238C0 /* PlayerBar.swift */,
+				075F15EB288B45A400E238C0 /* AddRow.swift */,
 			);
 			path = ScoreCard;
+			sourceTree = "<group>";
+		};
+		075F15E1288B23C200E238C0 /* Round Editor */ = {
+			isa = PBXGroup;
+			children = (
+				0714D2042883735000CE45A3 /* RoundEditor.swift */,
+			);
+			path = "Round Editor";
+			sourceTree = "<group>";
+		};
+		075F15E2288B23CE00E238C0 /* LoadGame */ = {
+			isa = PBXGroup;
+			children = (
+				0714D1DE2883125D00CE45A3 /* LoadGame.swift */,
+			);
+			path = LoadGame;
+			sourceTree = "<group>";
+		};
+		075F15E3288B23D900E238C0 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				0714D1D0287B38B600CE45A3 /* MainMenu.swift */,
+			);
+			path = MainMenu;
 			sourceTree = "<group>";
 		};
 		076A0C33287B35A000A75AE9 = {
@@ -253,7 +283,9 @@
 				0714D1DF2883125D00CE45A3 /* LoadGame.swift in Sources */,
 				0714D1E1288327AA00CE45A3 /* ScoreRow.swift in Sources */,
 				0714D1DD287B532600CE45A3 /* NewGame.swift in Sources */,
-				075F15E0288B204500E238C0 /* TotalScoreRow.swift in Sources */,
+				075F15E0288B204500E238C0 /* TotalScoreBar.swift in Sources */,
+				075F15EC288B45A400E238C0 /* AddRow.swift in Sources */,
+				075F15EA288B442A00E238C0 /* PlayerBar.swift in Sources */,
 				0714D1D1287B38B600CE45A3 /* MainMenu.swift in Sources */,
 				0714D1D8287B39A200CE45A3 /* ScoreFive.xcdatamodeld in Sources */,
 				0714D1D3287B38BD00CE45A3 /* ScoreCard.swift in Sources */,

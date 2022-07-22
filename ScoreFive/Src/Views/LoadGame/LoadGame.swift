@@ -10,6 +10,11 @@ import SwiftUI
 
 struct LoadGame: View {
 
+    init() {
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+    }
+
     // MARK: - API
 
     @EnvironmentObject
@@ -22,18 +27,29 @@ struct LoadGame: View {
 
     var body: some View {
         NavigationView {
-            List(gameRecords) { game in
-                Text(formatter.string(from: game.playerNames ?? []) ?? "")
+            List {
+                ForEach(gameRecords) { record in
+                    VStack(alignment: .leading) {
+                        Text(formatter.string(from: record.playerNames ?? []) ?? "")
+                        Text("Last updated at \(dateFormatter.string(from: record.timestamp ?? .now))")
+                            .font(.caption)
+                    }
                     .onTapGesture {
                         presentationMode.wrappedValue.dismiss()
                         withAnimation {
-                            try! gameManager.activateGame(with: game.objectID)
+                            try! gameManager.activateGame(with: record)
                         }
                     }
+                }
+                .onDelete(perform: deleteItems(offsets:))
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+                    if !gameRecords.isEmpty {
+                        EditButton()
+                    } else {
+                        EmptyView()
+                    }
                 }
             }
             .navigationTitle("Load Game")
@@ -46,6 +62,15 @@ struct LoadGame: View {
     private var gameRecords: FetchedResults<GameRecord>
 
     private let formatter = ListFormatter()
+
+    private let dateFormatter = DateFormatter()
+
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { gameRecords[$0] }.forEach(gameManager.viewContext.delete)
+            try! gameManager.save()
+        }
+    }
 }
 
 struct LoadGame_Previews: PreviewProvider {

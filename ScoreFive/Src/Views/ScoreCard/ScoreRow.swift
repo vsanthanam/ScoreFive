@@ -13,6 +13,8 @@ struct ScoreRow: View {
 
     // MARK: - API
 
+    let signpost: String
+
     let players: [Game.Player]
 
     let round: Round
@@ -21,14 +23,22 @@ struct ScoreRow: View {
 
     var body: some View {
         HStack {
-            ForEach(players, id: \.self) { player in
-                if round.players.contains(player) {
-                    Text(String(round[player] ?? 0))
-                } else {
-                    Text("")
-                }
+            VStack(alignment: .center) {
+                Text(signpost)
+                    .bold()
+                    .multilineTextAlignment(.center)
             }
-            .frame(maxWidth: .infinity)
+            .frame(width: 48)
+            HStack {
+                ForEach(players, id: \.self) { player in
+                    if round.players.contains(player) {
+                        Text(String(round[player] ?? 0))
+                    } else {
+                        Text("")
+                    }
+                }
+                .frame(maxWidth: .infinity)
+            }
         }
     }
 }
@@ -45,7 +55,8 @@ struct ScoreRow_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        ScoreRow(players: ["Mom", "Dad", "God", "Bro"],
+        ScoreRow(signpost: "X",
+                 players: ["Mom", "Dad", "God", "Bro"],
                  round: round)
     }
 }
