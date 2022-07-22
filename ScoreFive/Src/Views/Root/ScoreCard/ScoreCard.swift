@@ -36,6 +36,8 @@ struct ScoreCard: View {
                 }
                 .listStyle(PlainListStyle())
 
+                TotalScoreRow(scores: totalScores)
+
                 Button(action: showAddRound) {
                     Text("Add Round")
                         .frame(maxWidth: .infinity)
@@ -46,6 +48,7 @@ struct ScoreCard: View {
                 .sheet(isPresented: $showingAddRound) {
                     RoundEditor(game: $game)
                 }
+                .disabled(game.isComplete)
             }
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
@@ -66,6 +69,10 @@ struct ScoreCard: View {
 
     @State
     private var showingAddRound = false
+
+    private var totalScores: [Int] {
+        game.allPlayers(withSort: .playingOrder).map { game.totalScore(forPlayer: $0) }
+    }
 
     private func showAddRound() {
         showingAddRound.toggle()

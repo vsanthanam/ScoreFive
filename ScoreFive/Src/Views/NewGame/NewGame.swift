@@ -32,6 +32,12 @@ struct NewGame: View {
                     ForEach(players.indices, id: \.self) { index in
                         PlayerTextField(index: index, player: $players[index])
                     }
+                    .onDelete { indexSet in
+                        for index in indexSet {
+                            players.remove(at: index)
+                        }
+                    }
+                    .deleteDisabled(players.count <= 2)
                     if canAddPlayer {
                         FormButton(text: "Add Player", action: addPlayer)
                     }
@@ -77,12 +83,15 @@ struct NewGame: View {
         guard set.allSatisfy({ !$0.isEmpty }) else {
             return false
         }
+        guard scoreLimit >= 50, scoreLimit <= 250 else {
+            return false
+        }
         return true
     }
 
     private func save() {
         withAnimation {
-            let game = Game(players: players)
+            let game = Game(players: players, scoreLimit: scoreLimit)
             let id = try! gameManager.storeNewGame(game)
             presentationMode.wrappedValue.dismiss()
             try! gameManager.activateGame(with: id)
