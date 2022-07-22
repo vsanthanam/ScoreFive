@@ -30,28 +30,15 @@ struct NewGame: View {
                 }
                 Section {
                     ForEach(players.indices, id: \.self) { index in
-                        TextField("Player \(index + 1)", text: $players[index])
-                            .autocapitalization(.words)
-                            .keyboardType(.default)
-                            .disableAutocorrection(true)
+                        PlayerTextField(index: index, player: $players[index])
                     }
                     if canAddPlayer {
-                        Button {
-                            withAnimation { players.append("") }
-                        } label: {
-                            Text("Add Player")
-                                .frame(maxWidth: .infinity)
-                        }
+                        FormButton(text: "Add Player", action: addPlayer)
                     }
                 }
                 if canSaveGame {
                     Section {
-                        Button {
-                            withAnimation { save() }
-                        } label: {
-                            Text("Start Game")
-                                .frame(maxWidth: .infinity)
-                        }
+                        FormButton(text: "Start Game", action: save)
                     }
                 }
             }
@@ -75,13 +62,6 @@ struct NewGame: View {
         })
     }
 
-    private func save() {
-        let game = Game(players: players)
-        let id = try! gameManager.storeNewGame(game)
-        presentationMode.wrappedValue.dismiss()
-        try! gameManager.activateGame(with: id)
-    }
-
     private var canAddPlayer: Bool {
         players.count < 8
     }
@@ -98,6 +78,19 @@ struct NewGame: View {
             return false
         }
         return true
+    }
+
+    private func save() {
+        withAnimation {
+            let game = Game(players: players)
+            let id = try! gameManager.storeNewGame(game)
+            presentationMode.wrappedValue.dismiss()
+            try! gameManager.activateGame(with: id)
+        }
+    }
+
+    private func addPlayer() {
+        withAnimation { players.append("") }
     }
 
 }
