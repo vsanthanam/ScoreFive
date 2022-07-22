@@ -38,5 +38,6 @@ struct PlayerBar: View {
 struct PlayerBar_Previews: PreviewProvider {
     static var previews: some View {
         PlayerBar(players: ["Mom", "Dad", "God", "Bro"])
+            .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

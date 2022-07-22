@@ -31,5 +31,6 @@ struct AddRow: View {
 struct AddRow_Previews: PreviewProvider {
     static var previews: some View {
         AddRow(signpost: "X")
+            .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

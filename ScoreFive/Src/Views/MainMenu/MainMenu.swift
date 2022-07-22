@@ -11,6 +11,12 @@ import SwiftUI
 
 struct MainMenu: View {
 
+    // MARK: - Initializers
+
+    init(shouldAutoLaunch: Bool = false) {
+        self.shouldAutoLaunch = shouldAutoLaunch
+    }
+
     // MARK: - API
 
     @EnvironmentObject
@@ -53,7 +59,7 @@ struct MainMenu: View {
 
             }
             .onAppear {
-                if gameRecords.isEmpty {
+                if gameRecords.isEmpty, shouldAutoLaunch {
                     showingNewGame = true
                 }
             }
@@ -63,6 +69,8 @@ struct MainMenu: View {
     }
 
     // MARK: - Private
+
+    private let shouldAutoLaunch: Bool
 
     @State
     private var showingNewGame = false

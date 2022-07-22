@@ -37,5 +37,6 @@ struct TotalScoreBar: View {
 struct TotalScoreBar_Previews: PreviewProvider {
     static var previews: some View {
         TotalScoreBar(scores: [0, 50, 12, 3])
+            .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

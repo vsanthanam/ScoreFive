@@ -23,6 +23,11 @@ struct PlayerTextField: View {
 
 struct PlayerTextField_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerTextField(index: 0, player: .constant("Mom"))
+        Group {
+            PlayerTextField(index: 0, player: .constant("Mom"))
+                .previewLayout(PreviewLayout.sizeThatFits)
+            PlayerTextField(index: 0, player: .constant(""))
+                .previewLayout(PreviewLayout.sizeThatFits)
+        }
     }
 }

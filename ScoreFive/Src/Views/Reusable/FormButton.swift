@@ -24,5 +24,6 @@ struct FormButton: View {
 struct FormButton_Previews: PreviewProvider {
     static var previews: some View {
         FormButton(text: "test") {}
+            .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

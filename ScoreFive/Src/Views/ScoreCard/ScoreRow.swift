@@ -54,9 +54,9 @@ struct ScoreRow_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-
         ScoreRow(signpost: "X",
                  players: ["Mom", "Dad", "God", "Bro"],
                  round: round)
+            .previewLayout(PreviewLayout.sizeThatFits)
     }
 }
