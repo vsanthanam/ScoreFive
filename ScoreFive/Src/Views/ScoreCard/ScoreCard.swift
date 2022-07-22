@@ -26,7 +26,7 @@ struct ScoreCard: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                PlayerBar(players: Array(game.allPlayers(withSort: .playingOrder)))
+                PlayerBar(players: Array(game.allPlayers))
                 List {
 
                     ForEach(game.rounds.indices, id: \.self) { index in
@@ -35,7 +35,7 @@ struct ScoreCard: View {
                             showEditRound()
                         } label: {
                             ScoreRow(signpost: "X",
-                                     players: Array(game.allPlayers(withSort: .playingOrder)),
+                                     players: Array(game.allPlayers),
                                      round: game.rounds[index])
                         }
                         .padding(.vertical, 8)
@@ -99,7 +99,7 @@ struct ScoreCard: View {
     private var showingEditRound = false
 
     private var totalScores: [Int] {
-        game.allPlayers(withSort: .playingOrder).map { game.totalScore(forPlayer: $0) }
+        game.allPlayers.map { game.totalScore(forPlayer: $0) }
     }
 
     private func showAddRound() {
