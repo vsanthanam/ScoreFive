@@ -44,7 +44,7 @@ struct ScoreCard: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                PlayerBar(players: Array(game.allPlayers))
+                PlayerBar(players: game.allPlayers)
                 List {
 
                     ForEach(game.rounds.indices, id: \.self) { index in
@@ -55,13 +55,14 @@ struct ScoreCard: View {
                                      players: game.allPlayers,
                                      activePlayers: game.activePlayers)
                         }
-                        .padding(.vertical, 8)
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                         .sheet(isPresented: $showingEditRound) {
                             RoundEditor(game: $game, previousIndex: index)
                         }
+
                     }
+                    .padding(.vertical, 8)
+                    .listRowSeparator(.hidden)
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
 
                     if !game.isComplete {
                         Button(action: showAddRound) {

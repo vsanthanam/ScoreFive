@@ -1,5 +1,5 @@
 // ScoreFive
-// PlayerBar.swift
+// RootView.swift
 //
 // MIT License
 //
@@ -23,40 +23,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Collections
-import Five
 import SwiftUI
 
-struct PlayerBar: View {
+struct RootView: View {
 
-    var players: OrderedSet<Game.Player>
+    // MARK: - View
 
     var body: some View {
-        HStack {
-            VStack(alignment: .center) {
-                Text("")
-            }
-            .frame(width: 48)
-            HStack {
-                ForEach(players, id: \.self) { player in
-                    Text(player.capitalized.first?.description ?? "X")
-                        .bold()
-                }
-                .frame(maxWidth: .infinity)
-            }
-        }
-        .padding(.vertical, 12)
-        .background(
-            Color(uiColor: UIColor.systemBackground)
-                .shadow(radius: 10, x: 0, y: 0)
-                .mask(Rectangle().padding(.bottom, -20))
-        )
+        MainMenu()
     }
+
 }
 
-struct PlayerBar_Previews: PreviewProvider {
+struct RooView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerBar(players: ["Mom", "Dad", "God", "Bro"])
-            .previewLayout(PreviewLayout.sizeThatFits)
+        RootView()
     }
 }

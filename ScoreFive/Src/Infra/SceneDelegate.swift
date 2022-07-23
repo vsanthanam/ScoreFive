@@ -38,8 +38,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         window = .init(windowScene: scene)
-        let root = Root(gameManager: .shared)
+        let root = RootView()
             .environment(\.managedObjectContext, GameManager.shared.viewContext)
+            .environmentObject(GameManager.shared)
+            .environmentObject(NetworkManager.shared)
         let vc = UIHostingController(rootView: root)
         window?.rootViewController = vc
         window?.makeKeyAndVisible()

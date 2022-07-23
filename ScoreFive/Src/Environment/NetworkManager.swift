@@ -1,5 +1,5 @@
 // ScoreFive
-// Root.swift
+// NetworkManager.swift
 //
 // MIT License
 //
@@ -23,31 +23,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import Foundation
+import Network
+import NetworkReachability
 
-struct Root: View {
+@MainActor
+final class NetworkManager: ObservableObject {
 
-    // MARK: - Initializers
+    // MARK: - API
 
-    init(gameManager: GameManager) {
-        _gameManager = .init(wrappedValue: gameManager)
-    }
+    static let shared: NetworkManager = .init()
 
-    // MARK: - View
-
-    var body: some View {
-        MainMenu()
-            .environmentObject(gameManager)
-    }
+    @Published
+    var path: NWPath?
 
     // MARK: - Private
 
-    @StateObject
-    private var gameManager: GameManager
-}
-
-struct Root_Previews: PreviewProvider {
-    static var previews: some View {
-        Root(gameManager: .preview)
+    private init() {
+        setUp()
     }
+
+    private var task: Task<Void, Never>?
+
+    private func setUp() {
+        task = Task {
+            for await path in NetworkMonitor.networkPathUpdates {
+                self.path = path
+            }
+        }
+    }
+
+    deinit {
+        task?.cancel()
+        task = nil
+    }
+
 }
