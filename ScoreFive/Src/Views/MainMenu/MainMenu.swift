@@ -51,7 +51,7 @@ struct MainMenu: View {
 
             VStack {
 
-                Button(action: toggleNewGame) {
+                Button(action: showNewGame) {
                     Text("New Game")
                         .frame(width: 120)
                 }
@@ -64,7 +64,7 @@ struct MainMenu: View {
                 }
 
                 if !gameRecords.isEmpty {
-                    Button(action: toggleLoadGame) {
+                    Button(action: showLoadGame) {
                         Text("Load Game")
                             .frame(width: 120)
                     }
@@ -75,6 +75,15 @@ struct MainMenu: View {
                                 try? gameManager.save()
                             }
                     }
+                }
+
+                Button(action: showSettings) {
+                    Text("Settings")
+                        .frame(width: 120)
+                }
+                .buttonStyle(.borderedProminent)
+                .sheet(isPresented: $showingSettings) {
+                    Settings()
                 }
 
             }
@@ -98,15 +107,22 @@ struct MainMenu: View {
     @State
     private var showingLoadGame = false
 
+    @State
+    private var showingSettings = false
+
     @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)])
     private var gameRecords: FetchedResults<GameRecord>
 
-    private func toggleNewGame() {
-        showingNewGame.toggle()
+    private func showNewGame() {
+        showingNewGame = true
     }
 
-    private func toggleLoadGame() {
-        showingLoadGame.toggle()
+    private func showLoadGame() {
+        showingLoadGame = true
+    }
+
+    private func showSettings() {
+        showingSettings = true
     }
 
 }
