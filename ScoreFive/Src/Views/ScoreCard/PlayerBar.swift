@@ -39,7 +39,7 @@ struct PlayerBar: View {
             .frame(width: 48)
             HStack {
                 ForEach(players, id: \.self) { player in
-                    Text(player.capitalized.first?.description ?? "X")
+                    Text(player.signpost(for: players))
                         .bold()
                 }
                 .frame(maxWidth: .infinity)

@@ -23,6 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Collections
 import Five
 import SwiftUI
 
@@ -50,7 +51,7 @@ struct ScoreCard: View {
                     ForEach(game.rounds.indices, id: \.self) { index in
 
                         Button(action: showEditRound) {
-                            ScoreRow(signpost: game.startingPlayer(atIndex: index).first!.description,
+                            ScoreRow(signpost: game.startingPlayer(atIndex: index).signpost(for: game.allPlayers),
                                      round: game.rounds[index],
                                      players: game.allPlayers,
                                      activePlayers: game.activePlayers)
@@ -66,7 +67,7 @@ struct ScoreCard: View {
 
                     if !game.isComplete {
                         Button(action: showAddRound) {
-                            AddRow(signpost: game.startingPlayer(atIndex: game.rounds.count).first!.description)
+                            AddRow(signpost: game.startingPlayer(atIndex: game.rounds.count).signpost(for: game.allPlayers))
                                 .sheet(isPresented: $showingAddRound) {
                                     RoundEditor(game: $game)
                                 }
@@ -151,4 +152,17 @@ struct ScoreCard_Previews: PreviewProvider {
         ScoreCard(game: testGame)
             .environmentObject(GameManager.preview)
     }
+}
+
+extension Game.Player {
+
+    func signpost(for players: OrderedSet<Game.Player>) -> String {
+        if contains("Player ") {
+            let index = players.firstIndex(of: self)!
+            return "P\(index + 1)"
+        } else {
+            return capitalized.first!.description
+        }
+    }
+
 }

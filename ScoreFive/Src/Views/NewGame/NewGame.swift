@@ -91,14 +91,12 @@ struct NewGame: View {
     }
 
     private var canSaveGame: Bool {
-        let set = OrderedSet<String>(players)
-        guard set.count == players.count else {
+        let nonNil = players.filter { !$0.isEmpty }
+
+        guard nonNil.count == Set(nonNil).count else {
             return false
         }
-        guard set.count >= 2, set.count <= 8 else {
-            return false
-        }
-        guard set.allSatisfy({ !$0.isEmpty }) else {
+        guard players.count >= 2, players.count <= 8 else {
             return false
         }
         guard scoreLimit >= 50, scoreLimit <= 250 else {
@@ -109,7 +107,16 @@ struct NewGame: View {
 
     private func save() {
         withAnimation {
-            let game = Game(players: players, scoreLimit: scoreLimit)
+            let mappedPlayers = players
+                .indices
+                .map { index -> Game.Player in
+                    if players[index].isEmpty {
+                        return "Player \(index + 1)"
+                    } else {
+                        return players[index]
+                    }
+                }
+            let game = Game(players: mappedPlayers, scoreLimit: scoreLimit)
             let record = try! gameManager.storeNewGame(game)
             dismiss()
             try! gameManager.activateGame(with: record)

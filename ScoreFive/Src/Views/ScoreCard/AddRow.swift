@@ -38,7 +38,7 @@ struct AddRow: View {
             }
             .frame(width: 48)
             VStack(alignment: .center) {
-                Text("Add Row")
+                Text("Add Scores")
                     .frame(maxWidth: .infinity)
             }
         }
