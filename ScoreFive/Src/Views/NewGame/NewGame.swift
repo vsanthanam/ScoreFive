@@ -61,11 +61,11 @@ struct NewGame: View {
     private var scoreLimit = 250
 
     private var scoreLimitBining: Binding<String> {
-        .init(get: {
+        .init {
             scoreLimit.description
-        }, set: { newValue in
+        } set: { newValue in
             scoreLimit = Int(newValue) ?? 0
-        })
+        }
     }
 
     private var canAddPlayer: Bool {

@@ -173,6 +173,41 @@ public struct Game: Sequence, Sendable, Equatable, Hashable, Codable, CustomStri
         }
     }
 
+    public func startingPlayer(atIndex index: Int) -> Game.Player {
+        func alivePlayers(atIndex index: Int) -> OrderedSet<Game.Player> {
+            var game = self
+            game.rounds = .init(rounds[0 ..< rounds.count])
+            return game.orderedPlayers
+        }
+
+        if index == 0 {
+            return orderedPlayers[index % orderedPlayers.count]
+        } else {
+            if activePlayers == allPlayers {
+                return orderedPlayers[index % orderedPlayers.count]
+            } else {
+                var player = startingPlayer(atIndex: index - 1)
+                var playerIndex = orderedPlayers.firstIndex(of: player)!
+                playerIndex += 1
+
+                if (playerIndex > allPlayers.count - 1) {
+                    playerIndex = 0
+                }
+
+                player = orderedPlayers[playerIndex]
+
+                while !activePlayers.contains(player) {
+                    playerIndex += 1
+                    if playerIndex > activePlayers.count - 1 {
+                        playerIndex = 0
+                    }
+                    player = activePlayers[playerIndex]
+                }
+                return player
+            }
+        }
+    }
+
     /// Create a new round for the game
     /// - Returns: The new round, without any scores
     public func newRound() -> Round {

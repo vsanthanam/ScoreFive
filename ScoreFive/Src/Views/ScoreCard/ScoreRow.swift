@@ -11,13 +11,17 @@ import SwiftUI
 
 struct ScoreRow: View {
 
-    // MARK: - API
+    // MARK: - Initializers
 
-    let signpost: String
-
-    let players: [Game.Player]
-
-    let round: Round
+    init(signpost: String,
+         round: Round,
+         players: OrderedSet<Game.Player>,
+         activePlayers: OrderedSet<Game.Player>) {
+        self.signpost = signpost
+        self.round = round
+        self.players = Array(players)
+        self.activePlayers = Array(activePlayers)
+    }
 
     // MARK: - View
 
@@ -31,8 +35,10 @@ struct ScoreRow: View {
             .frame(width: 48)
             HStack {
                 ForEach(players, id: \.self) { player in
-                    if round.players.contains(player) {
-                        Text(String(round[player] ?? 0))
+                    if round.players.contains(player), let score = round[player] {
+                        Text(String(score))
+                            .foregroundColor(color(for: score))
+                            .opacity(opacity(for: player))
                     } else {
                         Text("")
                     }
@@ -40,6 +46,48 @@ struct ScoreRow: View {
                 .frame(maxWidth: .infinity)
             }
         }
+    }
+
+    // MARK: - Private
+
+    private let signpost: String
+
+    private let round: Round
+
+    private let players: [Game.Player]
+
+    private let activePlayers: [Game.Player]
+
+    private var min: Round.Score? {
+        round.players
+            .reduce([]) { scores, player in
+                scores + [round.score(forPlayer: player)]
+            }
+            .compactMap { $0 }
+            .min()
+    }
+
+    private var max: Round.Score? {
+        round.players
+            .reduce([]) { scores, player in
+                scores + [round.score(forPlayer: player)]
+            }
+            .compactMap { $0 }
+            .max()
+    }
+
+    private func color(for score: Round.Score) -> Color {
+        if score == min {
+            return .green
+        } else if score == max {
+            return .red
+        } else {
+            return .init(uiColor: .label)
+        }
+    }
+
+    private func opacity(for player: Game.Player) -> Double {
+        activePlayers.contains(player) ? 1.0 : 0.5
     }
 }
 
@@ -55,8 +103,9 @@ struct ScoreRow_Previews: PreviewProvider {
 
     static var previews: some View {
         ScoreRow(signpost: "X",
+                 round: round,
                  players: ["Mom", "Dad", "God", "Bro"],
-                 round: round)
+                 activePlayers: ["Mom", "Dad", "Bro"])
             .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

@@ -31,12 +31,11 @@ struct ScoreCard: View {
 
                     ForEach(game.rounds.indices, id: \.self) { index in
 
-                        Button {
-                            showEditRound()
-                        } label: {
-                            ScoreRow(signpost: "X",
-                                     players: Array(game.allPlayers),
-                                     round: game.rounds[index])
+                        Button(action: showEditRound) {
+                            ScoreRow(signpost: game.startingPlayer(atIndex: index).first!.description,
+                                     round: game.rounds[index],
+                                     players: game.allPlayers,
+                                     activePlayers: game.activePlayers)
                         }
                         .padding(.vertical, 8)
                         .listRowSeparator(.hidden)
@@ -44,12 +43,11 @@ struct ScoreCard: View {
                         .sheet(isPresented: $showingEditRound) {
                             RoundEditor(game: $game, previousIndex: index)
                         }
-
                     }
 
                     if !game.isComplete {
                         Button(action: showAddRound) {
-                            AddRow(signpost: "X")
+                            AddRow(signpost: game.startingPlayer(atIndex: game.rounds.count).first!.description)
                                 .sheet(isPresented: $showingAddRound) {
                                     RoundEditor(game: $game)
                                 }
@@ -69,7 +67,7 @@ struct ScoreCard: View {
                 }
                 .listStyle(PlainListStyle())
 
-                TotalScoreBar(scores: totalScores)
+                TotalScoreBar(game: $game)
             }
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
@@ -103,11 +101,11 @@ struct ScoreCard: View {
     }
 
     private func showAddRound() {
-        showingAddRound.toggle()
+        showingAddRound = true
     }
 
     private func showEditRound() {
-        showingEditRound.toggle()
+        showingEditRound = true
     }
 
     private func close() {

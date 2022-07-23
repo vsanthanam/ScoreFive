@@ -5,11 +5,15 @@
 //  Created by Varun Santhanam on 7/22/22.
 //
 
+import Five
 import SwiftUI
 
 struct TotalScoreBar: View {
 
-    var scores: [Int]
+    @Binding
+    var game: Game
+
+    // MARK: - View
 
     var body: some View {
         HStack {
@@ -18,9 +22,10 @@ struct TotalScoreBar: View {
             }
             .frame(width: 48)
             HStack {
-                ForEach(scores.indices, id: \.self) { index in
-                    Text(scores[index].description)
+                ForEach(game.allPlayers, id: \.self) { player in
+                    Text(game[player].description)
                         .bold()
+                        .opacity(opacity(for: player))
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -32,11 +37,29 @@ struct TotalScoreBar: View {
                 .mask(Rectangle().padding(.top, -20)) /// here!
         )
     }
+
+    // MARK: - Private
+
+    private func opacity(for player: Game.Player) -> Double {
+        game.activePlayers.contains(player) ? 1.0 : 0.5
+    }
 }
 
 struct TotalScoreBar_Previews: PreviewProvider {
+
+    static var previewGame: Game {
+        var firstGame = Game(players: ["Mom", "Dad", "God", "Bro"], scoreLimit: 250)
+        var round = firstGame.newRound()
+        round["Mom"] = 0
+        round["Dad"] = 23
+        round["God"] = 35
+        round["Bro"] = 11
+        firstGame.addRound(round)
+        return firstGame
+    }
+
     static var previews: some View {
-        TotalScoreBar(scores: [0, 50, 12, 3])
+        TotalScoreBar(game: .constant(previewGame))
             .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

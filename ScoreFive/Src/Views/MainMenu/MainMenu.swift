@@ -45,16 +45,18 @@ struct MainMenu: View {
                         }
                 }
 
-                Button(action: toggleLoadGame) {
-                    Text("Load Game")
-                        .frame(width: 120)
-                }
-                .buttonStyle(.borderedProminent)
-                .sheet(isPresented: $showingLoadGame) {
-                    LoadGame()
-                        .onAppear {
-                            try? gameManager.save()
-                        }
+                if !gameRecords.isEmpty {
+                    Button(action: toggleLoadGame) {
+                        Text("Load Game")
+                            .frame(width: 120)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .sheet(isPresented: $showingLoadGame) {
+                        LoadGame()
+                            .onAppear {
+                                try? gameManager.save()
+                            }
+                    }
                 }
 
             }
