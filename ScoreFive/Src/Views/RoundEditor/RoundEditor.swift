@@ -43,14 +43,8 @@ struct RoundEditor: View {
 
     // MARK: - API
 
-    @EnvironmentObject
-    var gameManager: GameManager
-
     @Binding
     var game: Game
-
-    @Environment(\.dismiss)
-    var dismiss
 
     // MARK: - View
 
@@ -160,6 +154,12 @@ struct RoundEditor: View {
     }
 
     private let previousIndex: Int?
+
+    @Environment(\.dismiss)
+    private var dismiss: DismissAction
+
+    @EnvironmentObject
+    private var gameManager: GameManager
 
     @State
     private var round: InProgressRound

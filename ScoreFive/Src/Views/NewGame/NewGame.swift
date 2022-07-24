@@ -29,14 +29,6 @@ import SwiftUI
 
 struct NewGame: View {
 
-    // MARK: - API
-
-    @Environment(\.dismiss)
-    var dismiss
-
-    @EnvironmentObject
-    var gameManager: GameManager
-
     // MARK: - View
 
     var body: some View {
@@ -71,6 +63,12 @@ struct NewGame: View {
     }
 
     // MARK: - Private
+
+    @Environment(\.dismiss)
+    private var dismiss: DismissAction
+
+    @EnvironmentObject
+    private var gameManager: GameManager
 
     @State
     private var players: [String] = ["", ""]

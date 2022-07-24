@@ -114,7 +114,7 @@
 				07E25151288C4CFA0061AA19 /* Settings */,
 				075F15E3288B23D900E238C0 /* Main */,
 				075F15E2288B23CE00E238C0 /* LoadGame */,
-				075F15E1288B23C200E238C0 /* Round Editor */,
+				075F15E1288B23C200E238C0 /* RoundEditor */,
 				075F15DE288B203B00E238C0 /* ScoreCard */,
 				075F15DD288B164000E238C0 /* RootView */,
 				075F15DC288B162900E238C0 /* Reusable */,
@@ -169,12 +169,12 @@
 			path = ScoreCard;
 			sourceTree = "<group>";
 		};
-		075F15E1288B23C200E238C0 /* Round Editor */ = {
+		075F15E1288B23C200E238C0 /* RoundEditor */ = {
 			isa = PBXGroup;
 			children = (
 				0714D2042883735000CE45A3 /* RoundEditor.swift */,
 			);
-			path = "Round Editor";
+			path = RoundEditor;
 			sourceTree = "<group>";
 		};
 		075F15E2288B23CE00E238C0 /* LoadGame */ = {

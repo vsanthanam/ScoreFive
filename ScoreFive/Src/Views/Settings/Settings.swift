@@ -27,8 +27,7 @@ import SwiftUI
 
 struct Settings: View {
 
-    @AppStorage("mySetting")
-    private var mySetting: Bool = false
+    // MARK: - View
 
     var body: some View {
         NavigationView {
@@ -40,6 +39,11 @@ struct Settings: View {
             .navigationTitle("Settings")
         }
     }
+
+    // MARK: - Private
+
+    @AppStorage("mySetting")
+    private var mySetting: Bool = false
 }
 
 struct Settings_Previews: PreviewProvider {

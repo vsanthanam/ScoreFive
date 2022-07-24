@@ -37,17 +37,51 @@ struct Main: View {
     // MARK: - View
 
     var body: some View {
-        if let identifier = gameManager.activeGameRecord {
-            ScoreCard(game: try! gameManager.game(for: identifier))
-        } else {
-            Menu(shouldAutoLaunch: true)
+        HStack(alignment: .top, spacing: 0) {
+            if let identifier = gameManager.activeGameRecord {
+                ScoreCard(game: try! gameManager.game(for: identifier))
+            } else {
+                Menu(showingNewGame: $showingNewGame,
+                     showingLoadGame: $showingLoadGame,
+                     showingSettings: $showingSettings)
+            }
+        }
+        .sheet(isPresented: $showingNewGame) {
+            NewGame()
+                .saveOnAppear(gameManager)
+        }
+        .sheet(isPresented: $showingLoadGame) {
+            LoadGame()
+                .saveOnAppear(gameManager)
+        }
+        .sheet(isPresented: $showingSettings) {
+            Settings()
         }
     }
+
+    // MARK: - Private
+
+    @State
+    private var showingNewGame = false
+
+    @State
+    private var showingLoadGame = false
+
+    @State
+    private var showingSettings = false
 }
 
 struct Main_Previews: PreviewProvider {
     static var previews: some View {
         Main()
             .environmentObject(GameManager.preview)
+    }
+}
+
+private extension View {
+    func saveOnAppear(_ manager: GameManager) -> some View {
+        onAppear {
+            Task { await MainActor.run { try! manager.save() } }
+        }
     }
 }

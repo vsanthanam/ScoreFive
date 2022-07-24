@@ -35,32 +35,26 @@ struct LoadGame: View {
 
     // MARK: - API
 
-    @EnvironmentObject
-    var gameManager: GameManager
-
-    @Environment(\.dismiss)
-    var dismiss
-
     // MARK: - View
 
     var body: some View {
         NavigationView {
             List {
                 ForEach(gameRecords) { record in
-                    VStack(alignment: .leading) {
-                        Text(formatter.string(from: record.playerNames ?? []) ?? "")
-                        Text("Last updated at \(dateFormatter.string(from: record.timestamp ?? .now))")
-                            .font(.caption)
-                    }
-                    .onTapGesture {
-                        dismiss()
-                        withAnimation {
-                            try! gameManager.activateGame(with: record)
+                    Button {
+                        openGame(withRecord: record)
+                    } label: {
+                        VStack(alignment: .leading) {
+                            Text(formatter.string(from: record.playerNames ?? []) ?? "")
+                            Text("Last updated at \(dateFormatter.string(from: record.timestamp ?? .now))")
+                                .font(.caption)
                         }
                     }
+                    .buttonStyle(.plain)
                 }
                 .onDelete(perform: deleteItems(offsets:))
             }
+            .animation(nil, value: editMode?.wrappedValue)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if !gameRecords.isEmpty {
@@ -81,20 +75,31 @@ struct LoadGame: View {
 
     // MARK: - Private
 
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)])
-    private var gameRecords: FetchedResults<GameRecord> {
-        didSet {
-            if gameRecords.isEmpty {
-                dismiss()
-            }
+    private func openGame(withRecord record: GameRecord) {
+        guard !(editMode?.wrappedValue.isEditing ?? false) else { return }
+        withAnimation {
+            try! gameManager.activateGame(with: record)
         }
+        dismiss()
     }
 
     private let formatter = ListFormatter()
 
     private let dateFormatter = DateFormatter()
 
-    private var didSave = NotificationCenter.default.publisher(for: NSNotification.Name.NSManagedObjectContextDidSave)
+    private let didSave = NotificationCenter.default.publisher(for: NSNotification.Name.NSManagedObjectContextDidSave)
+
+    @Environment(\.editMode)
+    private var editMode
+
+    @Environment(\.dismiss)
+    private var dismiss: DismissAction
+
+    @EnvironmentObject
+    private var gameManager: GameManager
+
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)])
+    private var gameRecords: FetchedResults<GameRecord>
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {

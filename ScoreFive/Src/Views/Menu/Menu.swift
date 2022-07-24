@@ -27,16 +27,16 @@ import SwiftUI
 
 struct Menu: View {
 
-    // MARK: - Initializers
-
-    init(shouldAutoLaunch: Bool = false) {
-        self.shouldAutoLaunch = shouldAutoLaunch
-    }
-
     // MARK: - API
 
-    @EnvironmentObject
-    var gameManager: GameManager
+    @Binding
+    var showingNewGame: Bool
+
+    @Binding
+    var showingLoadGame: Bool
+
+    @Binding
+    var showingSettings: Bool
 
     // MARK: - View
 
@@ -56,36 +56,12 @@ struct Menu: View {
             MenuButton("Settings", systemName: "gearshape.fill", action: showSettings)
 
         }
-        .sheet(isPresented: $showingNewGame) {
-            NewGame()
-                .saveOnAppear(gameManager)
-        }
-        .sheet(isPresented: $showingLoadGame) {
-            LoadGame()
-                .saveOnAppear(gameManager)
-        }
-        .sheet(isPresented: $showingSettings) {
-            Settings()
-        }
-        .onAppear {
-            if gameRecords.isEmpty, shouldAutoLaunch {
-                showingNewGame = true
-            }
-        }
     }
 
     // MARK: - Private
 
-    private let shouldAutoLaunch: Bool
-
-    @State
-    private var showingNewGame = false
-
-    @State
-    private var showingLoadGame = false
-
-    @State
-    private var showingSettings = false
+    @EnvironmentObject
+    private var gameManager: GameManager
 
     @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)])
     private var gameRecords: FetchedResults<GameRecord>
@@ -105,14 +81,7 @@ struct Menu: View {
 
 struct Menu_Previews: PreviewProvider {
     static var previews: some View {
-        Menu()
-    }
-}
-
-private extension View {
-    func saveOnAppear(_ manager: GameManager) -> some View {
-        onAppear {
-            Task { await MainActor.run { try! manager.save() } }
-        }
+        Menu(showingNewGame: .constant(false), showingLoadGame: .constant(false), showingSettings: .constant(false))
+            .environmentObject(GameManager.preview)
     }
 }
