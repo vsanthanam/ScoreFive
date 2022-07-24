@@ -165,7 +165,7 @@ public struct Round: Sendable, Equatable, Hashable, Codable, CustomStringConvert
     // MARK: - CustomStringConvertible
 
     public var description: String {
-        "Players: \(players)\nScores:\(scores)"
+        scores.description
     }
 
     // MARK: - Subscript

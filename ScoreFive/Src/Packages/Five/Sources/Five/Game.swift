@@ -80,8 +80,8 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
         activePlayers.count == 1
     }
 
-    /// The results of the game, if it is complete
-    /// - Throws: An error if the came is incomplete
+    /// The results of the game
+    /// - Throws: `Error.incompleteGame` if the game is incomplete.
     public var result: Game.Result {
         get throws {
             guard isComplete else {

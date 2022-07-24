@@ -20,7 +20,6 @@
 		075F15E0288B204500E238C0 /* TotalScoreBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15DF288B204500E238C0 /* TotalScoreBar.swift */; };
 		075F15EA288B442A00E238C0 /* PlayerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15E9288B442A00E238C0 /* PlayerBar.swift */; };
 		075F15EC288B45A400E238C0 /* AddRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15EB288B45A400E238C0 /* AddRow.swift */; };
-		075F15FC288B53BD00E238C0 /* Five in Frameworks */ = {isa = PBXBuildFile; productRef = 075F15FB288B53BD00E238C0 /* Five */; };
 		075F15FE288B53D200E238C0 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 075F15FD288B53D200E238C0 /* Collections */; };
 		076A0C40287B35A000A75AE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C3F287B35A000A75AE9 /* AppDelegate.swift */; };
 		076A0C42287B35A000A75AE9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C41287B35A000A75AE9 /* SceneDelegate.swift */; };
@@ -36,6 +35,7 @@
 		07E25155288C4FBD0061AA19 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25154288C4FBD0061AA19 /* MenuButton.swift */; };
 		07E25177288DBCB00061AA19 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E25176288DBCB00061AA19 /* CloudKit.framework */; };
 		07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25179288DCFB80061AA19 /* AppFoundation */; };
+		07E2517E288DDB0F0061AA19 /* Five in Frameworks */ = {isa = PBXBuildFile; productRef = 07E2517D288DDB0F0061AA19 /* Five */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +52,6 @@
 		075F15DF288B204500E238C0 /* TotalScoreBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreBar.swift; sourceTree = "<group>"; };
 		075F15E9288B442A00E238C0 /* PlayerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerBar.swift; sourceTree = "<group>"; };
 		075F15EB288B45A400E238C0 /* AddRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRow.swift; sourceTree = "<group>"; };
-		075F15FA288B533300E238C0 /* Five */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Five; path = ScoreFive/Packages/Five; sourceTree = "<group>"; };
 		076A0C3C287B35A000A75AE9 /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076A0C3F287B35A000A75AE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		076A0C41287B35A000A75AE9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		07E25154288C4FBD0061AA19 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		07E25175288DBCAB0061AA19 /* ScoreFive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScoreFive.entitlements; sourceTree = "<group>"; };
 		07E25176288DBCB00061AA19 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		07E2517C288DDA690061AA19 /* Five */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Five; path = ScoreFive/Src/Packages/Five; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,11 +74,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07E2517E288DDB0F0061AA19 /* Five in Frameworks */,
 				07E25177288DBCB00061AA19 /* CloudKit.framework in Frameworks */,
 				075F15FE288B53D200E238C0 /* Collections in Frameworks */,
 				07E25147288C45060061AA19 /* Introspect in Frameworks */,
 				07E2514A288C45350061AA19 /* NetworkReachability in Frameworks */,
-				075F15FC288B53BD00E238C0 /* Five in Frameworks */,
 				07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,20 +199,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		075F15F9288B533300E238C0 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				075F15FA288B533300E238C0 /* Five */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		076A0C33287B35A000A75AE9 = {
 			isa = PBXGroup;
 			children = (
 				07E2514D288C4BCC0061AA19 /* LICENSE */,
 				07E2514E288C4BCC0061AA19 /* README.md */,
-				075F15F9288B533300E238C0 /* Packages */,
+				07E2517B288DDA690061AA19 /* Packages */,
 				076A0C3E287B35A000A75AE9 /* ScoreFive */,
 				076A0C3D287B35A000A75AE9 /* Products */,
 				075F15F4288B51F700E238C0 /* Frameworks */,
@@ -248,6 +240,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		07E2517B288DDA690061AA19 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				07E2517C288DDA690061AA19 /* Five */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -265,11 +265,11 @@
 			);
 			name = ScoreFive;
 			packageProductDependencies = (
-				075F15FB288B53BD00E238C0 /* Five */,
 				075F15FD288B53D200E238C0 /* Collections */,
 				07E25146288C45060061AA19 /* Introspect */,
 				07E25149288C45350061AA19 /* NetworkReachability */,
 				07E25179288DCFB80061AA19 /* AppFoundation */,
+				07E2517D288DDB0F0061AA19 /* Five */,
 			);
 			productName = ScoreFive;
 			productReference = 076A0C3C287B35A000A75AE9 /* ScoreFive.app */;
@@ -607,10 +607,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		075F15FB288B53BD00E238C0 /* Five */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Five;
-		};
 		075F15FD288B53D200E238C0 /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0714D1E2288327E400CE45A3 /* XCRemoteSwiftPackageReference "swift-collections" */;
@@ -630,6 +626,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 07E25178288DCFB80061AA19 /* XCRemoteSwiftPackageReference "AppFoundation" */;
 			productName = AppFoundation;
+		};
+		07E2517D288DDB0F0061AA19 /* Five */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Five;
 		};
 /* End XCSwiftPackageProductDependency section */
 
