@@ -63,9 +63,6 @@ struct ScoreCard: View {
                                      activePlayers: game.activePlayers)
 
                         }
-                        .sheet(item: $editingRound) { roundAndIndex in
-                            RoundEditor(game: $game, previousIndex: roundAndIndex.id)
-                        }
 
                     }
                     .onDelete(perform: deleteItems(offsets:))
@@ -79,9 +76,6 @@ struct ScoreCard: View {
                                 }
                         }
                         .scoreCardRow()
-                        .sheet(isPresented: $showingAddRound) {
-                            RoundEditor(game: $game)
-                        }
                     }
 
                     Spacer()
@@ -104,6 +98,12 @@ struct ScoreCard: View {
                     }
                 }
             }
+        }
+        .sheet(item: $editingRound) { roundAndIndex in
+            RoundEditor(game: $game, previousIndex: roundAndIndex.id)
+        }
+        .sheet(isPresented: $showingAddRound) {
+            RoundEditor(game: $game)
         }
         .alert("Cannot delete this round", isPresented: $roundAlert) {
             Button("OK") { roundAlert = false }
