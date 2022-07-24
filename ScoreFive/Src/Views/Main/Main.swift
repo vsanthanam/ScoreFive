@@ -1,5 +1,5 @@
 // ScoreFive
-// RootView.swift
+// Main.swift
 //
 // MIT License
 //
@@ -23,20 +23,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CoreData
+import Five
 import SwiftUI
 
-struct RootView: View {
+struct Main: View {
+
+    // MARK: - API
+
+    @EnvironmentObject
+    var gameManager: GameManager
 
     // MARK: - View
 
     var body: some View {
-        Main()
+        if let identifier = gameManager.activeGameRecord {
+            ScoreCard(game: try! gameManager.game(for: identifier))
+        } else {
+            Menu(shouldAutoLaunch: true)
+        }
     }
-
 }
 
-struct RooView_Previews: PreviewProvider {
+struct Main_Previews: PreviewProvider {
     static var previews: some View {
-        RootView()
+        Main()
+            .environmentObject(GameManager.preview)
     }
 }

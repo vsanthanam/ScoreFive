@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0714D1D1287B38B600CE45A3 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1D0287B38B600CE45A3 /* MainMenu.swift */; };
+		0714D1D1287B38B600CE45A3 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1D0287B38B600CE45A3 /* Main.swift */; };
 		0714D1D3287B38BD00CE45A3 /* ScoreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1D2287B38BD00CE45A3 /* ScoreCard.swift */; };
 		0714D1D5287B390000CE45A3 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1D4287B390000CE45A3 /* GameManager.swift */; };
 		0714D1D8287B39A200CE45A3 /* ScoreFive.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1D6287B39A200CE45A3 /* ScoreFive.xcdatamodeld */; };
@@ -36,10 +36,11 @@
 		07E25177288DBCB00061AA19 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E25176288DBCB00061AA19 /* CloudKit.framework */; };
 		07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25179288DCFB80061AA19 /* AppFoundation */; };
 		07E2517E288DDB0F0061AA19 /* Five in Frameworks */ = {isa = PBXBuildFile; productRef = 07E2517D288DDB0F0061AA19 /* Five */; };
+		07E25181288DF9D30061AA19 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25180288DF9D30061AA19 /* Menu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0714D1D0287B38B600CE45A3 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		0714D1D0287B38B600CE45A3 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		0714D1D2287B38BD00CE45A3 /* ScoreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCard.swift; sourceTree = "<group>"; };
 		0714D1D4287B390000CE45A3 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		0714D1D7287B39A200CE45A3 /* ScoreFive.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScoreFive.xcdatamodel; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 		07E25175288DBCAB0061AA19 /* ScoreFive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScoreFive.entitlements; sourceTree = "<group>"; };
 		07E25176288DBCB00061AA19 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		07E2517C288DDA690061AA19 /* Five */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Five; path = ScoreFive/Src/Packages/Five; sourceTree = "<group>"; };
+		07E25180288DF9D30061AA19 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,8 +110,9 @@
 		075F15CE288B12EB00E238C0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				07E2517F288DF8D00061AA19 /* Menu */,
 				07E25151288C4CFA0061AA19 /* Settings */,
-				075F15E3288B23D900E238C0 /* MainMenu */,
+				075F15E3288B23D900E238C0 /* Main */,
 				075F15E2288B23CE00E238C0 /* LoadGame */,
 				075F15E1288B23C200E238C0 /* Round Editor */,
 				075F15DE288B203B00E238C0 /* ScoreCard */,
@@ -182,13 +185,12 @@
 			path = LoadGame;
 			sourceTree = "<group>";
 		};
-		075F15E3288B23D900E238C0 /* MainMenu */ = {
+		075F15E3288B23D900E238C0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				0714D1D0287B38B600CE45A3 /* MainMenu.swift */,
-				07E25154288C4FBD0061AA19 /* MenuButton.swift */,
+				0714D1D0287B38B600CE45A3 /* Main.swift */,
 			);
-			path = MainMenu;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		075F15F4288B51F700E238C0 /* Frameworks */ = {
@@ -246,6 +248,15 @@
 				07E2517C288DDA690061AA19 /* Five */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		07E2517F288DF8D00061AA19 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				07E25180288DF9D30061AA19 /* Menu.swift */,
+				07E25154288C4FBD0061AA19 /* MenuButton.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,9 +359,10 @@
 				0714D1DD287B532600CE45A3 /* NewGame.swift in Sources */,
 				07E25155288C4FBD0061AA19 /* MenuButton.swift in Sources */,
 				075F15E0288B204500E238C0 /* TotalScoreBar.swift in Sources */,
+				07E25181288DF9D30061AA19 /* Menu.swift in Sources */,
 				075F15EC288B45A400E238C0 /* AddRow.swift in Sources */,
 				075F15EA288B442A00E238C0 /* PlayerBar.swift in Sources */,
-				0714D1D1287B38B600CE45A3 /* MainMenu.swift in Sources */,
+				0714D1D1287B38B600CE45A3 /* Main.swift in Sources */,
 				0714D1D8287B39A200CE45A3 /* ScoreFive.xcdatamodeld in Sources */,
 				0714D1D3287B38BD00CE45A3 /* ScoreCard.swift in Sources */,
 			);

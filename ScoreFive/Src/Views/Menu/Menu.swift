@@ -1,5 +1,5 @@
 // ScoreFive
-// MainMenu.swift
+// Menu.swift
 //
 // MIT License
 //
@@ -23,11 +23,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreData
-import Five
 import SwiftUI
 
-struct MainMenu: View {
+struct Menu: View {
 
     // MARK: - Initializers
 
@@ -43,46 +41,37 @@ struct MainMenu: View {
     // MARK: - View
 
     var body: some View {
-        if let identifier = gameManager.activeGameRecord {
+        VStack {
 
-            ScoreCard(game: try! gameManager.game(for: identifier))
+            MenuButton("New Game",
+                       systemName: "square.and.pencil",
+                       action: showNewGame)
 
-        } else {
-
-            VStack {
-
-                MenuButton("New Game",
-                           systemName: "doc.fill.badge.plus",
-                           action: showNewGame)
-
-                if !gameRecords.isEmpty {
-                    MenuButton("Load Game",
-                               systemName: "doc.fill.badge.ellipsis",
-                               action: showLoadGame)
-                }
-
-                MenuButton("Settings", systemName: "gearshape.fill", action: showSettings)
-
+            if !gameRecords.isEmpty {
+                MenuButton("Load Game",
+                           systemName: "doc.fill.badge.ellipsis",
+                           action: showLoadGame)
             }
-            .sheet(isPresented: $showingNewGame) {
-                NewGame()
-                    .saveOnAppear(gameManager)
-            }
-            .sheet(isPresented: $showingLoadGame) {
-                LoadGame()
-                    .saveOnAppear(gameManager)
-            }
-            .sheet(isPresented: $showingSettings) {
-                Settings()
-            }
-            .onAppear {
-                if gameRecords.isEmpty, shouldAutoLaunch {
-                    showingNewGame = true
-                }
-            }
+
+            MenuButton("Settings", systemName: "gearshape.fill", action: showSettings)
 
         }
-
+        .sheet(isPresented: $showingNewGame) {
+            NewGame()
+                .saveOnAppear(gameManager)
+        }
+        .sheet(isPresented: $showingLoadGame) {
+            LoadGame()
+                .saveOnAppear(gameManager)
+        }
+        .sheet(isPresented: $showingSettings) {
+            Settings()
+        }
+        .onAppear {
+            if gameRecords.isEmpty, shouldAutoLaunch {
+                showingNewGame = true
+            }
+        }
     }
 
     // MARK: - Private
@@ -112,13 +101,11 @@ struct MainMenu: View {
     private func showSettings() {
         showingSettings = true
     }
-
 }
 
-struct MainMenu_Previews: PreviewProvider {
+struct Menu_Previews: PreviewProvider {
     static var previews: some View {
-        MainMenu()
-            .environmentObject(GameManager.preview)
+        Menu()
     }
 }
 
