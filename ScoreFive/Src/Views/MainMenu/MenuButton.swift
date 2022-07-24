@@ -1,5 +1,5 @@
 // ScoreFive
-// Settings.swift
+// MenuButton.swift
 //
 // MIT License
 //
@@ -25,25 +25,44 @@
 
 import SwiftUI
 
-struct Settings: View {
+struct MenuButton: View {
 
-    @AppStorage("mySetting")
-    private var mySetting: Bool = false
+    // MARK: - Initializers
+
+    init(_ message: String,
+         systemName: String,
+         action: @escaping () -> Void = {}) {
+        self.message = message
+        self.systemName = systemName
+        self.action = action
+    }
+
+    // MARK: - View
 
     var body: some View {
-        NavigationView {
-            List {
-                Toggle(isOn: $mySetting) {
-                    Text("Test Setting")
-                }
+
+        Button(action: action) {
+            HStack {
+                Image(systemName: systemName)
+                Text(message)
             }
-            .navigationTitle("Settings")
+            .frame(width: 140)
         }
+        .buttonStyle(.borderedProminent)
+
     }
+
+    // MARK: - Private
+
+    private let action: () -> Void
+    private let message: String
+    private let systemName: String
+
 }
 
-struct Settings_Previews: PreviewProvider {
+struct MenuButton_Previews: PreviewProvider {
     static var previews: some View {
-        Settings()
+        MenuButton("New Game", systemName: "doc.badge.plus")
+            .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

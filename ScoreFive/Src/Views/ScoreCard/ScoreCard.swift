@@ -55,15 +55,20 @@ struct ScoreCard: View {
                                      round: game.rounds[index],
                                      players: game.allPlayers,
                                      activePlayers: game.activePlayers)
+
+                        }
+                        .alert("Cannot delete this round", isPresented: $roundAlert) {
+                            Button("OK") { roundAlert = false }
+                        } message: {
+                            Text("Please delete newer rounds first")
                         }
                         .sheet(isPresented: $showingEditRound) {
                             RoundEditor(game: $game, previousIndex: index)
                         }
 
                     }
-                    .padding(.vertical, 8)
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .onDelete(perform: deleteItems(offsets:))
+                    .scoreCardRow()
 
                     if !game.isComplete {
                         Button(action: showAddRound) {
@@ -72,9 +77,7 @@ struct ScoreCard: View {
                                     RoundEditor(game: $game)
                                 }
                         }
-                        .padding(.vertical, 8)
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        .scoreCardRow()
                         .sheet(isPresented: $showingAddRound) {
                             RoundEditor(game: $game)
                         }
@@ -99,10 +102,7 @@ struct ScoreCard: View {
                 }
             }
         }
-        .onChange(of: game) { game in
-            try! gameManager.updateGame(game)
-            try! gameManager.save()
-        }
+        .onChange(of: game, perform: persist(game:))
     }
 
     // MARK: - Private
@@ -116,6 +116,9 @@ struct ScoreCard: View {
     @State
     private var showingEditRound = false
 
+    @State
+    private var roundAlert: Bool = false
+
     private var totalScores: [Int] {
         game.allPlayers.map { game.totalScore(forPlayer: $0) }
     }
@@ -128,10 +131,25 @@ struct ScoreCard: View {
         showingEditRound = true
     }
 
+    private func deleteItems(offsets: IndexSet) {
+        for index in offsets {
+            if game.canDeleteRound(atIndex: index) {
+                game.deleteRound(atIndex: index)
+            } else {
+                roundAlert = true
+            }
+        }
+    }
+
     private func close() {
         withAnimation {
             try! gameManager.deactivateGame()
         }
+    }
+
+    private func persist(game: Game) {
+        try! gameManager.updateGame(game)
+        try! gameManager.save()
     }
 }
 
@@ -163,6 +181,16 @@ extension Game.Player {
         } else {
             return capitalized.first!.description
         }
+    }
+
+}
+
+private extension View {
+
+    func scoreCardRow() -> some View {
+        padding(.vertical, 8)
+            .listRowSeparator(.hidden)
+            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
     }
 
 }

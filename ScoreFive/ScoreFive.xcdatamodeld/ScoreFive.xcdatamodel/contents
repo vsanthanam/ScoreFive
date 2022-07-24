@@ -2,10 +2,11 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="GameRecord" representedClassName="GameRecord" syncable="YES" codeGenerationType="class">
         <attribute name="gameData" attributeType="Binary"/>
+        <attribute name="isComplete" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="playerNames" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="GameRecord" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="GameRecord" positionX="-63" positionY="-18" width="128" height="89"/>
     </elements>
 </model>

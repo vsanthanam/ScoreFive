@@ -51,41 +51,29 @@ struct MainMenu: View {
 
             VStack {
 
-                Button(action: showNewGame) {
-                    Text("New Game")
-                        .frame(width: 120)
-                }
-                .buttonStyle(.borderedProminent)
-                .sheet(isPresented: $showingNewGame) {
-                    NewGame()
-                        .onAppear {
-                            try? gameManager.save()
-                        }
-                }
+                MenuButton("New Game",
+                           systemName: "doc.fill.badge.plus",
+                           action: showNewGame)
 
                 if !gameRecords.isEmpty {
-                    Button(action: showLoadGame) {
-                        Text("Load Game")
-                            .frame(width: 120)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .sheet(isPresented: $showingLoadGame) {
-                        LoadGame()
-                            .onAppear {
-                                try? gameManager.save()
-                            }
-                    }
+                    MenuButton("Load Game",
+                               systemName: "doc.fill.badge.ellipsis",
+                               action: showLoadGame)
                 }
 
-                Button(action: showSettings) {
-                    Text("Settings")
-                        .frame(width: 120)
-                }
-                .buttonStyle(.borderedProminent)
-                .sheet(isPresented: $showingSettings) {
-                    Settings()
-                }
+                MenuButton("Settings", systemName: "gearshape.fill", action: showSettings)
 
+            }
+            .sheet(isPresented: $showingNewGame) {
+                NewGame()
+                    .saveOnAppear(gameManager)
+            }
+            .sheet(isPresented: $showingLoadGame) {
+                LoadGame()
+                    .saveOnAppear(gameManager)
+            }
+            .sheet(isPresented: $showingSettings) {
+                Settings()
             }
             .onAppear {
                 if gameRecords.isEmpty, shouldAutoLaunch {
@@ -131,5 +119,13 @@ struct MainMenu_Previews: PreviewProvider {
     static var previews: some View {
         MainMenu()
             .environmentObject(GameManager.preview)
+    }
+}
+
+private extension View {
+    func saveOnAppear(_ manager: GameManager) -> some View {
+        onAppear {
+            Task { await MainActor.run { try! manager.save() } }
+        }
     }
 }

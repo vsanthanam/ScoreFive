@@ -72,20 +72,35 @@ struct LoadGame: View {
             }
             .navigationTitle("Load Game")
         }
+        .onReceive(didSave) { _ in
+            if gameRecords.isEmpty {
+                dismiss()
+            }
+        }
     }
 
     // MARK: - Private
 
     @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)])
-    private var gameRecords: FetchedResults<GameRecord>
+    private var gameRecords: FetchedResults<GameRecord> {
+        didSet {
+            if gameRecords.isEmpty {
+                dismiss()
+            }
+        }
+    }
 
     private let formatter = ListFormatter()
 
     private let dateFormatter = DateFormatter()
 
+    private var didSave = NotificationCenter.default.publisher(for: NSNotification.Name.NSManagedObjectContextDidSave)
+
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { gameRecords[$0] }.forEach(gameManager.viewContext.delete)
+            offsets
+                .map { gameRecords[$0] }
+                .forEach(gameManager.viewContext.delete)
             try! gameManager.save()
         }
     }

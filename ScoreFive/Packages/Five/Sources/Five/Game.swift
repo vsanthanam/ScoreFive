@@ -26,7 +26,7 @@
 import OrderedCollections
 
 /// A game of Five
-public struct Game: Sequence, Sendable, Equatable, Hashable, Codable, CustomStringConvertible {
+public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConvertible {
 
     // MARK: - Initialzer
 
@@ -252,13 +252,24 @@ public struct Game: Sequence, Sendable, Equatable, Hashable, Codable, CustomStri
         return game
     }
 
+    /// Whether or not a round at a given index can be deleted
+    /// - Parameter index: The index you wish to delete
+    /// - Returns: `true` if the index can be deleted, otherwise `false`
+    public func canDeleteRound(atIndex index: Int) -> Bool {
+        precondition(index < rounds.count, "Invalid index \(index)!")
+        guard index != rounds.count - 1 else {
+            return true
+        }
+        var copy = self
+        copy.rounds.remove(at: index)
+        return copy.activePlayers == activePlayers
+    }
+
     /// Remove a round at a provided index
     /// - Parameter index: The index containing the round you wish to remove
     public mutating func deleteRound(atIndex index: Int) {
         precondition(index < rounds.count, "Invalid index \(index)!")
-        var copy = self
-        copy.rounds.remove(at: index)
-        guard copy.activePlayers == activePlayers else {
+        guard canDeleteRound(atIndex: index) else {
             fatalError("Cannot remove round at index \(index)! Game would change impossibly. Remove subsequent rounds first.")
         }
         rounds.remove(at: index)
@@ -291,14 +302,6 @@ public struct Game: Sequence, Sendable, Equatable, Hashable, Codable, CustomStri
 
     public subscript(index: Int) -> Round {
         round(atIndex: index)
-    }
-
-    // MARK: - Sequence
-
-    public typealias Iterator = Array<Round>.Iterator
-
-    public func makeIterator() -> Array<Round>.Iterator {
-        rounds.makeIterator()
     }
 
     // MARK: - CustomStringConvertible
