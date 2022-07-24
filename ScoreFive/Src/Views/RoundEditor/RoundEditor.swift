@@ -64,11 +64,8 @@ struct RoundEditor: View {
                     }
                 }
                 Section {
-                    Button(action: save) {
-                        Text("Done")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .disabled(!round.isValid)
+                    FormButton(text: "Done", action: save)
+                        .disabled(!round.isValid)
                 }
                 .multilineTextAlignment(.center)
             }
