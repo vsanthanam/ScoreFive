@@ -23,6 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import AppFoundation
 import Collections
 import Five
 import SwiftUI
@@ -50,20 +51,15 @@ struct ScoreCard: View {
 
                     ForEach(game.rounds.indices, id: \.self) { index in
 
-                        Button(action: showEditRound) {
+                        Button(action: { editingRound = RoundAndIndex(round: game[index], id: index) }) {
                             ScoreRow(signpost: game.startingPlayer(atIndex: index).signpost(for: game.allPlayers),
                                      round: game.rounds[index],
                                      players: game.allPlayers,
                                      activePlayers: game.activePlayers)
 
                         }
-                        .alert("Cannot delete this round", isPresented: $roundAlert) {
-                            Button("OK") { roundAlert = false }
-                        } message: {
-                            Text("Please delete newer rounds first")
-                        }
-                        .sheet(isPresented: $showingEditRound) {
-                            RoundEditor(game: $game, previousIndex: index)
+                        .sheet(item: $editingRound) { roundAndIndex in
+                            RoundEditor(game: $game, previousIndex: roundAndIndex.id)
                         }
 
                     }
@@ -102,10 +98,20 @@ struct ScoreCard: View {
                 }
             }
         }
+        .alert("Cannot delete this round", isPresented: $roundAlert) {
+            Button("OK") { roundAlert = false }
+        } message: {
+            Text("Please delete newer rounds first")
+        }
         .onChange(of: game, perform: persist(game:))
     }
 
     // MARK: - Private
+
+    private struct RoundAndIndex: Identifiable {
+        let round: Round
+        let id: Int
+    }
 
     @State
     private var game: Game
@@ -114,7 +120,7 @@ struct ScoreCard: View {
     private var showingAddRound = false
 
     @State
-    private var showingEditRound = false
+    private var editingRound: RoundAndIndex?
 
     @State
     private var roundAlert: Bool = false
@@ -125,10 +131,6 @@ struct ScoreCard: View {
 
     private func showAddRound() {
         showingAddRound = true
-    }
-
-    private func showEditRound() {
-        showingEditRound = true
     }
 
     private func deleteItems(offsets: IndexSet) {

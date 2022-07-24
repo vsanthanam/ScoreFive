@@ -35,6 +35,7 @@
 		07E25153288C4D040061AA19 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25152288C4D040061AA19 /* Settings.swift */; };
 		07E25155288C4FBD0061AA19 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25154288C4FBD0061AA19 /* MenuButton.swift */; };
 		07E25177288DBCB00061AA19 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E25176288DBCB00061AA19 /* CloudKit.framework */; };
+		07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25179288DCFB80061AA19 /* AppFoundation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 				07E25147288C45060061AA19 /* Introspect in Frameworks */,
 				07E2514A288C45350061AA19 /* NetworkReachability in Frameworks */,
 				075F15FC288B53BD00E238C0 /* Five in Frameworks */,
+				07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +269,7 @@
 				075F15FD288B53D200E238C0 /* Collections */,
 				07E25146288C45060061AA19 /* Introspect */,
 				07E25149288C45350061AA19 /* NetworkReachability */,
+				07E25179288DCFB80061AA19 /* AppFoundation */,
 			);
 			productName = ScoreFive;
 			productReference = 076A0C3C287B35A000A75AE9 /* ScoreFive.app */;
@@ -301,6 +304,7 @@
 				0714D1E2288327E400CE45A3 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				07E25145288C45060061AA19 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				07E25148288C45350061AA19 /* XCRemoteSwiftPackageReference "NetworkReachability" */,
+				07E25178288DCFB80061AA19 /* XCRemoteSwiftPackageReference "AppFoundation" */,
 			);
 			productRefGroup = 076A0C3D287B35A000A75AE9 /* Products */;
 			projectDirPath = "";
@@ -592,6 +596,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		07E25178288DCFB80061AA19 /* XCRemoteSwiftPackageReference "AppFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vsanthanam/AppFoundation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -613,6 +625,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 07E25148288C45350061AA19 /* XCRemoteSwiftPackageReference "NetworkReachability" */;
 			productName = NetworkReachability;
+		};
+		07E25179288DCFB80061AA19 /* AppFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07E25178288DCFB80061AA19 /* XCRemoteSwiftPackageReference "AppFoundation" */;
+			productName = AppFoundation;
 		};
 /* End XCSwiftPackageProductDependency section */
 

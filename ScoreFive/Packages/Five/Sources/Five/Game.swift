@@ -268,7 +268,6 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
     /// Remove a round at a provided index
     /// - Parameter index: The index containing the round you wish to remove
     public mutating func deleteRound(atIndex index: Int) {
-        precondition(index < rounds.count, "Invalid index \(index)!")
         guard canDeleteRound(atIndex: index) else {
             fatalError("Cannot remove round at index \(index)! Game would change impossibly. Remove subsequent rounds first.")
         }
@@ -282,6 +281,47 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
         var game = self
         game.deleteRound(atIndex: index)
         return game
+    }
+
+    /// Whether or not you can replace a round at a provided index with a new round
+    /// - Parameters:
+    ///   - index: The index you wish to replace
+    ///   - newRound: The new round to use in the provided index, in place of the existing round
+    /// - Returns: `true` if the replacement is possible, otherwise false
+    public func canReplaceRound(atIndex index: Int, with newRound: Round) -> Bool {
+        precondition(index < rounds.count, "Invalid index \(index)!")
+        let prev = rounds[index]
+        guard prev.players == newRound.players else {
+            return false
+        }
+        var copy = self
+        copy.rounds[index] = newRound
+        guard copy.activePlayers == activePlayers || index == rounds.count - 1 else {
+            return false
+        }
+        return true
+    }
+
+    /// Replace a round at given index with a new round
+    /// - Parameters:
+    ///   - index: The index you wish to replace
+    ///   - newRound: The new round to use in lace of the existing round
+    public mutating func replaceRound(atIndex index: Int, with newRound: Round) {
+        guard canReplaceRound(atIndex: index, with: newRound) else {
+            fatalError("Cannot replace round at index \(index) with provided replacements \(newRound)! ")
+        }
+        rounds[index] = newRound
+    }
+
+    /// Create a game by replacing a round at a provided index with a new round
+    /// - Parameters:
+    ///   - index: The index you wish to replace
+    ///   - newRound: The new round to use in place of the existing round at the provided index
+    /// - Returns: The new game with the replaced round
+    public func byReplacingRound(atIndex index: Int, with newRound: Round) -> Game {
+        var copy = self
+        copy.replaceRound(atIndex: index, with: newRound)
+        return copy
     }
 
     /// Create a game with the first n rounds of this game

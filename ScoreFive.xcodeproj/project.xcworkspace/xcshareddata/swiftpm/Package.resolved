@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "appfoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vsanthanam/AppFoundation.git",
+      "state" : {
+        "revision" : "a82ceee0389815ff0f482b2d0a50e68e8ec7713c",
+        "version" : "0.0.2"
+      }
+    },
+    {
       "identity" : "networkreachability",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vsanthanam/NetworkReachability.git",

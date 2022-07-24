@@ -80,6 +80,11 @@ struct RoundEditor: View {
             }
             .navigationTitle("Enter Scores")
             .navigationBarTitleDisplayMode(.inline)
+            .alert("Error", isPresented: $showingAlert) {
+                Button("OK") {}
+            } message: {
+                Text("You cannot change a round this much!")
+            }
         }
     }
 
@@ -159,9 +164,22 @@ struct RoundEditor: View {
     @State
     private var round: InProgressRound
 
+    @State
+    private var showingAlert: Bool = false
+
     private func save() {
-        game.addRound(round.buildRound())
-        dismiss()
+        if let previousIndex = previousIndex {
+            let proposed = round.buildRound()
+            if game.canReplaceRound(atIndex: previousIndex, with: proposed) {
+                game.replaceRound(atIndex: previousIndex, with: proposed)
+                dismiss()
+            } else {
+                showingAlert = true
+            }
+        } else {
+            game.addRound(round.buildRound())
+            dismiss()
+        }
     }
 
     private func binding(for player: Game.Player) -> Binding<String> {
