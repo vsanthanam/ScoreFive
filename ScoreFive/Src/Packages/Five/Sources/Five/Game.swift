@@ -66,9 +66,6 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
         case losingToWinning
     }
 
-    /// All players in the game
-    private let orderedPlayers: OrderedSet<Player>
-
     /// All the rounds in the game
     public private(set) var rounds = [Round]()
 
@@ -173,29 +170,23 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
         }
     }
 
+    /// The player that will play first in a given round
+    /// - Parameter index: The index of the round
+    /// - Returns: The player
     public func startingPlayer(atIndex index: Int) -> Game.Player {
-        func alivePlayers(atIndex index: Int) -> OrderedSet<Game.Player> {
-            var game = self
-            game.rounds = .init(rounds[0 ..< rounds.count])
-            return game.orderedPlayers
-        }
-
         if index == 0 {
-            return orderedPlayers[index % orderedPlayers.count]
+            return allPlayers[index % allPlayers.count]
         } else {
-            if activePlayers == allPlayers {
-                return orderedPlayers[index % orderedPlayers.count]
+            let alivePlayers = withFirst(n: index).activePlayers
+            if alivePlayers == activePlayers {
+                return activePlayers[index % activePlayers.count]
             } else {
                 var player = startingPlayer(atIndex: index - 1)
-                var playerIndex = orderedPlayers.firstIndex(of: player)!
+                var playerIndex = activePlayers.firstIndex(of: player)!
                 playerIndex += 1
-
-                if (playerIndex > allPlayers.count - 1) {
+                if playerIndex > activePlayers.count - 1 {
                     playerIndex = 0
                 }
-
-                player = orderedPlayers[playerIndex]
-
                 while !activePlayers.contains(player) {
                     playerIndex += 1
                     if playerIndex > activePlayers.count - 1 {
@@ -349,6 +340,8 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
     public var description: String { rounds.description }
 
     // MARK: - Private
+
+    private let orderedPlayers: OrderedSet<Player>
 
     private enum Error: Swift.Error {
         case incompleteGame
