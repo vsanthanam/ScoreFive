@@ -44,25 +44,30 @@ struct ScoreRow: View {
     // MARK: - View
 
     var body: some View {
-        HStack {
-            VStack(alignment: .center) {
-                Text(signpost)
-                    .bold()
-                    .multilineTextAlignment(.center)
-            }
-            .frame(width: 48)
+        VStack(spacing: 0) {
+            Spacer()
             HStack {
-                ForEach(players, id: \.self) { player in
-                    if round.players.contains(player), let score = round[player] {
-                        Text(String(score))
-                            .foregroundColor(color(for: score))
-                            .opacity(opacity(for: player))
-                    } else {
-                        Text("")
-                    }
+                VStack(alignment: .center) {
+                    Text(signpost)
+                        .bold()
+                        .multilineTextAlignment(.center)
                 }
-                .frame(maxWidth: .infinity)
+                .frame(width: 48)
+                HStack {
+                    ForEach(players, id: \.self) { player in
+                        if round.players.contains(player), let score = round[player] {
+                            Text(String(score))
+                                .foregroundColor(color(for: score))
+                                .opacity(opacity(for: player))
+                        } else {
+                            Text("")
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                }
             }
+            Spacer()
+            Divider()
         }
     }
 
@@ -105,7 +110,7 @@ struct ScoreRow: View {
     }
 
     private func opacity(for player: Game.Player) -> Double {
-        activePlayers.contains(player) ? 1.0 : 0.5
+        activePlayers.contains(player) ? 1.0 : 0.3
     }
 }
 

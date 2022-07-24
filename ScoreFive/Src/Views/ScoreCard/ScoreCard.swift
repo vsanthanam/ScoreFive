@@ -45,8 +45,13 @@ struct ScoreCard: View {
 
     var body: some View {
         NavigationView {
+
             VStack(spacing: 0) {
+
                 PlayerBar(players: game.allPlayers)
+
+                Divider()
+
                 List {
 
                     ForEach(game.rounds.indices, id: \.self) { index in
@@ -80,11 +85,13 @@ struct ScoreCard: View {
                     }
 
                     Spacer()
-                        .frame(maxWidth: .infinity, maxHeight: 24)
+                        .frame(maxWidth: .infinity, maxHeight: 44)
                         .listRowSeparator(.hidden)
 
                 }
                 .listStyle(PlainListStyle())
+
+                Divider()
 
                 TotalScoreBar(game: $game)
             }
@@ -190,9 +197,10 @@ extension Game.Player {
 private extension View {
 
     func scoreCardRow() -> some View {
-        padding(.vertical, 8)
+        padding(.vertical, 0)
             .listRowSeparator(.hidden)
             .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+            .frame(maxWidth: .infinity, maxHeight: 44)
     }
 
 }

@@ -46,11 +46,6 @@ struct PlayerBar: View {
             }
         }
         .padding(.vertical, 12)
-        .background(
-            Color(uiColor: UIColor.systemBackground)
-                .shadow(radius: 10, x: 0, y: 0)
-                .mask(Rectangle().padding(.bottom, -20))
-        )
     }
 }
 

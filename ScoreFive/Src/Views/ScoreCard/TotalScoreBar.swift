@@ -49,17 +49,12 @@ struct TotalScoreBar: View {
             }
         }
         .padding(.vertical, 12)
-        .background(
-            Color(uiColor: UIColor.systemBackground) // any non-transparent background
-                .shadow(radius: 10, x: 0, y: 0)
-                .mask(Rectangle().padding(.top, -20)) /// here!
-        )
     }
 
     // MARK: - Private
 
     private func opacity(for player: Game.Player) -> Double {
-        game.activePlayers.contains(player) ? 1.0 : 0.5
+        game.activePlayers.contains(player) ? 1.0 : 0.3
     }
 }
 
