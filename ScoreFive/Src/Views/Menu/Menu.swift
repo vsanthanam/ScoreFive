@@ -42,19 +42,19 @@ struct Menu: View {
 
     var body: some View {
         VStack {
-
             MenuButton("New Game",
                        systemName: "square.and.pencil",
                        action: showNewGame)
 
             if !gameRecords.isEmpty {
                 MenuButton("Load Game",
-                           systemName: "doc.fill.badge.ellipsis",
+                           systemName: "doc.badge.ellipsis",
                            action: showLoadGame)
             }
 
-            MenuButton("Settings", systemName: "gearshape.fill", action: showSettings)
-
+            MenuButton("Settings",
+                       systemName: "gearshape",
+                       action: showSettings)
         }
     }
 

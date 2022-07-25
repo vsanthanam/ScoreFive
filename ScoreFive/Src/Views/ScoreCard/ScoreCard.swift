@@ -92,9 +92,10 @@ struct ScoreCard: View {
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .automatic) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: close) {
-                        Text("Close")
+                        Image(systemName: "xmark.circle")
+                            .tint(Color(.label))
                     }
                 }
             }
@@ -197,7 +198,17 @@ extension Game.Player {
 private extension View {
 
     func scoreCardRow() -> some View {
-        padding(.vertical, 0)
+        let modifier = CardRowModifier()
+        return ModifiedContent(content: self, modifier: modifier)
+    }
+
+}
+
+private struct CardRowModifier: ViewModifier {
+
+    func body(content: Content) -> some View {
+        content
+            .padding(.vertical, 0)
             .listRowSeparator(.hidden)
             .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             .frame(maxWidth: .infinity, maxHeight: 44)
