@@ -33,26 +33,29 @@ struct LoadGame: View {
         dateFormatter.timeStyle = .short
     }
 
-    // MARK: - API
-
     // MARK: - View
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(gameRecords) { record in
-                    Button {
-                        openGame(withRecord: record)
-                    } label: {
-                        VStack(alignment: .leading) {
-                            Text(formatter.string(from: record.playerNames ?? []) ?? "")
-                            Text("Last updated at \(dateFormatter.string(from: record.timestamp ?? .now))")
-                                .font(.caption)
-                        }
-                    }
-                    .buttonStyle(.plain)
+                Section {
+                    Toggle("Show Complete Games", isOn: $showCompleteGames.animation(.default))
                 }
-                .onDelete(perform: deleteItems(offsets:))
+                Section {
+                    ForEach(showCompleteGames ? gameRecords : inProgressGameRecords) { record in
+                        Button {
+                            openGame(withRecord: record)
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text(formatter.string(from: record.playerNames ?? []) ?? "")
+                                Text("Last updated at \(dateFormatter.string(from: record.timestamp ?? .now))")
+                                    .font(.caption)
+                            }
+                        }
+                        .foregroundColor(.init(.label))
+                    }
+                    .onDelete(perform: deleteItems(offsets:))
+                }
             }
             .animation(nil, value: editMode?.wrappedValue)
             .toolbar {
@@ -89,6 +92,9 @@ struct LoadGame: View {
 
     private let didSave = NotificationCenter.default.publisher(for: NSNotification.Name.NSManagedObjectContextDidSave)
 
+    @AppStorage("show_complete_games")
+    private var showCompleteGames: Bool = false
+
     @Environment(\.editMode)
     private var editMode
 
@@ -100,6 +106,9 @@ struct LoadGame: View {
 
     @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)])
     private var gameRecords: FetchedResults<GameRecord>
+
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)], predicate: NSPredicate(format: "isComplete == NO"))
+    private var inProgressGameRecords: FetchedResults<GameRecord>
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {

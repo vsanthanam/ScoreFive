@@ -37,6 +37,7 @@
 		07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25179288DCFB80061AA19 /* AppFoundation */; };
 		07E2517E288DDB0F0061AA19 /* Five in Frameworks */ = {isa = PBXBuildFile; productRef = 07E2517D288DDB0F0061AA19 /* Five */; };
 		07E25181288DF9D30061AA19 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25180288DF9D30061AA19 /* Menu.swift */; };
+		07E25187288E5FF50061AA19 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25186288E5FF50061AA19 /* BetterSafariView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 				075F15FE288B53D200E238C0 /* Collections in Frameworks */,
 				07E25147288C45060061AA19 /* Introspect in Frameworks */,
 				07E2514A288C45350061AA19 /* NetworkReachability in Frameworks */,
+				07E25187288E5FF50061AA19 /* BetterSafariView in Frameworks */,
 				07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,6 +283,7 @@
 				07E25149288C45350061AA19 /* NetworkReachability */,
 				07E25179288DCFB80061AA19 /* AppFoundation */,
 				07E2517D288DDB0F0061AA19 /* Five */,
+				07E25186288E5FF50061AA19 /* BetterSafariView */,
 			);
 			productName = ScoreFive;
 			productReference = 076A0C3C287B35A000A75AE9 /* ScoreFive.app */;
@@ -316,6 +319,7 @@
 				07E25145288C45060061AA19 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				07E25148288C45350061AA19 /* XCRemoteSwiftPackageReference "NetworkReachability" */,
 				07E25178288DCFB80061AA19 /* XCRemoteSwiftPackageReference "AppFoundation" */,
+				07E25185288E5FF50061AA19 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
 			);
 			productRefGroup = 076A0C3D287B35A000A75AE9 /* Products */;
 			projectDirPath = "";
@@ -616,6 +620,14 @@
 				minimumVersion = 0.0.2;
 			};
 		};
+		07E25185288E5FF50061AA19 /* XCRemoteSwiftPackageReference "BetterSafariView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stleamist/BetterSafariView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -642,6 +654,11 @@
 		07E2517D288DDB0F0061AA19 /* Five */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Five;
+		};
+		07E25186288E5FF50061AA19 /* BetterSafariView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07E25185288E5FF50061AA19 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
+			productName = BetterSafariView;
 		};
 /* End XCSwiftPackageProductDependency section */
 

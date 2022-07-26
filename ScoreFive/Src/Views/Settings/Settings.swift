@@ -23,6 +23,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import AppFoundation
+import BetterSafariView
+import SafariServices
 import SwiftUI
 
 struct Settings: View {
@@ -32,18 +35,46 @@ struct Settings: View {
     var body: some View {
         NavigationView {
             List {
-                Toggle(isOn: $mySetting) {
-                    Text("Test Setting")
+                Section {
+                    HStack {
+                        Text("Version")
+                        Spacer()
+                        Text(AppInfo.version)
+                            .foregroundColor(.init(.secondaryLabel))
+                    }
+                    HStack {
+                        Text("Build")
+                        Spacer()
+                        Text(AppInfo.build)
+                            .foregroundColor(.init(.secondaryLabel))
+                    }
+                } header: {
+                    Text("About")
+                }
+                Section {
+                    Button {
+                        isShowingHelp = true
+                    } label: {
+                        HStack {
+                            Text("Help")
+                            Spacer()
+                            Image(systemName: "chevron.forward")
+                                .font(Font.system(.caption).weight(.bold))
+                                .foregroundColor(Color(UIColor.tertiaryLabel))
+                        }
+                    }
+                    .foregroundColor(.init(.label))
+                    .safariView(isPresented: $isShowingHelp) {
+                        SafariView(url: URL(string: "https://www.vsanthanam.com/five")!)
+                    }
                 }
             }
             .navigationTitle("Settings")
         }
     }
 
-    // MARK: - Private
-
-    @AppStorage("mySetting")
-    private var mySetting: Bool = false
+    @State
+    private var isShowingHelp = false
 }
 
 struct Settings_Previews: PreviewProvider {
