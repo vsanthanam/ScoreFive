@@ -1,5 +1,5 @@
 // ScoreFive
-// Main.swift
+// CloseButton.swift
 //
 // MIT License
 //
@@ -23,65 +23,49 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreData
-import Five
 import SwiftUI
 
-struct Main: View {
+struct CloseButton: View {
+
+    // MARK: - Initializers
+
+    init(action: @escaping () -> Void) {
+        self.action = action
+    }
 
     // MARK: - API
 
-    @EnvironmentObject
-    var gameManager: GameManager
+    func size(_ points: Double) -> CloseButton {
+        var copy = self
+        copy.size = points
+        return copy
+    }
 
     // MARK: - View
 
     var body: some View {
-        HStack(alignment: .top, spacing: 0) {
-            if let identifier = gameManager.activeGameRecord {
-                ScoreCard(game: try! gameManager.game(for: identifier))
-            } else {
-                Menu(showingNewGame: $showingNewGame,
-                     showingLoadGame: $showingLoadGame,
-                     showingMore: $showingMore)
-            }
-        }
-        .sheet(isPresented: $showingNewGame) {
-            NewGame()
-                .saveOnAppear(gameManager)
-        }
-        .sheet(isPresented: $showingLoadGame) {
-            LoadGame()
-                .saveOnAppear(gameManager)
-        }
-        .sheet(isPresented: $showingMore) {
-            More()
+        Button(action: action) {
+            Circle()
+                .fill(Color(.secondarySystemBackground))
+                .frame(width: size, height: size) // You can make this whatever size, but keep UX in mind.
+                .overlay(
+                    Image(systemName: "xmark")
+                        .font(.system(size: size / 2.5, weight: .bold, design: .rounded))
+                        .foregroundColor(.secondary)
+                )
         }
     }
 
     // MARK: - Private
 
-    @State
-    private var showingNewGame = false
-
-    @State
-    private var showingLoadGame = false
-
-    @State
-    private var showingMore = false
+    private var size: Double = 30
+    private let action: () -> Void
 }
 
-struct Main_Previews: PreviewProvider {
+struct CloseButton_Previews: PreviewProvider {
     static var previews: some View {
-        Main()
-            .environmentObject(GameManager.preview)
-    }
-}
-
-private extension View {
-    func saveOnAppear(_ manager: GameManager) -> some View {
-        onAppear {
-            Task { await MainActor.run { try! manager.save() } }
-        }
+        CloseButton() {}
+            .size(12)
+            .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

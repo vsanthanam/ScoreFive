@@ -93,10 +93,8 @@ struct ScoreCard: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: close) {
-                        Image(systemName: "xmark.circle")
-                            .tint(Color(.label))
-                    }
+                    CloseButton(action: close)
+                        .size(24)
                 }
             }
         }

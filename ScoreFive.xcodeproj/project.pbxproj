@@ -15,6 +15,7 @@
 		0714D1DF2883125D00CE45A3 /* LoadGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1DE2883125D00CE45A3 /* LoadGame.swift */; };
 		0714D1E1288327AA00CE45A3 /* ScoreRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1E0288327AA00CE45A3 /* ScoreRow.swift */; };
 		0714D2052883735000CE45A3 /* RoundEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D2042883735000CE45A3 /* RoundEditor.swift */; };
+		0747A45128906082001A561C /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A45028906082001A561C /* CloseButton.swift */; };
 		075F15D8288B147900E238C0 /* PlayerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15D7288B147900E238C0 /* PlayerTextField.swift */; };
 		075F15DA288B155300E238C0 /* FormButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15D9288B155300E238C0 /* FormButton.swift */; };
 		075F15E0288B204500E238C0 /* TotalScoreBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15DF288B204500E238C0 /* TotalScoreBar.swift */; };
@@ -31,7 +32,7 @@
 		07E2514C288C45630061AA19 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E2514B288C45630061AA19 /* NetworkManager.swift */; };
 		07E2514F288C4BCC0061AA19 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 07E2514D288C4BCC0061AA19 /* LICENSE */; };
 		07E25150288C4BCC0061AA19 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 07E2514E288C4BCC0061AA19 /* README.md */; };
-		07E25153288C4D040061AA19 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25152288C4D040061AA19 /* Settings.swift */; };
+		07E25153288C4D040061AA19 /* More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25152288C4D040061AA19 /* More.swift */; };
 		07E25155288C4FBD0061AA19 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25154288C4FBD0061AA19 /* MenuButton.swift */; };
 		07E25177288DBCB00061AA19 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E25176288DBCB00061AA19 /* CloudKit.framework */; };
 		07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25179288DCFB80061AA19 /* AppFoundation */; };
@@ -49,6 +50,7 @@
 		0714D1DE2883125D00CE45A3 /* LoadGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGame.swift; sourceTree = "<group>"; };
 		0714D1E0288327AA00CE45A3 /* ScoreRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreRow.swift; sourceTree = "<group>"; };
 		0714D2042883735000CE45A3 /* RoundEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundEditor.swift; sourceTree = "<group>"; };
+		0747A45028906082001A561C /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		075F15D7288B147900E238C0 /* PlayerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTextField.swift; sourceTree = "<group>"; };
 		075F15D9288B155300E238C0 /* FormButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButton.swift; sourceTree = "<group>"; };
 		075F15DF288B204500E238C0 /* TotalScoreBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreBar.swift; sourceTree = "<group>"; };
@@ -64,7 +66,7 @@
 		07E2514B288C45630061AA19 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		07E2514D288C4BCC0061AA19 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		07E2514E288C4BCC0061AA19 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		07E25152288C4D040061AA19 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		07E25152288C4D040061AA19 /* More.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = More.swift; sourceTree = "<group>"; };
 		07E25154288C4FBD0061AA19 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		07E25175288DBCAB0061AA19 /* ScoreFive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScoreFive.entitlements; sourceTree = "<group>"; };
 		07E25176288DBCB00061AA19 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -113,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				07E2517F288DF8D00061AA19 /* Menu */,
-				07E25151288C4CFA0061AA19 /* Settings */,
+				07E25151288C4CFA0061AA19 /* More */,
 				075F15E3288B23D900E238C0 /* Main */,
 				075F15E2288B23CE00E238C0 /* LoadGame */,
 				075F15E1288B23C200E238C0 /* RoundEditor */,
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				075F15D9288B155300E238C0 /* FormButton.swift */,
+				0747A45028906082001A561C /* CloseButton.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -236,12 +239,12 @@
 			path = ScoreFive;
 			sourceTree = "<group>";
 		};
-		07E25151288C4CFA0061AA19 /* Settings */ = {
+		07E25151288C4CFA0061AA19 /* More */ = {
 			isa = PBXGroup;
 			children = (
-				07E25152288C4D040061AA19 /* Settings.swift */,
+				07E25152288C4D040061AA19 /* More.swift */,
 			);
-			path = Settings;
+			path = More;
 			sourceTree = "<group>";
 		};
 		07E2517B288DDA690061AA19 /* Packages */ = {
@@ -357,7 +360,7 @@
 				076A0C40287B35A000A75AE9 /* AppDelegate.swift in Sources */,
 				0714D2052883735000CE45A3 /* RoundEditor.swift in Sources */,
 				076A0C42287B35A000A75AE9 /* SceneDelegate.swift in Sources */,
-				07E25153288C4D040061AA19 /* Settings.swift in Sources */,
+				07E25153288C4D040061AA19 /* More.swift in Sources */,
 				0714D1DF2883125D00CE45A3 /* LoadGame.swift in Sources */,
 				0714D1E1288327AA00CE45A3 /* ScoreRow.swift in Sources */,
 				0714D1DD287B532600CE45A3 /* NewGame.swift in Sources */,
@@ -367,6 +370,7 @@
 				075F15EC288B45A400E238C0 /* AddRow.swift in Sources */,
 				075F15EA288B442A00E238C0 /* PlayerBar.swift in Sources */,
 				0714D1D1287B38B600CE45A3 /* Main.swift in Sources */,
+				0747A45128906082001A561C /* CloseButton.swift in Sources */,
 				0714D1D8287B39A200CE45A3 /* ScoreFive.xcdatamodeld in Sources */,
 				0714D1D3287B38BD00CE45A3 /* ScoreCard.swift in Sources */,
 			);

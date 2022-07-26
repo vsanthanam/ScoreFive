@@ -56,35 +56,64 @@ struct LoadGame: View {
                     }
                     .onDelete(perform: deleteItems(offsets:))
                 }
+                if showDeleteAll, showCompleteGames {
+                    Section {
+                        Button(role: .destructive) {
+                            showConfirmDestroy = true
+                        } label: {
+                            Text("Erase All Games")
+                                .frame(maxWidth: .infinity)
+                        }
+                    }
+                }
             }
-            .animation(nil, value: editMode?.wrappedValue)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    if !gameRecords.isEmpty {
+                    if hasContent, (editButtonMode == listEditMode) {
                         EditButton()
+                            .environment(\.editMode, $editButtonMode)
                     } else {
                         EmptyView()
                     }
                 }
+
             }
+            .environment(\.editMode, $listEditMode)
             .navigationTitle("Load Game")
+        }
+        .confirmationDialog("Are You Sure?",
+                            isPresented: $showConfirmDestroy) {
+            Button(role: .destructive) {
+                try! gameManager.destroyAllRecords()
+            } label: {
+                Text("Erase All Games")
+            }
+            Button(role: .cancel) {
+                showConfirmDestroy = false
+            } label: {
+                Text("Cancel")
+            }
+        } message: {
+            Text("This action is not reversible")
         }
         .onReceive(didSave) { _ in
             if gameRecords.isEmpty {
                 dismiss()
             }
         }
+        .onChange(of: editButtonMode) { mode in
+            withAnimation {
+                self.listEditMode = mode
+            }
+        }
+        .onChange(of: listEditMode) { mode in
+            withAnimation {
+                showDeleteAll = editButtonMode.isEditing
+            }
+        }
     }
 
     // MARK: - Private
-
-    private func openGame(withRecord record: GameRecord) {
-        guard !(editMode?.wrappedValue.isEditing ?? false) else { return }
-        withAnimation {
-            try! gameManager.activateGame(with: record)
-        }
-        dismiss()
-    }
 
     private let formatter = ListFormatter()
 
@@ -95,8 +124,17 @@ struct LoadGame: View {
     @AppStorage("show_complete_games")
     private var showCompleteGames: Bool = false
 
-    @Environment(\.editMode)
-    private var editMode
+    @State
+    private var editButtonMode: EditMode = .inactive
+
+    @State
+    private var listEditMode: EditMode = .inactive
+
+    @State
+    private var showConfirmDestroy: Bool = false
+
+    @State
+    private var showDeleteAll: Bool = false
 
     @Environment(\.dismiss)
     private var dismiss: DismissAction
@@ -110,14 +148,31 @@ struct LoadGame: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)], predicate: NSPredicate(format: "isComplete == NO"))
     private var inProgressGameRecords: FetchedResults<GameRecord>
 
+    private var hasContent: Bool {
+        if showCompleteGames {
+            return !gameRecords.isEmpty
+        } else {
+            return !inProgressGameRecords.isEmpty
+        }
+    }
+
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets
-                .map { gameRecords[$0] }
+                .map { showCompleteGames ? gameRecords[$0] : inProgressGameRecords[$0] }
                 .forEach(gameManager.viewContext.delete)
             try! gameManager.save()
         }
     }
+
+    private func openGame(withRecord record: GameRecord) {
+        guard !listEditMode.isEditing else { return }
+        withAnimation {
+            try! gameManager.activateGame(with: record)
+        }
+        dismiss()
+    }
+
 }
 
 struct LoadGame_Previews: PreviewProvider {

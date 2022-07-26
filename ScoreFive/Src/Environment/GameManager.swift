@@ -105,6 +105,17 @@ final class GameManager: ObservableObject {
         try viewContext.save()
     }
 
+    func destroyAllRecords() throws {
+        try? deactivateGame()
+        let fetchRequest = GameRecord.fetchRequest()
+        fetchRequest.returnsObjectsAsFaults = false
+        let results = try viewContext.fetch(fetchRequest)
+        for result in results {
+            viewContext.delete(result)
+        }
+        try save()
+    }
+
     // MARK: - Private
 
     @Published
@@ -115,11 +126,13 @@ final class GameManager: ObservableObject {
     }
 
     private func setUp(inMemory: Bool) {
-        guard let url = Bundle.main.url(forResource: "ScoreFive", withExtension: "momd") else { fatalError() }
-        guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError() }
-        store = NSPersistentCloudKitContainer(name: "ScoreFive", managedObjectModel: model)
         if inMemory {
+            store = NSPersistentCloudKitContainer(name: "ScoreFive")
             store.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        } else {
+            guard let url = Bundle.main.url(forResource: "ScoreFive", withExtension: "momd") else { fatalError() }
+            guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError() }
+            store = NSPersistentCloudKitContainer(name: "ScoreFive", managedObjectModel: model)
         }
         store.loadPersistentStores { store, error in
             if let error = error as? NSError {

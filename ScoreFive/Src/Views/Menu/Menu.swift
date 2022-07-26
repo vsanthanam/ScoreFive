@@ -36,7 +36,7 @@ struct Menu: View {
     var showingLoadGame: Bool
 
     @Binding
-    var showingSettings: Bool
+    var showingMore: Bool
 
     // MARK: - View
 
@@ -52,9 +52,9 @@ struct Menu: View {
                            action: showLoadGame)
             }
 
-            MenuButton("Settings",
-                       systemName: "gearshape",
-                       action: showSettings)
+            MenuButton("More",
+                       systemName: "ellipsis.circle",
+                       action: showMore)
         }
     }
 
@@ -74,14 +74,14 @@ struct Menu: View {
         showingLoadGame = true
     }
 
-    private func showSettings() {
-        showingSettings = true
+    private func showMore() {
+        showingMore = true
     }
 }
 
 struct Menu_Previews: PreviewProvider {
     static var previews: some View {
-        Menu(showingNewGame: .constant(false), showingLoadGame: .constant(false), showingSettings: .constant(false))
+        Menu(showingNewGame: .constant(false), showingLoadGame: .constant(false), showingMore: .constant(false))
             .environmentObject(GameManager.preview)
     }
 }
