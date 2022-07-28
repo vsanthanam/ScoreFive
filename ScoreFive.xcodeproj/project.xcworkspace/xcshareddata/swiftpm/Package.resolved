@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "safariview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vsanthanam/SafariView.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f7c1ba5290ce4e8f770ca084a93a0db27be0fc66"
+      }
+    },
+    {
       "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections.git",

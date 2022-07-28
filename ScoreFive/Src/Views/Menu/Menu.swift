@@ -27,38 +27,36 @@ import SwiftUI
 
 struct Menu: View {
 
-    // MARK: - API
-
-    @Binding
-    var showingNewGame: Bool
-
-    @Binding
-    var showingLoadGame: Bool
-
-    @Binding
-    var showingMore: Bool
+    init(_ handler: @escaping (Main.Sheet) -> Void) {
+        self.handler = handler
+    }
 
     // MARK: - View
 
     var body: some View {
         VStack {
             MenuButton("New Game",
-                       systemName: "square.and.pencil",
-                       action: showNewGame)
+                       systemName: "square.and.pencil") {
+                handler(.newGame)
+            }
 
             if !gameRecords.isEmpty {
                 MenuButton("Load Game",
-                           systemName: "doc.badge.ellipsis",
-                           action: showLoadGame)
+                           systemName: "doc.badge.ellipsis") {
+                    handler(.loadGame)
+                }
             }
 
             MenuButton("More",
-                       systemName: "ellipsis.circle",
-                       action: showMore)
+                       systemName: "ellipsis.circle") {
+                handler(.more)
+            }
         }
     }
 
     // MARK: - Private
+
+    private let handler: (Main.Sheet) -> Void
 
     @EnvironmentObject
     private var gameManager: GameManager
@@ -66,22 +64,11 @@ struct Menu: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)])
     private var gameRecords: FetchedResults<GameRecord>
 
-    private func showNewGame() {
-        showingNewGame = true
-    }
-
-    private func showLoadGame() {
-        showingLoadGame = true
-    }
-
-    private func showMore() {
-        showingMore = true
-    }
 }
 
 struct Menu_Previews: PreviewProvider {
     static var previews: some View {
-        Menu(showingNewGame: .constant(false), showingLoadGame: .constant(false), showingMore: .constant(false))
+        Menu() { _ in }
             .environmentObject(GameManager.preview)
     }
 }

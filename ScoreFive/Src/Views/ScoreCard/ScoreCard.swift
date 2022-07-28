@@ -56,8 +56,8 @@ struct ScoreCard: View {
 
                     ForEach(game.rounds.indices, id: \.self) { index in
 
-                        Button(action: { editingRound = RoundAndIndex(round: game[index], id: index) }) {
-                            ScoreRow(signpost: game.startingPlayer(atIndex: index).signpost(for: game.allPlayers),
+                        Button(action: { editingRound = RoundAndIndex(round: game[index], index: index) }) {
+                            ScoreRow(signpost: indexByPlayer ? game.startingPlayer(atIndex: index).signpost(for: game.allPlayers) : (index + 1).description,
                                      round: game.rounds[index],
                                      players: game.allPlayers,
                                      activePlayers: game.activePlayers)
@@ -70,7 +70,7 @@ struct ScoreCard: View {
 
                     if !game.isComplete {
                         Button(action: showAddRound) {
-                            AddRow(signpost: game.startingPlayer(atIndex: game.rounds.count).signpost(for: game.allPlayers))
+                            AddRow(signpost: indexByPlayer ? game.startingPlayer(atIndex: game.rounds.count).signpost(for: game.allPlayers) : (game.rounds.count + 1).description)
                                 .sheet(isPresented: $showingAddRound) {
                                     RoundEditor(game: $game)
                                 }
@@ -99,7 +99,7 @@ struct ScoreCard: View {
             }
         }
         .sheet(item: $editingRound) { roundAndIndex in
-            RoundEditor(game: $game, previousIndex: roundAndIndex.id)
+            RoundEditor(game: $game, previousIndex: roundAndIndex.index)
         }
         .sheet(isPresented: $showingAddRound) {
             RoundEditor(game: $game)
@@ -116,8 +116,13 @@ struct ScoreCard: View {
 
     private struct RoundAndIndex: Identifiable {
         let round: Round
-        let id: Int
+        let index: Int
+
+        var id: Int { index }
     }
+
+    @AppStorage("index_by_player")
+    private var indexByPlayer = true
 
     @State
     private var game: Game

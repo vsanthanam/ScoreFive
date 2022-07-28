@@ -31,8 +31,15 @@ struct Main: View {
 
     // MARK: - API
 
-    @EnvironmentObject
-    var gameManager: GameManager
+    enum Sheet: String, Identifiable {
+        case newGame
+        case loadGame
+        case more
+
+        typealias ID = RawValue
+
+        var id: ID { rawValue }
+    }
 
     // MARK: - View
 
@@ -41,34 +48,33 @@ struct Main: View {
             if let identifier = gameManager.activeGameRecord {
                 ScoreCard(game: try! gameManager.game(for: identifier))
             } else {
-                Menu(showingNewGame: $showingNewGame,
-                     showingLoadGame: $showingLoadGame,
-                     showingMore: $showingMore)
+                Menu { sheet in
+                    self.sheet = sheet
+                }
             }
         }
-        .sheet(isPresented: $showingNewGame) {
-            NewGame()
-                .saveOnAppear(gameManager)
-        }
-        .sheet(isPresented: $showingLoadGame) {
-            LoadGame()
-                .saveOnAppear(gameManager)
-        }
-        .sheet(isPresented: $showingMore) {
-            More()
+        .sheet(item: $sheet) { sheet in
+            switch sheet {
+            case .newGame:
+                NewGame()
+                    .saveOnAppear(gameManager)
+            case .loadGame:
+                LoadGame()
+                    .saveOnAppear(gameManager)
+            case .more:
+                More()
+            }
         }
     }
 
     // MARK: - Private
 
-    @State
-    private var showingNewGame = false
+    @EnvironmentObject
+    private var gameManager: GameManager
 
     @State
-    private var showingLoadGame = false
+    private var sheet: Sheet?
 
-    @State
-    private var showingMore = false
 }
 
 struct Main_Previews: PreviewProvider {

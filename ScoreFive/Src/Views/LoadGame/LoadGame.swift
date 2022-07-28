@@ -56,16 +56,6 @@ struct LoadGame: View {
                     }
                     .onDelete(perform: deleteItems(offsets:))
                 }
-                if showDeleteAll, showCompleteGames {
-                    Section {
-                        Button(role: .destructive) {
-                            showConfirmDestroy = true
-                        } label: {
-                            Text("Erase All Games")
-                                .frame(maxWidth: .infinity)
-                        }
-                    }
-                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -81,21 +71,6 @@ struct LoadGame: View {
             .environment(\.editMode, $listEditMode)
             .navigationTitle("Load Game")
         }
-        .confirmationDialog("Are You Sure?",
-                            isPresented: $showConfirmDestroy) {
-            Button(role: .destructive) {
-                try! gameManager.destroyAllRecords()
-            } label: {
-                Text("Erase All Games")
-            }
-            Button(role: .cancel) {
-                showConfirmDestroy = false
-            } label: {
-                Text("Cancel")
-            }
-        } message: {
-            Text("This action is not reversible")
-        }
         .onReceive(didSave) { _ in
             if gameRecords.isEmpty {
                 dismiss()
@@ -104,11 +79,6 @@ struct LoadGame: View {
         .onChange(of: editButtonMode) { mode in
             withAnimation {
                 self.listEditMode = mode
-            }
-        }
-        .onChange(of: listEditMode) { mode in
-            withAnimation {
-                showDeleteAll = editButtonMode.isEditing
             }
         }
     }
@@ -129,12 +99,6 @@ struct LoadGame: View {
 
     @State
     private var listEditMode: EditMode = .inactive
-
-    @State
-    private var showConfirmDestroy: Bool = false
-
-    @State
-    private var showDeleteAll: Bool = false
 
     @Environment(\.dismiss)
     private var dismiss: DismissAction

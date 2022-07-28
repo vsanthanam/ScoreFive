@@ -24,11 +24,70 @@
 // SOFTWARE.
 
 import AppFoundation
-import BetterSafariView
-import SafariServices
+import SafariView
 import SwiftUI
 
 struct More: View {
+
+    // MARK: - View
+
+    var body: some View {
+        NavigationView {
+            List {
+                Section {
+                    Toggle("Index By Player", isOn: $indexByPlayer)
+                } header: {
+                    Text("Preferences")
+                }
+                Section {
+                    DiscloseButton {
+                        safariUrl = URL(string: "https://www.vsanthanam.com/five")
+                    } label: {
+                        Text("Game Instructions")
+                    }
+                } header: {
+                    Text("Help")
+                }
+                Section {
+                    DiscloseButton(action: {
+                        let url = URL(string: "https://twitter.vsanthanam.com")!
+                        UIApplication.shared.open(url)
+                    }) {
+                        Text("Twitter")
+                    }
+                    DiscloseButton(action: {
+                        safariUrl = URL(string: "https://www.vsanthanam.com")
+                    }) {
+                        Text("Website")
+                    }
+                } header: {
+                    Text("Contact")
+                }
+                Section {
+                    HStack {
+                        Text("Version")
+                        Spacer()
+                        Text(AppInfo.version)
+                            .foregroundColor(.init(.secondaryLabel))
+                    }
+                    HStack {
+                        Text("Build")
+                        Spacer()
+                        Text(AppInfo.build)
+                            .foregroundColor(.init(.secondaryLabel))
+                    }
+                } header: {
+                    Text("About")
+                }
+            }
+            .navigationTitle("More")
+        }
+        .safari(url: $safariUrl) { url in
+            SafariView(url: url)
+        }
+    }
+
+    // MARK: - Private
 
     private struct DiscloseButton<Content>: View where Content: View {
 
@@ -61,74 +120,12 @@ struct More: View {
 
     }
 
-    // MARK: - View
-
-    var body: some View {
-        NavigationView {
-            List {
-                Section {
-                    Toggle("Index By Player", isOn: $indexByPlayer)
-                } header: {
-                    Text("Preferences")
-                }
-                Section {
-                    DiscloseButton {
-                        safariViewUrl = URL(string: "https://www.vsanthanam.com/five")
-                    } label: {
-                        Text("How to play")
-                    }
-                } header: {
-                    Text("Help")
-                }
-                Section {
-                    HStack {
-                        Link("Twitter", destination: URL(string: "https://twitter.vsanthanam.com")!)
-                        Spacer()
-                        Image(systemName: "chevron.forward")
-                            .font(Font.system(.caption).weight(.bold))
-                            .foregroundColor(Color(UIColor.tertiaryLabel))
-                    }
-                    HStack {
-                        Link("Website", destination: URL(string: "https://www.vsanthanam.com")!)
-                        Spacer()
-                        Image(systemName: "chevron.forward")
-                            .font(Font.system(.caption).weight(.bold))
-                            .foregroundColor(Color(UIColor.tertiaryLabel))
-                    }
-
-                } header: {
-                    Text("Contact")
-                }
-                .foregroundColor(.init(.label))
-                Section {
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text(AppInfo.version)
-                            .foregroundColor(.init(.secondaryLabel))
-                    }
-                    HStack {
-                        Text("Build")
-                        Spacer()
-                        Text(AppInfo.build)
-                            .foregroundColor(.init(.secondaryLabel))
-                    }
-                } header: {
-                    Text("About")
-                }
-            }
-            .navigationTitle("More")
-        }
-        .safariView(item: $safariViewUrl) { url in
-            SafariView(url: url)
-        }
-    }
-
     @State
-    private var safariViewUrl: URL?
+    private var safariUrl: URL?
 
     @AppStorage("index_by_player")
     private var indexByPlayer = true
+
 }
 
 struct More_Previews: PreviewProvider {
