@@ -24,18 +24,30 @@
 // SOFTWARE.
 
 import SwiftUI
+import UIKit
 
 struct PlayerTextField: View {
+
+    init(index: Int, player: Binding<String>, returnKeyType: UIReturnKeyType = .next) {
+        self.index = index
+        self.player = player
+        self.returnKeyType = returnKeyType
+    }
 
     let index: Int
 
     let player: Binding<String>
+
+    let returnKeyType: UIReturnKeyType
 
     var body: some View {
         TextField("Player \(index + 1)", text: player)
             .autocapitalization(.words)
             .keyboardType(.default)
             .disableAutocorrection(true)
+            .introspectTextField { textField in
+                textField.returnKeyType = returnKeyType
+            }
     }
 }
 

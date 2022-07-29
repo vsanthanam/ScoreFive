@@ -25,6 +25,7 @@
 
 import Collections
 import Five
+import Introspect
 import SwiftUI
 
 struct NewGame: View {
@@ -37,10 +38,26 @@ struct NewGame: View {
                 Section {
                     TextField("Score Limit", text: scoreLimitBining)
                         .keyboardType(.numberPad)
+                        .focused($focusedPlayerIndex, equals: -1)
+                        .onSubmit {
+                            focusedPlayerIndex = 0
+                        }
+                        .introspectTextField { textField in
+                            textField.returnKeyType = .next
+                        }
                 }
                 Section {
                     ForEach(players.indices, id: \.self) { index in
-                        PlayerTextField(index: index, player: $players[index])
+                        PlayerTextField(index: index, player: $players[index], returnKeyType: (index == players.count - 1) ? .done : .next)
+                            .focused($focusedPlayerIndex, equals: index)
+                            .onSubmit {
+                                guard let focus = focusedPlayerIndex else { return }
+                                if focus == (players.count - 1) {
+                                    focusedPlayerIndex = nil
+                                } else {
+                                    focusedPlayerIndex = focus + 1
+                                }
+                            }
                     }
                     .onDelete { indexSet in
                         for index in indexSet {
@@ -66,6 +83,9 @@ struct NewGame: View {
 
     @Environment(\.dismiss)
     private var dismiss: DismissAction
+
+    @FocusState
+    private var focusedPlayerIndex: Int?
 
     @EnvironmentObject
     private var gameManager: GameManager
@@ -103,6 +123,14 @@ struct NewGame: View {
         return true
     }
 
+    private func deletePlayer(at index: Int) {
+        players.remove(at: index)
+    }
+
+    private func addPlayer() {
+        withAnimation { players.append("") }
+    }
+
     private func save() {
         withAnimation {
             let mappedPlayers = players
@@ -120,10 +148,6 @@ struct NewGame: View {
             try! gameManager.activateGame(with: record)
             try! gameManager.save()
         }
-    }
-
-    private func addPlayer() {
-        withAnimation { players.append("") }
     }
 
 }

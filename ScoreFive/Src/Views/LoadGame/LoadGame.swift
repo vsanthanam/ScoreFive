@@ -28,6 +28,8 @@ import SwiftUI
 
 struct LoadGame: View {
 
+    // MARK: - Initializers
+
     init() {
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
