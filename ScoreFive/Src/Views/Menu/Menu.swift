@@ -35,6 +35,13 @@ struct Menu: View {
 
     var body: some View {
         VStack {
+            Image("IconSymbol")
+                .renderingMode(.template)
+                .resizable()
+                .foregroundColor(.accentColor)
+                .frame(width: 100, height: 100, alignment: .center)
+            Spacer()
+                .frame(maxHeight: 25)
             MenuButton("New Game",
                        systemName: "square.and.pencil") {
                 handler(.newGame)

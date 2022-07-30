@@ -85,6 +85,7 @@ struct More: View {
                     Text("About")
                 }
             }
+            .animation(.default, value: reachabilityManager.reachability)
             .navigationTitle("More")
             .navigationBarTitleDisplayMode(.inline)
         }

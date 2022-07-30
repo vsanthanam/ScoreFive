@@ -62,8 +62,9 @@ struct RoundEditor: View {
                             .keyboardType(.numberPad)
                     }
                 } footer: {
-                    if let status = round.statusMessage {
+                    if let status = statusMessage {
                         Text(status)
+                            .foregroundColor(.red)
                     } else {
                         EmptyView()
                     }
@@ -76,15 +77,22 @@ struct RoundEditor: View {
             }
             .navigationTitle("Enter Scores")
             .navigationBarTitleDisplayMode(.inline)
+            .animation(.default, value: statusMessage)
             .alert("Error", isPresented: $showingAlert) {
                 Button("OK") {}
             } message: {
                 Text("You cannot change a round this much!")
             }
+            .onChange(of: playerFocus) { focus in
+                statusMessage = round.statusMessage
+            }
         }
     }
 
     // MARK: - Private
+
+    @State
+    var statusMessage: String?
 
     private struct InProgressRound {
 

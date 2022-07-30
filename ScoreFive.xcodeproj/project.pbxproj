@@ -108,6 +108,13 @@
 			path = Modifiers;
 			sourceTree = "<group>";
 		};
+		0747A45F2895BD2E001A561C /* Acknowledgements */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Acknowledgements;
+			sourceTree = "<group>";
+		};
 		075F15CC288B12DF00E238C0 /* Infra */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +137,7 @@
 		075F15CE288B12EB00E238C0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0747A45F2895BD2E001A561C /* Acknowledgements */,
 				07E2517F288DF8D00061AA19 /* Menu */,
 				07E25151288C4CFA0061AA19 /* More */,
 				075F15E3288B23D900E238C0 /* Main */,
@@ -530,7 +538,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -559,7 +567,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
