@@ -30,7 +30,7 @@ import SwiftUI
 struct More: View {
 
     // MARK: - View
-
+    
     var body: some View {
         NavigationView {
             List {
@@ -39,29 +39,31 @@ struct More: View {
                 } header: {
                     Text("Preferences")
                 }
-                Section {
-                    DiscloseButton {
-                        safariUrl = URL(string: "https://www.vsanthanam.com/five")
-                    } label: {
-                        Text("Game Instructions")
+                if let status = networkManager.path?.status, status == .satisfied {
+                    Section {
+                        DiscloseButton {
+                            safariUrl = URL(string: "https://www.vsanthanam.com/five")
+                        } label: {
+                            Text("Game Instructions")
+                        }
+                    } header: {
+                        Text("Help")
                     }
-                } header: {
-                    Text("Help")
-                }
-                Section {
-                    DiscloseButton(action: {
-                        let url = URL(string: "https://twitter.vsanthanam.com")!
-                        UIApplication.shared.open(url)
-                    }) {
-                        Text("Twitter")
+                    Section {
+                        DiscloseButton(action: {
+                            let url = URL(string: "https://twitter.vsanthanam.com")!
+                            UIApplication.shared.open(url)
+                        }) {
+                            Text("Twitter")
+                        }
+                        DiscloseButton(action: {
+                            safariUrl = URL(string: "https://www.vsanthanam.com")
+                        }) {
+                            Text("Website")
+                        }
+                    } header: {
+                        Text("Contact")
                     }
-                    DiscloseButton(action: {
-                        safariUrl = URL(string: "https://www.vsanthanam.com")
-                    }) {
-                        Text("Website")
-                    }
-                } header: {
-                    Text("Contact")
                 }
                 Section {
                     HStack {
@@ -81,6 +83,7 @@ struct More: View {
                 }
             }
             .navigationTitle("More")
+            .navigationBarTitleDisplayMode(.inline)
         }
         .safari(url: $safariUrl) { url in
             SafariView(url: url)
@@ -119,6 +122,11 @@ struct More: View {
         private let action: () -> Void
 
     }
+    
+    // MARK: - Private
+    
+    @EnvironmentObject
+    private var networkManager: NetworkManager
 
     @State
     private var safariUrl: URL?

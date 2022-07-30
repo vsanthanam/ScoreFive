@@ -89,6 +89,7 @@ struct ScoreCard: View {
 
                 TotalScoreBar(game: $game)
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

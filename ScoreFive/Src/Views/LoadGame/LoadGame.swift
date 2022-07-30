@@ -58,12 +58,27 @@ struct LoadGame: View {
                     }
                     .onDelete(perform: deleteItems(offsets:))
                 }
-                Section {
-                    Button(role: .destructive, action: {
-                        showEraseAllConfirm = true
-                    }) {
-                        Text("Erase All")
-                            .frame(maxWidth: .infinity)
+                if hasContent {
+                    Section {
+                        Button(role: .destructive, action: {
+                            showEraseAllConfirm = true
+                        }) {
+                            Text("Erase All")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .confirmationDialog("Are You Sure?",
+                                            isPresented: $showEraseAllConfirm,
+                                            titleVisibility: .visible,
+                                            actions: {
+                                                Button("Erase All", role: .destructive) {
+                                                    try! gameManager.destroyAllRecords()
+                                                }
+                                                Button("Cancel", role: .cancel) {
+                                                    showEraseAllConfirm = false
+                                                }
+                                            }) {
+                            Text("All if your games, including games you have not completed, will be permanently removed from the device. This action is irreversible.")
+                        }
                     }
                 }
             }
@@ -90,19 +105,6 @@ struct LoadGame: View {
             withAnimation {
                 self.listEditMode = mode
             }
-        }
-        .confirmationDialog("Are You Sure?",
-                            isPresented: $showEraseAllConfirm,
-                            titleVisibility: .visible,
-                            actions: {
-                                Button("Erase All", role: .destructive) {
-                                    try! gameManager.destroyAllRecords()
-                                }
-                                Button("Cancel", role: .cancel) {
-                                    showEraseAllConfirm = false
-                                }
-                            }) {
-            Text("All if your games, including games you have not completed, will be permanently removed from the device. This action is irreversible.")
         }
     }
 
