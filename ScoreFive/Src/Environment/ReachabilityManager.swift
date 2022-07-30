@@ -1,5 +1,5 @@
 // ScoreFive
-// NetworkManager.swift
+// ReachabilityManager.swift
 //
 // MIT License
 //
@@ -23,19 +23,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
 import Foundation
 import Network
 import NetworkReachability
 
-@MainActor
-final class NetworkManager: ObservableObject {
+final class ReachabilityManager: ObservableObject {
 
     // MARK: - API
 
-    static let shared: NetworkManager = .init()
+    enum Status {
+        case ethernet
+        case wifi
+        case cellular
+        case unknown
+        case disconnected
+    }
+
+    static let shared: ReachabilityManager = .init()
 
     @Published
-    var path: NWPath?
+    var reachability: Status = .disconnected
 
     // MARK: - Private
 
@@ -43,19 +51,22 @@ final class NetworkManager: ObservableObject {
         setUp()
     }
 
-    private var task: Task<Void, Never>?
+    private var monitor: NetworkMonitor!
 
     private func setUp() {
-        task = Task {
-            for await path in NetworkMonitor.networkPathUpdates {
-                self.path = path
+        monitor = .init() { [weak self] _, networkPath in
+            guard let self = self else { return }
+            if networkPath.usesInterfaceType(.wiredEthernet) {
+                self.reachability = .ethernet
+            } else if networkPath.usesInterfaceType(.wifi) {
+                self.reachability = .wifi
+            } else if networkPath.usesInterfaceType(.cellular) {
+                self.reachability = .cellular
+            } else if networkPath.status == .satisfied {
+                self.reachability = .unknown
+            } else {
+                self.reachability = .disconnected
             }
         }
     }
-
-    deinit {
-        task?.cancel()
-        task = nil
-    }
-
 }

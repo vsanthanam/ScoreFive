@@ -41,7 +41,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let root = RootView()
             .environment(\.managedObjectContext, GameManager.shared.viewContext)
             .environmentObject(GameManager.shared)
-            .environmentObject(NetworkManager.shared)
+            .environmentObject(ReachabilityManager.shared)
         let vc = UIHostingController(rootView: root)
         window?.rootViewController = vc
         window?.makeKeyAndVisible()

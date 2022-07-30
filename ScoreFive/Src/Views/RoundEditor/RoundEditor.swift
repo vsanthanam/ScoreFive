@@ -46,6 +46,9 @@ struct RoundEditor: View {
     @Binding
     var game: Game
 
+    @FocusState
+    var playerFocus: Game.Player?
+
     // MARK: - View
 
     var body: some View {
@@ -54,6 +57,8 @@ struct RoundEditor: View {
                 Section {
                     ForEach(round.players, id: \.self) { player in
                         TextField(player, text: binding(for: player))
+                            .scoreToolbar(focus: $playerFocus, player: player, players: round.players)
+                            .focused($playerFocus, equals: player)
                             .keyboardType(.numberPad)
                     }
                 } footer: {
@@ -206,5 +211,35 @@ struct RoundEditor_Previews: PreviewProvider {
 
     static var previews: some View {
         RoundEditor(game: .constant(testGame), previousIndex: 0)
+    }
+}
+
+private extension View {
+    func scoreToolbar(focus: FocusState<Game.Player?>.Binding, player: Game.Player, players: [Game.Player]) -> some View {
+        introspectTextField { field in
+            let toolbar = UIToolbar()
+            toolbar.barStyle = .default
+            let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
+            let closeItem = UIBarButtonItem(systemItem: .close)
+            closeItem.primaryAction = .init { _ in
+                focus.wrappedValue = nil
+            }
+            let doneItem = UIBarButtonItem(systemItem: .done)
+            doneItem.primaryAction = .init { _ in
+                focus.wrappedValue = nil
+            }
+            let nextItem = UIBarButtonItem()
+            nextItem.primaryAction = .init(title: "Next") { _ in
+                focus.wrappedValue = players[players.firstIndex(of: player)! + 1]
+            }
+            if player == players.last {
+                toolbar.setItems([spacer, doneItem], animated: false)
+            } else {
+                toolbar.setItems([spacer, nextItem], animated: false)
+            }
+            toolbar.sizeToFit()
+            toolbar.updateConstraintsIfNeeded()
+            field.inputAccessoryView = toolbar
+        }
     }
 }

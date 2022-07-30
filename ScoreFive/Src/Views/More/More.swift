@@ -24,13 +24,16 @@
 // SOFTWARE.
 
 import AppFoundation
+import Combine
+import Network
+import NetworkReachability
 import SafariView
 import SwiftUI
 
 struct More: View {
 
     // MARK: - View
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -39,7 +42,7 @@ struct More: View {
                 } header: {
                     Text("Preferences")
                 }
-                if let status = networkManager.path?.status, status == .satisfied {
+                if reachabilityManager.reachability != .disconnected {
                     Section {
                         DiscloseButton {
                             safariUrl = URL(string: "https://www.vsanthanam.com/five")
@@ -122,11 +125,11 @@ struct More: View {
         private let action: () -> Void
 
     }
-    
+
     // MARK: - Private
-    
+
     @EnvironmentObject
-    private var networkManager: NetworkManager
+    private var reachabilityManager: ReachabilityManager
 
     @State
     private var safariUrl: URL?
