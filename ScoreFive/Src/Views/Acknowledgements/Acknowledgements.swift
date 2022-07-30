@@ -28,38 +28,45 @@ import SafariView
 import SwiftUI
 
 struct Acknowledgements: View {
+
+    struct Acknowledgement: Identifiable {
+        var title: String
+        var urlString: String
+        var id: String { title }
+    }
+
+    struct AcknowledgementCell: View {
+        init(item: Acknowledgement, url: Binding<URL?>) {
+            self.item = item
+            self.url = url
+        }
+
+        private let item: Acknowledgement
+        private let url: Binding<URL?>
+
+        var body: some View {
+            Button(action: {
+                url.wrappedValue = URL(string: item.urlString)
+            }) {
+                HStack {
+                    Text(item.title)
+                        .foregroundColor(.init(.label))
+                    Spacer()
+                    Chevron()
+                }
+            }
+        }
+    }
+
+    let acknowledgements = [
+        Acknowledgement(title: "Introspect", urlString: "https://github.com/siteline/SwiftUI-Introspect"),
+        Acknowledgement(title: "NetworkReachability", urlString: "https://vsanthanam.github.io/NetworkReachability"),
+        Acknowledgement(title: "SafariView", urlString: "https://vsanthanam.github.io/SafariView")
+    ]
+
     var body: some View {
-        List {
-            Button(action: {
-                safariUrl = URL(string: "https://github.com/siteline/SwiftUI-Introspect")
-            }) {
-                HStack {
-                    Text("Introspect")
-                        .foregroundColor(.init(.label))
-                    Spacer()
-                    Chevron()
-                }
-            }
-            Button(action: {
-                safariUrl = URL(string: "https://vsanthanam.github.io/NetworkReachability")
-            }) {
-                HStack {
-                    Text("NetworkReachability")
-                        .foregroundColor(.init(.label))
-                    Spacer()
-                    Chevron()
-                }
-            }
-            Button(action: {
-                safariUrl = URL(string: "https://vsanthanam.github.io/SafariView")
-            }) {
-                HStack {
-                    Text("SafariView")
-                        .foregroundColor(.init(.label))
-                    Spacer()
-                    Chevron()
-                }
-            }
+        List(acknowledgements) { acknowledgement in
+            AcknowledgementCell(item: acknowledgement, url: $safariUrl)
         }
         .navigationTitle("Acknowledgements")
         .safari(url: $safariUrl) { url in
