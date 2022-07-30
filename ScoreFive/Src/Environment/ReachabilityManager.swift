@@ -51,22 +51,27 @@ final class ReachabilityManager: ObservableObject {
         setUp()
     }
 
-    private var monitor: NetworkMonitor!
+    var task: Task<Void, Never>?
 
     private func setUp() {
-        monitor = .init() { [weak self] _, networkPath in
-            guard let self = self else { return }
-            if networkPath.usesInterfaceType(.wiredEthernet) {
-                self.reachability = .ethernet
-            } else if networkPath.usesInterfaceType(.wifi) {
-                self.reachability = .wifi
-            } else if networkPath.usesInterfaceType(.cellular) {
-                self.reachability = .cellular
-            } else if networkPath.status == .satisfied {
-                self.reachability = .unknown
-            } else {
-                self.reachability = .disconnected
+        task = Task {
+            for await networkPath in NetworkMonitor.networkPathUpdates {
+                if networkPath.usesInterfaceType(.wiredEthernet) {
+                    self.reachability = .ethernet
+                } else if networkPath.usesInterfaceType(.wifi) {
+                    self.reachability = .wifi
+                } else if networkPath.usesInterfaceType(.cellular) {
+                    self.reachability = .cellular
+                } else if networkPath.status == .satisfied {
+                    self.reachability = .unknown
+                } else {
+                    self.reachability = .disconnected
+                }
             }
         }
+    }
+
+    deinit {
+        task?.cancel()
     }
 }

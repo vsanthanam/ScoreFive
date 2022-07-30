@@ -38,48 +38,61 @@ struct More: View {
         NavigationView {
             List {
                 Section {
-                    Toggle("Index By Player", isOn: $indexByPlayer)
+                    HStack {
+                        Image(systemName: "list.number")
+                            .foregroundColor(.accentColor)
+                        Toggle("Index By Player", isOn: $indexByPlayer)
+                    }
                 } header: {
                     Text("Preferences")
                 }
                 if reachabilityManager.reachability != .disconnected {
                     Section {
-                        DiscloseButton {
+                        Button(action: {
                             safariUrl = URL(string: "https://www.vsanthanam.com/five")
-                        } label: {
-                            Text("Game Instructions")
+                        }) {
+                            HStack {
+                                Image(systemName: "book")
+                                Text("Instructions")
+                                    .foregroundColor(.init(.label))
+                                Spacer()
+                                Chevron()
+                            }
+                        }
+                        Button(action: {
+                            let url = URL(string: "mailto:talkto@vsanthanam.com")!
+                            UIApplication.shared.open(url)
+                        }) {
+                            HStack {
+                                Image(systemName: "envelope")
+                                Text("Email")
+                                    .foregroundColor(.init(.label))
+                                Spacer()
+                                Chevron()
+                            }
                         }
                     } header: {
                         Text("Help")
                     }
-                    Section {
-                        DiscloseButton(action: {
-                            let url = URL(string: "https://twitter.vsanthanam.com")!
-                            UIApplication.shared.open(url)
-                        }) {
-                            Text("Twitter")
-                        }
-                        DiscloseButton(action: {
-                            safariUrl = URL(string: "https://www.vsanthanam.com")
-                        }) {
-                            Text("Website")
-                        }
-                    } header: {
-                        Text("Contact")
-                    }
                 }
                 Section {
                     HStack {
+                        Image(systemName: "info.circle")
+                            .foregroundColor(.accentColor)
                         Text("Version")
                         Spacer()
-                        Text(AppInfo.version)
+                        Text("\(AppInfo.version) (\(AppInfo.build))")
                             .foregroundColor(.init(.secondaryLabel))
                     }
-                    HStack {
-                        Text("Build")
-                        Spacer()
-                        Text(AppInfo.build)
-                            .foregroundColor(.init(.secondaryLabel))
+                    NavigationLink(destination: {
+                        Acknowledgements()
+                    }) {
+                        HStack {
+                            Image(systemName: "heart.text.square")
+                                .foregroundColor(.accentColor)
+                            Text("Acknowledgements")
+                            Spacer()
+                        }
                     }
                 } header: {
                     Text("About")
@@ -100,8 +113,8 @@ struct More: View {
 
         // MARK: - Initializers
 
-        init(action: @escaping () -> Void, @ViewBuilder label: @escaping () -> Content) {
-            self.label = label
+        init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
+            self.content = content
             self.action = action
         }
 
@@ -110,7 +123,7 @@ struct More: View {
         var body: some View {
             Button(action: action) {
                 HStack {
-                    label()
+                    content()
                     Spacer()
                     Image(systemName: "chevron.forward")
                         .font(Font.system(.caption).weight(.bold))
@@ -122,7 +135,7 @@ struct More: View {
 
         // MARK: - Private
 
-        private let label: () -> Content
+        private let content: () -> Content
         private let action: () -> Void
 
     }
@@ -144,4 +157,14 @@ struct More_Previews: PreviewProvider {
     static var previews: some View {
         More()
     }
+}
+
+struct Chevron: View {
+
+    var body: some View {
+        Image(systemName: "chevron.forward")
+            .font(Font.system(.caption).weight(.bold))
+            .foregroundColor(Color(UIColor.tertiaryLabel))
+    }
+
 }
