@@ -50,7 +50,7 @@ struct More: View {
                 if reachabilityManager.reachability != .disconnected {
                     Section {
                         Button(action: {
-                            safariUrl = URL(string: "https://www.vsanthanam.com/five")
+                            safariUrl = URL(string: "https://www.scorefive.app")
                         }) {
                             HStack {
                                 Image(systemName: "book")
