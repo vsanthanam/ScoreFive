@@ -59,13 +59,14 @@ struct Acknowledgements: View {
 
     private static let libraries = [
         AcknowledgementItem(title: "Introspect", urlString: "https://github.com/siteline/SwiftUI-Introspect"),
-        AcknowledgementItem(title: "NetworkReachability", urlString: "https://vsanthanam.github.io/NetworkReachability"),
+        AcknowledgementItem(title: "NetworkReachability", urlString: "https://reachability.tools"),
         AcknowledgementItem(title: "SafariView", urlString: "https://vsanthanam.github.io/SafariView")
     ]
 
     private static let tools = [
         AcknowledgementItem(title: "Fastlane", urlString: "https://fastlane.tools"),
-        AcknowledgementItem(title: "Jekyll", urlString: "https://jekyllrb.com")
+        AcknowledgementItem(title: "Jekyll", urlString: "https://jekyllrb.com"),
+        AcknowledgementItem(title: "Tuist", urlString: "https://tuist.io")
     ]
 
     @State
