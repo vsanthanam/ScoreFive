@@ -117,7 +117,7 @@ struct More: View {
                             Chevron()
                         }
                     }
-                    .shareSheet(isPresented: $showShareSheet, items: [URL(string: "https://itunes.apple.com/app/id1591366129")!])
+                    .shareSheet(isPresented: $showShareSheet, items: [URL(string: "https://itunes.apple.com/app/id1637035385")!])
                 } header: {
                     Text("Support ScoreFive")
                 }
@@ -178,7 +178,7 @@ struct More: View {
            !requestedReview {
             SKStoreReviewController.requestReview(in: scene)
             requestedReview = true
-        } else if let url = URL(string: "https://itunes.apple.com/app/id1591366129?action=write-review"),
+        } else if let url = URL(string: "https://itunes.apple.com/app/id1637035385?action=write-review"),
                   UIApplication.shared.canOpenURL(url) {
             Task { await UIApplication.shared.open(url, options: [:]) }
         }
