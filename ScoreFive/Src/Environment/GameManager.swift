@@ -127,12 +127,12 @@ final class GameManager: ObservableObject {
 
     private func setUp(inMemory: Bool) {
         if inMemory {
-            store = NSPersistentCloudKitContainer(name: "ScoreFive")
+            store = NSPersistentContainer(name: "ScoreFive")
             store.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         } else {
             guard let url = Bundle.main.url(forResource: "ScoreFive", withExtension: "momd") else { fatalError() }
             guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError() }
-            store = NSPersistentCloudKitContainer(name: "ScoreFive", managedObjectModel: model)
+            store = NSPersistentContainer(name: "ScoreFive", managedObjectModel: model)
         }
         store.loadPersistentStores { store, error in
             if let error = error as? NSError {
@@ -143,7 +143,7 @@ final class GameManager: ObservableObject {
         }
     }
 
-    private var store: NSPersistentCloudKitContainer!
+    private var store: NSPersistentContainer!
 }
 
 private extension GameRecord {
