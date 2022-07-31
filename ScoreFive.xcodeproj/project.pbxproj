@@ -19,6 +19,9 @@
 		0747A458289338D5001A561C /* SafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 0747A457289338D5001A561C /* SafariView */; };
 		0747A45A2895A882001A561C /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4592895A882001A561C /* ReachabilityManager.swift */; };
 		0747A4612895C543001A561C /* Acknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4602895C543001A561C /* Acknowledgements.swift */; };
+		0747A4632896DB5E001A561C /* Chevron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4622896DB5E001A561C /* Chevron.swift */; };
+		0747A4652896DB7C001A561C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4642896DB7C001A561C /* ActivityView.swift */; };
+		0747A4682896DD91001A561C /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4672896DD91001A561C /* ShareSheet.swift */; };
 		075F15D8288B147900E238C0 /* PlayerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15D7288B147900E238C0 /* PlayerTextField.swift */; };
 		075F15DA288B155300E238C0 /* FormButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15D9288B155300E238C0 /* FormButton.swift */; };
 		075F15E0288B204500E238C0 /* TotalScoreBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15DF288B204500E238C0 /* TotalScoreBar.swift */; };
@@ -54,6 +57,9 @@
 		0747A45028906082001A561C /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		0747A4592895A882001A561C /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		0747A4602895C543001A561C /* Acknowledgements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acknowledgements.swift; sourceTree = "<group>"; };
+		0747A4622896DB5E001A561C /* Chevron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chevron.swift; sourceTree = "<group>"; };
+		0747A4642896DB7C001A561C /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		0747A4672896DD91001A561C /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		075F15D7288B147900E238C0 /* PlayerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTextField.swift; sourceTree = "<group>"; };
 		075F15D9288B155300E238C0 /* FormButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButton.swift; sourceTree = "<group>"; };
 		075F15DF288B204500E238C0 /* TotalScoreBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreBar.swift; sourceTree = "<group>"; };
@@ -99,15 +105,10 @@
 			children = (
 				075F15D9288B155300E238C0 /* FormButton.swift */,
 				0747A45028906082001A561C /* CloseButton.swift */,
+				0747A4622896DB5E001A561C /* Chevron.swift */,
+				0747A4642896DB7C001A561C /* ActivityView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		0747A45C2895A938001A561C /* Modifiers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Modifiers;
 			sourceTree = "<group>";
 		};
 		0747A45F2895BD2E001A561C /* Acknowledgements */ = {
@@ -116,6 +117,14 @@
 				0747A4602895C543001A561C /* Acknowledgements.swift */,
 			);
 			path = Acknowledgements;
+			sourceTree = "<group>";
+		};
+		0747A4662896DD89001A561C /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				0747A4672896DD91001A561C /* ShareSheet.swift */,
+			);
+			path = Modifiers;
 			sourceTree = "<group>";
 		};
 		075F15CC288B12DF00E238C0 /* Infra */ = {
@@ -175,7 +184,7 @@
 		075F15DC288B162900E238C0 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
-				0747A45C2895A938001A561C /* Modifiers */,
+				0747A4662896DD89001A561C /* Modifiers */,
 				0747A45B2895A932001A561C /* Views */,
 			);
 			path = Reusable;
@@ -387,7 +396,9 @@
 				075F15D8288B147900E238C0 /* PlayerTextField.swift in Sources */,
 				075F15DA288B155300E238C0 /* FormButton.swift in Sources */,
 				0747A4612895C543001A561C /* Acknowledgements.swift in Sources */,
+				0747A4652896DB7C001A561C /* ActivityView.swift in Sources */,
 				076A0C40287B35A000A75AE9 /* AppDelegate.swift in Sources */,
+				0747A4632896DB5E001A561C /* Chevron.swift in Sources */,
 				0714D2052883735000CE45A3 /* RoundEditor.swift in Sources */,
 				076A0C42287B35A000A75AE9 /* SceneDelegate.swift in Sources */,
 				07E25153288C4D040061AA19 /* More.swift in Sources */,
@@ -398,6 +409,7 @@
 				075F15E0288B204500E238C0 /* TotalScoreBar.swift in Sources */,
 				07E25181288DF9D30061AA19 /* Menu.swift in Sources */,
 				075F15EC288B45A400E238C0 /* AddRow.swift in Sources */,
+				0747A4682896DD91001A561C /* ShareSheet.swift in Sources */,
 				075F15EA288B442A00E238C0 /* PlayerBar.swift in Sources */,
 				0747A45A2895A882001A561C /* ReachabilityManager.swift in Sources */,
 				0714D1D1287B38B600CE45A3 /* Main.swift in Sources */,
@@ -542,7 +554,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -571,7 +583,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;

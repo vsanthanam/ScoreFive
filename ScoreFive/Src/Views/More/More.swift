@@ -28,6 +28,7 @@ import Combine
 import Network
 import NetworkReachability
 import SafariView
+import StoreKit
 import SwiftUI
 
 struct More: View {
@@ -59,21 +60,66 @@ struct More: View {
                                 Chevron()
                             }
                         }
-                        Button(action: {
-                            let url = URL(string: "mailto:talkto@vsanthanam.com")!
-                            UIApplication.shared.open(url)
-                        }) {
-                            HStack {
-                                Image(systemName: "envelope")
-                                Text("Email")
-                                    .foregroundColor(.init(.label))
-                                Spacer()
-                                Chevron()
+                        if let url = URL(string: More.mailUrlString),
+                           UIApplication.shared.canOpenURL(url) {
+                            Button(action: {
+                                UIApplication.shared.open(url)
+                            }) {
+                                HStack {
+                                    Image(systemName: "envelope")
+                                    Text("Email")
+                                        .foregroundColor(.init(.label))
+                                    Spacer()
+                                    Chevron()
+                                }
+                            }
+                        }
+                        if let url = URL(string: More.twitterUrlString),
+                           UIApplication.shared.canOpenURL(url) {
+                            Button(action: {
+                                UIApplication.shared.open(url)
+                            }) {
+                                HStack {
+                                    Image("Twitter")
+                                        .renderingMode(.template)
+                                        .resizable()
+                                        .frame(width: 20, height: 20, alignment: .center)
+                                        .foregroundColor(.accentColor)
+                                    Text("Twitter")
+                                        .foregroundColor(.init(.label))
+                                    Spacer()
+                                    Chevron()
+                                }
                             }
                         }
                     } header: {
                         Text("Help")
                     }
+                }
+                Section {
+                    Button(action: leaveReview) {
+                        HStack {
+                            Image(systemName: "star.bubble")
+                            Text("Rate & Review")
+                                .foregroundColor(.init(.label))
+                            Spacer()
+                            Chevron()
+                        }
+                    }
+                    Button(action: {
+                        showShareSheet = true
+                    }) {
+                        HStack {
+                            Image(systemName: "square.and.arrow.up")
+                            Text("Share ScoreFive")
+                                .foregroundColor(.init(.label))
+                            Spacer()
+                            Chevron()
+                        }
+                    }
+                    .shareSheet(isPresented: $showShareSheet, items: [URL(string: "https://itunes.apple.com/app/id1591366129")!])
+                } header: {
+                    Text("Support ScoreFive")
                 }
                 Section {
                     HStack {
@@ -100,44 +146,10 @@ struct More: View {
             }
             .animation(.default, value: reachabilityManager.reachability)
             .navigationTitle("More")
-            .navigationBarTitleDisplayMode(.inline)
         }
         .safari(url: $safariUrl) { url in
             SafariView(url: url)
         }
-    }
-
-    // MARK: - Private
-
-    private struct DiscloseButton<Content>: View where Content: View {
-
-        // MARK: - Initializers
-
-        init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
-            self.content = content
-            self.action = action
-        }
-
-        // MARK: - View
-
-        var body: some View {
-            Button(action: action) {
-                HStack {
-                    content()
-                    Spacer()
-                    Image(systemName: "chevron.forward")
-                        .font(Font.system(.caption).weight(.bold))
-                        .foregroundColor(Color(UIColor.tertiaryLabel))
-                }
-            }
-            .foregroundColor(.init(.label))
-        }
-
-        // MARK: - Private
-
-        private let content: () -> Content
-        private let action: () -> Void
-
     }
 
     // MARK: - Private
@@ -148,23 +160,33 @@ struct More: View {
     @State
     private var safariUrl: URL?
 
+    @State
+    private var showShareSheet = false
+
     @AppStorage("index_by_player")
     private var indexByPlayer = true
 
+    @AppStorage("requested_review")
+    private var requestedReview = false
+
+    private static let mailUrlString = "mailto:talkto@vsanthanam.com"
+
+    private static let twitterUrlString = "https://twitter.vsanthanam.com"
+
+    private func leaveReview() {
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           !requestedReview {
+            SKStoreReviewController.requestReview(in: scene)
+            requestedReview = true
+        } else if let url = URL(string: "https://itunes.apple.com/app/id1591366129?action=write-review"),
+                  UIApplication.shared.canOpenURL(url) {
+            Task { await UIApplication.shared.open(url, options: [:]) }
+        }
+    }
 }
 
 struct More_Previews: PreviewProvider {
     static var previews: some View {
         More()
     }
-}
-
-struct Chevron: View {
-
-    var body: some View {
-        Image(systemName: "chevron.forward")
-            .font(Font.system(.caption).weight(.bold))
-            .foregroundColor(Color(UIColor.tertiaryLabel))
-    }
-
 }
