@@ -33,7 +33,7 @@ struct ScoreCard: View {
     // MARK: - Initializers
 
     init(game: Game) {
-        self.game = game
+        _game = .init(initialValue: game)
     }
 
     // MARK: - API
@@ -45,29 +45,22 @@ struct ScoreCard: View {
 
     var body: some View {
         NavigationView {
-
             VStack(spacing: 0) {
-
                 PlayerBar(players: game.allPlayers)
-
                 Divider()
-
                 List {
-
-                    ForEach(game.rounds.indices, id: \.self) { index in
-
-                        Button(action: { editingRound = RoundAndIndex(round: game[index], index: index) }) {
+                    ForEach(game.rounds) { round in
+                        let index = game.rounds.firstIndex(of: round)!
+                        Button(action: { editingRound = RoundAndIndex(round: round, index: index) }) {
                             ScoreRow(signpost: indexByPlayer ? game.startingPlayer(atIndex: index).signpost(for: game.allPlayers) : (index + 1).description,
-                                     round: game.rounds[index],
+                                     round: round,
                                      players: game.allPlayers,
                                      activePlayers: game.activePlayers)
-
                         }
 
                     }
                     .onDelete(perform: deleteItems(offsets:))
                     .scoreCardRow()
-
                     if !game.isComplete {
                         Button(action: showAddRound) {
                             AddRow(signpost: indexByPlayer ? game.startingPlayer(atIndex: game.rounds.count).signpost(for: game.allPlayers) : (game.rounds.count + 1).description)
@@ -77,16 +70,13 @@ struct ScoreCard: View {
                         }
                         .scoreCardRow()
                     }
-
                     Spacer()
                         .frame(maxWidth: .infinity, maxHeight: 44)
                         .listRowSeparator(.hidden)
 
                 }
                 .listStyle(PlainListStyle())
-
                 Divider()
-
                 TotalScoreBar(game: $game)
             }
             .navigationViewStyle(StackNavigationViewStyle())

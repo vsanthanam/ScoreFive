@@ -23,10 +23,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Foundation
 import OrderedCollections
 
 /// A game of Five
-public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConvertible {
+public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConvertible, Identifiable {
 
     // MARK: - Initialzer
 
@@ -37,6 +38,7 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
     /// - Note: The score limit must be greater than or equal to 50
     public init(players: [Player],
                 scoreLimit: TotalScore = 250) {
+        id = UUID().uuidString
         precondition(players.allSatisfy(\.isValid), "Player names must contain at least 1 character!")
         precondition(Set(players).count == players.count, "Player names must be unique!")
         precondition(scoreLimit >= 50, "Score limit must be greater than or equal to 50!")
@@ -238,9 +240,10 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
     /// - Parameter round: The round to add to this game
     /// - Returns: The new game
     public func withRound(_ round: Round) -> Game {
-        var game = self
-        game.addRound(round)
-        return game
+        var copy = self
+        copy.id = UUID().uuidString
+        copy.addRound(round)
+        return copy
     }
 
     /// Whether or not a round at a given index can be deleted
@@ -269,9 +272,10 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
     /// - Parameter index: The index containing the round that the new game will not contain
     /// - Returns: The new game
     public func withoutRound(atIndex index: Int) -> Game {
-        var game = self
-        game.deleteRound(atIndex: index)
-        return game
+        var copy = self
+        copy.id = UUID().uuidString
+        copy.deleteRound(atIndex: index)
+        return copy
     }
 
     /// Whether or not you can replace a round at a provided index with a new round
@@ -311,6 +315,7 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
     /// - Returns: The new game with the replaced round
     public func byReplacingRound(atIndex index: Int, with newRound: Round) -> Game {
         var copy = self
+        copy.id = UUID().uuidString
         copy.replaceRound(atIndex: index, with: newRound)
         return copy
     }
@@ -324,6 +329,10 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
         game.rounds = .init(rounds[0 ..< n])
         return game
     }
+
+    // MARK: - Identifiable
+
+    public private(set) var id: String
 
     // MARK: - Subscript
 

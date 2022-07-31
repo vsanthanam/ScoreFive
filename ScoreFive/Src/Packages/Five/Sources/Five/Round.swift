@@ -23,16 +23,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Foundation
 import OrderedCollections
 
 /// A round in a game
-public struct Round: Sendable, Equatable, Hashable, Codable, CustomStringConvertible {
+public struct Round: Sendable, Equatable, Hashable, Codable, CustomStringConvertible, Identifiable {
 
     // MARK: - Initializers
 
     /// Create a round with a given list of players
     /// - Parameter players: The players that will have scores in this round
     public init(players: OrderedSet<Game.Player>) {
+        id = UUID().uuidString
         for player in players {
             scores[player] = .noScore
         }
@@ -42,6 +44,7 @@ public struct Round: Sendable, Equatable, Hashable, Codable, CustomStringConvert
     /// - Parameter scores: The players and their respective scores.
     public init(scores: OrderedDictionary<Game.Player, Score>) {
         self.scores = scores
+        id = UUID().uuidString
 
         for score in scores.values {
             precondition(score.isValid || score == .noScore, "Dictionary contains is invalid score \(score)!")
@@ -127,6 +130,7 @@ public struct Round: Sendable, Equatable, Hashable, Codable, CustomStringConvert
     /// - Returns: The new round
     public func withScore(_ score: Score, forPlayer player: Game.Player) -> Round {
         var round = self
+        round.id = UUID().uuidString
         round.setScore(score, forPlayer: player)
         return round
     }
@@ -143,6 +147,7 @@ public struct Round: Sendable, Equatable, Hashable, Codable, CustomStringConvert
     /// - Returns: The round
     public func withoutScore(forPlayer player: Game.Player) -> Round {
         var round = self
+        round.id = UUID().uuidString
         round.removeScore(forPlayer: player)
         return round
     }
@@ -158,9 +163,14 @@ public struct Round: Sendable, Equatable, Hashable, Codable, CustomStringConvert
     /// - Returns: The round without any scores
     public func withoutScores() -> Round {
         var round = self
+        round.id = UUID().uuidString
         round.eraseScores()
         return round
     }
+
+    // MARK: - Identifiable
+
+    public private(set) var id: String
 
     // MARK: - CustomStringConvertible
 
