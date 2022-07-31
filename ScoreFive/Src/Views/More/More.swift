@@ -41,6 +41,7 @@ struct More: View {
                 Section {
                     HStack {
                         Image(systemName: "list.number")
+                            .frame(maxWidth: 20, alignment: .center)
                             .foregroundColor(.accentColor)
                         Toggle("Index By Player", isOn: $indexByPlayer)
                     }
@@ -54,6 +55,7 @@ struct More: View {
                         }) {
                             HStack {
                                 Image(systemName: "book")
+                                    .frame(maxWidth: 20, alignment: .center)
                                 Text("Instructions")
                                     .foregroundColor(.init(.label))
                                 Spacer()
@@ -67,6 +69,7 @@ struct More: View {
                             }) {
                                 HStack {
                                     Image(systemName: "envelope")
+                                        .frame(maxWidth: 20, alignment: .center)
                                     Text("Email")
                                         .foregroundColor(.init(.label))
                                     Spacer()
@@ -100,6 +103,7 @@ struct More: View {
                     Button(action: leaveReview) {
                         HStack {
                             Image(systemName: "star.bubble")
+                                .frame(maxWidth: 20, alignment: .center)
                             Text("Rate & Review")
                                 .foregroundColor(.init(.label))
                             Spacer()
@@ -111,7 +115,8 @@ struct More: View {
                     }) {
                         HStack {
                             Image(systemName: "square.and.arrow.up")
-                            Text("Share ScoreFive")
+                                .frame(maxWidth: 20, alignment: .center)
+                            Text("Tell a Friend")
                                 .foregroundColor(.init(.label))
                             Spacer()
                             Chevron()
@@ -125,6 +130,7 @@ struct More: View {
                     HStack {
                         Image(systemName: "info.circle")
                             .foregroundColor(.accentColor)
+                            .frame(maxWidth: 20, alignment: .center)
                         Text("Version")
                         Spacer()
                         Text("\(AppInfo.version) (\(AppInfo.build))")
@@ -135,6 +141,7 @@ struct More: View {
                     }) {
                         HStack {
                             Image(systemName: "heart.text.square")
+                                .frame(maxWidth: 20, alignment: .center)
                                 .foregroundColor(.accentColor)
                             Text("Acknowledgements")
                             Spacer()
@@ -197,5 +204,6 @@ struct More: View {
 struct More_Previews: PreviewProvider {
     static var previews: some View {
         More()
+            .environmentObject(ReachabilityManager.shared)
     }
 }
