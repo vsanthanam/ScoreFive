@@ -58,7 +58,7 @@ struct LoadGame: View {
                     }
                     .onDelete(perform: deleteItems(offsets:))
                 }
-                if hasContent {
+                if hasContent, showCompleteGames {
                     Section {
                         Button(role: .destructive, action: {
                             showEraseAllConfirm = true
@@ -91,10 +91,15 @@ struct LoadGame: View {
                         EmptyView()
                     }
                 }
-
             }
             .environment(\.editMode, $listEditMode)
             .navigationTitle("Load Game")
+            .introspectViewController { viewController in
+                let closeItem = UIBarButtonItem(systemItem: .close, primaryAction: UIAction { _ in
+                    dismiss()
+                }, menu: nil)
+                viewController.navigationItem.leftBarButtonItem = closeItem
+            }
         }
         .onReceive(didSave) { _ in
             if gameRecords.isEmpty {

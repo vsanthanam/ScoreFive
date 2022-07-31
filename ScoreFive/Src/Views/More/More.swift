@@ -146,6 +146,12 @@ struct More: View {
             }
             .animation(.default, value: reachabilityManager.reachability)
             .navigationTitle("More")
+            .introspectViewController { viewController in
+                let closeItem = UIBarButtonItem(systemItem: .close, primaryAction: UIAction { _ in
+                    dismiss()
+                }, menu: nil)
+                viewController.navigationItem.leftBarButtonItem = closeItem
+            }
         }
         .safari(url: $safariUrl) { url in
             SafariView(url: url)
@@ -156,6 +162,9 @@ struct More: View {
 
     @EnvironmentObject
     private var reachabilityManager: ReachabilityManager
+
+    @SwiftUI.Environment(\.dismiss)
+    private var dismiss: DismissAction
 
     @State
     private var safariUrl: URL?

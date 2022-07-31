@@ -41,7 +41,6 @@
 		07E25150288C4BCC0061AA19 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 07E2514E288C4BCC0061AA19 /* README.md */; };
 		07E25153288C4D040061AA19 /* More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25152288C4D040061AA19 /* More.swift */; };
 		07E25155288C4FBD0061AA19 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25154288C4FBD0061AA19 /* MenuButton.swift */; };
-		07E25177288DBCB00061AA19 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E25176288DBCB00061AA19 /* CloudKit.framework */; };
 		07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25179288DCFB80061AA19 /* AppFoundation */; };
 		07E2517E288DDB0F0061AA19 /* Five in Frameworks */ = {isa = PBXBuildFile; productRef = 07E2517D288DDB0F0061AA19 /* Five */; };
 		07E25181288DF9D30061AA19 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25180288DF9D30061AA19 /* Menu.swift */; };
@@ -103,7 +102,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				07E2517E288DDB0F0061AA19 /* Five in Frameworks */,
-				07E25177288DBCB00061AA19 /* CloudKit.framework in Frameworks */,
 				0747A458289338D5001A561C /* SafariView in Frameworks */,
 				075F15FE288B53D200E238C0 /* Collections in Frameworks */,
 				07E25147288C45060061AA19 /* Introspect in Frameworks */,
@@ -634,7 +632,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 105;
+				CURRENT_PROJECT_VERSION = 106;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -663,7 +661,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 105;
+				CURRENT_PROJECT_VERSION = 106;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;

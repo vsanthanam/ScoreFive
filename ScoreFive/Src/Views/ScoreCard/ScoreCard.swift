@@ -92,11 +92,11 @@ struct ScoreCard: View {
             .navigationViewStyle(StackNavigationViewStyle())
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    CloseButton(action: close)
-                        .size(24)
-                }
+            .introspectViewController { viewController in
+                let closeItem = UIBarButtonItem(systemItem: .close, primaryAction: UIAction { _ in
+                    close()
+                }, menu: nil)
+                viewController.navigationItem.leftBarButtonItem = closeItem
             }
         }
         .sheet(item: $editingRound) { roundAndIndex in
