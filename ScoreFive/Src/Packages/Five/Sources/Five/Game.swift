@@ -180,21 +180,22 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
             return allPlayers[index % allPlayers.count]
         } else {
             let alivePlayers = withFirst(n: index).activePlayers
-            if alivePlayers == activePlayers {
-                return activePlayers[index % activePlayers.count]
+            if alivePlayers == allPlayers {
+                return allPlayers[index % allPlayers.count]
             } else {
                 var player = startingPlayer(atIndex: index - 1)
-                var playerIndex = activePlayers.firstIndex(of: player)!
+                var playerIndex = allPlayers.firstIndex(of: player)!
                 playerIndex += 1
-                if playerIndex > activePlayers.count - 1 {
+                if playerIndex > allPlayers.count - 1 {
                     playerIndex = 0
                 }
-                while !activePlayers.contains(player) {
+                player = allPlayers[playerIndex]
+                while !alivePlayers.contains(player) {
                     playerIndex += 1
-                    if playerIndex > activePlayers.count - 1 {
+                    if playerIndex > allPlayers.count - 1 {
                         playerIndex = 0
                     }
-                    player = activePlayers[playerIndex]
+                    player = allPlayers[playerIndex]
                 }
                 return player
             }
