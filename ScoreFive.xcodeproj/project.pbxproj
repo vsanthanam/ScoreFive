@@ -35,6 +35,8 @@
 		076A0C54287B35C800A75AE9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C53287B35C800A75AE9 /* RootView.swift */; };
 		07A0A5642896EEE5004F4196 /* AutomatedScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */; };
 		07A0A56D2896EF3D004F4196 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56C2896EF3D004F4196 /* SnapshotHelper.swift */; };
+		07A0A56F28971519004F4196 /* AcknowledgementItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56E28971519004F4196 /* AcknowledgementItem.swift */; };
+		07A0A5712897153F004F4196 /* AcknowledgementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A5702897153F004F4196 /* AcknowledgementCell.swift */; };
 		07E25147288C45060061AA19 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25146288C45060061AA19 /* Introspect */; };
 		07E2514A288C45350061AA19 /* NetworkReachability in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25149288C45350061AA19 /* NetworkReachability */; };
 		07E2514F288C4BCC0061AA19 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 07E2514D288C4BCC0061AA19 /* LICENSE */; };
@@ -86,6 +88,8 @@
 		07A0A5612896EEE5004F4196 /* AutomatedScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutomatedScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomatedScreenshots.swift; sourceTree = "<group>"; };
 		07A0A56C2896EF3D004F4196 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		07A0A56E28971519004F4196 /* AcknowledgementItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementItem.swift; sourceTree = "<group>"; };
+		07A0A5702897153F004F4196 /* AcknowledgementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementCell.swift; sourceTree = "<group>"; };
 		07E2514D288C4BCC0061AA19 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		07E2514E288C4BCC0061AA19 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		07E25152288C4D040061AA19 /* More.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = More.swift; sourceTree = "<group>"; };
@@ -135,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				0747A4602895C543001A561C /* Acknowledgements.swift */,
+				07A0A56E28971519004F4196 /* AcknowledgementItem.swift */,
+				07A0A5702897153F004F4196 /* AcknowledgementCell.swift */,
 			);
 			path = Acknowledgements;
 			sourceTree = "<group>";
@@ -457,11 +463,13 @@
 				075F15D8288B147900E238C0 /* PlayerTextField.swift in Sources */,
 				075F15DA288B155300E238C0 /* FormButton.swift in Sources */,
 				0747A4612895C543001A561C /* Acknowledgements.swift in Sources */,
+				07A0A56F28971519004F4196 /* AcknowledgementItem.swift in Sources */,
 				0747A4652896DB7C001A561C /* ActivityView.swift in Sources */,
 				076A0C40287B35A000A75AE9 /* AppDelegate.swift in Sources */,
 				0747A4632896DB5E001A561C /* Chevron.swift in Sources */,
 				0714D2052883735000CE45A3 /* RoundEditor.swift in Sources */,
 				076A0C42287B35A000A75AE9 /* SceneDelegate.swift in Sources */,
+				07A0A5712897153F004F4196 /* AcknowledgementCell.swift in Sources */,
 				07E25153288C4D040061AA19 /* More.swift in Sources */,
 				0714D1DF2883125D00CE45A3 /* LoadGame.swift in Sources */,
 				0714D1E1288327AA00CE45A3 /* ScoreRow.swift in Sources */,

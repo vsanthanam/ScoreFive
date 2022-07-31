@@ -29,50 +29,44 @@ import SwiftUI
 
 struct Acknowledgements: View {
 
-    struct Acknowledgement: Identifiable {
-        var title: String
-        var urlString: String
-        var id: String { title }
-    }
-
-    struct AcknowledgementCell: View {
-        init(item: Acknowledgement, url: Binding<URL?>) {
-            self.item = item
-            self.url = url
-        }
-
-        private let item: Acknowledgement
-        private let url: Binding<URL?>
-
-        var body: some View {
-            Button(action: {
-                url.wrappedValue = URL(string: item.urlString)
-            }) {
-                HStack {
-                    Text(item.title)
-                        .foregroundColor(.init(.label))
-                    Spacer()
-                    Chevron()
-                }
-            }
-        }
-    }
-
-    let acknowledgements = [
-        Acknowledgement(title: "Introspect", urlString: "https://github.com/siteline/SwiftUI-Introspect"),
-        Acknowledgement(title: "NetworkReachability", urlString: "https://vsanthanam.github.io/NetworkReachability"),
-        Acknowledgement(title: "SafariView", urlString: "https://vsanthanam.github.io/SafariView")
-    ]
+    // MARK: - View
 
     var body: some View {
-        List(acknowledgements) { acknowledgement in
-            AcknowledgementCell(item: acknowledgement, url: $safariUrl)
+        List {
+            Section {
+                ForEach(Acknowledgements.libraries.sorted(by: \.title)) { item in
+                    AcknowledgementCell(item: item, url: $safariUrl)
+                }
+            } header: {
+                Text("Made with these libraries")
+            }
+            Section {
+                ForEach(Acknowledgements.tools.sorted(by: \.title)) { item in
+                    AcknowledgementCell(item: item, url: $safariUrl)
+                }
+            } header: {
+                Text("Powered by these tools")
+            }
         }
         .navigationTitle("Acknowledgements")
+        .navigationBarTitleDisplayMode(.inline)
         .safari(url: $safariUrl) { url in
             SafariView(url: url)
         }
     }
+
+    // MARK: - Private
+
+    private static let libraries = [
+        AcknowledgementItem(title: "Introspect", urlString: "https://github.com/siteline/SwiftUI-Introspect"),
+        AcknowledgementItem(title: "NetworkReachability", urlString: "https://vsanthanam.github.io/NetworkReachability"),
+        AcknowledgementItem(title: "SafariView", urlString: "https://vsanthanam.github.io/SafariView")
+    ]
+
+    private static let tools = [
+        AcknowledgementItem(title: "Fastlane", urlString: "https://fastlane.tools"),
+        AcknowledgementItem(title: "Jekyll", urlString: "https://jekyllrb.com")
+    ]
 
     @State
     private var safariUrl: URL?
