@@ -37,7 +37,9 @@ extension View {
             return self
         }
         let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = { _, _, _, _ in isPresented.wrappedValue = false }
+        activityViewController.completionWithItemsHandler = { _, _, _, _ in
+            isPresented.wrappedValue = false
+        }
         vc.present(activityViewController, animated: true)
         return self
     }

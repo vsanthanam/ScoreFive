@@ -111,7 +111,13 @@ struct More: View {
                         }
                     }
                     Button(action: {
-                        showShareSheet = true
+                        guard let url = URL(string: "https://itunes.apple.com/app/id1637035385"),
+                              let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                              let window = scene.windows.first else {
+                            return
+                        }
+                        let av = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+                        window.rootViewController?.presentedViewController?.present(av, animated: true, completion: nil)
                     }) {
                         HStack {
                             Image(systemName: "square.and.arrow.up")
@@ -122,7 +128,6 @@ struct More: View {
                             Chevron()
                         }
                     }
-                    .shareSheet(isPresented: $showShareSheet, items: [URL(string: "https://itunes.apple.com/app/id1637035385")!])
                 } header: {
                     Text("Support ScoreFive")
                 }
