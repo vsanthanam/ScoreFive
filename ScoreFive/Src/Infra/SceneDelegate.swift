@@ -39,9 +39,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = .init(windowScene: scene)
         let root = RootView()
-            .environment(\.managedObjectContext, GameManager.shared.viewContext)
-            .environmentObject(GameManager.shared)
-            .environmentObject(ReachabilityManager.shared)
         let vc = UIHostingController(rootView: root)
         window?.rootViewController = vc
         window?.makeKeyAndVisible()

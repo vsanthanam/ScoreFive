@@ -48,12 +48,10 @@ struct Main: View {
             if let identifier = gameManager.activeGameRecord {
                 ScoreCard(game: try! gameManager.game(for: identifier))
             } else {
-                Menu { sheet in
-                    self.sheet = sheet
-                }
+                Menu(activeSheet: $activeSheet)
             }
         }
-        .sheet(item: $sheet) { sheet in
+        .sheet(item: $activeSheet) { sheet in
             switch sheet {
             case .newGame:
                 NewGame()
@@ -73,7 +71,7 @@ struct Main: View {
     private var gameManager: GameManager
 
     @State
-    private var sheet: Sheet?
+    private var activeSheet: Sheet?
 
 }
 

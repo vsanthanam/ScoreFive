@@ -27,9 +27,10 @@ import SwiftUI
 
 struct Menu: View {
 
-    init(_ handler: @escaping (Main.Sheet) -> Void) {
-        self.handler = handler
-    }
+    // MARK: - API
+
+    @Binding
+    var activeSheet: Main.Sheet?
 
     // MARK: - View
 
@@ -44,29 +45,27 @@ struct Menu: View {
                 .frame(maxHeight: 25)
             MenuButton("New Game",
                        systemName: "square.and.pencil") {
-                handler(.newGame)
+                activeSheet = .newGame
             }
             .keyboardShortcut("n", modifiers: .command)
 
             if !gameRecords.isEmpty {
                 MenuButton("Load Game",
                            systemName: "doc.badge.ellipsis") {
-                    handler(.loadGame)
+                    activeSheet = .loadGame
                 }
                 .keyboardShortcut("o", modifiers: .command)
             }
 
             MenuButton("More",
                        systemName: "ellipsis.circle") {
-                handler(.more)
+                activeSheet = .more
             }
             .keyboardShortcut(",", modifiers: .command)
         }
     }
 
     // MARK: - Private
-
-    private let handler: (Main.Sheet) -> Void
 
     @EnvironmentObject
     private var gameManager: GameManager
@@ -78,7 +77,7 @@ struct Menu: View {
 
 struct Menu_Previews: PreviewProvider {
     static var previews: some View {
-        Menu() { _ in }
+        Menu(activeSheet: .constant(nil))
             .environmentObject(GameManager.preview)
     }
 }
