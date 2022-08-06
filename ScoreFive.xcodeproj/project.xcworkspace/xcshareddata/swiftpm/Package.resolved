@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "mailview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vsanthanam/MailView.git",
+      "state" : {
+        "revision" : "1d02a02c0d8f9cb212af9c4db55da605f710643f",
+        "version" : "0.0.1"
+      }
+    },
+    {
       "identity" : "networkreachability",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vsanthanam/NetworkReachability.git",

@@ -25,6 +25,7 @@
 
 import AppFoundation
 import Combine
+import MailView
 import Network
 import NetworkReachability
 import SafariView
@@ -62,10 +63,9 @@ struct More: View {
                                 Chevron()
                             }
                         }
-                        if let url = URL(string: More.mailUrlString),
-                           UIApplication.shared.canOpenURL(url) {
+                        if MailView.canSendMail {
                             Button(action: {
-                                UIApplication.shared.open(url)
+                                showMail = true
                             }) {
                                 HStack {
                                     Image(systemName: "envelope")
@@ -169,6 +169,9 @@ struct More: View {
         .safari(url: $safariUrl) { url in
             SafariView(url: url)
         }
+        .sheet(isPresented: $showMail) {
+            MailView(toRecipients: ["talkto@vsanthanam.com"])
+        }
     }
 
     // MARK: - Private
@@ -185,13 +188,14 @@ struct More: View {
     @State
     private var showShareSheet = false
 
+    @State
+    private var showMail = false
+
     @AppStorage("index_by_player")
     private var indexByPlayer = true
 
     @AppStorage("requested_review")
     private var requestedReview = false
-
-    private static let mailUrlString = "mailto:talkto@vsanthanam.com"
 
     private static let twitterUrlString = "https://twitter.vsanthanam.com"
 
