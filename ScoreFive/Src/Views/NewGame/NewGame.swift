@@ -25,7 +25,6 @@
 
 import Collections
 import Five
-import Introspect
 import SwiftUI
 
 struct NewGame: View {
@@ -42,13 +41,11 @@ struct NewGame: View {
                         .onSubmit {
                             focusedPlayerIndex = 0
                         }
-                        .introspectTextField { textField in
-                            textField.returnKeyType = .next
-                        }
+                        .submitLabel(.next)
                 }
                 Section {
                     ForEach(players.indices, id: \.self) { index in
-                        PlayerTextField(index: index, player: $players[index], returnKeyType: (index == players.count - 1) ? .done : .next)
+                        PlayerTextField(index: index, player: $players[index], submitLabel: (index == players.count - 1) ? .done : .next)
                             .focused($focusedPlayerIndex, equals: index)
                             .onSubmit {
                                 guard let focus = focusedPlayerIndex else { return }
