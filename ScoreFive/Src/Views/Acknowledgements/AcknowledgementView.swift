@@ -32,15 +32,13 @@ struct AcknowledgementView: View {
 
     init(item: Acknowledgement, url: Binding<URL?>) {
         self.item = item
-        self.url = url
+        _url = url
     }
 
     // MARK: - View
 
     var body: some View {
-        Button(action: {
-            url.wrappedValue = URL(string: item.urlString)
-        }) {
+        Button(action: updateURL) {
             HStack {
                 VStack(alignment: .leading) {
                     Text(item.title)
@@ -61,8 +59,14 @@ struct AcknowledgementView: View {
     // MARK: - Private
 
     private let item: Acknowledgement
-    private let url: Binding<URL?>
+
+    @Binding
+    private var url: URL?
 
     @EnvironmentObject
     private var reachabilityManager: ReachabilityManager
+
+    private func updateURL() {
+        url = URL(string: item.urlString)
+    }
 }

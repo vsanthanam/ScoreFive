@@ -34,18 +34,18 @@ struct Acknowledgements: View {
     var body: some View {
         List {
             Section {
-                ForEach(Acknowledgements.libraries.sorted(by: \.title)) { item in
-                    AcknowledgementView(item: item, url: $safariUrl)
-                }
-            } header: {
-                Text("Made with these libraries")
-            }
-            Section {
                 ForEach(Acknowledgements.tools.sorted(by: \.title)) { item in
                     AcknowledgementView(item: item, url: $safariUrl)
                 }
             } header: {
-                Text("Powered by these tools")
+                Text("Made with these tools")
+            }
+            Section {
+                ForEach(Acknowledgements.services.sorted(by: \.title)) { item in
+                    AcknowledgementView(item: item, url: $safariUrl)
+                }
+            } header: {
+                Text("Powered by these services")
             }
         }
         .navigationTitle("Acknowledgements")
@@ -57,16 +57,16 @@ struct Acknowledgements: View {
 
     // MARK: - Private
 
-    private static let libraries = [
+    private static let tools = [
         Acknowledgement(title: "Introspect", urlString: "https://github.com/siteline/SwiftUI-Introspect"),
         Acknowledgement(title: "NetworkReachability", urlString: "https://reachability.tools"),
-        Acknowledgement(title: "SafariView", urlString: "https://vsanthanam.github.io/SafariView")
+        Acknowledgement(title: "SafariView", urlString: "https://vsanthanam.github.io/SafariView"),
+        Acknowledgement(title: "MailView", urlString: "https://vsanthanam.github.io/MailView")
     ]
 
-    private static let tools = [
+    private static let services = [
         Acknowledgement(title: "Fastlane", urlString: "https://fastlane.tools"),
         Acknowledgement(title: "Jekyll", urlString: "https://jekyllrb.com"),
-        Acknowledgement(title: "Tuist", urlString: "https://tuist.io")
     ]
 
     @State
