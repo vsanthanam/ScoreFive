@@ -94,12 +94,7 @@ struct LoadGame: View {
             }
             .environment(\.editMode, $listEditMode)
             .navigationTitle("Load Game")
-            .introspectViewController { viewController in
-                let closeItem = UIBarButtonItem(systemItem: .close, primaryAction: UIAction { _ in
-                    dismiss()
-                }, menu: nil)
-                viewController.navigationItem.leftBarButtonItem = closeItem
-            }
+            .closeButton { dismiss() }
         }
         .onReceive(didSave) { _ in
             if gameRecords.isEmpty {

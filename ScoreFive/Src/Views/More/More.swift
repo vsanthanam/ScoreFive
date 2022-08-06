@@ -107,9 +107,12 @@ struct More: View {
                             Text("Rate & Review")
                                 .foregroundColor(.init(.label))
                             Spacer()
-                            Chevron()
+                            if reachabilityManager.reachability != .disconnected {
+                                Chevron()
+                            }
                         }
                     }
+                    .disabled(reachabilityManager.reachability == .disconnected)
                     Button(action: {
                         guard let url = URL(string: "https://itunes.apple.com/app/id1637035385"),
                               let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
@@ -125,9 +128,12 @@ struct More: View {
                             Text("Tell a Friend")
                                 .foregroundColor(.init(.label))
                             Spacer()
-                            Chevron()
+                            if reachabilityManager.reachability != .disconnected {
+                                Chevron()
+                            }
                         }
                     }
+                    .disabled(reachabilityManager.reachability == .disconnected)
                 } header: {
                     Text("Support ScoreFive")
                 }
@@ -158,12 +164,7 @@ struct More: View {
             }
             .animation(.default, value: reachabilityManager.reachability)
             .navigationTitle("More")
-            .introspectViewController { viewController in
-                let closeItem = UIBarButtonItem(systemItem: .close, primaryAction: UIAction { _ in
-                    dismiss()
-                }, menu: nil)
-                viewController.navigationItem.leftBarButtonItem = closeItem
-            }
+            .closeButton { dismiss() }
         }
         .safari(url: $safariUrl) { url in
             SafariView(url: url)

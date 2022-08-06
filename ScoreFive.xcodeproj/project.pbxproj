@@ -15,13 +15,12 @@
 		0714D1DF2883125D00CE45A3 /* LoadGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1DE2883125D00CE45A3 /* LoadGame.swift */; };
 		0714D1E1288327AA00CE45A3 /* ScoreRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1E0288327AA00CE45A3 /* ScoreRow.swift */; };
 		0714D2052883735000CE45A3 /* RoundEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D2042883735000CE45A3 /* RoundEditor.swift */; };
-		0747A45128906082001A561C /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A45028906082001A561C /* CloseButton.swift */; };
+		074374B3289EE924001279F8 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074374B2289EE924001279F8 /* CloseButton.swift */; };
 		0747A458289338D5001A561C /* SafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 0747A457289338D5001A561C /* SafariView */; };
 		0747A45A2895A882001A561C /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4592895A882001A561C /* ReachabilityManager.swift */; };
 		0747A4612895C543001A561C /* Acknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4602895C543001A561C /* Acknowledgements.swift */; };
 		0747A4632896DB5E001A561C /* Chevron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4622896DB5E001A561C /* Chevron.swift */; };
 		0747A4652896DB7C001A561C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4642896DB7C001A561C /* ActivityView.swift */; };
-		0747A4682896DD91001A561C /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4672896DD91001A561C /* ShareSheet.swift */; };
 		075F15D8288B147900E238C0 /* PlayerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15D7288B147900E238C0 /* PlayerTextField.swift */; };
 		075F15DA288B155300E238C0 /* FormButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15D9288B155300E238C0 /* FormButton.swift */; };
 		075F15E0288B204500E238C0 /* TotalScoreBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15DF288B204500E238C0 /* TotalScoreBar.swift */; };
@@ -67,12 +66,11 @@
 		0714D1DE2883125D00CE45A3 /* LoadGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGame.swift; sourceTree = "<group>"; };
 		0714D1E0288327AA00CE45A3 /* ScoreRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreRow.swift; sourceTree = "<group>"; };
 		0714D2042883735000CE45A3 /* RoundEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundEditor.swift; sourceTree = "<group>"; };
-		0747A45028906082001A561C /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		074374B2289EE924001279F8 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		0747A4592895A882001A561C /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		0747A4602895C543001A561C /* Acknowledgements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acknowledgements.swift; sourceTree = "<group>"; };
 		0747A4622896DB5E001A561C /* Chevron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chevron.swift; sourceTree = "<group>"; };
 		0747A4642896DB7C001A561C /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
-		0747A4672896DD91001A561C /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		075F15D7288B147900E238C0 /* PlayerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTextField.swift; sourceTree = "<group>"; };
 		075F15D9288B155300E238C0 /* FormButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButton.swift; sourceTree = "<group>"; };
 		075F15DF288B204500E238C0 /* TotalScoreBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreBar.swift; sourceTree = "<group>"; };
@@ -124,11 +122,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		074374B1289EE908001279F8 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				074374B2289EE924001279F8 /* CloseButton.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		0747A45B2895A932001A561C /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				075F15D9288B155300E238C0 /* FormButton.swift */,
-				0747A45028906082001A561C /* CloseButton.swift */,
 				0747A4622896DB5E001A561C /* Chevron.swift */,
 				0747A4642896DB7C001A561C /* ActivityView.swift */,
 			);
@@ -143,14 +148,6 @@
 				07A0A5702897153F004F4196 /* AcknowledgementCell.swift */,
 			);
 			path = Acknowledgements;
-			sourceTree = "<group>";
-		};
-		0747A4662896DD89001A561C /* Modifiers */ = {
-			isa = PBXGroup;
-			children = (
-				0747A4672896DD91001A561C /* ShareSheet.swift */,
-			);
-			path = Modifiers;
 			sourceTree = "<group>";
 		};
 		075F15CC288B12DF00E238C0 /* Infra */ = {
@@ -210,7 +207,7 @@
 		075F15DC288B162900E238C0 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
-				0747A4662896DD89001A561C /* Modifiers */,
+				074374B1289EE908001279F8 /* Modifiers */,
 				0747A45B2895A932001A561C /* Views */,
 			);
 			path = Reusable;
@@ -461,6 +458,7 @@
 				076A0C54287B35C800A75AE9 /* RootView.swift in Sources */,
 				0714D1D5287B390000CE45A3 /* GameManager.swift in Sources */,
 				075F15D8288B147900E238C0 /* PlayerTextField.swift in Sources */,
+				074374B3289EE924001279F8 /* CloseButton.swift in Sources */,
 				075F15DA288B155300E238C0 /* FormButton.swift in Sources */,
 				0747A4612895C543001A561C /* Acknowledgements.swift in Sources */,
 				07A0A56F28971519004F4196 /* AcknowledgementItem.swift in Sources */,
@@ -478,11 +476,9 @@
 				075F15E0288B204500E238C0 /* TotalScoreBar.swift in Sources */,
 				07E25181288DF9D30061AA19 /* Menu.swift in Sources */,
 				075F15EC288B45A400E238C0 /* AddRow.swift in Sources */,
-				0747A4682896DD91001A561C /* ShareSheet.swift in Sources */,
 				075F15EA288B442A00E238C0 /* PlayerBar.swift in Sources */,
 				0747A45A2895A882001A561C /* ReachabilityManager.swift in Sources */,
 				0714D1D1287B38B600CE45A3 /* Main.swift in Sources */,
-				0747A45128906082001A561C /* CloseButton.swift in Sources */,
 				0714D1D8287B39A200CE45A3 /* ScoreFive.xcdatamodeld in Sources */,
 				0714D1D3287B38BD00CE45A3 /* ScoreCard.swift in Sources */,
 			);

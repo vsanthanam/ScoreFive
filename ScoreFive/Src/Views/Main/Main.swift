@@ -31,7 +31,7 @@ struct Main: View {
 
     // MARK: - API
 
-    enum Sheet: String, Identifiable {
+    enum Sheets: String, Identifiable {
         case newGame
         case loadGame
         case more
@@ -71,7 +71,7 @@ struct Main: View {
     private var gameManager: GameManager
 
     @State
-    private var activeSheet: Sheet?
+    private var activeSheet: Sheets?
 
 }
 

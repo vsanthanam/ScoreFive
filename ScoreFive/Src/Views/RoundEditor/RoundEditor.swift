@@ -86,12 +86,7 @@ struct RoundEditor: View {
             .onChange(of: playerFocus) { focus in
                 statusMessage = round.statusMessage
             }
-            .introspectViewController { viewController in
-                let closeItem = UIBarButtonItem(systemItem: .close, primaryAction: UIAction { _ in
-                    dismiss()
-                }, menu: nil)
-                viewController.navigationItem.leftBarButtonItem = closeItem
-            }
+            .closeButton { dismiss() }
         }
         .interactiveDismissDisabled()
     }

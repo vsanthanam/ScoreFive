@@ -30,7 +30,7 @@ struct Menu: View {
     // MARK: - API
 
     @Binding
-    var activeSheet: Main.Sheet?
+    var activeSheet: Main.Sheets?
 
     // MARK: - View
 
