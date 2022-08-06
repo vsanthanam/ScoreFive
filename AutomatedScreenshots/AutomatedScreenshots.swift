@@ -27,11 +27,19 @@ import XCTest
 
 class AutomatedScreenshots: XCTestCase {
 
+    func test_score_card() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["demo"]
+        setupSnapshot(app)
+        app.launch()
+        snapshot("a-score-card")
+    }
+
     func test_launch() throws {
         let app = XCUIApplication()
         setupSnapshot(app)
         app.launch()
-        snapshot("a-home")
+        snapshot("b-home")
     }
 
     func test_settings() throws {
