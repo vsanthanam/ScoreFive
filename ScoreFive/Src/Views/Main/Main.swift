@@ -63,6 +63,9 @@ struct Main: View {
                 More()
             }
         }
+        .onAppear {
+            launchCount += 1
+        }
     }
 
     // MARK: - Private
@@ -72,6 +75,9 @@ struct Main: View {
 
     @State
     private var activeSheet: Sheets?
+
+    @AppStorage("launch_count")
+    private var launchCount = 0
 
 }
 

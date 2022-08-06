@@ -23,9 +23,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import AppFoundation
 import Collections
 import Five
+import StoreKit
 import SwiftUI
 
 struct ScoreCard: View {
@@ -96,6 +96,7 @@ struct ScoreCard: View {
             Text("Please delete newer rounds first")
         }
         .onChange(of: game, perform: persist(game:))
+        .onAppear(perform: promptForReviewIfNeeded)
     }
 
     // MARK: - Private
@@ -109,6 +110,12 @@ struct ScoreCard: View {
 
     @AppStorage("index_by_player")
     private var indexByPlayer = true
+
+    @AppStorage("requested_review")
+    private var requestedReview = false
+
+    @AppStorage("launch_count")
+    private var launchCount = 0
 
     @State
     private var game: Game
@@ -149,6 +156,15 @@ struct ScoreCard: View {
     private func persist(game: Game) {
         try! gameManager.updateGame(game)
         try! gameManager.save()
+    }
+
+    private func promptForReviewIfNeeded() {
+        if launchCount >= 3,
+           !requestedReview,
+           let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            SKStoreReviewController.requestReview(in: scene)
+            requestedReview = true
+        }
     }
 }
 

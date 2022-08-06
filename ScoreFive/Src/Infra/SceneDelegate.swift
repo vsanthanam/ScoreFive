@@ -43,30 +43,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let vc = UIHostingController(rootView: root)
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
-        if ProcessInfo.processInfo.arguments.contains("demo") {
-            var game = Game(players: ["Mom", "Dad", "God", "Bro"], scoreLimit: 250)
-            var round = game.newRound()
-            round["Mom"] = 21
-            round["Dad"] = 17
-            round["God"] = 32
-            round["Bro"] = 0
-            game.addRound(round)
-            round = game.newRound()
-            round["Mom"] = 12
-            round["Dad"] = 9
-            round["God"] = 0
-            round["Bro"] = 4
-            game.addRound(round)
-            round = game.newRound()
-            round["Mom"] = 0
-            round["Dad"] = 50
-            round["God"] = 31
-            round["Bro"] = 17
-            game.addRound(round)
-            let record = try! GameManager.shared.storeNewGame(game)
-            try! GameManager.shared.save()
-            try! GameManager.shared.activateGame(with: record)
-        }
+        checkForDemo()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
