@@ -1,5 +1,5 @@
 // ScoreFive
-// AcknowledgementItem.swift
+// Acknowledgement.swift
 //
 // MIT License
 //
@@ -25,7 +25,7 @@
 
 import Foundation
 
-struct AcknowledgementItem: Identifiable {
+struct Acknowledgement: Identifiable {
     var title: String
     var urlString: String
     var id: String { title }

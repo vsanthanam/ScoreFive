@@ -1,5 +1,5 @@
 // ScoreFive
-// AcknowledgementCell.swift
+// AcknowledgementView.swift
 //
 // MIT License
 //
@@ -26,11 +26,11 @@
 import Foundation
 import SwiftUI
 
-struct AcknowledgementCell: View {
+struct AcknowledgementView: View {
 
     // MARK: - Initializers
 
-    init(item: AcknowledgementItem, url: Binding<URL?>) {
+    init(item: Acknowledgement, url: Binding<URL?>) {
         self.item = item
         self.url = url
     }
@@ -60,7 +60,7 @@ struct AcknowledgementCell: View {
 
     // MARK: - Private
 
-    private let item: AcknowledgementItem
+    private let item: Acknowledgement
     private let url: Binding<URL?>
 
     @EnvironmentObject
