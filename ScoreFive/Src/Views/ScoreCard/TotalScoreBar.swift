@@ -28,6 +28,8 @@ import SwiftUI
 
 struct TotalScoreBar: View {
 
+    // MARK: - API
+
     @Binding
     var game: Game
 
@@ -43,6 +45,7 @@ struct TotalScoreBar: View {
                 ForEach(game.allPlayers, id: \.self) { player in
                     Text(game[player].description)
                         .bold()
+                        .foregroundColor(color(for: player))
                         .opacity(opacity(for: player))
                 }
                 .frame(maxWidth: .infinity)
@@ -52,6 +55,18 @@ struct TotalScoreBar: View {
     }
 
     // MARK: - Private
+
+    private func color(for player: Game.Player) -> Color {
+        guard game.rounds.count >= 1 else {
+            return .init(.label)
+        }
+        if game.winners.contains(player) {
+            return .green
+        } else if game.activeLosers.contains(player) {
+            return .red
+        }
+        return .init(.label)
+    }
 
     private func opacity(for player: Game.Player) -> Double {
         game.activePlayers.contains(player) ? 1.0 : 0.3
