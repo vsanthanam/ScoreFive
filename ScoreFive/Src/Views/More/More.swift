@@ -171,7 +171,10 @@ struct More: View {
             SafariView(url: url)
         }
         .sheet(isPresented: $showMail) {
-            MailView(toRecipients: ["talkto@vsanthanam.com"])
+            MailView()
+                .toRecipents(["talkto@vsanthanam.com"])
+                .subject("Help with ScoreFive")
+                .messageBody("I need some help with ScoreFive!")
         }
     }
 

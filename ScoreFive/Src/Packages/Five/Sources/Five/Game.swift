@@ -208,6 +208,9 @@ public struct Game: Sendable, Equatable, Hashable, Codable, CustomStringConverti
         .init(players: activePlayers(withSort: .playingOrder))
     }
 
+    /// Add a new round
+    /// - Parameter scoreBuilder: A function used to assign scores
+    /// - Returns: The round
     public func newRound(withScores scoreBuilder: (Player) -> Round.Score) -> Round {
         var dict = OrderedDictionary<Player, Round.Score>()
         for player in activePlayers {
