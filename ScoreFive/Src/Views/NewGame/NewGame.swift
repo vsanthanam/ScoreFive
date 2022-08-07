@@ -28,6 +28,7 @@ import Five
 import Foundation
 import SwiftUI
 
+/// The view used to create new games
 struct NewGame: View {
 
     // MARK: - View
@@ -36,7 +37,7 @@ struct NewGame: View {
         NavigationView {
             Form {
                 Section {
-                    TextField("Score Limit", text: scoreLimitBining)
+                    TextField("Score Limit", text: scoreLimitBinding)
                         .keyboardType(.numberPad)
                         .focused($focusedPlayerIndex, equals: -1)
                         .onSubmit {
@@ -109,7 +110,7 @@ struct NewGame: View {
     @State
     private var scoreLimit = 250
 
-    private var scoreLimitBining: Binding<String> {
+    private var scoreLimitBinding: Binding<String> {
         .init {
             scoreLimit.description
         } set: { newValue in

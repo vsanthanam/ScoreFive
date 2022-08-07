@@ -27,14 +27,21 @@ import CoreData
 import Five
 import SwiftUI
 
+/// The main view of application
 struct Main: View {
 
     // MARK: - API
 
+    /// An enumeration describing sheets presentable from the main view
     enum Sheets: String, Identifiable {
+
+        // MARK: - Cases
+
         case newGame
         case loadGame
         case more
+
+        // MARK: - Identifiable
 
         typealias ID = RawValue
 
@@ -65,10 +72,16 @@ struct Main: View {
         }
         .onAppear {
             launchCount += 1
+            if let record = gameRecords.first, !record.isComplete {
+                try! gameManager.activateGame(with: record)
+            }
         }
     }
 
     // MARK: - Private
+
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp, order: .reverse)])
+    private var gameRecords: FetchedResults<GameRecord>
 
     @EnvironmentObject
     private var gameManager: GameManager

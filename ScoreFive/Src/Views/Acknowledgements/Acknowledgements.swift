@@ -27,6 +27,7 @@ import Foundation
 import SafariView
 import SwiftUI
 
+/// Acknowledments Screen
 struct Acknowledgements: View {
 
     // MARK: - View
@@ -35,14 +36,14 @@ struct Acknowledgements: View {
         List {
             Section {
                 ForEach(Acknowledgements.tools.sorted(by: \.title)) { item in
-                    AcknowledgementView(item: item, url: $safariUrl)
+                    AcknowledgementRow(item: item, url: $safariUrl)
                 }
             } header: {
                 Text("Made with these tools")
             }
             Section {
                 ForEach(Acknowledgements.services.sorted(by: \.title)) { item in
-                    AcknowledgementView(item: item, url: $safariUrl)
+                    AcknowledgementRow(item: item, url: $safariUrl)
                 }
             } header: {
                 Text("Powered by these services")

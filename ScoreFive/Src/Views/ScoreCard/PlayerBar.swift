@@ -29,7 +29,11 @@ import SwiftUI
 
 struct PlayerBar: View {
 
-    var players: OrderedSet<Game.Player>
+    // MARK: - API
+
+    let players: OrderedSet<Game.Player>
+
+    // MARK: - View
 
     var body: some View {
         HStack {

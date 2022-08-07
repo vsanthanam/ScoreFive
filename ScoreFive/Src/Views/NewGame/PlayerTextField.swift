@@ -25,19 +25,25 @@
 
 import SwiftUI
 
+/// A text fied used to enter the name of a player
 struct PlayerTextField: View {
 
-    init(index: Int, player: Binding<String>, submitLabel: SubmitLabel = .next) {
+    // MARK: - Initializers
+
+    /// Create a `PlayerTextField`
+    /// - Parameters:
+    ///   - index: The index of the player in the rotation
+    ///   - player: A `Binding` to read and write the player's name
+    ///   - submitLabel: The label to use on the keyboard.
+    init(index: Int,
+         player: Binding<String>,
+         submitLabel: SubmitLabel = .next) {
         self.index = index
         self.player = player
         self.submitLabel = submitLabel
     }
 
-    let index: Int
-
-    let player: Binding<String>
-
-    let submitLabel: SubmitLabel
+    // MARK: - View
 
     var body: some View {
         TextField("Player \(index + 1)", text: player)
@@ -46,6 +52,12 @@ struct PlayerTextField: View {
             .disableAutocorrection(true)
             .submitLabel(submitLabel)
     }
+
+    // MARK: - Private
+
+    private let index: Int
+    private let player: Binding<String>
+    private let submitLabel: SubmitLabel
 }
 
 struct PlayerTextField_Previews: PreviewProvider {

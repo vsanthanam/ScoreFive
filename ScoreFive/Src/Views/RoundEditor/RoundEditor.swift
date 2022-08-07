@@ -27,11 +27,17 @@ import Collections
 import Five
 import SwiftUI
 
+/// View used to edit rounds of a game
 struct RoundEditor: View {
 
     // MARK: - Initializers
 
-    init(game: Binding<Game>, previousIndex: Int? = nil) {
+    /// Create a `RoundEditor` view
+    /// - Parameters:
+    ///   - game: The game to read/write from
+    ///   - previousIndex: The previous index, if the view is used to edit a round instead of creating a new round.
+    init(game: Binding<Game>,
+         previousIndex: Int? = nil) {
         self.previousIndex = previousIndex
         _game = game
         if let previousIndex = previousIndex {
@@ -43,11 +49,9 @@ struct RoundEditor: View {
 
     // MARK: - API
 
+    /// The Game binding used to accept new values
     @Binding
     var game: Game
-
-    @FocusState
-    var playerFocus: Game.Player?
 
     // MARK: - View
 
@@ -93,8 +97,11 @@ struct RoundEditor: View {
 
     // MARK: - Private
 
+    @FocusState
+    private var playerFocus: Game.Player?
+
     @State
-    var statusMessage: String?
+    private var statusMessage: String?
 
     private struct InProgressRound {
 

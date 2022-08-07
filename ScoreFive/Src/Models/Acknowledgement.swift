@@ -1,5 +1,5 @@
 // ScoreFive
-// AcknowledgementView.swift
+// Acknowledgement.swift
 //
 // MIT License
 //
@@ -23,50 +23,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
-import SwiftUI
+/// An acknowledment item to display in the more page
+struct Acknowledgement: Identifiable, Equatable, Hashable, Sendable {
 
-struct AcknowledgementView: View {
+    // MARK: - API
 
-    // MARK: - Initializers
+    /// The name of the acknowledgement
+    var title: String
 
-    init(item: Acknowledgement, url: Binding<URL?>) {
-        self.item = item
-        _url = url
-    }
+    /// The project homepage
+    var urlString: String
 
-    // MARK: - View
+    // MARK: - Identifiable
 
-    var body: some View {
-        Button(action: updateURL) {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(item.title)
-                        .foregroundColor(.init(.label))
-                    Text(item.urlString)
-                        .foregroundColor(.init(.secondaryLabel))
-                        .font(.caption)
-                }
-                Spacer()
-                if reachabilityManager.reachability != .disconnected {
-                    Chevron()
-                }
-            }
-        }
-        .disabled(reachabilityManager.reachability == .disconnected)
-    }
-
-    // MARK: - Private
-
-    private let item: Acknowledgement
-
-    @Binding
-    private var url: URL?
-
-    @EnvironmentObject
-    private var reachabilityManager: ReachabilityManager
-
-    private func updateURL() {
-        url = URL(string: item.urlString)
-    }
+    var id: String { title }
 }

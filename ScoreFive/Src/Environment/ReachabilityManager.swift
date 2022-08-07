@@ -27,6 +27,9 @@ import Combine
 import Network
 import NetworkReachability
 
+/// A singleton object used to observe the current network conditions and hide network-dependent features where approproate.
+/// UIKit interacts with this class via its `.shared` static property
+/// SwiftUI interacts with this class using the EnvironmentObject API.
 final class ReachabilityManager: ObservableObject {
 
     // MARK: - API

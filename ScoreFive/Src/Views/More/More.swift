@@ -32,6 +32,7 @@ import SafariView
 import StoreKit
 import SwiftUI
 
+/// The More screen
 struct More: View {
 
     // MARK: - View

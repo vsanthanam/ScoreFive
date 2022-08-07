@@ -25,10 +25,12 @@
 
 import SwiftUI
 
+/// The home menu
 struct Menu: View {
 
     // MARK: - API
 
+    /// A binding to accept sheets from user taps
     @Binding
     var activeSheet: Main.Sheets?
 

@@ -26,10 +26,12 @@
 import CoreData
 import SwiftUI
 
+/// Screen used to load games from disk, or to delete games from disk.
 struct LoadGame: View {
 
     // MARK: - Initializers
 
+    /// Create a `LoadGame` view
     init() {
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
@@ -134,10 +136,10 @@ struct LoadGame: View {
     @EnvironmentObject
     private var gameManager: GameManager
 
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)])
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp, order: .reverse)])
     private var gameRecords: FetchedResults<GameRecord>
 
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)], predicate: NSPredicate(format: "isComplete == NO"))
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp, order: .reverse)], predicate: NSPredicate(format: "isComplete == NO"))
     private var inProgressGameRecords: FetchedResults<GameRecord>
 
     private var hasContent: Bool {

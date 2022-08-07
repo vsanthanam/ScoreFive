@@ -27,7 +27,11 @@ import SwiftUI
 
 struct AddRow: View {
 
+    // MARK: - API
+
     let signpost: String
+
+    // MARK: - View
 
     var body: some View {
         HStack {

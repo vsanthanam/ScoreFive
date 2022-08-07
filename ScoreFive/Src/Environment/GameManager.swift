@@ -27,49 +27,49 @@ import CoreData
 import Five
 import Foundation
 
+/// A singleton object used to write games to CoreData and to manage the currently open game
+/// UIKit interacts with this class via its `.shared` static property
+/// SwiftUI interacts with this class using the EnvironmentObject API.
 @MainActor
 final class GameManager: ObservableObject {
 
     // MARK: - Factories
 
-    static let preview: GameManager = {
-        let manager = GameManager()
-        let context = manager.viewContext
-        var firstGame = Game(players: ["Mom", "Dad", "God", "Bro"], scoreLimit: 250)
-        var round = firstGame.newRound()
-        round["Mom"] = 0
-        round["Dad"] = 23
-        round["God"] = 35
-        round["Bro"] = 11
-        firstGame.addRound(round)
-        let record = GameRecord(context: context)
-        try! record.applyGame(firstGame)
-        try! context.save()
-        return manager
-    }()
-
+    /// The shared singleton instance.
     static let shared: GameManager = .init()
 
     // MARK: - API
 
+    /// Errors produced by a `GameManager`
     enum Error: Swift.Error {
         case noGameFound
         case noActiveGame
+        case gameAlreadyActive
     }
 
+    /// The Core Data View Context
     var viewContext: NSManagedObjectContext {
         store.viewContext
     }
 
+    /// The currently active game record
     @Published
     private(set) var activeGameRecord: GameRecord?
 
+    /// Store a new game in Core Data
+    /// - Parameter game: The game to store
+    /// - Returns: The associated managed object
+    /// - Throws: An error, if the game could not be translated into a `GameRecord`
     func storeNewGame(_ game: Game) throws -> GameRecord {
         let record = GameRecord(context: viewContext)
         try record.applyGame(game)
         return record
     }
 
+    /// Retrieve a game for a given managed object
+    /// - Parameter record: The `GameRecord` to retrieve
+    /// - Returns: The `Game` stored in the managed object
+    /// - Throws: An error, if the game could not be decoded from the managed object.
     func game(for record: GameRecord) throws -> Game {
         guard let gameData = record.gameData else {
             throw Error.noGameFound
@@ -78,6 +78,9 @@ final class GameManager: ObservableObject {
         return game
     }
 
+    /// Replace the currently active record with new game data
+    /// - Parameter game: The game data to update
+    /// - Throws: An error, if no record is active, or if the game could not be encoded into the managed object.
     func updateGame(_ game: Game) throws {
         guard let record = activeGameRecord else {
             throw Error.noActiveGame
@@ -85,10 +88,18 @@ final class GameManager: ObservableObject {
         try record.applyGame(game)
     }
 
+    /// Activate a managed object
+    /// - Parameter record: The `GameRecord` to activate
+    /// - Throws: An error, if an existing managed object is already active
     func activateGame(with record: GameRecord) throws {
+        guard activeGameRecord == nil else {
+            throw Error.gameAlreadyActive
+        }
         activeGameRecord = record
     }
 
+    /// Deactivate the current managed object
+    /// - Throws: An error, if no managed object is currently active
     func deactivateGame() throws {
         guard activeGameRecord != nil else {
             throw Error.noActiveGame
@@ -96,18 +107,15 @@ final class GameManager: ObservableObject {
         activeGameRecord = nil
     }
 
-    func deleteGame(identifier: NSManagedObjectID) throws {
-        guard let record = viewContext.registeredObject(for: identifier) else {
-            throw Error.noGameFound
-        }
-        viewContext.delete(record)
-    }
-
+    /// Save the store to disk
+    /// - Throws: An error, if saving failed
     func save() throws {
         guard viewContext.hasChanges else { return }
         try viewContext.save()
     }
 
+    /// Remove every record in the store
+    /// - Throws: An error, if destruction failed.
     func destroyAllRecords() throws {
         try? deactivateGame()
         let fetchRequest = GameRecord.fetchRequest()
@@ -154,4 +162,24 @@ private extension GameRecord {
         playerNames = .init(game.allPlayers)
         isComplete = game.isComplete
     }
+}
+
+extension GameManager {
+
+    /// For SwiftUI Previews
+    static let preview: GameManager = {
+        let manager = GameManager()
+        let context = manager.viewContext
+        var firstGame = Game(players: ["Mom", "Dad", "God", "Bro"], scoreLimit: 250)
+        var round = firstGame.newRound()
+        round["Mom"] = 0
+        round["Dad"] = 23
+        round["God"] = 35
+        round["Bro"] = 11
+        firstGame.addRound(round)
+        let record = GameRecord(context: context)
+        try! record.applyGame(firstGame)
+        try! context.save()
+        return manager
+    }()
 }

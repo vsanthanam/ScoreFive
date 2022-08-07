@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vsanthanam/MailView.git",
       "state" : {
-        "revision" : "1d02a02c0d8f9cb212af9c4db55da605f710643f",
-        "version" : "0.0.1"
+        "revision" : "65cfb030f21ea1df8f09f4391ce35c1ae7c866af",
+        "version" : "0.0.2"
       }
     },
     {

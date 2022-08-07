@@ -28,18 +28,16 @@ import Five
 import StoreKit
 import SwiftUI
 
+/// The score card view
 struct ScoreCard: View {
 
     // MARK: - Initializers
 
+    /// Create a `ScoreCard` view
+    /// - Parameter game: The game to display in the score card.
     init(game: Game) {
         _game = .init(initialValue: game)
     }
-
-    // MARK: - API
-
-    @EnvironmentObject
-    var gameManager: GameManager
 
     // MARK: - View
 
@@ -51,7 +49,9 @@ struct ScoreCard: View {
                 List {
                     ForEach(game.rounds) { round in
                         let index = game.rounds.firstIndex(of: round)!
-                        Button(action: { editingRound = RoundAndIndex(round: round, index: index) }) {
+                        Button(action: {
+                            editingRound = RoundAndIndex(round: round, index: index)
+                        }) {
                             ScoreRow(signpost: indexByPlayer ? game.startingPlayer(atIndex: index).signpost(for: game.allPlayers) : (index + 1).description,
                                      round: round,
                                      players: game.allPlayers,
@@ -105,7 +105,9 @@ struct ScoreCard: View {
         let round: Round
         let index: Int
 
-        var id: Int { index }
+        // MARK: - Identifiable
+
+        var id: String { round.id }
     }
 
     @AppStorage("index_by_player")
@@ -116,6 +118,9 @@ struct ScoreCard: View {
 
     @AppStorage("launch_count")
     private var launchCount = 0
+
+    @EnvironmentObject
+    private var gameManager: GameManager
 
     @State
     private var game: Game

@@ -1,5 +1,5 @@
 // ScoreFive
-// FormButton.swift
+// AcknowledgementRow.swift
 //
 // MIT License
 //
@@ -23,41 +23,56 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Foundation
 import SwiftUI
 
-/// A centered button for use in a `Form` view
-struct FormButton: View {
+/// An individual entry in the acknowledgements screen
+struct AcknowledgementRow: View {
 
     // MARK: - Initializers
 
-    /// Create a `FormButton`
+    /// Create an `AcknowledgementRow`
     /// - Parameters:
-    ///   - text: The text to display on the button
-    ///   - action: The action to execute when the button is tapped
-    init(text: String,
-         action: @escaping () -> Void) {
-        self.text = text
-        self.action = action
+    ///   - item: The `Acknowledgement` model to display
+    ///   - url: A binding to accept URL values from
+    init(item: Acknowledgement,
+         url: Binding<URL?>) {
+        self.item = item
+        _url = url
     }
 
     // MARK: - View
 
     var body: some View {
-        Button(action: action) {
-            Text(text)
-                .frame(maxWidth: .infinity)
+        Button(action: updateURL) {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(item.title)
+                        .foregroundColor(.init(.label))
+                    Text(item.urlString)
+                        .foregroundColor(.init(.secondaryLabel))
+                        .font(.caption)
+                }
+                Spacer()
+                if reachabilityManager.reachability != .disconnected {
+                    Chevron()
+                }
+            }
         }
+        .disabled(reachabilityManager.reachability == .disconnected)
     }
 
     // MARK: - Private
 
-    private let text: String
-    private let action: () -> Void
-}
+    private let item: Acknowledgement
 
-struct FormButton_Previews: PreviewProvider {
-    static var previews: some View {
-        FormButton(text: "test") {}
-            .previewLayout(PreviewLayout.sizeThatFits)
+    @Binding
+    private var url: URL?
+
+    @EnvironmentObject
+    private var reachabilityManager: ReachabilityManager
+
+    private func updateURL() {
+        url = URL(string: item.urlString)
     }
 }
