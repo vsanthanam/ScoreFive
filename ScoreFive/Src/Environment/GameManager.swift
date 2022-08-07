@@ -61,6 +61,9 @@ final class GameManager: ObservableObject {
         store.viewContext
     }
 
+    @Published
+    private(set) var activeGameRecord: GameRecord?
+
     func storeNewGame(_ game: Game) throws -> GameRecord {
         let record = GameRecord(context: viewContext)
         try record.applyGame(game)
@@ -117,9 +120,6 @@ final class GameManager: ObservableObject {
     }
 
     // MARK: - Private
-
-    @Published
-    private(set) var activeGameRecord: GameRecord?
 
     private init(inMemory: Bool = false) {
         setUp(inMemory: inMemory)

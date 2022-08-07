@@ -47,21 +47,18 @@ struct Menu: View {
                        systemName: "square.and.pencil") {
                 activeSheet = .newGame
             }
-            .keyboardShortcut("n", modifiers: .command)
 
             if !gameRecords.isEmpty {
                 MenuButton("Load Game",
                            systemName: "doc.badge.ellipsis") {
                     activeSheet = .loadGame
                 }
-                .keyboardShortcut("o", modifiers: .command)
             }
 
             MenuButton("More",
                        systemName: "ellipsis.circle") {
                 activeSheet = .more
             }
-            .keyboardShortcut(",", modifiers: .command)
         }
     }
 

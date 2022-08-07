@@ -25,7 +25,7 @@
 
 import Foundation
 
-struct Acknowledgement: Identifiable {
+struct Acknowledgement: Identifiable, Equatable, Hashable, Sendable {
     var title: String
     var urlString: String
     var id: String { title }
