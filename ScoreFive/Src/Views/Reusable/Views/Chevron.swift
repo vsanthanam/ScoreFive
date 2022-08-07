@@ -27,6 +27,8 @@ import SwiftUI
 
 struct Chevron: View {
 
+    // MARK: - View
+
     var body: some View {
         Image(systemName: "chevron.forward")
             .font(Font.system(.caption).weight(.bold))

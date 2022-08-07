@@ -25,6 +25,7 @@
 
 import Collections
 import Five
+import Foundation
 import SwiftUI
 
 struct NewGame: View {

@@ -22,7 +22,6 @@
 		0747A45A2895A882001A561C /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4592895A882001A561C /* ReachabilityManager.swift */; };
 		0747A4612895C543001A561C /* Acknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4602895C543001A561C /* Acknowledgements.swift */; };
 		0747A4632896DB5E001A561C /* Chevron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4622896DB5E001A561C /* Chevron.swift */; };
-		0747A4652896DB7C001A561C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4642896DB7C001A561C /* ActivityView.swift */; };
 		075F15D8288B147900E238C0 /* PlayerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15D7288B147900E238C0 /* PlayerTextField.swift */; };
 		075F15DA288B155300E238C0 /* FormButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15D9288B155300E238C0 /* FormButton.swift */; };
 		075F15E0288B204500E238C0 /* TotalScoreBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15DF288B204500E238C0 /* TotalScoreBar.swift */; };
@@ -73,7 +72,6 @@
 		0747A4592895A882001A561C /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		0747A4602895C543001A561C /* Acknowledgements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acknowledgements.swift; sourceTree = "<group>"; };
 		0747A4622896DB5E001A561C /* Chevron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chevron.swift; sourceTree = "<group>"; };
-		0747A4642896DB7C001A561C /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		075F15D7288B147900E238C0 /* PlayerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTextField.swift; sourceTree = "<group>"; };
 		075F15D9288B155300E238C0 /* FormButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButton.swift; sourceTree = "<group>"; };
 		075F15DF288B204500E238C0 /* TotalScoreBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreBar.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 			children = (
 				075F15D9288B155300E238C0 /* FormButton.swift */,
 				0747A4622896DB5E001A561C /* Chevron.swift */,
-				0747A4642896DB7C001A561C /* ActivityView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -469,7 +466,6 @@
 				075F15DA288B155300E238C0 /* FormButton.swift in Sources */,
 				0747A4612895C543001A561C /* Acknowledgements.swift in Sources */,
 				07A0A56F28971519004F4196 /* Acknowledgement.swift in Sources */,
-				0747A4652896DB7C001A561C /* ActivityView.swift in Sources */,
 				076A0C40287B35A000A75AE9 /* AppDelegate.swift in Sources */,
 				0747A4632896DB5E001A561C /* Chevron.swift in Sources */,
 				0714D2052883735000CE45A3 /* RoundEditor.swift in Sources */,

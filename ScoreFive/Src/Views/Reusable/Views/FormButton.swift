@@ -27,9 +27,13 @@ import SwiftUI
 
 struct FormButton: View {
 
+    // MARK: - API
+
     let text: String
 
     let action: () -> Void
+
+    // MARK: - View
 
     var body: some View {
         Button(action: action) {

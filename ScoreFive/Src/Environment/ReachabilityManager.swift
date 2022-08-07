@@ -24,7 +24,6 @@
 // SOFTWARE.
 
 import Combine
-import Foundation
 import Network
 import NetworkReachability
 

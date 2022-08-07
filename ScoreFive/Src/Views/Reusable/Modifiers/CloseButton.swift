@@ -23,17 +23,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
 import Introspect
 import SwiftUI
+import UIKit
 
 extension View {
 
-    /// Add a close button to the view controller's navigation item
-    /// - Parameters:
-    ///   - placement: The location of the navigation item
-    ///   - action: The action to execute when the user taps the button
-    /// - Returns: The modified view
     func closeButton(_ placement: CloseButtonPlacement = .left, action: @escaping () -> Void) -> some View {
         let modifier = CloseButtonModifier(placement: placement, action: action)
         return ModifiedContent(content: self, modifier: modifier)
