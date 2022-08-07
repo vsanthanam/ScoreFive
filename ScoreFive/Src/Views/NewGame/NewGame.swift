@@ -44,8 +44,11 @@ struct NewGame: View {
                         .submitLabel(.next)
                 }
                 Section {
-                    ForEach(players.indices, id: \.self) { index in
-                        PlayerTextField(index: index, player: $players[index], submitLabel: (index == players.count - 1) ? .done : .next)
+                    ForEach(players) { player in
+                        let index = players.firstIndex(of: player)!
+                        PlayerTextField(index: index,
+                                        player: $players[index].name,
+                                        submitLabel: (index == players.count - 1) ? .done : .next)
                             .focused($focusedPlayerIndex, equals: index)
                             .onSubmit {
                                 guard let focus = focusedPlayerIndex else { return }
@@ -78,6 +81,18 @@ struct NewGame: View {
 
     // MARK: - Private
 
+    private struct PotentialPlayer: Identifiable, Equatable, Hashable, Sendable {
+
+        var name: String
+
+        let id: String = UUID().uuidString
+
+        static var empty: PotentialPlayer {
+            .init(name: "")
+        }
+
+    }
+
     @Environment(\.dismiss)
     private var dismiss: DismissAction
 
@@ -88,7 +103,7 @@ struct NewGame: View {
     private var gameManager: GameManager
 
     @State
-    private var players: [String] = ["", ""]
+    private var players: [PotentialPlayer] = [.empty, .empty]
 
     @State
     private var scoreLimit = 250
@@ -106,7 +121,7 @@ struct NewGame: View {
     }
 
     private var canSaveGame: Bool {
-        let nonNil = players.filter { !$0.isEmpty }
+        let nonNil = players.map(\.name).filter { !$0.isEmpty }
 
         guard nonNil.count == Set(nonNil).count else {
             return false
@@ -125,7 +140,7 @@ struct NewGame: View {
     }
 
     private func addPlayer() {
-        withAnimation { players.append("") }
+        withAnimation { players.append(.empty) }
     }
 
     private func save() {
@@ -133,10 +148,10 @@ struct NewGame: View {
             let mappedPlayers = players
                 .indices
                 .map { index -> Game.Player in
-                    if players[index].isEmpty {
+                    if players[index].name.isEmpty {
                         return "Player \(index + 1)"
                     } else {
-                        return players[index]
+                        return players[index].name
                     }
                 }
             let game = Game(players: mappedPlayers, scoreLimit: scoreLimit)
