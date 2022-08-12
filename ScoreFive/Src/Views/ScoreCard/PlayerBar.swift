@@ -33,6 +33,8 @@ struct PlayerBar: View {
 
     let players: OrderedSet<Game.Player>
 
+    let activePlayers: OrderedSet<Game.Player>
+
     // MARK: - View
 
     var body: some View {
@@ -45,17 +47,24 @@ struct PlayerBar: View {
                 ForEach(players, id: \.self) { player in
                     Text(player.signpost(for: players))
                         .bold()
+                        .opacity(opacity(for: player))
                 }
                 .frame(maxWidth: .infinity)
             }
         }
         .padding(.vertical, 12)
     }
+
+    // MARK: - Private
+
+    private func opacity(for player: Game.Player) -> Double {
+        activePlayers.contains(player) ? 1.0 : 0.3
+    }
 }
 
 struct PlayerBar_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerBar(players: ["Mom", "Dad", "God", "Bro"])
+        PlayerBar(players: ["Mom", "Dad", "God", "Bro"], activePlayers: ["Mom", "Dad", "Bro"])
             .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

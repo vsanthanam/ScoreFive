@@ -36,7 +36,7 @@ struct ScoreCard: View {
     /// Create a `ScoreCard` view
     /// - Parameter game: The game to display in the score card.
     init(game: Game) {
-        _game = .init(initialValue: game)
+        self.game = game
     }
 
     // MARK: - View
@@ -44,11 +44,14 @@ struct ScoreCard: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                PlayerBar(players: game.allPlayers)
+                PlayerBar(players: game.allPlayers,
+                          activePlayers: game.activePlayers)
                 Divider()
                 List {
+
                     ForEach(game.rounds) { round in
                         let index = game.rounds.firstIndex(of: round)!
+                        let color: Color = index % 2 == 0 ? Color(uiColor: .secondarySystemBackground) : Color(uiColor: .tertiarySystemBackground)
                         Button(action: {
                             editingRound = RoundAndIndex(round: round, index: index)
                         }) {
@@ -57,10 +60,11 @@ struct ScoreCard: View {
                                      players: game.allPlayers,
                                      activePlayers: game.activePlayers)
                         }
+                        .scoreCardRow(color: color)
 
                     }
                     .onDelete(perform: deleteItems(offsets:))
-                    .scoreCardRow()
+
                     if !game.isComplete {
                         Button(action: showAddRound) {
                             AddRow(signpost: indexByPlayer ? game.startingPlayer(atIndex: game.rounds.count).signpost(for: game.allPlayers) : (game.rounds.count + 1).description)
@@ -70,6 +74,7 @@ struct ScoreCard: View {
                         }
                         .scoreCardRow()
                     }
+
                     Spacer()
                         .frame(maxWidth: .infinity, maxHeight: 44)
                         .listRowSeparator(.hidden)
@@ -207,8 +212,8 @@ extension Game.Player {
 
 private extension View {
 
-    func scoreCardRow() -> some View {
-        let modifier = CardRowModifier()
+    func scoreCardRow(color: Color? = nil) -> some View {
+        let modifier = CardRowModifier(color: color)
         return ModifiedContent(content: self, modifier: modifier)
     }
 
@@ -216,12 +221,15 @@ private extension View {
 
 private struct CardRowModifier: ViewModifier {
 
+    let color: Color?
+
     func body(content: Content) -> some View {
         content
             .padding(.vertical, 0)
             .listRowSeparator(.hidden)
             .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             .frame(maxWidth: .infinity, maxHeight: 44)
+            .background(color ?? Color(uiColor: .systemBackground))
     }
 
 }

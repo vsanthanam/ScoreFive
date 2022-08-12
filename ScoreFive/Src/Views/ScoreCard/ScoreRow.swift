@@ -99,7 +99,7 @@ struct ScoreRow: View {
     private func color(for score: Round.Score) -> Color {
         if score == min {
             return .green
-        } else if score == max {
+        } else if score == max, players.count > 2 {
             return .red
         } else {
             return .init(uiColor: .label)
