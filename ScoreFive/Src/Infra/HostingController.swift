@@ -1,5 +1,5 @@
 // ScoreFive
-// MenuButton.swift
+// HostingController.swift
 //
 // MIT License
 //
@@ -24,50 +24,42 @@
 // SOFTWARE.
 
 import SwiftUI
+import UIKit
 
-struct MenuButton: View {
+final class HostingController: UIHostingController<RootView> {
 
-    // MARK: - Initializers
-
-    init(_ message: String,
-         systemName: String,
-         action: @escaping () -> Void = {}) {
-        self.message = message
-        self.systemName = systemName
-        self.action = action
+    var statusBarStyle: StatusBarStyle = .default {
+        didSet {
+            setNeedsStatusBarAppearanceUpdate()
+        }
     }
 
-    // MARK: - View
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setNeedsStatusBarAppearanceUpdate()
+    }
 
-    var body: some View {
-
-        Button(action: action) {
-            HStack {
-                Image(systemName: systemName)
-                Text(message)
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        switch statusBarStyle {
+        case .alwaysLight:
+            return .lightContent
+        case .alwaysDark:
+            return .darkContent
+        case .standard:
+            if traitCollection.userInterfaceStyle == .dark {
+                return .lightContent
+            } else {
+                return .darkContent
             }
-            .foregroundColor(.menuAccent)
-            .frame(width: 140)
-        }
-        .buttonStyle(.borderedProminent)
-        .accentColor(.menuContent)
-
-    }
-
-    // MARK: - Private
-
-    private let action: () -> Void
-    private let message: String
-    private let systemName: String
-
-}
-
-struct MenuButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self) { scheme in
-            MenuButton("New Game", systemName: "doc.badge.plus")
-                .previewLayout(PreviewLayout.sizeThatFits)
-                .colorScheme(scheme)
+        case .inverted:
+            if traitCollection.userInterfaceStyle == .dark {
+                return .darkContent
+            } else {
+                return .lightContent
+            }
+        case .default:
+            return .default
         }
     }
+
 }

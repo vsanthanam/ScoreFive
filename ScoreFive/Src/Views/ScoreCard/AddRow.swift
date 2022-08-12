@@ -34,25 +34,27 @@ struct AddRow: View {
     // MARK: - View
 
     var body: some View {
-        HStack {
-            VStack(alignment: .center) {
-                Text(signpost)
-                    .bold()
-                    .multilineTextAlignment(.center)
-            }
-            .frame(width: 48)
-            VStack(alignment: .center) {
-                Text("Add Scores")
+        ZStack {
+            HStack {
+                VStack(alignment: .center) {
+                    Text(signpost)
+                        .bold()
+                        .multilineTextAlignment(.center)
+                }
+                .frame(width: 48)
+                Spacer()
                     .frame(maxWidth: .infinity)
             }
+            Text("Add Scores")
         }
-        .foregroundColor(.init(uiColor: .secondaryLabel))
+        .foregroundColor(Color.tertiaryLabel)
     }
 }
 
 struct AddRow_Previews: PreviewProvider {
     static var previews: some View {
         AddRow(signpost: "X")
+            .scoreCardRow()
             .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

@@ -28,6 +28,19 @@ import SwiftUI
 
 extension Color {
 
+    static func dynamic(light: Color, dark: Color) -> Color {
+        .init(UIColor { traitCollection in
+            switch traitCollection.userInterfaceStyle {
+            case .light, .unspecified:
+                return UIColor(light)
+            case .dark:
+                return UIColor(dark)
+            @unknown default:
+                return UIColor(light)
+            }
+        })
+    }
+
     static var label: Color {
         .init(.label)
     }
@@ -94,5 +107,17 @@ extension Color {
 
     static var darkText: Color {
         .init(.darkText)
+    }
+
+    static var mainBackground: Color {
+        .dynamic(light: .tintColor, dark: .systemBackground)
+    }
+
+    static var menuContent: Color {
+        .dynamic(light: .white, dark: .tintColor)
+    }
+
+    static var menuAccent: Color {
+        .dynamic(light: .tintColor, dark: .label)
     }
 }

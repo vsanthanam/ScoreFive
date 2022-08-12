@@ -126,6 +126,7 @@ struct ScoreRow_Previews: PreviewProvider {
                  round: round,
                  players: ["Mom", "Dad", "God", "Bro"],
                  activePlayers: ["Mom", "Dad", "Bro"])
+            .scoreCardRow()
             .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

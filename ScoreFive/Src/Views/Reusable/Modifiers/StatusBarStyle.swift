@@ -1,5 +1,5 @@
 // ScoreFive
-// MenuButton.swift
+// StatusBarStyle.swift
 //
 // MIT License
 //
@@ -23,51 +23,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Foundation
 import SwiftUI
+import UIKit
 
-struct MenuButton: View {
+enum StatusBarStyle {
+    case alwaysLight
+    case alwaysDark
+    case standard
+    case inverted
+    case `default`
+}
 
-    // MARK: - Initializers
+extension View {
 
-    init(_ message: String,
-         systemName: String,
-         action: @escaping () -> Void = {}) {
-        self.message = message
-        self.systemName = systemName
-        self.action = action
+    func rootStatusBarStyle(_ style: StatusBarStyle) -> some View {
+        let modifier = StatusBarStyleModifier(style: style)
+        return ModifiedContent(content: self, modifier: modifier)
     }
-
-    // MARK: - View
-
-    var body: some View {
-
-        Button(action: action) {
-            HStack {
-                Image(systemName: systemName)
-                Text(message)
-            }
-            .foregroundColor(.menuAccent)
-            .frame(width: 140)
-        }
-        .buttonStyle(.borderedProminent)
-        .accentColor(.menuContent)
-
-    }
-
-    // MARK: - Private
-
-    private let action: () -> Void
-    private let message: String
-    private let systemName: String
 
 }
 
-struct MenuButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self) { scheme in
-            MenuButton("New Game", systemName: "doc.badge.plus")
-                .previewLayout(PreviewLayout.sizeThatFits)
-                .colorScheme(scheme)
-        }
+struct StatusBarStyleModifier: ViewModifier {
+
+    let style: StatusBarStyle
+
+    func body(content: Content) -> some View {
+        content
+            .onAppear {
+                guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                      let vc = scene.windows.first?.rootViewController as? HostingController else {
+                    return
+                }
+                vc.statusBarStyle = style
+            }
     }
 }

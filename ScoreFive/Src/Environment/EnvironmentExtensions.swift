@@ -1,5 +1,5 @@
 // ScoreFive
-// MenuButton.swift
+// EnvironmentExtensions.swift
 //
 // MIT License
 //
@@ -23,51 +23,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Foundation
 import SwiftUI
 
-struct MenuButton: View {
-
-    // MARK: - Initializers
-
-    init(_ message: String,
-         systemName: String,
-         action: @escaping () -> Void = {}) {
-        self.message = message
-        self.systemName = systemName
-        self.action = action
-    }
-
-    // MARK: - View
-
-    var body: some View {
-
-        Button(action: action) {
-            HStack {
-                Image(systemName: systemName)
-                Text(message)
-            }
-            .foregroundColor(.menuAccent)
-            .frame(width: 140)
-        }
-        .buttonStyle(.borderedProminent)
-        .accentColor(.menuContent)
-
-    }
-
-    // MARK: - Private
-
-    private let action: () -> Void
-    private let message: String
-    private let systemName: String
-
-}
-
-struct MenuButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self) { scheme in
-            MenuButton("New Game", systemName: "doc.badge.plus")
-                .previewLayout(PreviewLayout.sizeThatFits)
-                .colorScheme(scheme)
-        }
+public extension EnvironmentValues {
+    var isPreview: Bool {
+        #if DEBUG
+            return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+        #else
+            return false
+        #endif
     }
 }

@@ -45,7 +45,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = .init(windowScene: scene)
         let root = RootView()
-        let vc = UIHostingController(rootView: root)
+        let vc = HostingController(rootView: root)
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
         checkForDemo()

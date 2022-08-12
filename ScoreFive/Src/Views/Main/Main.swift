@@ -58,6 +58,9 @@ struct Main: View {
                 Menu(activeSheet: $activeSheet)
             }
         }
+        .frame(maxWidth: .infinity,
+               maxHeight: .infinity)
+        .background(Color.mainBackground)
         .sheet(item: $activeSheet) { sheet in
             switch sheet {
             case .newGame:
@@ -72,6 +75,7 @@ struct Main: View {
         }
         .onAppear {
             launchCount += 1
+            guard !isPreview else { return }
             if let record = gameRecords.first, !record.isComplete {
                 try! gameManager.activateGame(with: record)
             }
@@ -86,6 +90,9 @@ struct Main: View {
     @EnvironmentObject
     private var gameManager: GameManager
 
+    @Environment(\.isPreview)
+    var isPreview
+
     @State
     private var activeSheet: Sheets?
 
@@ -94,17 +101,20 @@ struct Main: View {
 
 }
 
-struct Main_Previews: PreviewProvider {
-    static var previews: some View {
-        Main()
-            .environmentObject(GameManager.preview)
-    }
-}
-
 private extension View {
     func saveOnAppear(_ manager: GameManager) -> some View {
         onAppear {
             Task { await MainActor.run { try! manager.save() } }
+        }
+    }
+}
+
+struct Main_Previews: PreviewProvider {
+    static var previews: some View {
+        ForEach(ColorScheme.allCases, id: \.self) { scheme in
+            Main()
+                .environmentObject(GameManager.preview)
+                .colorScheme(scheme)
         }
     }
 }

@@ -51,7 +51,7 @@ struct ScoreCard: View {
 
                     ForEach(game.rounds) { round in
                         let index = game.rounds.firstIndex(of: round)!
-                        let color: Color = index % 2 == 0 ? Color(uiColor: .secondarySystemBackground) : Color(uiColor: .tertiarySystemBackground)
+                        let color: Color = index % 2 == 0 ? .secondarySystemBackground : .tertiarySystemBackground
                         Button(action: {
                             editingRound = RoundAndIndex(round: round, index: index)
                         }) {
@@ -101,6 +101,7 @@ struct ScoreCard: View {
             Text("Please delete newer rounds first")
         }
         .onChange(of: game, perform: persist(game:))
+        .rootStatusBarStyle(.default)
         .onAppear(perform: promptForReviewIfNeeded)
     }
 
@@ -178,25 +179,6 @@ struct ScoreCard: View {
     }
 }
 
-struct ScoreCard_Previews: PreviewProvider {
-
-    static var testGame: Game {
-        var game = Game(players: ["Mom", "Dad", "God", "Bro"])
-        var round = game.newRound()
-        round["Mom"] = 23
-        round["Dad"] = 11
-        round["God"] = 50
-        round["Bro"] = 0
-        game.addRound(round)
-        return game
-    }
-
-    static var previews: some View {
-        ScoreCard(game: testGame)
-            .environmentObject(GameManager.preview)
-    }
-}
-
 extension Game.Player {
 
     func signpost(for players: OrderedSet<Game.Player>) -> String {
@@ -210,7 +192,7 @@ extension Game.Player {
 
 }
 
-private extension View {
+extension View {
 
     func scoreCardRow(color: Color? = nil) -> some View {
         let modifier = CardRowModifier(color: color)
@@ -232,4 +214,32 @@ private struct CardRowModifier: ViewModifier {
             .background(color ?? Color(uiColor: .systemBackground))
     }
 
+}
+
+struct ScoreCard_Previews: PreviewProvider {
+
+    static var testGame: Game {
+        var game = Game(players: ["Mom", "Dad", "God", "Bro"])
+        var round = game.newRound()
+        round["Mom"] = 23
+        round["Dad"] = 11
+        round["God"] = 50
+        round["Bro"] = 0
+        game.addRound(round)
+        round = game.newRound()
+        round["Mom"] = 0
+        round["Dad"] = 5
+        round["God"] = 7
+        round["Bro"] = 4
+        game.addRound(round)
+        return game
+    }
+
+    static var previews: some View {
+        ForEach(ColorScheme.allCases, id: \.self) { scheme in
+            ScoreCard(game: testGame)
+                .environmentObject(GameManager.preview)
+                .colorScheme(scheme)
+        }
+    }
 }
