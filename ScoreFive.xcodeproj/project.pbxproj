@@ -33,6 +33,7 @@
 		076A0C49287B35A000A75AE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 076A0C48287B35A000A75AE9 /* Assets.xcassets */; };
 		076A0C4C287B35A000A75AE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 076A0C4A287B35A000A75AE9 /* LaunchScreen.storyboard */; };
 		076A0C54287B35C800A75AE9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C53287B35C800A75AE9 /* RootView.swift */; };
+		0798000028A6A2AB00464449 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798FFFF28A6A2AB00464449 /* ColorExtensions.swift */; };
 		07A0A5642896EEE5004F4196 /* AutomatedScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */; };
 		07A0A56D2896EF3D004F4196 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56C2896EF3D004F4196 /* SnapshotHelper.swift */; };
 		07A0A56F28971519004F4196 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56E28971519004F4196 /* Acknowledgement.swift */; };
@@ -84,6 +85,7 @@
 		076A0C4B287B35A000A75AE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		076A0C4D287B35A000A75AE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		076A0C53287B35C800A75AE9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		0798FFFF28A6A2AB00464449 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		07A0A5612896EEE5004F4196 /* AutomatedScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutomatedScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomatedScreenshots.swift; sourceTree = "<group>"; };
 		07A0A56C2896EF3D004F4196 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		075F15CD288B12E400E238C0 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				0798FFFE28A6A2A300464449 /* Extensions */,
 				07B767E228A030C8002B2565 /* Models */,
 				075F15D6288B137700E238C0 /* Environment */,
 				075F15CE288B12EB00E238C0 /* Views */,
@@ -300,6 +303,14 @@
 				0714D1D6287B39A200CE45A3 /* ScoreFive.xcdatamodeld */,
 			);
 			path = ScoreFive;
+			sourceTree = "<group>";
+		};
+		0798FFFE28A6A2A300464449 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0798FFFF28A6A2AB00464449 /* ColorExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		07A0A5622896EEE5004F4196 /* AutomatedScreenshots */ = {
@@ -490,6 +501,7 @@
 				075F15EC288B45A400E238C0 /* AddRow.swift in Sources */,
 				075F15EA288B442A00E238C0 /* PlayerBar.swift in Sources */,
 				0747A45A2895A882001A561C /* ReachabilityManager.swift in Sources */,
+				0798000028A6A2AB00464449 /* ColorExtensions.swift in Sources */,
 				0714D1D1287B38B600CE45A3 /* Main.swift in Sources */,
 				0714D1D8287B39A200CE45A3 /* ScoreFive.xcdatamodeld in Sources */,
 				0714D1D3287B38BD00CE45A3 /* ScoreCard.swift in Sources */,
@@ -648,7 +660,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -661,7 +673,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.4;
+				MARKETING_VERSION = 2.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFive2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -678,7 +690,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -691,7 +703,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.4;
+				MARKETING_VERSION = 2.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFive2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

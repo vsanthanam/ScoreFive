@@ -48,9 +48,9 @@ struct AcknowledgementRow: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text(item.title)
-                        .foregroundColor(.init(.label))
+                        .foregroundColor(.label)
                     Text(item.urlString)
-                        .foregroundColor(.init(.secondaryLabel))
+                        .foregroundColor(.secondaryLabel)
                         .font(.caption)
                 }
                 Spacer()

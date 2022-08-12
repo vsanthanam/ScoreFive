@@ -59,7 +59,7 @@ struct More: View {
                                 Image(systemName: "book")
                                     .frame(maxWidth: 20, alignment: .center)
                                 Text("Instructions")
-                                    .foregroundColor(.init(.label))
+                                    .foregroundColor(.label)
                                 Spacer()
                                 Chevron()
                             }
@@ -72,7 +72,7 @@ struct More: View {
                                     Image(systemName: "envelope")
                                         .frame(maxWidth: 20, alignment: .center)
                                     Text("Email")
-                                        .foregroundColor(.init(.label))
+                                        .foregroundColor(.label)
                                     Spacer()
                                     Chevron()
                                 }
@@ -90,7 +90,7 @@ struct More: View {
                                         .frame(width: 20, height: 20, alignment: .center)
                                         .foregroundColor(.accentColor)
                                     Text("Twitter")
-                                        .foregroundColor(.init(.label))
+                                        .foregroundColor(.label)
                                     Spacer()
                                     Chevron()
                                 }
@@ -106,7 +106,7 @@ struct More: View {
                             Image(systemName: "star.bubble")
                                 .frame(maxWidth: 20, alignment: .center)
                             Text("Rate & Review")
-                                .foregroundColor(.init(.label))
+                                .foregroundColor(.label)
                             Spacer()
                             if reachabilityManager.reachability != .disconnected {
                                 Chevron()
@@ -127,7 +127,7 @@ struct More: View {
                             Image(systemName: "square.and.arrow.up")
                                 .frame(maxWidth: 20, alignment: .center)
                             Text("Tell a Friend")
-                                .foregroundColor(.init(.label))
+                                .foregroundColor(.label)
                             Spacer()
                             if reachabilityManager.reachability != .disconnected {
                                 Chevron()

@@ -56,7 +56,7 @@ struct LoadGame: View {
                                     .font(.caption)
                             }
                         }
-                        .foregroundColor(.init(.label))
+                        .foregroundColor(.label)
                     }
                     .onDelete(perform: deleteItems(offsets:))
                 }

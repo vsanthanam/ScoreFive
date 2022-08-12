@@ -58,14 +58,14 @@ struct TotalScoreBar: View {
 
     private func color(for player: Game.Player) -> Color {
         guard game.rounds.count >= 1 else {
-            return .init(.label)
+            return .label
         }
         if game.winners.contains(player) {
             return .green
         } else if game.activeLosers.contains(player) {
             return .red
         }
-        return .init(.label)
+        return .label
     }
 
     private func opacity(for player: Game.Player) -> Double {
