@@ -62,7 +62,7 @@ struct Acknowledgements: View {
         Acknowledgement(title: "Introspect", urlString: "https://github.com/siteline/SwiftUI-Introspect"),
         Acknowledgement(title: "NetworkReachability", urlString: "https://reachability.tools"),
         Acknowledgement(title: "SafariView", urlString: "https://vsanthanam.github.io/SafariView"),
-        Acknowledgement(title: "MailView", urlString: "https://vsanthanam.github.io/MailView")
+        Acknowledgement(title: "MailView", urlString: "https://www.github.com/vsanthanam/MailView")
     ]
 
     private static let services = [

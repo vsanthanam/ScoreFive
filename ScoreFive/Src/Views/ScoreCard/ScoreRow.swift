@@ -73,10 +73,10 @@ struct ScoreRow: View {
 
     // MARK: - Private
 
-    private let signpost: String
-    private let round: Round
-    private let players: [Game.Player]
-    private let activePlayers: [Game.Player]
+    let signpost: String
+    let round: Round
+    let players: [Game.Player]
+    let activePlayers: [Game.Player]
 
     private var min: Round.Score? {
         round.players

@@ -79,7 +79,7 @@ struct RoundEditor: View {
                 }
                 .multilineTextAlignment(.center)
             }
-            .navigationTitle("Enter Scores")
+            .navigationTitle(previousIndex == nil ? "Add Scores" : "Edit Scores")
             .navigationBarTitleDisplayMode(.inline)
             .animation(.default, value: statusMessage)
             .alert("Error", isPresented: $showingAlert) {
