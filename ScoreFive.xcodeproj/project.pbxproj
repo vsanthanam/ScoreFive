@@ -35,7 +35,6 @@
 		076A0C54287B35C800A75AE9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C53287B35C800A75AE9 /* RootView.swift */; };
 		0798000028A6A2AB00464449 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798FFFF28A6A2AB00464449 /* ColorExtensions.swift */; };
 		0798000228A6AA2900464449 /* EnvironmentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798000128A6AA2900464449 /* EnvironmentExtensions.swift */; };
-		0798000C28A729D400464449 /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798000B28A729D400464449 /* GameStats.swift */; };
 		07A0A5642896EEE5004F4196 /* AutomatedScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */; };
 		07A0A56D2896EF3D004F4196 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56C2896EF3D004F4196 /* SnapshotHelper.swift */; };
 		07A0A56F28971519004F4196 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56E28971519004F4196 /* Acknowledgement.swift */; };
@@ -88,7 +87,6 @@
 		076A0C4D287B35A000A75AE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		076A0C53287B35C800A75AE9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		0798000128A6AA2900464449 /* EnvironmentExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentExtensions.swift; sourceTree = "<group>"; };
-		0798000B28A729D400464449 /* GameStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStats.swift; sourceTree = "<group>"; };
 		0798FFFF28A6A2AB00464449 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		07A0A5612896EEE5004F4196 /* AutomatedScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutomatedScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomatedScreenshots.swift; sourceTree = "<group>"; };
@@ -181,7 +179,6 @@
 		075F15CE288B12EB00E238C0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0798000A28A729CA00464449 /* GameStats */,
 				0747A45F2895BD2E001A561C /* Acknowledgements */,
 				07E2517F288DF8D00061AA19 /* Menu */,
 				07E25151288C4CFA0061AA19 /* More */,
@@ -311,14 +308,6 @@
 			path = ScoreFive;
 			sourceTree = "<group>";
 		};
-		0798000A28A729CA00464449 /* GameStats */ = {
-			isa = PBXGroup;
-			children = (
-				0798000B28A729D400464449 /* GameStats.swift */,
-			);
-			path = GameStats;
-			sourceTree = "<group>";
-		};
 		0798FFFE28A6A2A300464449 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,15 +434,11 @@
 			);
 			mainGroup = 076A0C33287B35A000A75AE9;
 			packageReferences = (
-				0714D1D9287B4E3D00CE45A3 /* XCRemoteSwiftPackageReference "Five" */,
 				0714D1E2288327E400CE45A3 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				07E25145288C45060061AA19 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				07E25148288C45350061AA19 /* XCRemoteSwiftPackageReference "NetworkReachability" */,
 				07E25178288DCFB80061AA19 /* XCRemoteSwiftPackageReference "AppFoundation" */,
-				07E25185288E5FF50061AA19 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
-				0747A45228908C85001A561C /* XCRemoteSwiftPackageReference "SafariView" */,
 				0747A455289338B6001A561C /* XCRemoteSwiftPackageReference "SafariView" */,
-				0747A456289338D5001A561C /* XCRemoteSwiftPackageReference "SafariView" */,
 				074374B8289F0545001279F8 /* XCRemoteSwiftPackageReference "MailView" */,
 			);
 			productRefGroup = 076A0C3D287B35A000A75AE9 /* Products */;
@@ -497,7 +482,6 @@
 				075F15D8288B147900E238C0 /* PlayerTextField.swift in Sources */,
 				074374B3289EE924001279F8 /* CloseButton.swift in Sources */,
 				075F15DA288B155300E238C0 /* FormButton.swift in Sources */,
-				0798000C28A729D400464449 /* GameStats.swift in Sources */,
 				0747A4612895C543001A561C /* Acknowledgements.swift in Sources */,
 				07A0A56F28971519004F4196 /* Acknowledgement.swift in Sources */,
 				0798000228A6AA2900464449 /* EnvironmentExtensions.swift in Sources */,
@@ -796,14 +780,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0714D1D9287B4E3D00CE45A3 /* XCRemoteSwiftPackageReference "Five" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:vsanthanam/Five.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		0714D1E2288327E400CE45A3 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -820,23 +796,7 @@
 				minimumVersion = 0.0.1;
 			};
 		};
-		0747A45228908C85001A561C /* XCRemoteSwiftPackageReference "SafariView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/vsanthanam/SafariView.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		0747A455289338B6001A561C /* XCRemoteSwiftPackageReference "SafariView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/vsanthanam/SafariView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		0747A456289338D5001A561C /* XCRemoteSwiftPackageReference "SafariView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vsanthanam/SafariView.git";
 			requirement = {
@@ -866,14 +826,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.0.2;
-			};
-		};
-		07E25185288E5FF50061AA19 /* XCRemoteSwiftPackageReference "BetterSafariView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stleamist/BetterSafariView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

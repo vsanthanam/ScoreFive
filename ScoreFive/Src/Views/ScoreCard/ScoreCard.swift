@@ -43,50 +43,54 @@ struct ScoreCard: View {
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                PlayerBar(players: game.allPlayers,
-                          activePlayers: game.activePlayers)
-                Divider()
-                List {
-
-                    ForEach(game.rounds) { round in
-                        let index = game.rounds.firstIndex(of: round)!
-                        let color: Color = index % 2 == 0 ? .secondarySystemBackground : .tertiarySystemBackground
-                        Button(action: {
-                            editingRound = RoundAndIndex(round: round, index: index)
-                        }) {
-                            ScoreRow(signpost: indexByPlayer ? game.startingPlayer(atIndex: index).signpost(for: game.allPlayers) : (index + 1).description,
-                                     round: round,
-                                     players: game.allPlayers,
-                                     activePlayers: game.activePlayers)
+            ZStack(alignment: .leading) {
+                VStack(spacing: 0) {
+                    PlayerBar(players: game.allPlayers,
+                              activePlayers: game.activePlayers)
+                    Divider()
+                    List {
+                        ForEach(game.rounds) { round in
+                            let index = game.rounds.firstIndex(of: round)!
+                            let color: Color = index % 2 == 0 ? .secondarySystemBackground : .tertiarySystemBackground
+                            Button(action: {
+                                editingRound = RoundAndIndex(round: round, index: index)
+                            }) {
+                                ScoreRow(signpost: indexByPlayer ? game.startingPlayer(atIndex: index).signpost(for: game.allPlayers) : (index + 1).description,
+                                         round: round,
+                                         players: game.allPlayers,
+                                         activePlayers: game.activePlayers)
+                            }
+                            .scoreCardRow(color: color)
                         }
-                        .scoreCardRow(color: color)
-                    }
-                    .onDelete(perform: deleteItems(offsets:))
+                        .onDelete(perform: deleteItems(offsets:))
 
-                    if !game.isComplete {
-                        Button(action: showAddRound) {
-                            AddRow(signpost: indexByPlayer ? game.startingPlayer(atIndex: game.rounds.count).signpost(for: game.allPlayers) : (game.rounds.count + 1).description)
-                                .sheet(isPresented: $showingAddRound) {
-                                    RoundEditor(game: $game)
-                                }
+                        if !game.isComplete {
+                            Button(action: showAddRound) {
+                                AddRow(signpost: indexByPlayer ? game.startingPlayer(atIndex: game.rounds.count).signpost(for: game.allPlayers) : (game.rounds.count + 1).description)
+                                    .sheet(isPresented: $showingAddRound) {
+                                        RoundEditor(game: $game)
+                                    }
+                            }
+                            .scoreCardRow()
                         }
-                        .scoreCardRow()
+
+                        Spacer()
+                            .frame(maxWidth: .infinity, maxHeight: 44)
+                            .listRowSeparator(.hidden)
+
                     }
-
-                    Spacer()
-                        .frame(maxWidth: .infinity, maxHeight: 44)
-                        .listRowSeparator(.hidden)
-
+                    .listStyle(PlainListStyle())
+                    Divider()
+                    TotalScoreBar(game: $game)
                 }
-                .listStyle(PlainListStyle())
-                Divider()
-                TotalScoreBar(game: $game)
-            }
-            .toolbar {
-                NavigationLink(destination: GameStats(game: $game)) {
-                    Image(systemName: "chart.bar.xaxis")
-                }
+                Rectangle()
+                    .fill(Color.red)
+                    .frame(maxWidth: 1, maxHeight: .infinity)
+                    .opacity(0.4)
+                    .padding(.init(NSDirectionalEdgeInsets(top: 45.5,
+                                                           leading: 48,
+                                                           bottom: 0,
+                                                           trailing: 0)))
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .navigationTitle("Score Card")

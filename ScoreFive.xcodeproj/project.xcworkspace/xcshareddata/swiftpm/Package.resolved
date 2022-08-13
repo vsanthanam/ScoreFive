@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "bettersafariview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/stleamist/BetterSafariView.git",
-      "state" : {
-        "revision" : "be7248720af18c57c7a1348b20f6212379b28c6b",
-        "version" : "2.4.0"
-      }
-    },
-    {
       "identity" : "mailview",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vsanthanam/MailView.git",
@@ -41,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vsanthanam/SafariView.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "f7c1ba5290ce4e8f770ca084a93a0db27be0fc66"
+        "revision" : "f7c1ba5290ce4e8f770ca084a93a0db27be0fc66",
+        "version" : "1.0.0"
       }
     },
     {
