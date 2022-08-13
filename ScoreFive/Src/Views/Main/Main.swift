@@ -74,7 +74,7 @@ struct Main: View {
         }
         .onAppear {
             launchCount += 1
-            guard !isPreview else { return }
+            guard !isPreview && !isUITest else { return }
             if let record = gameRecords.first, !record.isComplete {
                 try! gameManager.activateGame(with: record)
             }
@@ -90,7 +90,10 @@ struct Main: View {
     private var gameManager: GameManager
 
     @Environment(\.isPreview)
-    var isPreview
+    private var isPreview: Bool
+    
+    @Environment(\.isUITest)
+    private var isUITest: Bool
 
     @State
     private var activeSheet: Sheets?
