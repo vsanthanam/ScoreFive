@@ -87,7 +87,6 @@ struct ScoreCard: View {
                 }
                 VerticalLine()
             }
-            .navigationViewStyle(StackNavigationViewStyle())
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
             .closeButton(action: close)
@@ -105,6 +104,7 @@ struct ScoreCard: View {
         }
         .onChange(of: game, perform: persist(game:))
         .onAppear(perform: promptForReviewIfNeeded)
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 
     // MARK: - Private
