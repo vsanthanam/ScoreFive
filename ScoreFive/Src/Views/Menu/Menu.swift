@@ -41,8 +41,10 @@ struct Menu: View {
             Image("IconSymbol")
                 .renderingMode(.template)
                 .resizable()
-                .foregroundColor(.menuContent)
-                .frame(width: 100, height: 100, alignment: .center)
+                .foregroundColor(.tintColor)
+                .frame(width: 100,
+                       height: 100,
+                       alignment: .center)
             Spacer()
                 .frame(maxHeight: 25)
             MenuButton("New Game",
@@ -62,7 +64,6 @@ struct Menu: View {
                 activeSheet = .more
             }
         }
-        .rootStatusBarStyle(.alwaysLight)
     }
 
     // MARK: - Private
@@ -80,7 +81,6 @@ struct Menu_Previews: PreviewProvider {
         ForEach(ColorScheme.allCases, id: \.self) { scheme in
             Menu(activeSheet: .constant(nil))
                 .environmentObject(GameManager.preview)
-                .background(Color.mainBackground)
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .colorScheme(scheme)
         }

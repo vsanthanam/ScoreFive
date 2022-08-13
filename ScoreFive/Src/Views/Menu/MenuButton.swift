@@ -46,12 +46,9 @@ struct MenuButton: View {
                 Image(systemName: systemName)
                 Text(message)
             }
-            .foregroundColor(.menuAccent)
             .frame(width: 140)
         }
         .buttonStyle(.borderedProminent)
-        .accentColor(.menuContent)
-
     }
 
     // MARK: - Private

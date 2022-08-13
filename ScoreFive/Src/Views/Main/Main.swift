@@ -60,7 +60,6 @@ struct Main: View {
         }
         .frame(maxWidth: .infinity,
                maxHeight: .infinity)
-        .background(Color.mainBackground)
         .sheet(item: $activeSheet) { sheet in
             switch sheet {
             case .newGame:

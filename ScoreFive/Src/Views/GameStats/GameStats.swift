@@ -1,5 +1,5 @@
 // ScoreFive
-// HostingController.swift
+// GameStats.swift
 //
 // MIT License
 //
@@ -23,43 +23,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Five
 import SwiftUI
-import UIKit
 
-final class HostingController: UIHostingController<RootView> {
+struct GameStats: View {
 
-    var statusBarStyle: StatusBarStyle = .default {
-        didSet {
-            setNeedsStatusBarAppearanceUpdate()
+    @Binding
+    var game: Game
+
+    var body: some View {
+        List {
+            Text("Stats")
+        }
+        .navigationTitle("Statistics")
+    }
+}
+
+struct GameStats_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            HStack {
+                NavigationLink("Z", isActive: .constant(true)) {
+                    GameStats(game: .constant(.init(players: ["Mom", "Dad"], scoreLimit: 250)))
+                }
+            }
+            .navigationTitle("Score Card")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        setNeedsStatusBarAppearanceUpdate()
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        switch statusBarStyle {
-        case .alwaysLight:
-            return .lightContent
-        case .alwaysDark:
-            return .darkContent
-        case .standard:
-            if traitCollection.userInterfaceStyle == .dark {
-                return .lightContent
-            } else {
-                return .darkContent
-            }
-        case .inverted:
-            if traitCollection.userInterfaceStyle == .dark {
-                return .darkContent
-            } else {
-                return .lightContent
-            }
-        case .default:
-            return .default
-        }
-    }
-
 }

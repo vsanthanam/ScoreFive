@@ -108,16 +108,4 @@ extension Color {
     static var darkText: Color {
         .init(.darkText)
     }
-
-    static var mainBackground: Color {
-        .dynamic(light: .tintColor, dark: .systemBackground)
-    }
-
-    static var menuContent: Color {
-        .dynamic(light: .white, dark: .tintColor)
-    }
-
-    static var menuAccent: Color {
-        .dynamic(light: .tintColor, dark: .label)
-    }
 }

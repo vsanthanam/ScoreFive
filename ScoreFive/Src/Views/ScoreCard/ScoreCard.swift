@@ -61,7 +61,6 @@ struct ScoreCard: View {
                                      activePlayers: game.activePlayers)
                         }
                         .scoreCardRow(color: color)
-
                     }
                     .onDelete(perform: deleteItems(offsets:))
 
@@ -84,6 +83,11 @@ struct ScoreCard: View {
                 Divider()
                 TotalScoreBar(game: $game)
             }
+            .toolbar {
+                NavigationLink(destination: GameStats(game: $game)) {
+                    Image(systemName: "chart.bar.xaxis")
+                }
+            }
             .navigationViewStyle(StackNavigationViewStyle())
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
@@ -101,7 +105,6 @@ struct ScoreCard: View {
             Text("Please delete newer rounds first")
         }
         .onChange(of: game, perform: persist(game:))
-        .rootStatusBarStyle(.default)
         .onAppear(perform: promptForReviewIfNeeded)
     }
 
