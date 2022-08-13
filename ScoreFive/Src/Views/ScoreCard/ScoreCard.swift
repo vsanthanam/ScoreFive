@@ -179,9 +179,9 @@ struct ScoreCard: View {
             requestedReview = true
         }
     }
-    
+
     private struct VerticalLine: View {
-        
+
         var body: some View {
             Rectangle()
                 .fill(Color.tintColor)
@@ -189,7 +189,7 @@ struct ScoreCard: View {
                 .padding(.init(top: 0, leading: 48, bottom: 0, trailing: 0))
                 .ignoresSafeArea(.all, edges: [.bottom])
         }
-        
+
     }
 
 }

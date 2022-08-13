@@ -74,7 +74,7 @@ struct Main: View {
         }
         .onAppear {
             launchCount += 1
-            guard !isPreview && !isUITest else { return }
+            guard !isPreview, !isUITest else { return }
             if let record = gameRecords.first, !record.isComplete {
                 try! gameManager.activateGame(with: record)
             }
@@ -91,7 +91,7 @@ struct Main: View {
 
     @Environment(\.isPreview)
     private var isPreview: Bool
-    
+
     @Environment(\.isUITest)
     private var isUITest: Bool
 

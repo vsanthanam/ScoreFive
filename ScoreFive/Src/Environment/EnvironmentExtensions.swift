@@ -34,7 +34,7 @@ public extension EnvironmentValues {
             return false
         #endif
     }
-    
+
     var isUITest: Bool {
         ProcessInfo.processInfo.arguments.contains("-ui_testing")
     }
