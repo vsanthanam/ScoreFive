@@ -122,11 +122,14 @@ struct ScoreRow_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        ScoreRow(signpost: "X",
-                 round: round,
-                 players: ["Mom", "Dad", "God", "Bro"],
-                 activePlayers: ["Mom", "Dad", "Bro"])
-            .scoreCardRow()
-            .previewLayout(PreviewLayout.sizeThatFits)
+        ForEach(ColorScheme.allCases, id: \.self) { scheme in
+            ScoreRow(signpost: "X",
+                     round: round,
+                     players: ["Mom", "Dad", "God", "Bro"],
+                     activePlayers: ["Mom", "Dad", "Bro"])
+                .scoreCardRow()
+                .colorScheme(scheme)
+        }
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

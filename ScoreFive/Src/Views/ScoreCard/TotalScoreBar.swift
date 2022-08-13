@@ -87,7 +87,10 @@ struct TotalScoreBar_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        TotalScoreBar(game: .constant(previewGame))
-            .previewLayout(PreviewLayout.sizeThatFits)
+        ForEach(ColorScheme.allCases, id: \.self) { scheme in
+            TotalScoreBar(game: .constant(previewGame))
+                .previewLayout(PreviewLayout.sizeThatFits)
+                .colorScheme(scheme)
+        }
     }
 }

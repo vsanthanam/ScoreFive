@@ -213,6 +213,49 @@ struct RoundEditor: View {
 
 }
 
+private struct ScoreToolbarModifier: ViewModifier {
+
+    let focus: FocusState<Game.Player?>.Binding
+    let player: Game.Player
+    let players: [Game.Player]
+
+    func body(content: Content) -> some View {
+        content
+            .introspectTextField { field in
+                let toolbar = UIToolbar()
+                toolbar.barStyle = .default
+                let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
+                let closeItem = UIBarButtonItem(systemItem: .close)
+                closeItem.primaryAction = .init { _ in
+                    focus.wrappedValue = nil
+                }
+                let doneItem = UIBarButtonItem(systemItem: .done)
+                doneItem.primaryAction = .init { _ in
+                    focus.wrappedValue = nil
+                }
+                let nextItem = UIBarButtonItem()
+                nextItem.primaryAction = .init(title: "Next") { _ in
+                    focus.wrappedValue = players[players.firstIndex(of: player)! + 1]
+                }
+                if player == players.last {
+                    toolbar.setItems([spacer, doneItem], animated: false)
+                } else {
+                    toolbar.setItems([spacer, nextItem], animated: false)
+                }
+                toolbar.sizeToFit()
+                toolbar.updateConstraintsIfNeeded()
+                field.inputAccessoryView = toolbar
+            }
+    }
+}
+
+private extension View {
+    func scoreToolbar(focus: FocusState<Game.Player?>.Binding, player: Game.Player, players: [Game.Player]) -> some View {
+        let modifier = ScoreToolbarModifier(focus: focus, player: player, players: players)
+        return ModifiedContent(content: self, modifier: modifier)
+    }
+}
+
 struct RoundEditor_Previews: PreviewProvider {
 
     static var testGame: Game {
@@ -228,35 +271,5 @@ struct RoundEditor_Previews: PreviewProvider {
 
     static var previews: some View {
         RoundEditor(game: .constant(testGame), previousIndex: 0)
-    }
-}
-
-private extension View {
-    func scoreToolbar(focus: FocusState<Game.Player?>.Binding, player: Game.Player, players: [Game.Player]) -> some View {
-        introspectTextField { field in
-            let toolbar = UIToolbar()
-            toolbar.barStyle = .default
-            let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
-            let closeItem = UIBarButtonItem(systemItem: .close)
-            closeItem.primaryAction = .init { _ in
-                focus.wrappedValue = nil
-            }
-            let doneItem = UIBarButtonItem(systemItem: .done)
-            doneItem.primaryAction = .init { _ in
-                focus.wrappedValue = nil
-            }
-            let nextItem = UIBarButtonItem()
-            nextItem.primaryAction = .init(title: "Next") { _ in
-                focus.wrappedValue = players[players.firstIndex(of: player)! + 1]
-            }
-            if player == players.last {
-                toolbar.setItems([spacer, doneItem], animated: false)
-            } else {
-                toolbar.setItems([spacer, nextItem], animated: false)
-            }
-            toolbar.sizeToFit()
-            toolbar.updateConstraintsIfNeeded()
-            field.inputAccessoryView = toolbar
-        }
     }
 }

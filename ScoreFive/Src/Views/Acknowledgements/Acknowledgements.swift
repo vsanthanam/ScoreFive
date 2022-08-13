@@ -76,6 +76,13 @@ struct Acknowledgements: View {
 
 struct Acknowledgements_Previews: PreviewProvider {
     static var previews: some View {
-        Acknowledgements()
+        ForEach(ColorScheme.allCases, id: \.self) { scheme in
+            NavigationView {
+                Acknowledgements()
+
+            }
+            .colorScheme(scheme)
+        }
+        .environmentObject(ReachabilityManager.shared)
     }
 }

@@ -59,14 +59,3 @@ struct PlayerTextField: View {
     private let player: Binding<String>
     private let submitLabel: SubmitLabel
 }
-
-struct PlayerTextField_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            PlayerTextField(index: 0, player: .constant("Mom"))
-                .previewLayout(PreviewLayout.sizeThatFits)
-            PlayerTextField(index: 0, player: .constant(""))
-                .previewLayout(PreviewLayout.sizeThatFits)
-        }
-    }
-}

@@ -112,8 +112,8 @@ struct Main_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) { scheme in
             Main()
-                .environmentObject(GameManager.preview)
                 .colorScheme(scheme)
         }
+        .environmentObject(GameManager.preview)
     }
 }

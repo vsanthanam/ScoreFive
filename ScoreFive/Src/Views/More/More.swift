@@ -217,7 +217,10 @@ struct More: View {
 
 struct More_Previews: PreviewProvider {
     static var previews: some View {
-        More()
-            .environmentObject(ReachabilityManager.shared)
+        ForEach(ColorScheme.allCases, id: \.self) { scheme in
+            More()
+                .colorScheme(scheme)
+        }
+        .environmentObject(ReachabilityManager.shared)
     }
 }

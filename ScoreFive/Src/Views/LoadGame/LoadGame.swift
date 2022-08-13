@@ -171,7 +171,10 @@ struct LoadGame: View {
 
 struct LoadGame_Previews: PreviewProvider {
     static var previews: some View {
-        LoadGame()
-            .environmentObject(GameManager.preview)
+        ForEach(ColorScheme.allCases, id: \.self) { scheme in
+            LoadGame()
+                .colorScheme(scheme)
+        }
+        .environmentObject(GameManager.preview)
     }
 }

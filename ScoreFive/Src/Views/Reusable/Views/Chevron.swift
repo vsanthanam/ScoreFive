@@ -33,13 +33,7 @@ struct Chevron: View {
     var body: some View {
         Image(systemName: "chevron.forward")
             .font(Font.system(.caption).weight(.bold))
-            .foregroundColor(Color(UIColor.tertiaryLabel))
+            .foregroundColor(.tertiaryLabel)
     }
 
-}
-
-struct Chevron_Previews: PreviewProvider {
-    static var previews: some View {
-        Chevron()
-    }
 }

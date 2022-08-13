@@ -45,6 +45,7 @@ struct ScoreCard: View {
         NavigationView {
             ZStack(alignment: .leading) {
                 VStack(spacing: 0) {
+                    Divider()
                     PlayerBar(players: game.allPlayers,
                               activePlayers: game.activePlayers)
                     Divider()
@@ -81,16 +82,10 @@ struct ScoreCard: View {
                     }
                     .listStyle(PlainListStyle())
                     Divider()
+                        .padding(.init(top: 0, leading: 48, bottom: 0, trailing: 0))
                     TotalScoreBar(game: $game)
                 }
-                Rectangle()
-                    .fill(Color.red)
-                    .frame(maxWidth: 1, maxHeight: .infinity)
-                    .opacity(0.4)
-                    .padding(.init(NSDirectionalEdgeInsets(top: 45.5,
-                                                           leading: 48,
-                                                           bottom: 0,
-                                                           trailing: 0)))
+                VerticalLine()
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .navigationTitle("Score Card")
@@ -184,6 +179,19 @@ struct ScoreCard: View {
             requestedReview = true
         }
     }
+    
+    private struct VerticalLine: View {
+        
+        var body: some View {
+            Rectangle()
+                .fill(Color.tintColor)
+                .frame(maxWidth: 1, maxHeight: .infinity)
+                .padding(.init(top: 0, leading: 48, bottom: 0, trailing: 0))
+                .ignoresSafeArea(.all, edges: [.bottom])
+        }
+        
+    }
+
 }
 
 extension Game.Player {
@@ -202,23 +210,11 @@ extension Game.Player {
 extension View {
 
     func scoreCardRow(color: Color? = nil) -> some View {
-        let modifier = CardRowModifier(color: color)
-        return ModifiedContent(content: self, modifier: modifier)
-    }
-
-}
-
-private struct CardRowModifier: ViewModifier {
-
-    let color: Color?
-
-    func body(content: Content) -> some View {
-        content
-            .padding(.vertical, 0)
+        padding(.vertical, 0)
             .listRowSeparator(.hidden)
             .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             .frame(maxWidth: .infinity, maxHeight: 44)
-            .background(color ?? Color(uiColor: .systemBackground))
+            .background(color ?? .systemBackground)
     }
 
 }
@@ -245,8 +241,8 @@ struct ScoreCard_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) { scheme in
             ScoreCard(game: testGame)
-                .environmentObject(GameManager.preview)
                 .colorScheme(scheme)
         }
+        .environmentObject(GameManager.preview)
     }
 }

@@ -54,10 +54,3 @@ struct FormButton: View {
     private let text: String
     private let action: () -> Void
 }
-
-struct FormButton_Previews: PreviewProvider {
-    static var previews: some View {
-        FormButton(text: "test") {}
-            .previewLayout(PreviewLayout.sizeThatFits)
-    }
-}

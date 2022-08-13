@@ -52,8 +52,11 @@ struct AddRow: View {
 
 struct AddRow_Previews: PreviewProvider {
     static var previews: some View {
-        AddRow(signpost: "X")
-            .scoreCardRow()
-            .previewLayout(PreviewLayout.sizeThatFits)
+        ForEach(ColorScheme.allCases, id: \.self) { scheme in
+            AddRow(signpost: "X")
+                .scoreCardRow()
+                .previewLayout(PreviewLayout.sizeThatFits)
+                .colorScheme(scheme)
+        }
     }
 }
