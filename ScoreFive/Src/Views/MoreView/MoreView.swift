@@ -50,16 +50,22 @@ struct MoreView: View {
                     Text("Preferences")
                 }
                 Section {
-                    Button(action: {
-                        safariUrl = URL(string: "https://www.scorefive.app")
-                    }) {
-                        HStack {
-                            Image(systemName: "book")
-                                .frame(maxWidth: 20, alignment: .center)
-                            Text("Instructions")
-                                .foregroundColor(.label)
-                            Spacer()
-                            Chevron()
+                    if let url = URL(string: MoreView.twitterUrlString),
+                       UIApplication.shared.canOpenURL(url) {
+                        Button(action: {
+                            UIApplication.shared.open(url)
+                        }) {
+                            HStack {
+                                Image("Twitter")
+                                    .renderingMode(.template)
+                                    .resizable()
+                                    .frame(width: 20, height: 20, alignment: .center)
+                                    .foregroundColor(.accentColor)
+                                Text("Twitter")
+                                    .foregroundColor(.label)
+                                Spacer()
+                                Chevron()
+                            }
                         }
                     }
                     if MailView.canSendMail {
@@ -76,18 +82,26 @@ struct MoreView: View {
                             }
                         }
                     }
-                    if let url = URL(string: MoreView.twitterUrlString),
-                       UIApplication.shared.canOpenURL(url) {
+                    Button(action: {
+                        safariUrl = URL(string: "https://www.scorefive.app")
+                    }) {
+                        HStack {
+                            Image(systemName: "book")
+                                .frame(maxWidth: 20, alignment: .center)
+                            Text("Instructions")
+                                .foregroundColor(.label)
+                            Spacer()
+                            Chevron()
+                        }
+                    }
+                    if let url = URL(string: MoreView.privacyUrlString) {
                         Button(action: {
-                            UIApplication.shared.open(url)
+                            safariUrl = url
                         }) {
                             HStack {
-                                Image("Twitter")
-                                    .renderingMode(.template)
-                                    .resizable()
-                                    .frame(width: 20, height: 20, alignment: .center)
-                                    .foregroundColor(.accentColor)
-                                Text("Twitter")
+                                Image(systemName: "shield.lefthalf.filled")
+                                    .frame(maxWidth: 20, alignment: .center)
+                                Text("Privacy")
                                     .foregroundColor(.label)
                                 Spacer()
                                 Chevron()
@@ -184,6 +198,7 @@ struct MoreView: View {
     private var requestedReview = false
 
     private static let twitterUrlString = "https://twitter.vsanthanam.com"
+    private static let privacyUrlString = "https://www.scorefive.app/privacy"
 
     private func leaveReview() {
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
