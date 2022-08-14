@@ -33,17 +33,30 @@ import NetworkReachability
 final class ReachabilityManager: ObservableObject {
 
     // MARK: - API
-
+    
+    /// ReachabilityManager Network Connectivity Status Options
     enum Status {
+
+        /// Ethernet
         case ethernet
+        
+        /// WiFi
         case wifi
+        
+        /// Cellular
         case cellular
+        
+        /// Unknown
         case unknown
+        
+        /// Disconnected
         case disconnected
     }
 
+    /// The singleton instance
     static let shared: ReachabilityManager = .init()
 
+    /// The current network connectivity status
     @Published
     var reachability: Status = .disconnected
 

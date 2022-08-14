@@ -29,10 +29,10 @@ struct Acknowledgement: Identifiable, Equatable, Hashable, Sendable {
     // MARK: - API
 
     /// The name of the acknowledgement
-    var title: String
+    let title: String
 
     /// The project homepage
-    var urlString: String
+    let urlString: String
 
     // MARK: - Identifiable
 

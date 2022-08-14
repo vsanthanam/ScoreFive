@@ -26,7 +26,9 @@
 import Foundation
 import SwiftUI
 
-public extension EnvironmentValues {
+extension EnvironmentValues {
+    
+    /// Whether or not the view is running within SwiftUI previews.
     var isPreview: Bool {
         #if DEBUG
             return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
@@ -35,6 +37,7 @@ public extension EnvironmentValues {
         #endif
     }
 
+    /// Whether or not the view is running within then the UITest environment.
     var isUITest: Bool {
         ProcessInfo.processInfo.arguments.contains("-ui_testing")
     }
