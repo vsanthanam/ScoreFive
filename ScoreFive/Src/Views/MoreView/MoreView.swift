@@ -1,5 +1,5 @@
 // ScoreFive
-// More.swift
+// MoreView.swift
 //
 // MIT License
 //
@@ -33,7 +33,7 @@ import StoreKit
 import SwiftUI
 
 /// The More screen
-struct More: View {
+struct MoreView: View {
 
     // MARK: - View
 
@@ -78,7 +78,7 @@ struct More: View {
                                 }
                             }
                         }
-                        if let url = URL(string: More.twitterUrlString),
+                        if let url = URL(string: MoreView.twitterUrlString),
                            UIApplication.shared.canOpenURL(url) {
                             Button(action: {
                                 UIApplication.shared.open(url)
@@ -114,15 +114,7 @@ struct More: View {
                         }
                     }
                     .disabled(reachabilityManager.reachability == .disconnected)
-                    Button(action: {
-                        guard let url = URL(string: "https://itunes.apple.com/app/id1637035385"),
-                              let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                              let window = scene.windows.first else {
-                            return
-                        }
-                        let av = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-                        window.rootViewController?.presentedViewController?.present(av, animated: true, completion: nil)
-                    }) {
+                    Button(action: shareApp) {
                         HStack {
                             Image(systemName: "square.and.arrow.up")
                                 .frame(maxWidth: 20, alignment: .center)
@@ -213,12 +205,29 @@ struct More: View {
             Task { await UIApplication.shared.open(url, options: [:]) }
         }
     }
+
+    private func shareApp() {
+        guard let url = URL(string: "https://itunes.apple.com/app/id1637035385"),
+              let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = scene.windows.first,
+              let vc = window.rootViewController?.presentedViewController else {
+            return
+        }
+        print(String(describing: vc.self))
+        print(vc.view.subviews)
+        let av = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            av.popoverPresentationController?.sourceView = vc.view
+            av.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height, width: 0, height: 0)
+        }
+        vc.present(av, animated: true, completion: nil)
+    }
 }
 
 struct More_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) { scheme in
-            More()
+            MoreView()
                 .colorScheme(scheme)
         }
         .environmentObject(ReachabilityManager.shared)

@@ -69,7 +69,7 @@ struct Main: View {
                 LoadGame()
                     .saveOnAppear(gameManager)
             case .more:
-                More()
+                MoreView()
             }
         }
         .onAppear {

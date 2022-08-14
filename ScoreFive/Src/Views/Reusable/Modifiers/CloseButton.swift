@@ -28,7 +28,6 @@ import SwiftUI
 import UIKit
 
 extension View {
-
     func closeButton(_ placement: CloseButtonPlacement = .left, action: @escaping () -> Void) -> some View {
         let modifier = CloseButtonModifier(placement: placement, action: action)
         return ModifiedContent(content: self, modifier: modifier)

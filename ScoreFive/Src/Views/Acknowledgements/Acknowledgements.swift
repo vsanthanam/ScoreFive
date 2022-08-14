@@ -79,7 +79,6 @@ struct Acknowledgements_Previews: PreviewProvider {
         ForEach(ColorScheme.allCases, id: \.self) { scheme in
             NavigationView {
                 Acknowledgements()
-
             }
             .colorScheme(scheme)
         }
