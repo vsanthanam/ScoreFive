@@ -83,7 +83,7 @@ struct MoreView: View {
                         }
                     }
                     Button(action: {
-                        safariUrl = URL(string: "https://www.scorefive.app")
+                        safariUrl = URL(string: MoreView.instructionsUrlString)
                     }) {
                         HStack {
                             Image(systemName: "book")
@@ -147,13 +147,13 @@ struct MoreView: View {
                         }
                     }
                     Button(action: {
-                        safariUrl = URL(string: "https://www.github.com/vsanthanam/ScoreFive")
+                        safariUrl = URL(string: MoreView.sourceCodeUrlString)
                     }) {
                         HStack {
                             Image(systemName: "chevron.left.forwardslash.chevron.right")
                                 .foregroundColor(.accentColor)
                                 .frame(maxWidth: 20, alignment: .center)
-                            Text("Soure Code")
+                            Text("Source Code")
                                 .foregroundColor(.label)
                             Spacer()
                             Chevron()
@@ -175,9 +175,23 @@ struct MoreView: View {
                 .subject("Help with ScoreFive")
                 .messageBody("I need some help with ScoreFive!")
         }
+        .onAppear {
+            let urls = [MoreView.instructionsUrlString,
+                        MoreView.twitterUrlString,
+                        MoreView.privacyUrlString,
+                        MoreView.sourceCodeUrlString]
+                .compactMap(URL.init(string:))
+            token = SafariView.prewarmConnections(to: urls)
+        }
+        .onDisappear {
+            token?.invalidate()
+        }
     }
 
     // MARK: - Private
+
+    @State
+    private var token: SafariView.PrewarmingToken?
 
     @SwiftUI.Environment(\.dismiss)
     private var dismiss: DismissAction
@@ -197,8 +211,10 @@ struct MoreView: View {
     @AppStorage("requested_review")
     private var requestedReview = false
 
+    private static let instructionsUrlString = "https://www.scorefive.app"
     private static let twitterUrlString = "https://twitter.vsanthanam.com"
     private static let privacyUrlString = "https://www.scorefive.app/privacy"
+    private static let sourceCodeUrlString = "https://www.github.com/vsanthanam/ScoreFive"
 
     private func leaveReview() {
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
