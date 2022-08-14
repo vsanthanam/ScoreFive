@@ -27,7 +27,7 @@ import Foundation
 import SwiftUI
 
 extension EnvironmentValues {
-    
+
     /// Whether or not the view is running within SwiftUI previews.
     var isPreview: Bool {
         #if DEBUG

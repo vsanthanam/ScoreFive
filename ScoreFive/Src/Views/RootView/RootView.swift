@@ -34,7 +34,6 @@ struct RootView: View {
         Main()
             .environment(\.managedObjectContext, GameManager.shared.viewContext)
             .environmentObject(GameManager.shared)
-            .environmentObject(ReachabilityManager.shared)
     }
 
 }

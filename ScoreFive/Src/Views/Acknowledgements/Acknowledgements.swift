@@ -60,7 +60,6 @@ struct Acknowledgements: View {
 
     private static let tools = [
         Acknowledgement(title: "Introspect", urlString: "https://github.com/siteline/SwiftUI-Introspect"),
-        Acknowledgement(title: "NetworkReachability", urlString: "https://reachability.tools"),
         Acknowledgement(title: "SafariView", urlString: "https://vsanthanam.github.io/SafariView"),
         Acknowledgement(title: "MailView", urlString: "https://www.github.com/vsanthanam/MailView")
     ]
@@ -82,6 +81,5 @@ struct Acknowledgements_Previews: PreviewProvider {
             }
             .colorScheme(scheme)
         }
-        .environmentObject(ReachabilityManager.shared)
     }
 }

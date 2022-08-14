@@ -27,7 +27,6 @@ import AppFoundation
 import Combine
 import MailView
 import Network
-import NetworkReachability
 import SafariView
 import StoreKit
 import SwiftUI
@@ -50,55 +49,53 @@ struct MoreView: View {
                 } header: {
                     Text("Preferences")
                 }
-                if reachabilityManager.reachability != .disconnected {
-                    Section {
+                Section {
+                    Button(action: {
+                        safariUrl = URL(string: "https://www.scorefive.app")
+                    }) {
+                        HStack {
+                            Image(systemName: "book")
+                                .frame(maxWidth: 20, alignment: .center)
+                            Text("Instructions")
+                                .foregroundColor(.label)
+                            Spacer()
+                            Chevron()
+                        }
+                    }
+                    if MailView.canSendMail {
                         Button(action: {
-                            safariUrl = URL(string: "https://www.scorefive.app")
+                            showMail = true
                         }) {
                             HStack {
-                                Image(systemName: "book")
+                                Image(systemName: "envelope")
                                     .frame(maxWidth: 20, alignment: .center)
-                                Text("Instructions")
+                                Text("Email")
                                     .foregroundColor(.label)
                                 Spacer()
                                 Chevron()
                             }
                         }
-                        if MailView.canSendMail {
-                            Button(action: {
-                                showMail = true
-                            }) {
-                                HStack {
-                                    Image(systemName: "envelope")
-                                        .frame(maxWidth: 20, alignment: .center)
-                                    Text("Email")
-                                        .foregroundColor(.label)
-                                    Spacer()
-                                    Chevron()
-                                }
-                            }
-                        }
-                        if let url = URL(string: MoreView.twitterUrlString),
-                           UIApplication.shared.canOpenURL(url) {
-                            Button(action: {
-                                UIApplication.shared.open(url)
-                            }) {
-                                HStack {
-                                    Image("Twitter")
-                                        .renderingMode(.template)
-                                        .resizable()
-                                        .frame(width: 20, height: 20, alignment: .center)
-                                        .foregroundColor(.accentColor)
-                                    Text("Twitter")
-                                        .foregroundColor(.label)
-                                    Spacer()
-                                    Chevron()
-                                }
-                            }
-                        }
-                    } header: {
-                        Text("Help")
                     }
+                    if let url = URL(string: MoreView.twitterUrlString),
+                       UIApplication.shared.canOpenURL(url) {
+                        Button(action: {
+                            UIApplication.shared.open(url)
+                        }) {
+                            HStack {
+                                Image("Twitter")
+                                    .renderingMode(.template)
+                                    .resizable()
+                                    .frame(width: 20, height: 20, alignment: .center)
+                                    .foregroundColor(.accentColor)
+                                Text("Twitter")
+                                    .foregroundColor(.label)
+                                Spacer()
+                                Chevron()
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Help")
                 }
                 Section {
                     Button(action: leaveReview) {
@@ -108,25 +105,9 @@ struct MoreView: View {
                             Text("Rate & Review")
                                 .foregroundColor(.label)
                             Spacer()
-                            if reachabilityManager.reachability != .disconnected {
-                                Chevron()
-                            }
+                            Chevron()
                         }
                     }
-                    .disabled(reachabilityManager.reachability == .disconnected)
-                    Button(action: shareApp) {
-                        HStack {
-                            Image(systemName: "square.and.arrow.up")
-                                .frame(maxWidth: 20, alignment: .center)
-                            Text("Tell a Friend")
-                                .foregroundColor(.label)
-                            Spacer()
-                            if reachabilityManager.reachability != .disconnected {
-                                Chevron()
-                            }
-                        }
-                    }
-                    .disabled(reachabilityManager.reachability == .disconnected)
                 } header: {
                     Text("Support ScoreFive")
                 }
@@ -151,11 +132,23 @@ struct MoreView: View {
                             Spacer()
                         }
                     }
+                    Button(action: {
+                        safariUrl = URL(string: "https://www.github.com/vsanthanam/ScoreFive")
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.left.forwardslash.chevron.right")
+                                .foregroundColor(.accentColor)
+                                .frame(maxWidth: 20, alignment: .center)
+                            Text("Soure Code")
+                                .foregroundColor(.label)
+                            Spacer()
+                            Chevron()
+                        }
+                    }
                 } header: {
                     Text("About")
                 }
             }
-            .animation(.default, value: reachabilityManager.reachability)
             .navigationTitle("More")
             .closeButton { dismiss() }
         }
@@ -171,9 +164,6 @@ struct MoreView: View {
     }
 
     // MARK: - Private
-
-    @EnvironmentObject
-    private var reachabilityManager: ReachabilityManager
 
     @SwiftUI.Environment(\.dismiss)
     private var dismiss: DismissAction
@@ -230,6 +220,5 @@ struct More_Previews: PreviewProvider {
             MoreView()
                 .colorScheme(scheme)
         }
-        .environmentObject(ReachabilityManager.shared)
     }
 }

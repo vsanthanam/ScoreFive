@@ -19,7 +19,6 @@
 		074374B5289EFAE5001279F8 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074374B4289EFAE5001279F8 /* Demo.swift */; };
 		074374BA289F0546001279F8 /* MailView in Frameworks */ = {isa = PBXBuildFile; productRef = 074374B9289F0546001279F8 /* MailView */; };
 		0747A458289338D5001A561C /* SafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 0747A457289338D5001A561C /* SafariView */; };
-		0747A45A2895A882001A561C /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4592895A882001A561C /* ReachabilityManager.swift */; };
 		0747A4612895C543001A561C /* Acknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4602895C543001A561C /* Acknowledgements.swift */; };
 		0747A4632896DB5E001A561C /* Chevron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747A4622896DB5E001A561C /* Chevron.swift */; };
 		075F15D8288B147900E238C0 /* PlayerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15D7288B147900E238C0 /* PlayerTextField.swift */; };
@@ -40,7 +39,6 @@
 		07A0A56F28971519004F4196 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56E28971519004F4196 /* Acknowledgement.swift */; };
 		07A0A5712897153F004F4196 /* AcknowledgementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A5702897153F004F4196 /* AcknowledgementRow.swift */; };
 		07E25147288C45060061AA19 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25146288C45060061AA19 /* Introspect */; };
-		07E2514A288C45350061AA19 /* NetworkReachability in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25149288C45350061AA19 /* NetworkReachability */; };
 		07E2514F288C4BCC0061AA19 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 07E2514D288C4BCC0061AA19 /* LICENSE */; };
 		07E25150288C4BCC0061AA19 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 07E2514E288C4BCC0061AA19 /* README.md */; };
 		07E25153288C4D040061AA19 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25152288C4D040061AA19 /* MoreView.swift */; };
@@ -71,7 +69,6 @@
 		0714D2042883735000CE45A3 /* RoundEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundEditor.swift; sourceTree = "<group>"; };
 		074374B2289EE924001279F8 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		074374B4289EFAE5001279F8 /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
-		0747A4592895A882001A561C /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		0747A4602895C543001A561C /* Acknowledgements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acknowledgements.swift; sourceTree = "<group>"; };
 		0747A4622896DB5E001A561C /* Chevron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chevron.swift; sourceTree = "<group>"; };
 		075F15D7288B147900E238C0 /* PlayerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTextField.swift; sourceTree = "<group>"; };
@@ -113,7 +110,6 @@
 				074374BA289F0546001279F8 /* MailView in Frameworks */,
 				075F15FE288B53D200E238C0 /* Collections in Frameworks */,
 				07E25147288C45060061AA19 /* Introspect in Frameworks */,
-				07E2514A288C45350061AA19 /* NetworkReachability in Frameworks */,
 				07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,7 +193,6 @@
 			isa = PBXGroup;
 			children = (
 				0714D1D4287B390000CE45A3 /* GameManager.swift */,
-				0747A4592895A882001A561C /* ReachabilityManager.swift */,
 				0798000128A6AA2900464449 /* EnvironmentExtensions.swift */,
 			);
 			path = Environment;
@@ -377,7 +372,6 @@
 			packageProductDependencies = (
 				075F15FD288B53D200E238C0 /* Collections */,
 				07E25146288C45060061AA19 /* Introspect */,
-				07E25149288C45350061AA19 /* NetworkReachability */,
 				07E25179288DCFB80061AA19 /* AppFoundation */,
 				07E2517D288DDB0F0061AA19 /* Five */,
 				0747A457289338D5001A561C /* SafariView */,
@@ -436,7 +430,6 @@
 			packageReferences = (
 				0714D1E2288327E400CE45A3 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				07E25145288C45060061AA19 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				07E25148288C45350061AA19 /* XCRemoteSwiftPackageReference "NetworkReachability" */,
 				07E25178288DCFB80061AA19 /* XCRemoteSwiftPackageReference "AppFoundation" */,
 				0747A455289338B6001A561C /* XCRemoteSwiftPackageReference "SafariView" */,
 				074374B8289F0545001279F8 /* XCRemoteSwiftPackageReference "MailView" */,
@@ -500,7 +493,6 @@
 				074374B5289EFAE5001279F8 /* Demo.swift in Sources */,
 				075F15EC288B45A400E238C0 /* AddRow.swift in Sources */,
 				075F15EA288B442A00E238C0 /* PlayerBar.swift in Sources */,
-				0747A45A2895A882001A561C /* ReachabilityManager.swift in Sources */,
 				0798000028A6A2AB00464449 /* ColorExtensions.swift in Sources */,
 				0714D1D1287B38B600CE45A3 /* Main.swift in Sources */,
 				0714D1D8287B39A200CE45A3 /* ScoreFive.xcdatamodeld in Sources */,
@@ -812,14 +804,6 @@
 				minimumVersion = 0.1.4;
 			};
 		};
-		07E25148288C45350061AA19 /* XCRemoteSwiftPackageReference "NetworkReachability" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/vsanthanam/NetworkReachability.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		07E25178288DCFB80061AA19 /* XCRemoteSwiftPackageReference "AppFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vsanthanam/AppFoundation.git";
@@ -850,11 +834,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 07E25145288C45060061AA19 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
-		};
-		07E25149288C45350061AA19 /* NetworkReachability */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 07E25148288C45350061AA19 /* XCRemoteSwiftPackageReference "NetworkReachability" */;
-			productName = NetworkReachability;
 		};
 		07E25179288DCFB80061AA19 /* AppFoundation */ = {
 			isa = XCSwiftPackageProductDependency;

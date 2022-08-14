@@ -54,12 +54,9 @@ struct AcknowledgementRow: View {
                         .font(.caption)
                 }
                 Spacer()
-                if reachabilityManager.reachability != .disconnected {
-                    Chevron()
-                }
+                Chevron()
             }
         }
-        .disabled(reachabilityManager.reachability == .disconnected)
     }
 
     // MARK: - Private
@@ -68,9 +65,6 @@ struct AcknowledgementRow: View {
 
     @Binding
     private var url: URL?
-
-    @EnvironmentObject
-    private var reachabilityManager: ReachabilityManager
 
     private func updateURL() {
         url = URL(string: item.urlString)
