@@ -169,7 +169,7 @@ struct MoreView: View {
         .safari(url: $safariUrl) { url in
             SafariView(url: url)
         }
-        .sheet(isPresented: $showMail) {
+        .mailView(isPresented: $showMail) {
             MailView()
                 .toRecipents(["talkto@vsanthanam.com"])
                 .subject("Help with ScoreFive")
@@ -193,7 +193,7 @@ struct MoreView: View {
     @State
     private var token: SafariView.PrewarmingToken?
 
-    @SwiftUI.Environment(\.dismiss)
+    @Environment(\.dismiss)
     private var dismiss: DismissAction
 
     @State

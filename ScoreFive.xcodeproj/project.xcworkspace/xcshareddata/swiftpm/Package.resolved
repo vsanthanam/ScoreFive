@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vsanthanam/AppFoundation.git",
       "state" : {
-        "revision" : "a82ceee0389815ff0f482b2d0a50e68e8ec7713c",
-        "version" : "0.0.2"
+        "revision" : "7c420d4c32351e8ffb09b7a371891d1159d7f7c9",
+        "version" : "0.0.3"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vsanthanam/MailView.git",
       "state" : {
-        "revision" : "65cfb030f21ea1df8f09f4391ce35c1ae7c866af",
-        "version" : "0.0.2"
+        "revision" : "f62ea51fe0037f68ab6cd8a23ca300ed8d6b5f81",
+        "version" : "0.0.3"
       }
     },
     {
