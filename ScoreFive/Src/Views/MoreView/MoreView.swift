@@ -68,7 +68,7 @@ struct MoreView: View {
                             }
                         }
                     }
-                    if MailView.canSendMail {
+                    if MailView.canSendMail || isUITest {
                         Button(action: {
                             showMail = true
                         }) {
@@ -156,6 +156,9 @@ struct MoreView: View {
 
     @Environment(\.dismiss)
     private var dismiss: DismissAction
+
+    @Environment(\.isUITest)
+    private var isUITest: Bool
 
     @State
     private var safariUrl: URL?
