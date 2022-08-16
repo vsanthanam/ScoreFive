@@ -142,6 +142,9 @@ struct ScoreCard: View {
     @State
     private var roundAlert: Bool = false
 
+    @Environment(\.isUITest)
+    private var isUITest: Bool
+
     private var totalScores: [Int] {
         game.allPlayers.map { game.totalScore(forPlayer: $0) }
     }
@@ -172,6 +175,7 @@ struct ScoreCard: View {
     }
 
     private func promptForReviewIfNeeded() {
+        guard !isUITest else { return }
         if launchCount >= 3,
            !requestedReview,
            let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {

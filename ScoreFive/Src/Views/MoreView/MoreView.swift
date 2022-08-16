@@ -92,7 +92,7 @@ struct MoreView: View {
                 }
                 Section {
                     Button(action: shareApp) {
-                        Cell("Tell a Fruend", systemName: "square.and.arrow.up")
+                        Cell("Tell a Friend", systemName: "square.and.arrow.up")
                     }
                     Button(action: leaveReview) {
                         Cell("Rate & Review", systemName: "star.bubble")
