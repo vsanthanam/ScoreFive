@@ -41,10 +41,14 @@ struct MoreView: View {
             List {
                 Section {
                     HStack {
-                        Image(systemName: "list.number")
-                            .frame(maxWidth: 20, alignment: .center)
-                            .foregroundColor(.accentColor)
-                        Toggle("Index By Player", isOn: $indexByPlayer)
+                        Toggle(isOn: $indexByPlayer) {
+                            Label {
+                                Text("Index By Player")
+                                    .foregroundColor(.label)
+                            } icon: {
+                                Image(systemName: "list.number")
+                            }
+                        }
                     }
                 } header: {
                     Text("Preferences")
@@ -55,16 +59,12 @@ struct MoreView: View {
                         Button(action: {
                             UIApplication.shared.open(url)
                         }) {
-                            HStack {
+                            Cell("Twitter") {
                                 Image("Twitter")
                                     .renderingMode(.template)
                                     .resizable()
                                     .frame(width: 20, height: 20, alignment: .center)
                                     .foregroundColor(.accentColor)
-                                Text("Twitter")
-                                    .foregroundColor(.label)
-                                Spacer()
-                                Chevron()
                             }
                         }
                     }
@@ -72,92 +72,53 @@ struct MoreView: View {
                         Button(action: {
                             showMail = true
                         }) {
-                            HStack {
-                                Image(systemName: "envelope")
-                                    .frame(maxWidth: 20, alignment: .center)
-                                Text("Email")
-                                    .foregroundColor(.label)
-                                Spacer()
-                                Chevron()
-                            }
+                            Cell("Email", systemName: "envelope")
                         }
                     }
                     Button(action: {
                         safariUrl = URL(string: MoreView.instructionsUrlString)
                     }) {
-                        HStack {
-                            Image(systemName: "book")
-                                .frame(maxWidth: 20, alignment: .center)
-                            Text("Instructions")
-                                .foregroundColor(.label)
-                            Spacer()
-                            Chevron()
-                        }
+                        Cell("Instructions", systemName: "book")
                     }
                     if let url = URL(string: MoreView.privacyUrlString) {
                         Button(action: {
                             safariUrl = url
                         }) {
-                            HStack {
-                                Image(systemName: "shield.lefthalf.filled")
-                                    .frame(maxWidth: 20, alignment: .center)
-                                Text("Privacy")
-                                    .foregroundColor(.label)
-                                Spacer()
-                                Chevron()
-                            }
+                            Cell("Privacy", systemName: "shield.lefthalf.filled")
                         }
                     }
                 } header: {
                     Text("Help")
                 }
                 Section {
+                    Button(action: shareApp) {
+                        Cell("Tell a Fruend", systemName: "square.and.arrow.up")
+                    }
                     Button(action: leaveReview) {
-                        HStack {
-                            Image(systemName: "star.bubble")
-                                .frame(maxWidth: 20, alignment: .center)
-                            Text("Rate & Review")
-                                .foregroundColor(.label)
-                            Spacer()
-                            Chevron()
-                        }
+                        Cell("Rate & Review", systemName: "star.bubble")
                     }
                 } header: {
                     Text("Support ScoreFive")
                 }
                 Section {
-                    HStack {
-                        Image(systemName: "info.circle")
-                            .foregroundColor(.accentColor)
-                            .frame(maxWidth: 20, alignment: .center)
-                        Text("Version")
-                        Spacer()
+                    Cell("Version", systemName: "info.circle") {
                         Text("\(AppInfo.version) (\(AppInfo.build))")
                             .foregroundColor(.init(.secondaryLabel))
                     }
                     NavigationLink(destination: {
                         Acknowledgements()
                     }) {
-                        HStack {
-                            Image(systemName: "heart.text.square")
-                                .frame(maxWidth: 20, alignment: .center)
-                                .foregroundColor(.accentColor)
+                        Label {
                             Text("Acknowledgements")
-                            Spacer()
+                                .foregroundColor(.label)
+                        } icon: {
+                            Image(systemName: "heart.text.square")
                         }
                     }
                     Button(action: {
                         safariUrl = URL(string: MoreView.sourceCodeUrlString)
                     }) {
-                        HStack {
-                            Image(systemName: "chevron.left.forwardslash.chevron.right")
-                                .foregroundColor(.accentColor)
-                                .frame(maxWidth: 20, alignment: .center)
-                            Text("Source Code")
-                                .foregroundColor(.label)
-                            Spacer()
-                            Chevron()
-                        }
+                        Cell("Source Code", systemName: "chevron.left.forwardslash.chevron.right")
                     }
                 } header: {
                     Text("About")
@@ -200,9 +161,6 @@ struct MoreView: View {
     private var safariUrl: URL?
 
     @State
-    private var showShareSheet = false
-
-    @State
     private var showMail = false
 
     @AppStorage("index_by_player")
@@ -242,6 +200,50 @@ struct MoreView: View {
             av.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height, width: 0, height: 0)
         }
         vc.present(av, animated: true, completion: nil)
+    }
+}
+
+private struct Cell<Icon: View, Accessory: View>: View {
+
+    init(_ title: String, systemName: String) where Icon == Image, Accessory == Chevron {
+        self.title = title
+        icon = { Image(systemName: systemName) }
+        accessory = { Chevron() }
+    }
+
+    init(_ title: String, @ViewBuilder icon: @escaping () -> Icon) where Accessory == Chevron {
+        self.title = title
+        self.icon = icon
+        accessory = { Chevron() }
+    }
+
+    init(_ title: String, systemName: String, @ViewBuilder accessory: @escaping () -> Accessory) where Icon == Image {
+        self.title = title
+        icon = { Image(systemName: systemName) }
+        self.accessory = accessory
+    }
+
+    init(_ title: String, @ViewBuilder icon: @escaping () -> Icon, @ViewBuilder accessory: @escaping () -> Accessory) {
+        self.title = title
+        self.icon = icon
+        self.accessory = accessory
+    }
+
+    let title: String
+    private let icon: () -> Icon
+    private let accessory: () -> Accessory
+
+    var body: some View {
+        HStack {
+            Label {
+                Text(title)
+                    .foregroundColor(.label)
+            } icon: {
+                icon()
+            }
+            Spacer()
+            accessory()
+        }
     }
 }
 
