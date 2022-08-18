@@ -27,11 +27,10 @@
 		075F15EA288B442A00E238C0 /* PlayerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15E9288B442A00E238C0 /* PlayerBar.swift */; };
 		075F15EC288B45A400E238C0 /* AddRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15EB288B45A400E238C0 /* AddRow.swift */; };
 		075F15FE288B53D200E238C0 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 075F15FD288B53D200E238C0 /* Collections */; };
-		076A0C40287B35A000A75AE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C3F287B35A000A75AE9 /* AppDelegate.swift */; };
-		076A0C42287B35A000A75AE9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C41287B35A000A75AE9 /* SceneDelegate.swift */; };
 		076A0C49287B35A000A75AE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 076A0C48287B35A000A75AE9 /* Assets.xcassets */; };
 		076A0C4C287B35A000A75AE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 076A0C4A287B35A000A75AE9 /* LaunchScreen.storyboard */; };
 		076A0C54287B35C800A75AE9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C53287B35C800A75AE9 /* RootView.swift */; };
+		077233B828AE91AC003EE3AD /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077233B728AE91AC003EE3AD /* App.swift */; };
 		0798000028A6A2AB00464449 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798FFFF28A6A2AB00464449 /* ColorExtensions.swift */; };
 		07A0A5642896EEE5004F4196 /* AutomatedScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */; };
 		07A0A56D2896EF3D004F4196 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56C2896EF3D004F4196 /* SnapshotHelper.swift */; };
@@ -76,12 +75,11 @@
 		075F15E9288B442A00E238C0 /* PlayerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerBar.swift; sourceTree = "<group>"; };
 		075F15EB288B45A400E238C0 /* AddRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRow.swift; sourceTree = "<group>"; };
 		076A0C3C287B35A000A75AE9 /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		076A0C3F287B35A000A75AE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		076A0C41287B35A000A75AE9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		076A0C48287B35A000A75AE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		076A0C4B287B35A000A75AE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		076A0C4D287B35A000A75AE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		076A0C53287B35C800A75AE9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		077233B728AE91AC003EE3AD /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		0798FFFF28A6A2AB00464449 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		07A0A5612896EEE5004F4196 /* AutomatedScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutomatedScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomatedScreenshots.swift; sourceTree = "<group>"; };
@@ -151,9 +149,8 @@
 		075F15CC288B12DF00E238C0 /* Infra */ = {
 			isa = PBXGroup;
 			children = (
-				076A0C3F287B35A000A75AE9 /* AppDelegate.swift */,
-				076A0C41287B35A000A75AE9 /* SceneDelegate.swift */,
 				074374B4289EFAE5001279F8 /* Demo.swift */,
+				077233B728AE91AC003EE3AD /* App.swift */,
 			);
 			path = Infra;
 			sourceTree = "<group>";
@@ -474,10 +471,9 @@
 				075F15DA288B155300E238C0 /* FormButton.swift in Sources */,
 				0747A4612895C543001A561C /* Acknowledgements.swift in Sources */,
 				07A0A56F28971519004F4196 /* Acknowledgement.swift in Sources */,
-				076A0C40287B35A000A75AE9 /* AppDelegate.swift in Sources */,
 				0747A4632896DB5E001A561C /* Chevron.swift in Sources */,
+				077233B828AE91AC003EE3AD /* App.swift in Sources */,
 				0714D2052883735000CE45A3 /* RoundEditor.swift in Sources */,
-				076A0C42287B35A000A75AE9 /* SceneDelegate.swift in Sources */,
 				07A0A5712897153F004F4196 /* AcknowledgementRow.swift in Sources */,
 				07E25153288C4D040061AA19 /* MoreView.swift in Sources */,
 				0714D1DF2883125D00CE45A3 /* LoadGame.swift in Sources */,
@@ -648,7 +644,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 164;
+				CURRENT_PROJECT_VERSION = 200;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -661,7 +657,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.7;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFive2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -678,7 +674,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 164;
+				CURRENT_PROJECT_VERSION = 200;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -691,7 +687,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.7;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFive2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

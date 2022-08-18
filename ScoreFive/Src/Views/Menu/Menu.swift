@@ -30,9 +30,17 @@ struct Menu: View {
 
     // MARK: - API
 
+    enum Tap {
+        case new
+        case load
+        case more
+    }
+
     /// A binding to accept sheets from user taps
     @Binding
-    var activeSheet: Main.Sheets?
+    var showLoading: Bool
+
+    let onTap: (Tap) -> Void
 
     // MARK: - View
 
@@ -49,19 +57,19 @@ struct Menu: View {
                 .frame(maxHeight: 25)
             MenuButton("New Game",
                        systemName: "square.and.pencil") {
-                activeSheet = .newGame
+                onTap(.new)
             }
 
-            if !gameRecords.isEmpty {
+            if showLoading {
                 MenuButton("Load Game",
                            systemName: "doc.badge.ellipsis") {
-                    activeSheet = .loadGame
+                    onTap(.load)
                 }
             }
 
             MenuButton("More",
                        systemName: "ellipsis.circle") {
-                activeSheet = .more
+                onTap(.more)
             }
         }
     }
@@ -77,12 +85,17 @@ struct Menu: View {
 }
 
 struct Menu_Previews: PreviewProvider {
+
+    static let manager = GameManager.preview
+
     static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self) { scheme in
-            Menu(activeSheet: .constant(nil))
-                .environmentObject(GameManager.preview)
-                .previewLayout(PreviewLayout.sizeThatFits)
-                .colorScheme(scheme)
+        Group {
+            Menu(showLoading: .constant(true), onTap: { _ in })
+            Menu(showLoading: .constant(false), onTap: { _ in })
+
         }
+        .environmentObject(manager)
+        .environment(\.managedObjectContext, manager.viewContext)
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

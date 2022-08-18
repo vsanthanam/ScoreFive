@@ -1,5 +1,5 @@
 // ScoreFive
-// AppDelegate.swift
+// App.swift
 //
 // MIT License
 //
@@ -23,26 +23,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import UIKit
+import SwiftUI
 
-/// The application's `UIApplicationDelegate`
 @main
-final class AppDelegate: UIResponder, UIApplicationDelegate {
+struct App: SwiftUI.App {
 
-    // MARK: - UIApplicationDelegate
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        true
+    init() {
+        checkForDemo()
     }
 
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
+    let gameManager = GameManager.shared
 
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    var body: some Scene {
+        WindowGroup {
+            RootView()
+                .environment(\.managedObjectContext, gameManager.viewContext)
+                .environmentObject(gameManager)
+        }
     }
 
 }

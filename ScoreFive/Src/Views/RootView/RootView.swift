@@ -32,14 +32,17 @@ struct RootView: View {
 
     var body: some View {
         Main()
-            .environment(\.managedObjectContext, GameManager.shared.viewContext)
-            .environmentObject(GameManager.shared)
     }
 
 }
 
 struct RooView_Previews: PreviewProvider {
+
+    static let manager = GameManager.preview
+
     static var previews: some View {
         RootView()
+            .environment(\.managedObjectContext, manager.viewContext)
+            .environmentObject(manager)
     }
 }

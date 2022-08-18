@@ -55,7 +55,16 @@ struct Main: View {
             if let identifier = gameManager.activeGameRecord {
                 ScoreCard(game: try! gameManager.game(for: identifier))
             } else {
-                Menu(activeSheet: $activeSheet)
+                Menu(showLoading: showLoad) { tap in
+                    switch tap {
+                    case .load:
+                        activeSheet = .loadGame
+                    case .more:
+                        activeSheet = .more
+                    case .new:
+                        activeSheet = .newGame
+                    }
+                }
             }
         }
         .frame(maxWidth: .infinity,
@@ -86,6 +95,13 @@ struct Main: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp, order: .reverse)])
     private var gameRecords: FetchedResults<GameRecord>
 
+    private var showLoad: Binding<Bool> {
+        .init {
+            gameRecords.isEmpty
+        } set: { _ in
+        }
+    }
+
     @EnvironmentObject
     private var gameManager: GameManager
 
@@ -113,10 +129,7 @@ private extension View {
 
 struct Main_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self) { scheme in
-            Main()
-                .colorScheme(scheme)
-        }
-        .environmentObject(GameManager.preview)
+        Main()
+            .environmentObject(GameManager.preview)
     }
 }

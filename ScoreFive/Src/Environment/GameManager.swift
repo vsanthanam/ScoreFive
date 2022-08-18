@@ -168,7 +168,7 @@ extension GameManager {
 
     /// For SwiftUI Previews
     static let preview: GameManager = {
-        let manager = GameManager()
+        let manager = GameManager(inMemory: true)
         let context = manager.viewContext
         var firstGame = Game(players: ["Mom", "Dad", "God", "Bro"], scoreLimit: 250)
         var round = firstGame.newRound()
