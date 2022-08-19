@@ -135,25 +135,25 @@ final class GameManager: ObservableObject {
 
     private func setUp(inMemory: Bool) {
         if inMemory {
-            store = NSPersistentCloudKitContainer(name: "ScoreFive")
+            store = NSPersistentContainer(name: "ScoreFive")
             store.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         } else {
             guard let url = Bundle.main.url(forResource: "ScoreFive", withExtension: "momd") else { fatalError() }
             guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError() }
             store = NSPersistentCloudKitContainer(name: "ScoreFive", managedObjectModel: model)
-        }
-        store.persistentStoreDescriptions.first?.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
-        store.loadPersistentStores { store, error in
-            if let error = error as? NSError {
-                fatalError(error.description)
+            store.persistentStoreDescriptions.first?.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+            store.loadPersistentStores { store, error in
+                if let error = error as? NSError {
+                    fatalError(error.description)
+                }
             }
-        }
 
-        store.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-        store.viewContext.automaticallyMergesChangesFromParent = true
+            store.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+            store.viewContext.automaticallyMergesChangesFromParent = true
+        }
     }
 
-    private var store: NSPersistentCloudKitContainer!
+    private var store: NSPersistentContainer!
 }
 
 private extension GameRecord {
