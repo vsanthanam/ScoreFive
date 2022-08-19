@@ -74,7 +74,22 @@ struct Main: View {
     // MARK: - Private
 
     @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp, order: .reverse)])
-    private var gameRecords: FetchedResults<GameRecord>
+    private var gameRecords: FetchedResults<GameRecord> {
+        didSet {
+            if let record = gameManager.activeGameRecord,
+               let game = try? gameManager.game(for: record) {
+                let newGames = gameRecords
+                    .map { record in
+                        try! gameManager.game(for: record)
+                    }
+                if !newGames.map(\.id).contains(game.id) {
+                    withAnimation {
+                        try! gameManager.deactivateGame()
+                    }
+                }
+            }
+        }
+    }
 
     @EnvironmentObject
     private var gameManager: GameManager
