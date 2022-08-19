@@ -34,8 +34,8 @@ struct Main: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
-            if let identifier = gameManager.activeGameRecord {
-                ScoreCard(game: try! gameManager.game(for: identifier))
+            if let record = gameManager.activeGameRecord, gameRecords.contains(record) {
+                ScoreCard(game: try! gameManager.game(for: record))
             } else {
                 Menu(showLoadGameButton: !gameRecords.isEmpty) { tap in
                     switch tap {

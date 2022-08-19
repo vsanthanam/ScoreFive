@@ -134,7 +134,6 @@ final class GameManager: ObservableObject {
         setUp(inMemory: inMemory)
     }
 
-    private var remoteSubscription: Cancellable?
     private var store: NSPersistentCloudKitContainer!
 
     private func setUp(inMemory: Bool) {
@@ -143,8 +142,6 @@ final class GameManager: ObservableObject {
         store = NSPersistentCloudKitContainer(name: "ScoreFive", managedObjectModel: model)
         if inMemory {
             store.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        } else {
-            store.persistentStoreDescriptions.first!.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
         }
         store.loadPersistentStores { store, error in
             if let error = error as? NSError {
@@ -153,32 +150,6 @@ final class GameManager: ObservableObject {
         }
         store.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         store.viewContext.automaticallyMergesChangesFromParent = true
-
-        remoteSubscription = NotificationCenter.default.publisher(for: .NSPersistentStoreRemoteChange)
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-                self.resolveActivatedGame()
-            }
-    }
-
-    private func resolveActivatedGame() {
-        let fetchRequest = GameRecord.fetchRequest()
-        guard let records = try? viewContext.fetch(fetchRequest) else { return }
-        if let active = activeGameRecord,
-           let identifier = active.gameIdentifier {
-            if let new = records.first(where: { $0.gameIdentifier == identifier }) {
-                if (try! game(for: new)) != (try! game(for: active)) {
-                    try! deactivateGame()
-                    try! activateGame(with: new)
-                }
-            } else {
-                try! deactivateGame()
-            }
-        }
-    }
-
-    deinit {
-        remoteSubscription?.cancel()
     }
 
 }
