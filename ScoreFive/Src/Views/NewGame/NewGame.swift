@@ -78,6 +78,7 @@ struct NewGame: View {
                 }
             }
             .navigationTitle("New Game")
+            .closeButton { dismiss() }
         }
     }
 

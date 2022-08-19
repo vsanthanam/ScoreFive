@@ -23,6 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
 import CoreData
 import Five
 import Foundation
@@ -98,6 +99,20 @@ final class GameManager: ObservableObject {
         activeGameRecord = record
     }
 
+    func refreshActiveGame() throws {
+        guard let active = activeGameRecord,
+              let id = active.gameIdentifier else {
+            throw Error.noActiveGame
+        }
+        let fetchRequest = GameRecord.fetchRequest()
+        let results = try viewContext.fetch(fetchRequest)
+        let record = results.first { $0.gameIdentifier == id }
+        if let record = record,
+           try game(for: record) != game(for: active) {
+            activeGameRecord = record
+        }
+    }
+
     /// Deactivate the current managed object
     /// - Throws: An error, if no managed object is currently active
     func deactivateGame() throws {
@@ -129,11 +144,12 @@ final class GameManager: ObservableObject {
 
     // MARK: - Private
 
-    private var store: NSPersistentCloudKitContainer!
-
     private init(inMemory: Bool = false) {
         setUp(inMemory: inMemory)
     }
+
+    private var remoteSubscription: Cancellable?
+    private var store: NSPersistentCloudKitContainer!
 
     private func setUp(inMemory: Bool) {
         guard let url = Bundle.main.url(forResource: "ScoreFive", withExtension: "momd") else { fatalError() }
@@ -141,14 +157,40 @@ final class GameManager: ObservableObject {
         store = NSPersistentCloudKitContainer(name: "ScoreFive", managedObjectModel: model)
         if inMemory {
             store.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        } else {
+            store.persistentStoreDescriptions.first!.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
         }
         store.loadPersistentStores { store, error in
             if let error = error as? NSError {
                 fatalError(error.description)
             }
         }
+        store.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         store.viewContext.automaticallyMergesChangesFromParent = true
+
+        remoteSubscription = NotificationCenter.default.publisher(for: .NSPersistentStoreRemoteChange)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                self.update()
+            }
     }
+
+    private func update() {
+        let fetchRequest = GameRecord.fetchRequest()
+        guard let records = try? viewContext.fetch(fetchRequest) else { return }
+        if let identifier = activeGameRecord?.gameIdentifier {
+            if records.compactMap(\.gameIdentifier).contains(identifier) {
+                try! refreshActiveGame()
+            } else {
+                try! deactivateGame()
+            }
+        }
+    }
+
+    deinit {
+        remoteSubscription?.cancel()
+    }
+
 }
 
 private extension GameRecord {
@@ -157,6 +199,7 @@ private extension GameRecord {
         gameData = data
         timestamp = .now
         playerNames = .init(game.allPlayers)
+        gameIdentifier = game.id
         isComplete = game.isComplete
     }
 }
