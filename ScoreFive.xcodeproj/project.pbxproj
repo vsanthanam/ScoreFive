@@ -31,6 +31,7 @@
 		076A0C4C287B35A000A75AE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 076A0C4A287B35A000A75AE9 /* LaunchScreen.storyboard */; };
 		076A0C54287B35C800A75AE9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C53287B35C800A75AE9 /* RootView.swift */; };
 		077233B828AE91AC003EE3AD /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077233B728AE91AC003EE3AD /* App.swift */; };
+		077233B928AE9A46003EE3AD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E25176288DBCB00061AA19 /* CloudKit.framework */; };
 		0798000028A6A2AB00464449 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798FFFF28A6A2AB00464449 /* ColorExtensions.swift */; };
 		07A0A5642896EEE5004F4196 /* AutomatedScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */; };
 		07A0A56D2896EF3D004F4196 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56C2896EF3D004F4196 /* SnapshotHelper.swift */; };
@@ -101,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				077233B928AE9A46003EE3AD /* CloudKit.framework in Frameworks */,
 				07E2517E288DDB0F0061AA19 /* Five in Frameworks */,
 				0747A458289338D5001A561C /* SafariView in Frameworks */,
 				074374BA289F0546001279F8 /* MailView in Frameworks */,
@@ -644,7 +646,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 200;
+				CURRENT_PROJECT_VERSION = 201;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -674,7 +676,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 200;
+				CURRENT_PROJECT_VERSION = 201;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;

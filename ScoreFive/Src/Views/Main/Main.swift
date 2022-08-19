@@ -30,24 +30,6 @@ import SwiftUI
 /// The main view of application
 struct Main: View {
 
-    // MARK: - API
-
-    /// An enumeration describing sheets presentable from the main view
-    enum Sheets: String, Identifiable {
-
-        // MARK: - Cases
-
-        case newGame
-        case loadGame
-        case more
-
-        // MARK: - Identifiable
-
-        typealias ID = RawValue
-
-        var id: ID { rawValue }
-    }
-
     // MARK: - View
 
     var body: some View {
@@ -55,31 +37,30 @@ struct Main: View {
             if let identifier = gameManager.activeGameRecord {
                 ScoreCard(game: try! gameManager.game(for: identifier))
             } else {
-                Menu(showLoading: showLoad) { tap in
+                Menu(showLoadGameButton: !gameRecords.isEmpty) { tap in
                     switch tap {
                     case .load:
-                        activeSheet = .loadGame
+                        showLoadGameSheet = true
                     case .more:
-                        activeSheet = .more
+                        showMoreSheet = true
                     case .new:
-                        activeSheet = .newGame
+                        showNewGameSheet = true
                     }
                 }
             }
         }
         .frame(maxWidth: .infinity,
                maxHeight: .infinity)
-        .sheet(item: $activeSheet) { sheet in
-            switch sheet {
-            case .newGame:
-                NewGame()
-                    .saveOnAppear(gameManager)
-            case .loadGame:
-                LoadGame()
-                    .saveOnAppear(gameManager)
-            case .more:
-                MoreView()
-            }
+        .sheet(isPresented: $showNewGameSheet) {
+            NewGame()
+                .saveOnAppear(gameManager)
+        }
+        .sheet(isPresented: $showLoadGameSheet) {
+            LoadGame()
+                .saveOnAppear(gameManager)
+        }
+        .sheet(isPresented: $showMoreSheet) {
+            MoreView()
         }
         .onAppear {
             launchCount += 1
@@ -95,13 +76,6 @@ struct Main: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp, order: .reverse)])
     private var gameRecords: FetchedResults<GameRecord>
 
-    private var showLoad: Binding<Bool> {
-        .init {
-            gameRecords.isEmpty
-        } set: { _ in
-        }
-    }
-
     @EnvironmentObject
     private var gameManager: GameManager
 
@@ -112,7 +86,13 @@ struct Main: View {
     private var isUITest: Bool
 
     @State
-    private var activeSheet: Sheets?
+    private var showNewGameSheet = false
+
+    @State
+    private var showLoadGameSheet = false
+
+    @State
+    private var showMoreSheet = false
 
     @AppStorage("launch_count")
     private var launchCount = 0

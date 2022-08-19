@@ -36,9 +36,7 @@ struct Menu: View {
         case more
     }
 
-    /// A binding to accept sheets from user taps
-    @Binding
-    var showLoading: Bool
+    let showLoadGameButton: Bool
 
     let onTap: (Tap) -> Void
 
@@ -60,7 +58,7 @@ struct Menu: View {
                 onTap(.new)
             }
 
-            if showLoading {
+            if showLoadGameButton {
                 MenuButton("Load Game",
                            systemName: "doc.badge.ellipsis") {
                     onTap(.load)
@@ -90,8 +88,8 @@ struct Menu_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            Menu(showLoading: .constant(true), onTap: { _ in })
-            Menu(showLoading: .constant(false), onTap: { _ in })
+            Menu(showLoadGameButton: true, onTap: { _ in })
+            Menu(showLoadGameButton: false, onTap: { _ in })
 
         }
         .environmentObject(manager)

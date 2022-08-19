@@ -60,7 +60,7 @@ struct LoadGame: View {
                     }
                     .onDelete(perform: deleteItems(offsets:))
                 }
-                if hasContent, showCompleteGames {
+                if hasContent, (showCompleteGames || gameRecords.count == inProgressGameRecords.count), !listEditMode.isEditing {
                     Section {
                         Button(role: .destructive, action: {
                             showEraseAllConfirm = true
