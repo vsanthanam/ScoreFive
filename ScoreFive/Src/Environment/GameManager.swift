@@ -142,6 +142,8 @@ final class GameManager: ObservableObject {
         store = NSPersistentCloudKitContainer(name: "ScoreFive", managedObjectModel: model)
         if inMemory {
             store.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        } else {
+            store.persistentStoreDescriptions.first!.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
         }
         store.loadPersistentStores { store, error in
             if let error = error as? NSError {
