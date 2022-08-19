@@ -99,20 +99,6 @@ final class GameManager: ObservableObject {
         activeGameRecord = record
     }
 
-    func refreshActiveGame() throws {
-        guard let active = activeGameRecord,
-              let id = active.gameIdentifier else {
-            throw Error.noActiveGame
-        }
-        let fetchRequest = GameRecord.fetchRequest()
-        let results = try viewContext.fetch(fetchRequest)
-        let record = results.first { $0.gameIdentifier == id }
-        if let record = record,
-           try game(for: record) != game(for: active) {
-            activeGameRecord = record
-        }
-    }
-
     /// Deactivate the current managed object
     /// - Throws: An error, if no managed object is currently active
     func deactivateGame() throws {
@@ -171,16 +157,20 @@ final class GameManager: ObservableObject {
         remoteSubscription = NotificationCenter.default.publisher(for: .NSPersistentStoreRemoteChange)
             .receive(on: DispatchQueue.main)
             .sink { _ in
-                self.update()
+                self.resolveActivatedGame()
             }
     }
 
-    private func update() {
+    private func resolveActivatedGame() {
         let fetchRequest = GameRecord.fetchRequest()
         guard let records = try? viewContext.fetch(fetchRequest) else { return }
-        if let identifier = activeGameRecord?.gameIdentifier {
-            if records.compactMap(\.gameIdentifier).contains(identifier) {
-                try! refreshActiveGame()
+        if let active = activeGameRecord,
+           let identifier = active.gameIdentifier {
+            if let new = records.first(where: { $0.gameIdentifier == identifier }) {
+                if (try! game(for: new)) != (try! game(for: active)) {
+                    try! deactivateGame()
+                    try! activateGame(with: new)
+                }
             } else {
                 try! deactivateGame()
             }
