@@ -54,7 +54,7 @@ final class GameManager: ObservableObject {
 
     /// The currently active game record
     @Published
-    private(set) var activeGameRecord: GameRecord?
+    private(set) var activeGameRecord: GameRecord? = nil
 
     /// Store a new game in Core Data
     /// - Parameter game: The game to store
@@ -129,31 +129,30 @@ final class GameManager: ObservableObject {
 
     // MARK: - Private
 
+    private var store: NSPersistentCloudKitContainer!
+    
     private init(inMemory: Bool = false) {
         setUp(inMemory: inMemory)
     }
 
     private func setUp(inMemory: Bool) {
         if inMemory {
-            store = NSPersistentContainer(name: "ScoreFive")
+            guard let url = Bundle.main.url(forResource: "ScoreFive", withExtension: "momd") else { fatalError() }
+            guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError() }
+            store = NSPersistentCloudKitContainer(name: "ScoreFive", managedObjectModel: model)
             store.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         } else {
             guard let url = Bundle.main.url(forResource: "ScoreFive", withExtension: "momd") else { fatalError() }
             guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError() }
             store = NSPersistentCloudKitContainer(name: "ScoreFive", managedObjectModel: model)
-            store.persistentStoreDescriptions.first?.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
             store.loadPersistentStores { store, error in
                 if let error = error as? NSError {
                     fatalError(error.description)
                 }
             }
-
-            store.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
             store.viewContext.automaticallyMergesChangesFromParent = true
         }
     }
-
-    private var store: NSPersistentContainer!
 }
 
 private extension GameRecord {

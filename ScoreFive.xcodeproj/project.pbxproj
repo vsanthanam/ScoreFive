@@ -28,7 +28,6 @@
 		075F15EC288B45A400E238C0 /* AddRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F15EB288B45A400E238C0 /* AddRow.swift */; };
 		075F15FE288B53D200E238C0 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 075F15FD288B53D200E238C0 /* Collections */; };
 		076A0C49287B35A000A75AE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 076A0C48287B35A000A75AE9 /* Assets.xcassets */; };
-		076A0C4C287B35A000A75AE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 076A0C4A287B35A000A75AE9 /* LaunchScreen.storyboard */; };
 		076A0C54287B35C800A75AE9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C53287B35C800A75AE9 /* RootView.swift */; };
 		077233B828AE91AC003EE3AD /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077233B728AE91AC003EE3AD /* App.swift */; };
 		077233B928AE9A46003EE3AD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E25176288DBCB00061AA19 /* CloudKit.framework */; };
@@ -77,7 +76,6 @@
 		075F15EB288B45A400E238C0 /* AddRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRow.swift; sourceTree = "<group>"; };
 		076A0C3C287B35A000A75AE9 /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076A0C48287B35A000A75AE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		076A0C4B287B35A000A75AE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		076A0C4D287B35A000A75AE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		076A0C53287B35C800A75AE9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		077233B728AE91AC003EE3AD /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -292,7 +290,6 @@
 				07E25175288DBCAB0061AA19 /* ScoreFive.entitlements */,
 				075F15CD288B12E400E238C0 /* Src */,
 				076A0C48287B35A000A75AE9 /* Assets.xcassets */,
-				076A0C4A287B35A000A75AE9 /* LaunchScreen.storyboard */,
 				076A0C4D287B35A000A75AE9 /* Info.plist */,
 				0714D1D6287B39A200CE45A3 /* ScoreFive.xcdatamodeld */,
 			);
@@ -446,7 +443,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				07E2514F288C4BCC0061AA19 /* LICENSE in Resources */,
-				076A0C4C287B35A000A75AE9 /* LaunchScreen.storyboard in Resources */,
 				07E25150288C4BCC0061AA19 /* README.md in Resources */,
 				076A0C49287B35A000A75AE9 /* Assets.xcassets in Resources */,
 			);
@@ -512,17 +508,6 @@
 			targetProxy = 07A0A5672896EEE5004F4196 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		076A0C4A287B35A000A75AE9 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				076A0C4B287B35A000A75AE9 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		076A0C4E287B35A000A75AE9 /* Debug */ = {
@@ -646,7 +631,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202;
+				CURRENT_PROJECT_VERSION = 204;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -676,7 +661,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202;
+				CURRENT_PROJECT_VERSION = 204;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
