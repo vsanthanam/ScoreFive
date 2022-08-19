@@ -130,28 +130,24 @@ final class GameManager: ObservableObject {
     // MARK: - Private
 
     private var store: NSPersistentCloudKitContainer!
-    
+
     private init(inMemory: Bool = false) {
         setUp(inMemory: inMemory)
     }
 
     private func setUp(inMemory: Bool) {
+        guard let url = Bundle.main.url(forResource: "ScoreFive", withExtension: "momd") else { fatalError() }
+        guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError() }
+        store = NSPersistentCloudKitContainer(name: "ScoreFive", managedObjectModel: model)
         if inMemory {
-            guard let url = Bundle.main.url(forResource: "ScoreFive", withExtension: "momd") else { fatalError() }
-            guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError() }
-            store = NSPersistentCloudKitContainer(name: "ScoreFive", managedObjectModel: model)
             store.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        } else {
-            guard let url = Bundle.main.url(forResource: "ScoreFive", withExtension: "momd") else { fatalError() }
-            guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError() }
-            store = NSPersistentCloudKitContainer(name: "ScoreFive", managedObjectModel: model)
-            store.loadPersistentStores { store, error in
-                if let error = error as? NSError {
-                    fatalError(error.description)
-                }
-            }
-            store.viewContext.automaticallyMergesChangesFromParent = true
         }
+        store.loadPersistentStores { store, error in
+            if let error = error as? NSError {
+                fatalError(error.description)
+            }
+        }
+        store.viewContext.automaticallyMergesChangesFromParent = true
     }
 }
 

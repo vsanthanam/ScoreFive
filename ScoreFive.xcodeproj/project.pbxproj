@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0713050728AFDDAB00B80968 /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0713050628AFDDAB00B80968 /* Combine.framework */; };
+		0713050928AFDDB700B80968 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0713050828AFDDB700B80968 /* SwiftUI.framework */; };
+		0713050B28AFDDBD00B80968 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0713050A28AFDDBD00B80968 /* Foundation.framework */; };
+		0713050D28AFDDC400B80968 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0713050C28AFDDC400B80968 /* CoreData.framework */; };
 		0714D1D1287B38B600CE45A3 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1D0287B38B600CE45A3 /* Main.swift */; };
 		0714D1D3287B38BD00CE45A3 /* ScoreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1D2287B38BD00CE45A3 /* ScoreCard.swift */; };
 		0714D1D5287B390000CE45A3 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1D4287B390000CE45A3 /* GameManager.swift */; };
@@ -57,6 +61,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0713050628AFDDAB00B80968 /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = System/Library/Frameworks/Combine.framework; sourceTree = SDKROOT; };
+		0713050828AFDDB700B80968 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		0713050A28AFDDBD00B80968 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0713050C28AFDDC400B80968 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0714D1D0287B38B600CE45A3 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		0714D1D2287B38BD00CE45A3 /* ScoreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCard.swift; sourceTree = "<group>"; };
 		0714D1D4287B390000CE45A3 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
@@ -101,11 +109,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				077233B928AE9A46003EE3AD /* CloudKit.framework in Frameworks */,
+				0713050928AFDDB700B80968 /* SwiftUI.framework in Frameworks */,
 				07E2517E288DDB0F0061AA19 /* Five in Frameworks */,
+				0713050728AFDDAB00B80968 /* Combine.framework in Frameworks */,
 				0747A458289338D5001A561C /* SafariView in Frameworks */,
+				0713050B28AFDDBD00B80968 /* Foundation.framework in Frameworks */,
 				074374BA289F0546001279F8 /* MailView in Frameworks */,
 				075F15FE288B53D200E238C0 /* Collections in Frameworks */,
 				07E25147288C45060061AA19 /* Introspect in Frameworks */,
+				0713050D28AFDDC400B80968 /* CoreData.framework in Frameworks */,
 				07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +269,10 @@
 		075F15F4288B51F700E238C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0713050C28AFDDC400B80968 /* CoreData.framework */,
+				0713050A28AFDDBD00B80968 /* Foundation.framework */,
+				0713050828AFDDB700B80968 /* SwiftUI.framework */,
+				0713050628AFDDAB00B80968 /* Combine.framework */,
 				07E25176288DBCB00061AA19 /* CloudKit.framework */,
 			);
 			name = Frameworks;
@@ -631,12 +647,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 204;
+				CURRENT_PROJECT_VERSION = 205;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -661,12 +677,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 204;
+				CURRENT_PROJECT_VERSION = 205;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
