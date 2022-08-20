@@ -69,7 +69,7 @@ struct Main: View {
             }
         }
         .onReceive(gameManager.cloudPublisher) { _ in
-            if gameManager.activeGameRecord != nil {
+            if !isPreview, !isUITest, gameManager.activeGameRecord != nil {
                 try! gameManager.deactivateGame()
             }
         }
