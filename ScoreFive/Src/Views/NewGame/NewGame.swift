@@ -28,7 +28,6 @@ import Five
 import Foundation
 import SwiftUI
 
-/// The view used to create new games
 struct NewGame: View {
 
     // MARK: - View

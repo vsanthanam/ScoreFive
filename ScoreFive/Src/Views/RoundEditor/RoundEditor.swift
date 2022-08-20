@@ -27,15 +27,10 @@ import Collections
 import Five
 import SwiftUI
 
-/// View used to edit rounds of a game
 struct RoundEditor: View {
 
     // MARK: - Initializers
 
-    /// Create a `RoundEditor` view
-    /// - Parameters:
-    ///   - game: The game to read/write from
-    ///   - previousIndex: The previous index, if the view is used to edit a round instead of creating a new round.
     init(game: Binding<Game>,
          previousIndex: Int? = nil) {
         self.previousIndex = previousIndex
@@ -49,7 +44,6 @@ struct RoundEditor: View {
 
     // MARK: - API
 
-    /// The Game binding used to accept new values
     @Binding
     var game: Game
 

@@ -27,7 +27,6 @@ import CoreData
 import Five
 import SwiftUI
 
-/// The main view of application
 struct Main: View {
 
     // MARK: - View
@@ -35,7 +34,7 @@ struct Main: View {
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             if let record = gameManager.activeGameRecord {
-                ScoreCard(game: try! gameManager.game(for: record))
+                ScoreCard(game: try! record.recordedGame)
             } else {
                 Menu(showLoadGameButton: !gameRecords.isEmpty) { tap in
                     switch tap {
@@ -69,28 +68,14 @@ struct Main: View {
                 try! gameManager.activateGame(with: record)
             }
         }
-        .onReceive(conflictPublisher) { _ in
-            if let active = gameManager.activeGameRecord, let identifier = active.gameIdentifier {
-                if gameRecords.compactMap(\.gameIdentifier).contains(identifier) {
-                    guard let new = gameRecords.first(where: { $0.gameIdentifier == identifier }) else { return }
-                    if (try! gameManager.game(for: active)) != (try! gameManager.game(for: new)) {
-                        try! gameManager.deactivateGame()
-                        try! gameManager.activateGame(with: new)
-                    }
-                } else {
-                    withAnimation {
-                        try! gameManager.deactivateGame()
-                    }
-                }
+        .onReceive(gameManager.cloudPublisher) { _ in
+            if gameManager.activeGameRecord != nil {
+                try! gameManager.deactivateGame()
             }
         }
     }
 
     // MARK: - Private
-
-    private let conflictPublisher = NotificationCenter.default.publisher(for: .NSPersistentStoreRemoteChange)
-        .merge(with: NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave))
-        .receive(on: DispatchQueue.main)
 
     @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp, order: .reverse)])
     private var gameRecords: FetchedResults<GameRecord>

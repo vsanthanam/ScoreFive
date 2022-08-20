@@ -27,7 +27,6 @@ import Foundation
 import SafariView
 import SwiftUI
 
-/// Acknowledments Screen
 struct Acknowledgements: View {
 
     // MARK: - View
@@ -36,14 +35,18 @@ struct Acknowledgements: View {
         List {
             Section {
                 ForEach(Acknowledgements.tools.sorted(by: \.title)) { item in
-                    AcknowledgementRow(item: item, url: $safariUrl)
+                    AcknowledgementRow(item: item) { item in
+                        activeSafariUrl = URL(string: item.urlString)
+                    }
                 }
             } header: {
                 Text("Made with these tools")
             }
             Section {
                 ForEach(Acknowledgements.services.sorted(by: \.title)) { item in
-                    AcknowledgementRow(item: item, url: $safariUrl)
+                    AcknowledgementRow(item: item) { item in
+                        activeSafariUrl = URL(string: item.urlString)
+                    }
                 }
             } header: {
                 Text("Powered by these services")
@@ -51,7 +54,7 @@ struct Acknowledgements: View {
         }
         .navigationTitle("Acknowledgements")
         .navigationBarTitleDisplayMode(.inline)
-        .safari(url: $safariUrl) { url in
+        .safari(url: $activeSafariUrl) { url in
             SafariView(url: url)
         }
     }
@@ -70,7 +73,7 @@ struct Acknowledgements: View {
     ]
 
     @State
-    private var safariUrl: URL?
+    private var activeSafariUrl: URL?
 }
 
 struct Acknowledgements_Previews: PreviewProvider {

@@ -25,15 +25,10 @@
 
 import SwiftUI
 
-/// A centered button for use in a `Form` view
 struct FormButton: View {
 
     // MARK: - Initializers
 
-    /// Create a `FormButton`
-    /// - Parameters:
-    ///   - text: The text to display on the button
-    ///   - action: The action to execute when the button is tapped
     init(text: String,
          action: @escaping () -> Void) {
         self.text = text

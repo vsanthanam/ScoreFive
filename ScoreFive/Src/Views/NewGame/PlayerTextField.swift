@@ -25,16 +25,10 @@
 
 import SwiftUI
 
-/// A text fied used to enter the name of a player
 struct PlayerTextField: View {
 
     // MARK: - Initializers
 
-    /// Create a `PlayerTextField`
-    /// - Parameters:
-    ///   - index: The index of the player in the rotation
-    ///   - player: A `Binding` to read and write the player's name
-    ///   - submitLabel: The label to use on the keyboard.
     init(index: Int,
          player: Binding<String>,
          submitLabel: SubmitLabel = .next) {

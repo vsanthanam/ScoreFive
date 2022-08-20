@@ -25,7 +25,6 @@
 
 import SwiftUI
 
-/// A small chevron icon from SFSymbols
 struct Chevron: View {
 
     // MARK: - View

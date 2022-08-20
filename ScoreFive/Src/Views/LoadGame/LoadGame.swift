@@ -26,12 +26,10 @@
 import CoreData
 import SwiftUI
 
-/// Screen used to load games from disk, or to delete games from disk.
 struct LoadGame: View {
 
     // MARK: - Initializers
 
-    /// Create a `LoadGame` view
     init() {
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short

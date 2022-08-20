@@ -28,13 +28,10 @@ import Five
 import StoreKit
 import SwiftUI
 
-/// The score card view
 struct ScoreCard: View {
 
     // MARK: - Initializers
 
-    /// Create a `ScoreCard` view
-    /// - Parameter game: The game to display in the score card.
     init(game: Game) {
         self.game = game
     }

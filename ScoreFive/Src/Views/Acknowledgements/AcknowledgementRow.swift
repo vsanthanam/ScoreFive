@@ -23,28 +23,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
 import SwiftUI
 
-/// An individual entry in the acknowledgements screen
 struct AcknowledgementRow: View {
 
     // MARK: - Initializers
 
-    /// Create an `AcknowledgementRow`
-    /// - Parameters:
-    ///   - item: The `Acknowledgement` model to display
-    ///   - url: A binding to accept URL values from
     init(item: Acknowledgement,
-         url: Binding<URL?>) {
+         onTap: @escaping (Acknowledgement) -> Void) {
         self.item = item
-        _url = url
+        self.onTap = onTap
     }
 
     // MARK: - View
 
     var body: some View {
-        Button(action: updateURL) {
+        Button(action: { onTap(item) }) {
             HStack {
                 VStack(alignment: .leading) {
                     Text(item.title)
@@ -63,10 +57,5 @@ struct AcknowledgementRow: View {
 
     private let item: Acknowledgement
 
-    @Binding
-    private var url: URL?
-
-    private func updateURL() {
-        url = URL(string: item.urlString)
-    }
+    private let onTap: (Acknowledgement) -> Void
 }

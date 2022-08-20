@@ -25,7 +25,6 @@
 
 import SwiftUI
 
-/// The home menu
 struct Menu: View {
 
     // MARK: - API

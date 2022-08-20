@@ -23,65 +23,41 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import AppFoundation
 import Combine
 import CoreData
 import Five
 import Foundation
+import SwiftUI
 
-/// A singleton object used to write games to CoreData and to manage the currently open game
-/// UIKit interacts with this class via its `.shared` static property
-/// SwiftUI interacts with this class using the EnvironmentObject API.
 @MainActor
 final class GameManager: ObservableObject {
 
     // MARK: - Factories
 
-    /// The shared singleton instance.
     static let shared: GameManager = .init()
 
     // MARK: - API
 
-    /// Errors produced by a `GameManager`
     enum Error: Swift.Error {
         case noGameFound
         case noActiveGame
         case gameAlreadyActive
     }
 
-    /// The Core Data View Context
     var viewContext: NSManagedObjectContext {
         store.viewContext
     }
 
-    /// The currently active game record
     @Published
     private(set) var activeGameRecord: GameRecord? = nil
 
-    /// Store a new game in Core Data
-    /// - Parameter game: The game to store
-    /// - Returns: The associated managed object
-    /// - Throws: An error, if the game could not be translated into a `GameRecord`
     func storeNewGame(_ game: Game) throws -> GameRecord {
         let record = GameRecord(context: viewContext)
         try record.applyGame(game)
         return record
     }
 
-    /// Retrieve a game for a given managed object
-    /// - Parameter record: The `GameRecord` to retrieve
-    /// - Returns: The `Game` stored in the managed object
-    /// - Throws: An error, if the game could not be decoded from the managed object.
-    func game(for record: GameRecord) throws -> Game {
-        guard let gameData = record.gameData else {
-            throw Error.noGameFound
-        }
-        let game = try JSONDecoder().decode(Game.self, from: gameData)
-        return game
-    }
-
-    /// Replace the currently active record with new game data
-    /// - Parameter game: The game data to update
-    /// - Throws: An error, if no record is active, or if the game could not be encoded into the managed object.
     func updateGame(_ game: Game) throws {
         guard let record = activeGameRecord else {
             throw Error.noActiveGame
@@ -89,9 +65,6 @@ final class GameManager: ObservableObject {
         try record.applyGame(game)
     }
 
-    /// Activate a managed object
-    /// - Parameter record: The `GameRecord` to activate
-    /// - Throws: An error, if an existing managed object is already active
     func activateGame(with record: GameRecord) throws {
         guard activeGameRecord == nil else {
             throw Error.gameAlreadyActive
@@ -99,8 +72,6 @@ final class GameManager: ObservableObject {
         activeGameRecord = record
     }
 
-    /// Deactivate the current managed object
-    /// - Throws: An error, if no managed object is currently active
     func deactivateGame() throws {
         guard activeGameRecord != nil else {
             throw Error.noActiveGame
@@ -108,15 +79,11 @@ final class GameManager: ObservableObject {
         activeGameRecord = nil
     }
 
-    /// Save the store to disk
-    /// - Throws: An error, if saving failed
     func save() throws {
         guard viewContext.hasChanges else { return }
         try viewContext.save()
     }
 
-    /// Remove every record in the store
-    /// - Throws: An error, if destruction failed.
     func destroyAllRecords() throws {
         try? deactivateGame()
         let fetchRequest = GameRecord.fetchRequest()
@@ -127,6 +94,14 @@ final class GameManager: ObservableObject {
         }
         try save()
     }
+
+    public var cloudPublisher: AnyPublisher<Notification, Never> {
+        _cloudPublisher
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+
+    private lazy var _cloudPublisher = NotificationCenter.default.publisher(for: .NSPersistentStoreRemoteChange, object: store.persistentStoreCoordinator)
 
     // MARK: - Private
 
@@ -143,6 +118,7 @@ final class GameManager: ObservableObject {
         if inMemory {
             store.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         } else {
+            store.persistentStoreDescriptions.first!.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
             store.persistentStoreDescriptions.first!.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
         }
         store.loadPersistentStores { store, error in
@@ -150,20 +126,29 @@ final class GameManager: ObservableObject {
                 fatalError(error.description)
             }
         }
-        store.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        store.viewContext.mergePolicy = NSOverwriteMergePolicy
         store.viewContext.automaticallyMergesChangesFromParent = true
     }
 
 }
 
-private extension GameRecord {
-    func applyGame(_ game: Game, timestampe: Date = .now) throws {
+extension GameRecord {
+    fileprivate func applyGame(_ game: Game, timestampe: Date = .now) throws {
         let data = try JSONEncoder().encode(game)
         gameData = data
         timestamp = .now
         playerNames = .init(game.allPlayers)
         gameIdentifier = game.id
         isComplete = game.isComplete
+    }
+
+    var recordedGame: Game {
+        get throws {
+            guard let gameData = gameData else {
+                throw StaticError(errorDescription: "No Game Data In Record!")
+            }
+            return try JSONDecoder().decode(Game.self, from: gameData)
+        }
     }
 }
 
