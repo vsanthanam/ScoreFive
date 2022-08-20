@@ -74,12 +74,14 @@ struct Main: View {
                     guard let newRecord = gameRecords.first(where: { $0.gameIdentifier == activeIdentifier }) else {
                         return
                     }
-                    if (try! newRecord.recordedGame) != (try! activeRecord.recordedGame) {
+                    withAnimation {
                         try! gameManager.deactivateGame()
                         try! gameManager.activateGame(with: newRecord)
                     }
                 } else {
-                    try! gameManager.deactivateGame()
+                    withAnimation {
+                        try! gameManager.deactivateGame()
+                    }
                 }
             }
         }
