@@ -69,8 +69,18 @@ struct Main: View {
             }
         }
         .onReceive(gameManager.cloudPublisher) { _ in
-            if !isPreview, !isUITest, gameManager.activeGameRecord != nil {
-                try! gameManager.deactivateGame()
+            if !isPreview, !isUITest, let activeRecord = gameManager.activeGameRecord, let activeIdentifier = activeRecord.gameIdentifier {
+                if gameRecords.compactMap(\.gameIdentifier).contains(activeIdentifier) {
+                    guard let newRecord = gameRecords.first(where: { $0.gameIdentifier == activeIdentifier }) else {
+                        return
+                    }
+                    if (try! newRecord.recordedGame) != (try! activeRecord.recordedGame) {
+                        try! gameManager.deactivateGame()
+                        try! gameManager.activateGame(with: newRecord)
+                    }
+                } else {
+                    try! gameManager.deactivateGame()
+                }
             }
         }
     }
