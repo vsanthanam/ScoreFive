@@ -187,7 +187,7 @@ struct RoundEditor: View {
                 game.replaceRound(atIndex: previousIndex, with: proposed)
                 dismiss()
             } else {
-                showingAlert = true
+                showingAlert.toggle()
             }
         } else {
             game.addRound(round.buildRound())

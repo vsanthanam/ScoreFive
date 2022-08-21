@@ -39,11 +39,11 @@ struct Main: View {
                 Menu(showLoadGameButton: !gameRecords.isEmpty) { tap in
                     switch tap {
                     case .load:
-                        showLoadGameSheet = true
+                        showLoadGameSheet.toggle()
                     case .more:
-                        showMoreSheet = true
+                        showMoreSheet.toggle()
                     case .new:
-                        showNewGameSheet = true
+                        showNewGameSheet.toggle()
                     }
                 }
             }

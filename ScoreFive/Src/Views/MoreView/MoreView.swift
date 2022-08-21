@@ -58,32 +58,36 @@ struct MoreView: View {
                         Button(action: {
                             UIApplication.shared.open(url)
                         }) {
-                            Cell("Twitter") {
+                            Cell(title: {
+                                Text("Twitter")
+                                    .foregroundColor(.label)
+                            }, icon: {
                                 Image("Twitter")
                                     .renderingMode(.template)
                                     .resizable()
                                     .frame(width: 20, height: 20, alignment: .center)
                                     .foregroundColor(.accentColor)
-                            }
+                            }, disclosureIndicator: true)
+
                         }
                     }
                     if MailView.canSendMail || isUITest {
                         Button(action: {
-                            showMail = true
+                            showMail.toggle()
                         }) {
-                            Cell("Email", systemName: "envelope")
+                            Cell("Email", systemImage: "envelope", disclosureIndicator: true)
                         }
                     }
                     Button(action: {
                         safariUrl = URL(string: MoreView.instructionsUrlString)
                     }) {
-                        Cell("Instructions", systemName: "book")
+                        Cell("Instructions", systemImage: "book", disclosureIndicator: true)
                     }
                     if let url = URL(string: MoreView.privacyUrlString) {
                         Button(action: {
                             safariUrl = url
                         }) {
-                            Cell("Privacy", systemName: "shield.lefthalf.filled")
+                            Cell("Privacy", systemImage: "shield.lefthalf.filled", disclosureIndicator: true)
                         }
                     }
                 } header: {
@@ -91,33 +95,25 @@ struct MoreView: View {
                 }
                 Section {
                     Button(action: shareApp) {
-                        Cell("Tell a Friend", systemName: "square.and.arrow.up")
+                        Cell("Tell a Friend", systemImage: "square.and.arrow.up", disclosureIndicator: true)
                     }
                     Button(action: leaveReview) {
-                        Cell("Rate & Review", systemName: "star.bubble")
+                        Cell("Rate & Review", systemImage: "star.bubble", disclosureIndicator: true)
                     }
                 } header: {
                     Text("Support ScoreFive")
                 }
                 Section {
-                    Cell("Version", systemName: "info.circle") {
-                        Text("\(AppInfo.version) (\(AppInfo.build))")
-                            .foregroundColor(.init(.secondaryLabel))
-                    }
+                    Cell("Version", systemImage: "info.circle", badge: "\(AppInfo.version) (\(AppInfo.build))")
                     NavigationLink(destination: {
                         Acknowledgements()
                     }) {
-                        Label {
-                            Text("Acknowledgements")
-                                .foregroundColor(.label)
-                        } icon: {
-                            Image(systemName: "heart.text.square")
-                        }
+                        Cell("Acknowledgements", systemImage: "heart.text.square")
                     }
                     Button(action: {
                         safariUrl = URL(string: MoreView.sourceCodeUrlString)
                     }) {
-                        Cell("Source Code", systemName: "chevron.left.forwardslash.chevron.right")
+                        Cell("Source Code", systemImage: "chevron.left.forwardslash.chevron.right", disclosureIndicator: true)
                     }
                 } header: {
                     Text("About")
@@ -202,50 +198,6 @@ struct MoreView: View {
             av.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height, width: 0, height: 0)
         }
         vc.present(av, animated: true, completion: nil)
-    }
-}
-
-private struct Cell<Icon: View, Accessory: View>: View {
-
-    init(_ title: String, systemName: String) where Icon == Image, Accessory == Chevron {
-        self.title = title
-        icon = { Image(systemName: systemName) }
-        accessory = { Chevron() }
-    }
-
-    init(_ title: String, @ViewBuilder icon: @escaping () -> Icon) where Accessory == Chevron {
-        self.title = title
-        self.icon = icon
-        accessory = { Chevron() }
-    }
-
-    init(_ title: String, systemName: String, @ViewBuilder accessory: @escaping () -> Accessory) where Icon == Image {
-        self.title = title
-        icon = { Image(systemName: systemName) }
-        self.accessory = accessory
-    }
-
-    init(_ title: String, @ViewBuilder icon: @escaping () -> Icon, @ViewBuilder accessory: @escaping () -> Accessory) {
-        self.title = title
-        self.icon = icon
-        self.accessory = accessory
-    }
-
-    let title: String
-    private let icon: () -> Icon
-    private let accessory: () -> Accessory
-
-    var body: some View {
-        HStack {
-            Label {
-                Text(title)
-                    .foregroundColor(.label)
-            } icon: {
-                icon()
-            }
-            Spacer()
-            accessory()
-        }
     }
 }
 

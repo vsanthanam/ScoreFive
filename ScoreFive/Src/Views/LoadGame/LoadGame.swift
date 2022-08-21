@@ -60,9 +60,10 @@ struct LoadGame: View {
                 }
                 if hasContent, (showCompleteGames || gameRecords.count == inProgressGameRecords.count), !listEditMode.isEditing {
                     Section {
-                        Button(role: .destructive, action: {
-                            showEraseAllConfirm = true
-                        }) {
+                        Button(role: .destructive,
+                               action: {
+                                   showEraseAllConfirm.toggle()
+                               }) {
                             Text("Erase All")
                                 .frame(maxWidth: .infinity)
                         }

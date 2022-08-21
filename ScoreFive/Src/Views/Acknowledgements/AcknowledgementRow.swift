@@ -39,17 +39,7 @@ struct AcknowledgementRow: View {
 
     var body: some View {
         Button(action: { onTap(item) }) {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(item.title)
-                        .foregroundColor(.label)
-                    Text(item.urlString)
-                        .foregroundColor(.secondaryLabel)
-                        .font(.caption)
-                }
-                Spacer()
-                Chevron()
-            }
+            Cell(item.title, subtitle: item.urlString)
         }
     }
 
