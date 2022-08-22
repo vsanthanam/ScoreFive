@@ -25,6 +25,7 @@
 
 import AppFoundation
 import Combine
+import ListCell
 import MailView
 import Network
 import SafariView
@@ -58,36 +59,32 @@ struct MoreView: View {
                         Button(action: {
                             UIApplication.shared.open(url)
                         }) {
-                            Cell(title: {
-                                Text("Twitter")
-                                    .foregroundColor(.label)
-                            }, icon: {
+                            ListCell("Twitter", icon: {
                                 Image("Twitter")
                                     .renderingMode(.template)
                                     .resizable()
                                     .frame(width: 20, height: 20, alignment: .center)
                                     .foregroundColor(.accentColor)
                             }, disclosureIndicator: true)
-
                         }
                     }
                     if MailView.canSendMail || isUITest {
                         Button(action: {
                             showMail.toggle()
                         }) {
-                            Cell("Email", systemImage: "envelope", disclosureIndicator: true)
+                            ListCell("Email", systemImage: "envelope", disclosureIndicator: true)
                         }
                     }
                     Button(action: {
                         safariUrl = URL(string: MoreView.instructionsUrlString)
                     }) {
-                        Cell("Instructions", systemImage: "book", disclosureIndicator: true)
+                        ListCell("Instructions", systemImage: "book", disclosureIndicator: true)
                     }
                     if let url = URL(string: MoreView.privacyUrlString) {
                         Button(action: {
                             safariUrl = url
                         }) {
-                            Cell("Privacy", systemImage: "shield.lefthalf.filled", disclosureIndicator: true)
+                            ListCell("Privacy", systemImage: "shield.lefthalf.filled", disclosureIndicator: true)
                         }
                     }
                 } header: {
@@ -95,25 +92,25 @@ struct MoreView: View {
                 }
                 Section {
                     Button(action: shareApp) {
-                        Cell("Tell a Friend", systemImage: "square.and.arrow.up", disclosureIndicator: true)
+                        ListCell("Tell a Friend", systemImage: "square.and.arrow.up", disclosureIndicator: true)
                     }
                     Button(action: leaveReview) {
-                        Cell("Rate & Review", systemImage: "star.bubble", disclosureIndicator: true)
+                        ListCell("Rate & Review", systemImage: "star.bubble", disclosureIndicator: true)
                     }
                 } header: {
                     Text("Support ScoreFive")
                 }
                 Section {
-                    Cell("Version", systemImage: "info.circle", badge: "\(AppInfo.version) (\(AppInfo.build))")
+                    ListCell("Version", systemImage: "info.circle", badge: "\(AppInfo.version) (\(AppInfo.build))")
                     NavigationLink(destination: {
                         Acknowledgements()
                     }) {
-                        Cell("Acknowledgements", systemImage: "heart.text.square")
+                        ListCell("Acknowledgements", systemImage: "heart.text.square")
                     }
                     Button(action: {
                         safariUrl = URL(string: MoreView.sourceCodeUrlString)
                     }) {
-                        Cell("Source Code", systemImage: "chevron.left.forwardslash.chevron.right", disclosureIndicator: true)
+                        ListCell("Source Code", systemImage: "chevron.left.forwardslash.chevron.right", disclosureIndicator: true)
                     }
                 } header: {
                     Text("About")

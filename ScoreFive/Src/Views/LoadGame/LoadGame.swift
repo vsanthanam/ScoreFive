@@ -24,6 +24,7 @@
 // SOFTWARE.
 
 import CoreData
+import ListCell
 import SwiftUI
 
 struct LoadGame: View {
@@ -61,11 +62,9 @@ struct LoadGame: View {
                 if hasContent, (showCompleteGames || gameRecords.count == inProgressGameRecords.count), !listEditMode.isEditing {
                     Section {
                         Button(role: .destructive,
-                               action: {
-                                   showEraseAllConfirm.toggle()
-                               }) {
-                            Text("Erase All")
-                                .frame(maxWidth: .infinity)
+                               action: { showEraseAllConfirm.toggle() }) {
+                            ListCell("Erase All")
+                                .listCellStyle(.buttonListCellStyle(accentColor: nil))
                         }
                         .confirmationDialog("Are You Sure?",
                                             isPresented: $showEraseAllConfirm,

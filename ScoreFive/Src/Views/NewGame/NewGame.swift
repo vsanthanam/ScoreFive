@@ -26,6 +26,7 @@
 import Collections
 import Five
 import Foundation
+import ListCell
 import SwiftUI
 
 struct NewGame: View {
@@ -67,12 +68,18 @@ struct NewGame: View {
                     }
                     .deleteDisabled(players.count <= 2)
                     if canAddPlayer {
-                        FormButton(text: "Add Player", action: addPlayer)
+                        Button(action: addPlayer) {
+                            ListCell("Add Player")
+                        }
+                        .listCellStyle(.defaultButtonStyle)
                     }
                 }
                 if canSaveGame {
                     Section {
-                        FormButton(text: "Start Game", action: save)
+                        Button(action: save) {
+                            ListCell("Start Game")
+                        }
+                        .listCellStyle(.defaultButtonStyle)
                     }
                 }
             }

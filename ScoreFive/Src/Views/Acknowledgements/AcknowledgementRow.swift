@@ -23,6 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import ListCell
 import SwiftUI
 
 struct AcknowledgementRow: View {
@@ -39,7 +40,16 @@ struct AcknowledgementRow: View {
 
     var body: some View {
         Button(action: { onTap(item) }) {
-            Cell(item.title, subtitle: item.urlString)
+            ListCell(content: {
+                VStack(alignment: .leading) {
+                    Text(item.title)
+                        .font(.body)
+                        .foregroundColor(.label)
+                    Text(item.urlString)
+                        .font(.caption)
+                        .foregroundColor(.secondaryLabel)
+                }
+            }, disclosureIndicator: true)
         }
     }
 

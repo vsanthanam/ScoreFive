@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "listcell",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vsanthanam/ListCell.git",
+      "state" : {
+        "revision" : "f0ca60808044ccead72732ade69c9d88d6b224ab",
+        "version" : "0.0.2"
+      }
+    },
+    {
       "identity" : "mailview",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vsanthanam/MailView.git",
