@@ -37,13 +37,13 @@ struct NewGame: View {
         NavigationView {
             Form {
                 Section {
-                    TextField("Score Limit", text: scoreLimitBinding)
+                    ListCell(placeholder: "Score Limit", input: scoreLimitBinding)
                         .keyboardType(.numberPad)
                         .focused($focusedPlayerIndex, equals: -1)
+                        .submitLabel(.next)
                         .onSubmit {
                             focusedPlayerIndex = 0
                         }
-                        .submitLabel(.next)
                 }
                 Section {
                     ForEach(players) { player in

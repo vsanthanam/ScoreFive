@@ -92,7 +92,6 @@ final class GameManager: ObservableObject {
         for result in results {
             viewContext.delete(result)
         }
-        try save()
     }
 
     public var cloudPublisher: AnyPublisher<Notification, Never> {

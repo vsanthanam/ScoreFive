@@ -23,6 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import ListCell
 import SwiftUI
 
 struct PlayerTextField: View {
@@ -40,7 +41,7 @@ struct PlayerTextField: View {
     // MARK: - View
 
     var body: some View {
-        TextField("Player \(index + 1)", text: player)
+        ListCell(placeholder: "Player \(index + 1)", input: player)
             .autocapitalization(.words)
             .keyboardType(.default)
             .disableAutocorrection(true)

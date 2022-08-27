@@ -71,11 +71,12 @@ struct LoadGame: View {
                                             titleVisibility: .visible,
                                             actions: {
                                                 Button("Erase All", role: .destructive) {
-                                                    try! gameManager.destroyAllRecords()
+                                                    dismiss()
+                                                    Task {
+                                                        try await destroyAll()
+                                                    }
                                                 }
-                                                Button("Cancel", role: .cancel) {
-                                                    showEraseAllConfirm = false
-                                                }
+                                                Button("Cancel", role: .cancel) {}
                                             }) {
                             Text("All if your games, including games you have not completed, will be permanently removed from the device. This action is irreversible.")
                         }
@@ -165,6 +166,17 @@ struct LoadGame: View {
         dismiss()
     }
 
+    private func destroyAll() async throws {
+        // SwiftUI is very stupid sometimes
+        dismiss()
+        try await Task.sleep(nanoseconds: 1000)
+        await MainActor.run {
+            withAnimation {
+                try? gameManager.destroyAllRecords()
+                try? gameManager.save()
+            }
+        }
+    }
 }
 
 struct LoadGame_Previews: PreviewProvider {
