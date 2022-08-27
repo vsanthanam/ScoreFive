@@ -23,11 +23,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import AppFoundation
 import Combine
 import CoreData
 import Five
 import Foundation
+import Outils
 import SwiftUI
 
 @MainActor
@@ -144,7 +144,7 @@ extension GameRecord {
     var recordedGame: Game {
         get throws {
             guard let gameData = gameData else {
-                throw StaticError(errorDescription: "No Game Data In Record!")
+                throw AnyError("No Game Data In Record!")
             }
             return try JSONDecoder().decode(Game.self, from: gameData)
         }

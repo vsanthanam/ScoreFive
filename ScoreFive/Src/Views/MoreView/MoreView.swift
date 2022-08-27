@@ -23,11 +23,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import AppFoundation
 import Combine
 import ListCell
 import MailView
 import Network
+import Outils
 import SafariView
 import StoreKit
 import SwiftUI

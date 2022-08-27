@@ -38,12 +38,12 @@
 		07A0A56D2896EF3D004F4196 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56C2896EF3D004F4196 /* SnapshotHelper.swift */; };
 		07A0A56F28971519004F4196 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56E28971519004F4196 /* Acknowledgement.swift */; };
 		07A0A5712897153F004F4196 /* AcknowledgementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A5702897153F004F4196 /* AcknowledgementRow.swift */; };
+		07DF790B28BAACA000DF0E05 /* Outils in Frameworks */ = {isa = PBXBuildFile; productRef = 07DF790A28BAACA000DF0E05 /* Outils */; };
 		07E25147288C45060061AA19 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25146288C45060061AA19 /* Introspect */; };
 		07E2514F288C4BCC0061AA19 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 07E2514D288C4BCC0061AA19 /* LICENSE */; };
 		07E25150288C4BCC0061AA19 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 07E2514E288C4BCC0061AA19 /* README.md */; };
 		07E25153288C4D040061AA19 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25152288C4D040061AA19 /* MoreView.swift */; };
 		07E25155288C4FBD0061AA19 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25154288C4FBD0061AA19 /* MenuButton.swift */; };
-		07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 07E25179288DCFB80061AA19 /* AppFoundation */; };
 		07E2517E288DDB0F0061AA19 /* Five in Frameworks */ = {isa = PBXBuildFile; productRef = 07E2517D288DDB0F0061AA19 /* Five */; };
 		07E25181288DF9D30061AA19 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E25180288DF9D30061AA19 /* Menu.swift */; };
 /* End PBXBuildFile section */
@@ -105,6 +105,7 @@
 			files = (
 				077233B928AE9A46003EE3AD /* CloudKit.framework in Frameworks */,
 				0713050928AFDDB700B80968 /* SwiftUI.framework in Frameworks */,
+				07DF790B28BAACA000DF0E05 /* Outils in Frameworks */,
 				07E2517E288DDB0F0061AA19 /* Five in Frameworks */,
 				0713050728AFDDAB00B80968 /* Combine.framework in Frameworks */,
 				0719CCD628B3009B00B428D0 /* ListCell in Frameworks */,
@@ -114,7 +115,6 @@
 				075F15FE288B53D200E238C0 /* Collections in Frameworks */,
 				07E25147288C45060061AA19 /* Introspect in Frameworks */,
 				0713050D28AFDDC400B80968 /* CoreData.framework in Frameworks */,
-				07E2517A288DCFB80061AA19 /* AppFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,11 +374,11 @@
 			packageProductDependencies = (
 				075F15FD288B53D200E238C0 /* Collections */,
 				07E25146288C45060061AA19 /* Introspect */,
-				07E25179288DCFB80061AA19 /* AppFoundation */,
 				07E2517D288DDB0F0061AA19 /* Five */,
 				0747A457289338D5001A561C /* SafariView */,
 				074374B9289F0546001279F8 /* MailView */,
 				0719CCD528B3009B00B428D0 /* ListCell */,
+				07DF790A28BAACA000DF0E05 /* Outils */,
 			);
 			productName = ScoreFive;
 			productReference = 076A0C3C287B35A000A75AE9 /* ScoreFive.app */;
@@ -433,10 +433,10 @@
 			packageReferences = (
 				0714D1E2288327E400CE45A3 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				07E25145288C45060061AA19 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				07E25178288DCFB80061AA19 /* XCRemoteSwiftPackageReference "AppFoundation" */,
 				0747A455289338B6001A561C /* XCRemoteSwiftPackageReference "SafariView" */,
 				074374B8289F0545001279F8 /* XCRemoteSwiftPackageReference "MailView" */,
 				0719CCD428B3009B00B428D0 /* XCRemoteSwiftPackageReference "ListCell" */,
+				07DF790928BAACA000DF0E05 /* XCRemoteSwiftPackageReference "Outils" */,
 			);
 			productRefGroup = 076A0C3D287B35A000A75AE9 /* Products */;
 			projectDirPath = "";
@@ -639,7 +639,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 251;
+				CURRENT_PROJECT_VERSION = 252;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -652,7 +652,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFive2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -669,7 +669,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 251;
+				CURRENT_PROJECT_VERSION = 252;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -682,7 +682,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFive2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -791,20 +791,20 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		07DF790928BAACA000DF0E05 /* XCRemoteSwiftPackageReference "Outils" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vsanthanam/Outils.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
 		07E25145288C45060061AA19 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.1.4;
-			};
-		};
-		07E25178288DCFB80061AA19 /* XCRemoteSwiftPackageReference "AppFoundation" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/vsanthanam/AppFoundation.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -830,15 +830,15 @@
 			package = 0714D1E2288327E400CE45A3 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
 		};
+		07DF790A28BAACA000DF0E05 /* Outils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07DF790928BAACA000DF0E05 /* XCRemoteSwiftPackageReference "Outils" */;
+			productName = Outils;
+		};
 		07E25146288C45060061AA19 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 07E25145288C45060061AA19 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
-		};
-		07E25179288DCFB80061AA19 /* AppFoundation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 07E25178288DCFB80061AA19 /* XCRemoteSwiftPackageReference "AppFoundation" */;
-			productName = AppFoundation;
 		};
 		07E2517D288DDB0F0061AA19 /* Five */ = {
 			isa = XCSwiftPackageProductDependency;
