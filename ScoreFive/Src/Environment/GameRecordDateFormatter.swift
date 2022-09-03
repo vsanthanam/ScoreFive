@@ -53,3 +53,27 @@ extension EnvironmentValues {
     }
 
 }
+
+private struct GameRecordDateFormatterModifier: ViewModifier {
+
+    // MARK: - API
+
+    let formatter: DateFormatter
+
+    // MARK: - ViewModifier
+
+    func body(content: Content) -> some View {
+        content
+            .environment(\.gameRecordDateFormatter, formatter)
+    }
+
+}
+
+extension View {
+
+    func gameRecordDateFormatter(_ formatter: DateFormatter) -> some View {
+        let modifier = GameRecordDateFormatterModifier(formatter: formatter)
+        return ModifiedContent(content: self, modifier: modifier)
+    }
+
+}

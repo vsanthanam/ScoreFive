@@ -1,5 +1,5 @@
 // ScoreFive
-// Main.swift
+// Root.swift
 //
 // MIT License
 //
@@ -27,7 +27,7 @@ import CoreData
 import Five
 import SwiftUI
 
-struct Main: View {
+struct Root: View {
 
     // MARK: - View
 
@@ -52,14 +52,17 @@ struct Main: View {
                maxHeight: .infinity)
         .sheet(isPresented: $showNewGameSheet) {
             NewGame()
-                .saveOnAppear(gameManager)
         }
         .sheet(isPresented: $showLoadGameSheet) {
             LoadGame()
-                .saveOnAppear(gameManager)
         }
         .sheet(isPresented: $showMoreSheet) {
             MoreView()
+        }
+        .alert("Operation Failed", isPresented: $showOperationError) {
+            Button("OK") {}
+        } message: {
+            Text("Cannot perform operation")
         }
         .onAppear {
             guard !isPreview, !isUITest else { return }
@@ -68,28 +71,17 @@ struct Main: View {
         .onReceive(gameManager.cloudPublisher) { _ in
             if !isPreview,
                !isUITest,
-               let activeIdentifier = gameManager.activeGameRecord?.gameIdentifier {
-                try! gameManager.deactivateGame()
-                if let newRecord = gameRecords.first(where: { $0.gameIdentifier == activeIdentifier }) {
-                    try! gameManager.activateGame(with: newRecord)
+               gameManager.activeGameRecord != nil {
+                do {
+                    try gameManager.deactivateGame()
+                } catch {
+                    showOperationError = true
                 }
             }
         }
     }
 
     // MARK: - Private
-
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp, order: .reverse)])
-    private var gameRecords: FetchedResults<GameRecord>
-
-    @EnvironmentObject
-    private var gameManager: GameManager
-
-    @Environment(\.isPreview)
-    private var isPreview: Bool
-
-    @Environment(\.isUITest)
-    private var isUITest: Bool
 
     @State
     private var showNewGameSheet = false
@@ -100,22 +92,33 @@ struct Main: View {
     @State
     private var showMoreSheet = false
 
+    @State
+    private var showOperationError = false
+
     @AppStorage("launch_count")
     private var launchCount = 0
 
+    @Environment(\.isPreview)
+    private var isPreview: Bool
+
+    @Environment(\.isUITest)
+    private var isUITest: Bool
+
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp, order: .reverse)])
+    private var gameRecords: FetchedResults<GameRecord>
+
+    @EnvironmentObject
+    private var gameManager: GameManager
+
 }
 
-private extension View {
-    func saveOnAppear(_ manager: GameManager) -> some View {
-        onAppear {
-            Task { await MainActor.run { try! manager.save() } }
-        }
-    }
-}
+struct Root_Previews: PreviewProvider {
 
-struct Main_Previews: PreviewProvider {
+    static let manager = GameManager.preview
+
     static var previews: some View {
-        Main()
-            .environmentObject(GameManager.preview)
+        Root()
+            .environmentObject(manager)
+            .environment(\.managedObjectContext, manager.viewContext)
     }
 }

@@ -39,7 +39,7 @@ struct ScoreFive: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            Root()
                 .environment(\.managedObjectContext, gameManager.viewContext)
                 .environmentObject(gameManager)
         }
