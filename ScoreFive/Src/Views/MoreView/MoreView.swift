@@ -35,14 +35,6 @@ struct MoreView: View {
 
     // MARK: - View
 
-    private var twitterIcon: some View {
-        Image("Twitter")
-            .renderingMode(.template)
-            .resizable()
-            .frame(width: 20, height: 20, alignment: .center)
-            .foregroundColor(.accentColor)
-    }
-
     var body: some View {
         NavigationView {
             List {
@@ -56,26 +48,17 @@ struct MoreView: View {
                     Text("Preferences")
                 }
                 Section {
-                    if let url = URL(string: MoreView.twitterUrlString),
-                       UIApplication.shared.canOpenURL(url) {
-                        Button(action: {
-                            Task {
-                                await UIApplication.shared.open(url)
-                            }
-                        }) {
-                            HStack {
-                                Label(title: {
-                                    Text("Twitter")
-                                }, icon: {
-                                    twitterIcon
-                                })
-                                Spacer()
-                                Chevron()
-                            }
+                    Button(action: openTwitter) {
+                        HStack {
+                            Label(title: {
+                                Text("Twitter")
+                            }, icon: twitterIcon)
+                            Spacer()
+                            Chevron()
                         }
                     }
                     if MailView.canSendMail || isUITest {
-                        Button(action: { showMail.toggle() }) {
+                        Button(action: sendEmail) {
                             HStack {
                                 Label("Email", systemImage: "envelope")
                                 Spacer()
@@ -83,14 +66,14 @@ struct MoreView: View {
                             }
                         }
                     }
-                    Button(action: { safariUrl = URL(string: MoreView.instructionsUrlString) }) {
+                    Button(action: openInstructions) {
                         HStack {
                             Label("Instructions", systemImage: "book")
                             Spacer()
                             Chevron()
                         }
                     }
-                    Button(action: { safariUrl = URL(string: MoreView.privacyUrlString) }) {
+                    Button(action: viewPrivacy) {
                         HStack {
                             Label("Privacy", systemImage: "shield.lefthalf.filled")
                             Spacer()
@@ -126,7 +109,7 @@ struct MoreView: View {
                     }) {
                         Label("Acknowledgements", systemImage: "heart.text.square")
                     }
-                    Button(action: { safariUrl = URL(string: MoreView.sourceCodeUrlString) }) {
+                    Button(action: viewSourceCode) {
                         HStack {
                             Label("Source Code", systemImage: "chevron.left.forwardslash.chevron.right")
                             Spacer()
@@ -141,8 +124,8 @@ struct MoreView: View {
             .navigationTitle("More")
             .closeButton { dismiss() }
         }
-        .safari(url: $safariUrl) { url in
-            SafariView(url: url)
+        .safari(item: $safariUrl) { url in
+            SafariView(url: URL(string: url.rawValue)!)
         }
         .mailView(isPresented: $showMail) {
             MailView()
@@ -151,10 +134,9 @@ struct MoreView: View {
                 .messageBody("I need some help with ScoreFive!")
         }
         .onAppear {
-            let urls = [MoreView.instructionsUrlString,
-                        MoreView.twitterUrlString,
-                        MoreView.privacyUrlString,
-                        MoreView.sourceCodeUrlString]
+            let urls = SafariURL
+                .allCases
+                .map(\.rawValue)
                 .compactMap(URL.init(string:))
             token = SafariView.prewarmConnections(to: urls)
         }
@@ -164,6 +146,14 @@ struct MoreView: View {
     }
 
     // MARK: - Private
+
+    private enum SafariURL: String, CaseIterable, Identifiable {
+        case instructions = "https://www.scorefive.app"
+        case privacy = "https://www.scorefive.app/privacy"
+        case sourceCode = "https://www.github.com/vsanthanam/ScoreFive"
+
+        var id: String { rawValue }
+    }
 
     @State
     private var token: SafariView.PrewarmingToken?
@@ -175,7 +165,7 @@ struct MoreView: View {
     private var isUITest: Bool
 
     @State
-    private var safariUrl: URL?
+    private var safariUrl: SafariURL?
 
     @State
     private var showMail = false
@@ -186,10 +176,18 @@ struct MoreView: View {
     @AppStorage("requested_review")
     private var requestedReview = false
 
-    private static let instructionsUrlString = "https://www.scorefive.app"
-    private static let twitterUrlString = "https://twitter.vsanthanam.com"
-    private static let privacyUrlString = "https://www.scorefive.app/privacy"
-    private static let sourceCodeUrlString = "https://www.github.com/vsanthanam/ScoreFive"
+    @ViewBuilder
+    private func twitterIcon() -> some View {
+        Image("Twitter")
+            .renderingMode(.template)
+            .resizable()
+            .frame(width: 20, height: 20, alignment: .center)
+            .foregroundColor(.accentColor)
+    }
+
+    private func sendEmail() {
+        showMail = true
+    }
 
     private func leaveReview() {
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
@@ -198,7 +196,7 @@ struct MoreView: View {
             requestedReview = true
         } else if let url = URL(string: "https://itunes.apple.com/app/id1637035385?action=write-review"),
                   UIApplication.shared.canOpenURL(url) {
-            Task { await UIApplication.shared.open(url, options: [:]) }
+            UIApplication.shared.open(url, options: [:])
         }
     }
 
@@ -217,6 +215,26 @@ struct MoreView: View {
             av.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height, width: 0, height: 0)
         }
         vc.present(av, animated: true, completion: nil)
+    }
+
+    private func viewPrivacy() {
+        safariUrl = .privacy
+    }
+
+    private func viewSourceCode() {
+        safariUrl = .sourceCode
+    }
+
+    private func openInstructions() {
+        safariUrl = .instructions
+    }
+
+    private func openTwitter() {
+        guard let url = URL(string: "https://twitter.vsanthanam.com"),
+              UIApplication.shared.canOpenURL(url) else {
+            return
+        }
+        UIApplication.shared.open(url)
     }
 }
 

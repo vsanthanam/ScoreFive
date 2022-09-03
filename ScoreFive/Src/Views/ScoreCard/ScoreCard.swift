@@ -50,21 +50,19 @@ struct ScoreCard: View {
                         .onDelete(perform: deleteItems)
 
                     if !game.isComplete {
-                        let signpost = indexByPlayer ? game.startingPlayer(atIndex: game.rounds.count).signpost(for: game.allPlayers) : (game.rounds.count + 1).description
-                        AddRow(signpost: signpost)
-                            .scoreCardRow()
-                            .onTapGesture(perform: showAddRound)
-                            .sheet(isPresented: $showingAddRound) {
-                                RoundEditor(game: $game)
-                            }
+                        Button(action: showAddRound) {
+                            AddRow(signpost: signpost(for: game.rounds.count))
+                        }
+                        .scoreCardRow()
+                        .sheet(isPresented: $showingAddRound) {
+                            RoundEditor(game: $game)
+                        }
                     }
-
                     Spacer()
                         .frame(maxWidth: .infinity, maxHeight: 44)
                         .listRowSeparator(.hidden)
-
                 }
-                .listStyle(PlainListStyle())
+                .listStyle(.plain)
                 Divider()
                     .padding(.init(top: 0, leading: 48, bottom: 0, trailing: 0))
                 TotalScoreBar(game: $game)
@@ -127,15 +125,19 @@ struct ScoreCard: View {
     private func makeRound(_ round: Round) -> some View {
         let index = game.rounds.firstIndex(of: round)!
         let color: Color = index % 2 == 0 ? .secondarySystemBackground : .tertiarySystemBackground
-        let signpost = indexByPlayer ? game.startingPlayer(atIndex: index).signpost(for: game.allPlayers) : (index + 1).description
-        ScoreRow(signpost: signpost,
-                 round: round,
-                 players: game.allPlayers,
-                 activePlayers: game.activePlayers)
-            .scoreCardRow(color: color)
-            .onTapGesture {
-                editingRound = RoundAndIndex(round: round, index: index)
-            }
+        Button(action: {
+            editingRound = RoundAndIndex(round: round, index: index)
+        }) {
+            ScoreRow(signpost: signpost(for: index),
+                     round: round,
+                     players: game.allPlayers,
+                     activePlayers: game.activePlayers)
+        }
+        .scoreCardRow(color: color)
+    }
+
+    private func signpost(for index: Int) -> String {
+        indexByPlayer ? game.startingPlayer(atIndex: index).signpost(for: game.allPlayers) : (index + 1).description
     }
 
     private func showAddRound() {
