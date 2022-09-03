@@ -26,7 +26,9 @@
 import Foundation
 import SwiftUI
 
-struct PlayerListFormatterKey: EnvironmentKey {
+private struct PlayerListFormatterKey: EnvironmentKey {
+
+    // MARK: - EnvironmentKey
 
     typealias Value = ListFormatter
 
@@ -36,7 +38,7 @@ struct PlayerListFormatterKey: EnvironmentKey {
 
 extension EnvironmentValues {
 
-    var playerListFormatter: PlayerListFormatterKey.Value {
+    var playerListFormatter: ListFormatter {
         get {
             self[PlayerListFormatterKey.self]
         }

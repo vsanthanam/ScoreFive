@@ -26,7 +26,9 @@
 import Foundation
 import SwiftUI
 
-struct GameRecordDateFormatterKey: EnvironmentKey {
+private struct GameRecordDateFormatterKey: EnvironmentKey {
+
+    // MARK: - EnvironmentKey
 
     typealias Value = DateFormatter
 
@@ -41,7 +43,7 @@ struct GameRecordDateFormatterKey: EnvironmentKey {
 
 extension EnvironmentValues {
 
-    var gameRecordDateFormatter: GameRecordDateFormatterKey.Value {
+    var gameRecordDateFormatter: DateFormatter {
         get {
             self[GameRecordDateFormatterKey.self]
         }

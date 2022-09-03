@@ -23,17 +23,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
 import SwiftUI
 
 struct CellLabelStyle: LabelStyle {
 
+    // MARK: - LabelStyle
+
     func makeBody(configuration: Configuration) -> some View {
-        Label(title: {
+        Label() {
             configuration.title.foregroundColor(.label)
-        }, icon: {
+        } icon: {
             configuration.icon.foregroundColor(.tintColor)
-        })
+        }
     }
 
 }
