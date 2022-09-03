@@ -35,7 +35,7 @@ struct Acknowledgements: View {
         List {
             Section {
                 ForEach(Acknowledgements.tools.sorted(by: \.title)) { item in
-                    AcknowledgementRow(item: item) { item in
+                    Row(item: item) { item in
                         activeSafariUrl = URL(string: item.urlString)
                     }
                 }
@@ -44,7 +44,7 @@ struct Acknowledgements: View {
             }
             Section {
                 ForEach(Acknowledgements.services.sorted(by: \.title)) { item in
-                    AcknowledgementRow(item: item) { item in
+                    Row(item: item) { item in
                         activeSafariUrl = URL(string: item.urlString)
                     }
                 }
@@ -77,6 +77,43 @@ struct Acknowledgements: View {
 
     @State
     private var activeSafariUrl: URL?
+
+    private struct Row: View {
+
+        // MARK: - Initializers
+
+        init(item: Acknowledgement,
+             action: @escaping (Acknowledgement) -> Void) {
+            self.item = item
+            self.action = action
+        }
+
+        // MARK: - View
+
+        var body: some View {
+            Button(action: {
+                action(item)
+            }) {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(item.title)
+                            .font(.body)
+                            .foregroundColor(.label)
+                        Text(item.urlString)
+                            .font(.caption)
+                            .foregroundColor(.secondaryLabel)
+                    }
+                    Spacer()
+                    Chevron()
+                }
+            }
+        }
+
+        // MARK: - Private
+
+        private let item: Acknowledgement
+        private let action: (Acknowledgement) -> Void
+    }
 }
 
 struct Acknowledgements_Previews: PreviewProvider {

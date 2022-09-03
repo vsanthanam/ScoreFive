@@ -1,5 +1,5 @@
 // ScoreFive
-// AcknowledgementRow.swift
+// SceneDelegate.swift
 //
 // MIT License
 //
@@ -23,40 +23,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import Foundation
+import UIKit
 
-struct AcknowledgementRow: View {
+final class SceneDelegate: NSObject, UISceneDelegate {
 
-    // MARK: - Initializers
+    // MARK: - UISceneDelegate
 
-    init(item: Acknowledgement, action: @escaping (Acknowledgement) -> Void) {
-        self.item = item
-        self.action = action
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        try? GameManager.shared.save()
     }
 
-    // MARK: - View
-
-    var body: some View {
-        Button(action: {
-            action(item)
-        }) {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(item.title)
-                        .font(.body)
-                        .foregroundColor(.label)
-                    Text(item.urlString)
-                        .font(.caption)
-                        .foregroundColor(.secondaryLabel)
-                }
-                Spacer()
-                Chevron()
-            }
-        }
-    }
-
-    // MARK: - Private
-
-    private let item: Acknowledgement
-    private let action: (Acknowledgement) -> Void
 }
