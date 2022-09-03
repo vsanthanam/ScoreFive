@@ -24,6 +24,7 @@
 // SOFTWARE.
 
 import CoreData
+import Outils
 import SwiftUI
 
 struct LoadGame: View {
@@ -56,7 +57,7 @@ struct LoadGame: View {
                         }
                         .foregroundColor(.label)
                     }
-                    .onDelete(perform: deleteItems(offsets:))
+                    .onDelete(perform: deleteItems)
                 }
                 if hasContent, (showCompleteGames || gameRecords.count == inProgressGameRecords.count), !listEditMode.isEditing {
                     Section {
@@ -69,18 +70,18 @@ struct LoadGame: View {
                                             isPresented: $showEraseAllConfirm,
                                             titleVisibility: .visible,
                                             actions: {
-                                                Button("Erase All", role: .destructive) {
-                                                    dismiss()
-                                                    Task {
-                                                        try await destroyAll()
-                                                    }
-                                                }
+                                                Button("Erase All", role: .destructive, action: destroyAll)
                                                 Button("Cancel", role: .cancel) {}
                                             }) {
                             Text("All if your games, including games you have not completed, will be permanently removed from the device. This action is irreversible.")
                         }
                     }
                 }
+            }
+            .alert("Operation Failed", isPresented: $showOperationError) {
+                Button("OK") {}
+            } message: {
+                Text("Cannot perform operation")
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -114,7 +115,7 @@ struct LoadGame: View {
 
     private let dateFormatter = DateFormatter()
 
-    private let didSave = NotificationCenter.default.publisher(for: NSNotification.Name.NSManagedObjectContextDidSave)
+    private let didSave = NotificationCenter.default.publisher(for: NSNotification.Name.NSManagedObjectContextDidSave).receive(on: DispatchQueue.main)
 
     @AppStorage("show_complete_games")
     private var showCompleteGames: Bool = false
@@ -127,6 +128,9 @@ struct LoadGame: View {
 
     @State
     private var showEraseAllConfirm = false
+
+    @State
+    private var showOperationError = false
 
     @Environment(\.dismiss)
     private var dismiss: DismissAction
@@ -149,30 +153,41 @@ struct LoadGame: View {
     }
 
     private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets
-                .map { showCompleteGames ? gameRecords[$0] : inProgressGameRecords[$0] }
-                .forEach(gameManager.viewContext.delete)
-            try! gameManager.save()
+        do {
+            try withAnimation {
+                offsets
+                    .map { showCompleteGames ? gameRecords[$0] : inProgressGameRecords[$0] }
+                    .forEach(gameManager.viewContext.delete)
+                try gameManager.save()
+            }
+        } catch {
+            showOperationError = true
         }
     }
 
     private func openGame(withRecord record: GameRecord) {
-        guard !listEditMode.isEditing else { return }
-        withAnimation {
-            try! gameManager.activateGame(with: record)
+        do {
+            guard !listEditMode.isEditing else { return }
+            try withAnimation {
+                try gameManager.activateGame(with: record)
+            }
+            dismiss()
+        } catch {
+            showOperationError = true
         }
-        dismiss()
     }
 
-    private func destroyAll() async throws {
-        // SwiftUI is very stupid sometimes
-        dismiss()
-        try await Task.sleep(nanoseconds: 1000)
-        await MainActor.run {
-            withAnimation {
-                try? gameManager.destroyAllRecords()
-                try? gameManager.save()
+    private func destroyAll() {
+        Task {
+            await MainActor.run {
+                do {
+                    try withAnimation {
+                        try gameManager.destroyAllRecords()
+                        try gameManager.save()
+                    }
+                } catch {
+                    showOperationError = true
+                }
             }
         }
     }
