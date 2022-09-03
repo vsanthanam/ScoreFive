@@ -48,3 +48,27 @@ extension EnvironmentValues {
     }
 
 }
+
+private struct PlayerListFormatterModifier: ViewModifier {
+
+    // MARK: - API
+
+    let formatter: ListFormatter
+
+    // MARK: - ViewModifier
+
+    func body(content: Content) -> some View {
+        content
+            .environment(\.playerListFormatter, formatter)
+    }
+
+}
+
+extension View {
+
+    func playerListFormatter(_ formatter: ListFormatter) -> some View {
+        let modifier = PlayerListFormatterModifier(formatter: formatter)
+        return ModifiedContent(content: self, modifier: modifier)
+    }
+
+}
