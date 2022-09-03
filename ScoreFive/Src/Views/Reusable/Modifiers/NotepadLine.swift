@@ -1,5 +1,5 @@
 // ScoreFive
-// MenuButton.swift
+// NotepadLine.swift
 //
 // MIT License
 //
@@ -25,45 +25,29 @@
 
 import SwiftUI
 
-struct MenuButton: View {
+extension View {
 
-    // MARK: - Initializers
-
-    init(_ message: String,
-         systemName: String,
-         action: @escaping () -> Void = {}) {
-        self.message = message
-        self.systemName = systemName
-        self.action = action
+    func notepadLine() -> some View {
+        let modifier = NotepadLineModifier()
+        return ModifiedContent(content: self, modifier: modifier)
     }
-
-    // MARK: - View
-
-    var body: some View {
-        Button(action: action) {
-            HStack {
-                Image(systemName: systemName)
-                Text(message)
-            }
-            .frame(width: 140)
-        }
-        .buttonStyle(.borderedProminent)
-    }
-
-    // MARK: - Private
-
-    private let action: () -> Void
-    private let message: String
-    private let systemName: String
 
 }
 
-struct MenuButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self) { scheme in
-            MenuButton("New Game", systemName: "doc.badge.plus")
-                .previewLayout(PreviewLayout.sizeThatFits)
-                .colorScheme(scheme)
+private struct NotepadLineModifier: ViewModifier {
+
+    // MARK: - ViewModifier
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        ZStack(alignment: .leading) {
+            content
+            Rectangle()
+                .fill(Color.tintColor)
+                .frame(maxWidth: 0.5, maxHeight: .infinity)
+                .padding(.init(top: 0, leading: 48, bottom: 0, trailing: 0))
+                .ignoresSafeArea(.all, edges: [.bottom])
+                .opacity(0.7)
         }
     }
 }

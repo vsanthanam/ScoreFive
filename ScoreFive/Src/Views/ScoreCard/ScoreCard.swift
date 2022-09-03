@@ -40,50 +40,36 @@ struct ScoreCard: View {
 
     var body: some View {
         NavigationView {
-            ZStack(alignment: .leading) {
-                VStack(spacing: 0) {
-                    Divider()
-                    PlayerBar(players: game.allPlayers,
-                              activePlayers: game.activePlayers)
-                    Divider()
-                    List {
-                        ForEach(game.rounds) { round in
-                            let index = game.rounds.firstIndex(of: round)!
-                            let color: Color = index % 2 == 0 ? .secondarySystemBackground : .tertiarySystemBackground
-                            let signpost = indexByPlayer ? game.startingPlayer(atIndex: index).signpost(for: game.allPlayers) : (index + 1).description
-                            ScoreRow(signpost: signpost,
-                                     round: round,
-                                     players: game.allPlayers,
-                                     activePlayers: game.activePlayers)
-                                .scoreCardRow(color: color)
-                                .onTapGesture {
-                                    editingRound = RoundAndIndex(round: round, index: index)
-                                }
-                        }
-                        .onDelete(perform: deleteItems(offsets:))
+            VStack(spacing: 0) {
+                Divider()
+                PlayerBar(players: game.allPlayers,
+                          activePlayers: game.activePlayers)
+                Divider()
+                List {
+                    ForEach(game.rounds, content: makeRound)
+                        .onDelete(perform: deleteItems)
 
-                        if !game.isComplete {
-                            let signpost = indexByPlayer ? game.startingPlayer(atIndex: game.rounds.count).signpost(for: game.allPlayers) : (game.rounds.count + 1).description
-                            AddRow(signpost: signpost)
-                                .scoreCardRow()
-                                .onTapGesture(perform: showAddRound)
-                                .sheet(isPresented: $showingAddRound) {
-                                    RoundEditor(game: $game)
-                                }
-                        }
-
-                        Spacer()
-                            .frame(maxWidth: .infinity, maxHeight: 44)
-                            .listRowSeparator(.hidden)
-
+                    if !game.isComplete {
+                        let signpost = indexByPlayer ? game.startingPlayer(atIndex: game.rounds.count).signpost(for: game.allPlayers) : (game.rounds.count + 1).description
+                        AddRow(signpost: signpost)
+                            .scoreCardRow()
+                            .onTapGesture(perform: showAddRound)
+                            .sheet(isPresented: $showingAddRound) {
+                                RoundEditor(game: $game)
+                            }
                     }
-                    .listStyle(PlainListStyle())
-                    Divider()
-                        .padding(.init(top: 0, leading: 48, bottom: 0, trailing: 0))
-                    TotalScoreBar(game: $game)
+
+                    Spacer()
+                        .frame(maxWidth: .infinity, maxHeight: 44)
+                        .listRowSeparator(.hidden)
+
                 }
-                VerticalLine()
+                .listStyle(PlainListStyle())
+                Divider()
+                    .padding(.init(top: 0, leading: 48, bottom: 0, trailing: 0))
+                TotalScoreBar(game: $game)
             }
+            .notepadLine()
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
             .closeButton(action: close)
@@ -105,15 +91,6 @@ struct ScoreCard: View {
     }
 
     // MARK: - Private
-
-    private struct RoundAndIndex: Identifiable {
-        let round: Round
-        let index: Int
-
-        // MARK: - Identifiable
-
-        var id: String { round.id }
-    }
 
     @AppStorage("index_by_player")
     private var indexByPlayer = true
@@ -144,6 +121,21 @@ struct ScoreCard: View {
 
     private var totalScores: [Int] {
         game.allPlayers.map { game.totalScore(forPlayer: $0) }
+    }
+
+    @ViewBuilder
+    private func makeRound(_ round: Round) -> some View {
+        let index = game.rounds.firstIndex(of: round)!
+        let color: Color = index % 2 == 0 ? .secondarySystemBackground : .tertiarySystemBackground
+        let signpost = indexByPlayer ? game.startingPlayer(atIndex: index).signpost(for: game.allPlayers) : (index + 1).description
+        ScoreRow(signpost: signpost,
+                 round: round,
+                 players: game.allPlayers,
+                 activePlayers: game.activePlayers)
+            .scoreCardRow(color: color)
+            .onTapGesture {
+                editingRound = RoundAndIndex(round: round, index: index)
+            }
     }
 
     private func showAddRound() {
@@ -181,44 +173,14 @@ struct ScoreCard: View {
         }
     }
 
-    private struct VerticalLine: View {
+    private struct RoundAndIndex: Identifiable {
+        let round: Round
+        let index: Int
 
-        var body: some View {
-            Rectangle()
-                .fill(Color.tintColor)
-                .frame(maxWidth: 0.5, maxHeight: .infinity)
-                .padding(.init(top: 0, leading: 48, bottom: 0, trailing: 0))
-                .ignoresSafeArea(.all, edges: [.bottom])
-                .opacity(0.7)
-        }
+        // MARK: - Identifiable
 
+        var id: String { round.id }
     }
-
-}
-
-extension Game.Player {
-
-    func signpost(for players: OrderedSet<Game.Player>) -> String {
-        if contains("Player ") {
-            let index = players.firstIndex(of: self)!
-            return "P\(index + 1)"
-        } else {
-            return capitalized.first!.description
-        }
-    }
-
-}
-
-extension View {
-
-    func scoreCardRow(color: Color? = nil) -> some View {
-        padding(.vertical, 0)
-            .listRowSeparator(.hidden)
-            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-            .frame(maxWidth: .infinity, maxHeight: 44)
-            .background(color ?? .systemBackground)
-    }
-
 }
 
 struct ScoreCard_Previews: PreviewProvider {

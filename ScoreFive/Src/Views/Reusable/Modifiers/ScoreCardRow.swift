@@ -1,5 +1,5 @@
 // ScoreFive
-// MenuButton.swift
+// ScoreCardRow.swift
 //
 // MIT License
 //
@@ -25,45 +25,31 @@
 
 import SwiftUI
 
-struct MenuButton: View {
+extension View {
 
-    // MARK: - Initializers
-
-    init(_ message: String,
-         systemName: String,
-         action: @escaping () -> Void = {}) {
-        self.message = message
-        self.systemName = systemName
-        self.action = action
+    func scoreCardRow(color: Color? = nil) -> some View {
+        let modifier = ScoreCardRowModifier(color: color)
+        return ModifiedContent(content: self, modifier: modifier)
     }
-
-    // MARK: - View
-
-    var body: some View {
-        Button(action: action) {
-            HStack {
-                Image(systemName: systemName)
-                Text(message)
-            }
-            .frame(width: 140)
-        }
-        .buttonStyle(.borderedProminent)
-    }
-
-    // MARK: - Private
-
-    private let action: () -> Void
-    private let message: String
-    private let systemName: String
 
 }
 
-struct MenuButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self) { scheme in
-            MenuButton("New Game", systemName: "doc.badge.plus")
-                .previewLayout(PreviewLayout.sizeThatFits)
-                .colorScheme(scheme)
-        }
+private struct ScoreCardRowModifier: ViewModifier {
+
+    // MARK: - API
+
+    let color: Color?
+
+    // MARK: - ViewModifier
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        content
+            .padding(.vertical, 0)
+            .listRowSeparator(.hidden)
+            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+            .frame(maxWidth: .infinity, maxHeight: 44)
+            .background(color ?? .systemBackground)
     }
+
 }

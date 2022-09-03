@@ -1,5 +1,5 @@
 // ScoreFive
-// MenuButton.swift
+// PlayerExtensions.swift
 //
 // MIT License
 //
@@ -23,47 +23,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import Collections
+import Five
 
-struct MenuButton: View {
+extension Game.Player {
 
-    // MARK: - Initializers
-
-    init(_ message: String,
-         systemName: String,
-         action: @escaping () -> Void = {}) {
-        self.message = message
-        self.systemName = systemName
-        self.action = action
-    }
-
-    // MARK: - View
-
-    var body: some View {
-        Button(action: action) {
-            HStack {
-                Image(systemName: systemName)
-                Text(message)
-            }
-            .frame(width: 140)
-        }
-        .buttonStyle(.borderedProminent)
-    }
-
-    // MARK: - Private
-
-    private let action: () -> Void
-    private let message: String
-    private let systemName: String
-
-}
-
-struct MenuButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self) { scheme in
-            MenuButton("New Game", systemName: "doc.badge.plus")
-                .previewLayout(PreviewLayout.sizeThatFits)
-                .colorScheme(scheme)
+    func signpost(for players: OrderedSet<Game.Player>) -> String {
+        if contains("Player ") {
+            let index = players.firstIndex(of: self)!
+            return "P\(index + 1)"
+        } else {
+            return capitalized.first!.description
         }
     }
+
 }

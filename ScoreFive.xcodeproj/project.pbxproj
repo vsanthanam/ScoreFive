@@ -37,6 +37,9 @@
 		0783691B28C2F911009DE778 /* Chevron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783691A28C2F911009DE778 /* Chevron.swift */; };
 		0783691E28C3009A009DE778 /* CellLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783691D28C3009A009DE778 /* CellLabelStyle.swift */; };
 		0783694328C30AC5009DE778 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783694228C30AC5009DE778 /* SceneDelegate.swift */; };
+		0783694528C322A9009DE778 /* NotepadLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783694428C322A9009DE778 /* NotepadLine.swift */; };
+		0783694728C322F2009DE778 /* ScoreCardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783694628C322F2009DE778 /* ScoreCardRow.swift */; };
+		0783694928C324BB009DE778 /* PlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783694828C324BB009DE778 /* PlayerExtensions.swift */; };
 		07A0A5642896EEE5004F4196 /* AutomatedScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */; };
 		07A0A56D2896EF3D004F4196 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56C2896EF3D004F4196 /* SnapshotHelper.swift */; };
 		07A0A56F28971519004F4196 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56E28971519004F4196 /* Acknowledgement.swift */; };
@@ -89,6 +92,9 @@
 		0783691A28C2F911009DE778 /* Chevron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chevron.swift; sourceTree = "<group>"; };
 		0783691D28C3009A009DE778 /* CellLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellLabelStyle.swift; sourceTree = "<group>"; };
 		0783694228C30AC5009DE778 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		0783694428C322A9009DE778 /* NotepadLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotepadLine.swift; sourceTree = "<group>"; };
+		0783694628C322F2009DE778 /* ScoreCardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCardRow.swift; sourceTree = "<group>"; };
+		0783694828C324BB009DE778 /* PlayerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerExtensions.swift; sourceTree = "<group>"; };
 		07A0A5612896EEE5004F4196 /* AutomatedScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutomatedScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomatedScreenshots.swift; sourceTree = "<group>"; };
 		07A0A56C2896EF3D004F4196 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -136,6 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				074374B2289EE924001279F8 /* CloseButton.swift */,
+				0783694428C322A9009DE778 /* NotepadLine.swift */,
+				0783694628C322F2009DE778 /* ScoreCardRow.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -324,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				0783691728C2F35A009DE778 /* AppExtensions.swift */,
+				0783694828C324BB009DE778 /* PlayerExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -495,6 +504,7 @@
 				07A0A56F28971519004F4196 /* Acknowledgement.swift in Sources */,
 				077233B828AE91AC003EE3AD /* App.swift in Sources */,
 				0714D2052883735000CE45A3 /* RoundEditor.swift in Sources */,
+				0783694728C322F2009DE778 /* ScoreCardRow.swift in Sources */,
 				07E25153288C4D040061AA19 /* MoreView.swift in Sources */,
 				0714D1DF2883125D00CE45A3 /* LoadGame.swift in Sources */,
 				0714D1E1288327AA00CE45A3 /* ScoreRow.swift in Sources */,
@@ -509,7 +519,9 @@
 				0783694328C30AC5009DE778 /* SceneDelegate.swift in Sources */,
 				0714D1D1287B38B600CE45A3 /* Main.swift in Sources */,
 				0714D1D8287B39A200CE45A3 /* ScoreFive.xcdatamodeld in Sources */,
+				0783694528C322A9009DE778 /* NotepadLine.swift in Sources */,
 				0714D1D3287B38BD00CE45A3 /* ScoreCard.swift in Sources */,
+				0783694928C324BB009DE778 /* PlayerExtensions.swift in Sources */,
 				0783691628C2F1FA009DE778 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
