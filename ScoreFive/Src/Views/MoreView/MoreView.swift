@@ -164,6 +164,9 @@ struct MoreView: View {
     @Environment(\.isUITest)
     private var isUITest: Bool
 
+    @Environment(\.openURL)
+    private var openURL: OpenURLAction
+
     @State
     private var safariUrl: SafariURL?
 
@@ -196,7 +199,7 @@ struct MoreView: View {
             requestedReview = true
         } else if let url = URL(string: "https://itunes.apple.com/app/id1637035385?action=write-review"),
                   UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:])
+            openURL(url)
         }
     }
 
@@ -234,7 +237,7 @@ struct MoreView: View {
               UIApplication.shared.canOpenURL(url) else {
             return
         }
-        UIApplication.shared.open(url)
+        openURL(url)
     }
 }
 
