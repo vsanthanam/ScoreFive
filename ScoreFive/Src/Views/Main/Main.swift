@@ -32,7 +32,7 @@ struct Main: View {
     // MARK: - View
 
     var body: some View {
-        HStack(alignment: .top, spacing: 0) {
+        HStack(spacing: 0) {
             if let record = gameManager.activeGameRecord {
                 ScoreCard(game: try! record.recordedGame)
             } else {
