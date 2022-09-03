@@ -47,28 +47,40 @@ struct Menu: View {
                 .renderingMode(.template)
                 .resizable()
                 .foregroundColor(.tintColor)
-                .frame(width: 100,
-                       height: 100,
+                .frame(width: 128,
+                       height: 128,
                        alignment: .center)
+
             Spacer()
                 .frame(maxHeight: 25)
-            MenuButton("New Game",
-                       systemName: "square.and.pencil") {
-                onTap(.new)
+
+            Button(action: { onTap(.new) }) {
+                HStack {
+                    Image(systemName: "square.and.pencil")
+                    Text("New Game")
+                }
+                .frame(width: 160)
             }
 
             if showLoadGameButton {
-                MenuButton("Load Game",
-                           systemName: "doc.badge.ellipsis") {
-                    onTap(.load)
+                Button(action: { onTap(.load) }) {
+                    HStack {
+                        Image(systemName: "doc.badge.ellipsis")
+                        Text("Load Game")
+                    }
+                    .frame(width: 160)
                 }
             }
 
-            MenuButton("More",
-                       systemName: "ellipsis.circle") {
-                onTap(.more)
+            Button(action: { onTap(.more) }) {
+                HStack {
+                    Image(systemName: "ellipsis.circle")
+                    Text("More")
+                }
+                .frame(width: 160)
             }
         }
+        .buttonStyle(.borderedProminent)
     }
 
     // MARK: - Private
