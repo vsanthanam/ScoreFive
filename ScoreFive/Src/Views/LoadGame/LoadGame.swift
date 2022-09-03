@@ -29,13 +29,6 @@ import SwiftUI
 
 struct LoadGame: View {
 
-    // MARK: - Initializers
-
-    init() {
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
-    }
-
     // MARK: - View
 
     var body: some View {
@@ -50,7 +43,7 @@ struct LoadGame: View {
                             openGame(withRecord: record)
                         } label: {
                             VStack(alignment: .leading) {
-                                Text(formatter.string(from: record.playerNames ?? []) ?? "")
+                                Text(playerListFormatter.string(from: record.playerNames ?? []) ?? "")
                                 Text("Last updated at \(dateFormatter.string(from: record.timestamp ?? .now))")
                                     .font(.caption)
                             }
@@ -73,7 +66,7 @@ struct LoadGame: View {
                                                 Button("Erase All", role: .destructive, action: destroyAll)
                                                 Button("Cancel", role: .cancel) {}
                                             }) {
-                            Text("All if your games, including games you have not completed, will be permanently removed from the device. This action is irreversible.")
+                            Text("All of your games, including games you have not yet completed, will be permanently deleted. This action is irreversible.")
                         }
                     }
                 }
@@ -111,14 +104,7 @@ struct LoadGame: View {
 
     // MARK: - Private
 
-    private let formatter = ListFormatter()
-
-    private let dateFormatter = DateFormatter()
-
     private let didSave = NotificationCenter.default.publisher(for: NSNotification.Name.NSManagedObjectContextDidSave).receive(on: DispatchQueue.main)
-
-    @AppStorage("show_complete_games")
-    private var showCompleteGames: Bool = false
 
     @State
     private var editButtonMode: EditMode = .inactive
@@ -131,6 +117,15 @@ struct LoadGame: View {
 
     @State
     private var showOperationError = false
+
+    @AppStorage("show_complete_games")
+    private var showCompleteGames: Bool = false
+
+    @Environment(\.gameRecordDateFormatter)
+    private var dateFormatter: DateFormatter
+
+    @Environment(\.playerListFormatter)
+    private var playerListFormatter: ListFormatter
 
     @Environment(\.dismiss)
     private var dismiss: DismissAction
