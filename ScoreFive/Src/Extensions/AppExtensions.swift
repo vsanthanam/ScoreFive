@@ -1,5 +1,5 @@
 // ScoreFive
-// PlayerTextField.swift
+// AppExtensions.swift
 //
 // MIT License
 //
@@ -23,33 +23,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import Five
+import Foundation
 
-struct PlayerTextField: View {
+extension ScoreFive {
 
-    // MARK: - Initializers
-
-    init(index: Int,
-         player: Binding<String>,
-         submitLabel: SubmitLabel = .next) {
-        self.index = index
-        self.player = player
-        self.submitLabel = submitLabel
+    @MainActor
+    func checkForDemo() {
+        if ProcessInfo.processInfo.arguments.contains("demo") {
+            var game = Game(players: ["Mom", "Dad", "God", "Bro"], scoreLimit: 250)
+            var round = game.newRound()
+            round["Mom"] = 21
+            round["Dad"] = 17
+            round["God"] = 32
+            round["Bro"] = 0
+            game.addRound(round)
+            round = game.newRound()
+            round["Mom"] = 12
+            round["Dad"] = 9
+            round["God"] = 0
+            round["Bro"] = 4
+            game.addRound(round)
+            round = game.newRound()
+            round["Mom"] = 0
+            round["Dad"] = 50
+            round["God"] = 31
+            round["Bro"] = 17
+            game.addRound(round)
+            let record = try! GameManager.shared.storeNewGame(game)
+            try! GameManager.shared.save()
+            try! GameManager.shared.activateGame(with: record)
+        }
     }
 
-    // MARK: - View
-
-    var body: some View {
-        TextField("Player \(index + 1)", text: player)
-            .autocapitalization(.words)
-            .keyboardType(.default)
-            .disableAutocorrection(true)
-            .submitLabel(submitLabel)
-    }
-
-    // MARK: - Private
-
-    private let index: Int
-    private let player: Binding<String>
-    private let submitLabel: SubmitLabel
 }

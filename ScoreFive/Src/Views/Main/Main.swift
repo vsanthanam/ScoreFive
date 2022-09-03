@@ -62,11 +62,8 @@ struct Main: View {
             MoreView()
         }
         .onAppear {
-            launchCount += 1
             guard !isPreview, !isUITest else { return }
-            if let record = gameRecords.first, !record.isComplete {
-                try! gameManager.activateGame(with: record)
-            }
+            launchCount += 1
         }
         .onReceive(gameManager.cloudPublisher) { _ in
             if !isPreview,

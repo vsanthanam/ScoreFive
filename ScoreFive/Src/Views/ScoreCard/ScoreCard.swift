@@ -50,26 +50,26 @@ struct ScoreCard: View {
                         ForEach(game.rounds) { round in
                             let index = game.rounds.firstIndex(of: round)!
                             let color: Color = index % 2 == 0 ? .secondarySystemBackground : .tertiarySystemBackground
-                            Button(action: {
-                                editingRound = RoundAndIndex(round: round, index: index)
-                            }) {
-                                ScoreRow(signpost: indexByPlayer ? game.startingPlayer(atIndex: index).signpost(for: game.allPlayers) : (index + 1).description,
-                                         round: round,
-                                         players: game.allPlayers,
-                                         activePlayers: game.activePlayers)
-                            }
-                            .scoreCardRow(color: color)
+                            let signpost = indexByPlayer ? game.startingPlayer(atIndex: index).signpost(for: game.allPlayers) : (index + 1).description
+                            ScoreRow(signpost: signpost,
+                                     round: round,
+                                     players: game.allPlayers,
+                                     activePlayers: game.activePlayers)
+                                .scoreCardRow(color: color)
+                                .onTapGesture {
+                                    editingRound = RoundAndIndex(round: round, index: index)
+                                }
                         }
                         .onDelete(perform: deleteItems(offsets:))
 
                         if !game.isComplete {
-                            Button(action: showAddRound) {
-                                AddRow(signpost: indexByPlayer ? game.startingPlayer(atIndex: game.rounds.count).signpost(for: game.allPlayers) : (game.rounds.count + 1).description)
-                                    .sheet(isPresented: $showingAddRound) {
-                                        RoundEditor(game: $game)
-                                    }
-                            }
-                            .scoreCardRow()
+                            let signpost = indexByPlayer ? game.startingPlayer(atIndex: game.rounds.count).signpost(for: game.allPlayers) : (game.rounds.count + 1).description
+                            AddRow(signpost: signpost)
+                                .scoreCardRow()
+                                .onTapGesture(perform: showAddRound)
+                                .sheet(isPresented: $showingAddRound) {
+                                    RoundEditor(game: $game)
+                                }
                         }
 
                         Spacer()
@@ -186,9 +186,10 @@ struct ScoreCard: View {
         var body: some View {
             Rectangle()
                 .fill(Color.tintColor)
-                .frame(maxWidth: 1, maxHeight: .infinity)
+                .frame(maxWidth: 0.5, maxHeight: .infinity)
                 .padding(.init(top: 0, leading: 48, bottom: 0, trailing: 0))
                 .ignoresSafeArea(.all, edges: [.bottom])
+                .opacity(0.7)
         }
 
     }

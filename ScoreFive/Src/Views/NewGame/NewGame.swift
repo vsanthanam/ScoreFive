@@ -26,7 +26,6 @@
 import Collections
 import Five
 import Foundation
-import ListCell
 import SwiftUI
 
 struct NewGame: View {
@@ -37,7 +36,7 @@ struct NewGame: View {
         NavigationView {
             Form {
                 Section {
-                    ListCell(placeholder: "Score Limit", input: scoreLimitBinding)
+                    TextField("Score Limit", text: scoreLimitBinding)
                         .keyboardType(.numberPad)
                         .focused($focusedPlayerIndex, equals: -1)
                         .submitLabel(.next)
@@ -69,17 +68,17 @@ struct NewGame: View {
                     .deleteDisabled(players.count <= 2)
                     if canAddPlayer {
                         Button(action: addPlayer) {
-                            ListCell("Add Player")
+                            Text("Add Player")
+                                .frame(maxWidth: .infinity)
                         }
-                        .listCellStyle(.defaultButtonStyle)
                     }
                 }
                 if canSaveGame {
                     Section {
                         Button(action: save) {
-                            ListCell("Start Game")
+                            Text("Start Game")
+                                .frame(maxWidth: .infinity)
                         }
-                        .listCellStyle(.defaultButtonStyle)
                     }
                 }
             }

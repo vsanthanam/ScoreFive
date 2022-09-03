@@ -68,8 +68,6 @@ struct Acknowledgements: View {
                         urlString: "https://vsanthanam.github.io/SafariView"),
         Acknowledgement(title: "MailView",
                         urlString: "https://www.github.com/vsanthanam/MailView"),
-        Acknowledgement(title: "ListCell",
-                        urlString: "https://github.com/vsanthanam/ListCell")
     ]
 
     private static let services = [

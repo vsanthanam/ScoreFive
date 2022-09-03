@@ -19,7 +19,6 @@
 		0714D1DF2883125D00CE45A3 /* LoadGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1DE2883125D00CE45A3 /* LoadGame.swift */; };
 		0714D1E1288327AA00CE45A3 /* ScoreRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D1E0288327AA00CE45A3 /* ScoreRow.swift */; };
 		0714D2052883735000CE45A3 /* RoundEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0714D2042883735000CE45A3 /* RoundEditor.swift */; };
-		0719CCD628B3009B00B428D0 /* ListCell in Frameworks */ = {isa = PBXBuildFile; productRef = 0719CCD528B3009B00B428D0 /* ListCell */; };
 		074374B3289EE924001279F8 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074374B2289EE924001279F8 /* CloseButton.swift */; };
 		074374BA289F0546001279F8 /* MailView in Frameworks */ = {isa = PBXBuildFile; productRef = 074374B9289F0546001279F8 /* MailView */; };
 		0747A458289338D5001A561C /* SafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 0747A457289338D5001A561C /* SafariView */; };
@@ -31,9 +30,12 @@
 		075F15FE288B53D200E238C0 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 075F15FD288B53D200E238C0 /* Collections */; };
 		076A0C49287B35A000A75AE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 076A0C48287B35A000A75AE9 /* Assets.xcassets */; };
 		076A0C54287B35C800A75AE9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A0C53287B35C800A75AE9 /* RootView.swift */; };
-		077233B828AE91AC003EE3AD /* ScoreFive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077233B728AE91AC003EE3AD /* ScoreFive.swift */; };
+		077233B828AE91AC003EE3AD /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077233B728AE91AC003EE3AD /* App.swift */; };
 		077233B928AE9A46003EE3AD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E25176288DBCB00061AA19 /* CloudKit.framework */; };
-		0798000028A6A2AB00464449 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798FFFF28A6A2AB00464449 /* ColorExtensions.swift */; };
+		0783691628C2F1FA009DE778 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783691528C2F1FA009DE778 /* AppDelegate.swift */; };
+		0783691828C2F35A009DE778 /* AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783691728C2F35A009DE778 /* AppExtensions.swift */; };
+		0783691B28C2F911009DE778 /* Chevron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783691A28C2F911009DE778 /* Chevron.swift */; };
+		0783691E28C3009A009DE778 /* CellLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783691D28C3009A009DE778 /* CellLabelStyle.swift */; };
 		07A0A5642896EEE5004F4196 /* AutomatedScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */; };
 		07A0A56D2896EF3D004F4196 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56C2896EF3D004F4196 /* SnapshotHelper.swift */; };
 		07A0A56F28971519004F4196 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0A56E28971519004F4196 /* Acknowledgement.swift */; };
@@ -81,8 +83,11 @@
 		076A0C48287B35A000A75AE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		076A0C4D287B35A000A75AE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		076A0C53287B35C800A75AE9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		077233B728AE91AC003EE3AD /* ScoreFive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreFive.swift; sourceTree = "<group>"; };
-		0798FFFF28A6A2AB00464449 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		077233B728AE91AC003EE3AD /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		0783691528C2F1FA009DE778 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0783691728C2F35A009DE778 /* AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExtensions.swift; sourceTree = "<group>"; };
+		0783691A28C2F911009DE778 /* Chevron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chevron.swift; sourceTree = "<group>"; };
+		0783691D28C3009A009DE778 /* CellLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellLabelStyle.swift; sourceTree = "<group>"; };
 		07A0A5612896EEE5004F4196 /* AutomatedScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutomatedScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A0A5632896EEE5004F4196 /* AutomatedScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomatedScreenshots.swift; sourceTree = "<group>"; };
 		07A0A56C2896EF3D004F4196 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -108,7 +113,6 @@
 				07DF790B28BAACA000DF0E05 /* Outils in Frameworks */,
 				07E2517E288DDB0F0061AA19 /* Five in Frameworks */,
 				0713050728AFDDAB00B80968 /* Combine.framework in Frameworks */,
-				0719CCD628B3009B00B428D0 /* ListCell in Frameworks */,
 				0747A458289338D5001A561C /* SafariView in Frameworks */,
 				0713050B28AFDDBD00B80968 /* Foundation.framework in Frameworks */,
 				074374BA289F0546001279F8 /* MailView in Frameworks */,
@@ -136,13 +140,6 @@
 			path = Modifiers;
 			sourceTree = "<group>";
 		};
-		0747A45B2895A932001A561C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		0747A45F2895BD2E001A561C /* Acknowledgements */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,7 +152,8 @@
 		075F15CC288B12DF00E238C0 /* Infra */ = {
 			isa = PBXGroup;
 			children = (
-				077233B728AE91AC003EE3AD /* ScoreFive.swift */,
+				077233B728AE91AC003EE3AD /* App.swift */,
+				0783691528C2F1FA009DE778 /* AppDelegate.swift */,
 			);
 			path = Infra;
 			sourceTree = "<group>";
@@ -209,8 +207,9 @@
 		075F15DC288B162900E238C0 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				0783691C28C30092009DE778 /* Styles */,
+				0783691928C2F90C009DE778 /* Views */,
 				074374B1289EE908001279F8 /* Modifiers */,
-				0747A45B2895A932001A561C /* Views */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -305,10 +304,26 @@
 			path = ScoreFive;
 			sourceTree = "<group>";
 		};
+		0783691928C2F90C009DE778 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0783691A28C2F911009DE778 /* Chevron.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0783691C28C30092009DE778 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				0783691D28C3009A009DE778 /* CellLabelStyle.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		0798FFFE28A6A2A300464449 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0798FFFF28A6A2AB00464449 /* ColorExtensions.swift */,
+				0783691728C2F35A009DE778 /* AppExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -377,7 +392,6 @@
 				07E2517D288DDB0F0061AA19 /* Five */,
 				0747A457289338D5001A561C /* SafariView */,
 				074374B9289F0546001279F8 /* MailView */,
-				0719CCD528B3009B00B428D0 /* ListCell */,
 				07DF790A28BAACA000DF0E05 /* Outils */,
 			);
 			productName = ScoreFive;
@@ -435,7 +449,6 @@
 				07E25145288C45060061AA19 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				0747A455289338B6001A561C /* XCRemoteSwiftPackageReference "SafariView" */,
 				074374B8289F0545001279F8 /* XCRemoteSwiftPackageReference "MailView" */,
-				0719CCD428B3009B00B428D0 /* XCRemoteSwiftPackageReference "ListCell" */,
 				07DF790928BAACA000DF0E05 /* XCRemoteSwiftPackageReference "Outils" */,
 			);
 			productRefGroup = 076A0C3D287B35A000A75AE9 /* Products */;
@@ -477,9 +490,10 @@
 				0714D1D5287B390000CE45A3 /* GameManager.swift in Sources */,
 				075F15D8288B147900E238C0 /* PlayerTextField.swift in Sources */,
 				074374B3289EE924001279F8 /* CloseButton.swift in Sources */,
+				0783691E28C3009A009DE778 /* CellLabelStyle.swift in Sources */,
 				0747A4612895C543001A561C /* Acknowledgements.swift in Sources */,
 				07A0A56F28971519004F4196 /* Acknowledgement.swift in Sources */,
-				077233B828AE91AC003EE3AD /* ScoreFive.swift in Sources */,
+				077233B828AE91AC003EE3AD /* App.swift in Sources */,
 				0714D2052883735000CE45A3 /* RoundEditor.swift in Sources */,
 				07A0A5712897153F004F4196 /* AcknowledgementRow.swift in Sources */,
 				07E25153288C4D040061AA19 /* MoreView.swift in Sources */,
@@ -488,13 +502,15 @@
 				0714D1DD287B532600CE45A3 /* NewGame.swift in Sources */,
 				07E25155288C4FBD0061AA19 /* MenuButton.swift in Sources */,
 				075F15E0288B204500E238C0 /* TotalScoreBar.swift in Sources */,
+				0783691828C2F35A009DE778 /* AppExtensions.swift in Sources */,
 				07E25181288DF9D30061AA19 /* Menu.swift in Sources */,
 				075F15EC288B45A400E238C0 /* AddRow.swift in Sources */,
 				075F15EA288B442A00E238C0 /* PlayerBar.swift in Sources */,
-				0798000028A6A2AB00464449 /* ColorExtensions.swift in Sources */,
+				0783691B28C2F911009DE778 /* Chevron.swift in Sources */,
 				0714D1D1287B38B600CE45A3 /* Main.swift in Sources */,
 				0714D1D8287B39A200CE45A3 /* ScoreFive.xcdatamodeld in Sources */,
 				0714D1D3287B38BD00CE45A3 /* ScoreCard.swift in Sources */,
+				0783691628C2F1FA009DE778 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,7 +655,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 252;
+				CURRENT_PROJECT_VERSION = 255;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -669,7 +685,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 252;
+				CURRENT_PROJECT_VERSION = 255;
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
@@ -767,14 +783,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		0719CCD428B3009B00B428D0 /* XCRemoteSwiftPackageReference "ListCell" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/vsanthanam/ListCell.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.1;
-			};
-		};
 		074374B8289F0545001279F8 /* XCRemoteSwiftPackageReference "MailView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vsanthanam/MailView.git";
@@ -810,11 +818,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0719CCD528B3009B00B428D0 /* ListCell */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0719CCD428B3009B00B428D0 /* XCRemoteSwiftPackageReference "ListCell" */;
-			productName = ListCell;
-		};
 		074374B9289F0546001279F8 /* MailView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 074374B8289F0545001279F8 /* XCRemoteSwiftPackageReference "MailView" */;

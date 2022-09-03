@@ -1,5 +1,5 @@
 // ScoreFive
-// PlayerTextField.swift
+// Chevron.swift
 //
 // MIT License
 //
@@ -23,33 +23,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Foundation
+import Outils
 import SwiftUI
 
-struct PlayerTextField: View {
-
-    // MARK: - Initializers
-
-    init(index: Int,
-         player: Binding<String>,
-         submitLabel: SubmitLabel = .next) {
-        self.index = index
-        self.player = player
-        self.submitLabel = submitLabel
-    }
+struct Chevron: View {
 
     // MARK: - View
 
     var body: some View {
-        TextField("Player \(index + 1)", text: player)
-            .autocapitalization(.words)
-            .keyboardType(.default)
-            .disableAutocorrection(true)
-            .submitLabel(submitLabel)
+        Image(systemName: "chevron.forward")
+            .font(Font.system(.caption).weight(.bold))
+            .foregroundColor(.tertiaryLabel)
     }
 
-    // MARK: - Private
-
-    private let index: Int
-    private let player: Binding<String>
-    private let submitLabel: SubmitLabel
 }

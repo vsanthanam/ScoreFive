@@ -24,7 +24,6 @@
 // SOFTWARE.
 
 import CoreData
-import ListCell
 import SwiftUI
 
 struct LoadGame: View {
@@ -63,8 +62,8 @@ struct LoadGame: View {
                     Section {
                         Button(role: .destructive,
                                action: { showEraseAllConfirm.toggle() }) {
-                            ListCell("Erase All")
-                                .listCellStyle(.buttonListCellStyle(accentColor: nil))
+                            Text("Erase All")
+                                .frame(maxWidth: .infinity)
                         }
                         .confirmationDialog("Are You Sure?",
                                             isPresented: $showEraseAllConfirm,

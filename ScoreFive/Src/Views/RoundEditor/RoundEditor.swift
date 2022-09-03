@@ -25,7 +25,6 @@
 
 import Collections
 import Five
-import ListCell
 import SwiftUI
 
 struct RoundEditor: View {
@@ -70,10 +69,10 @@ struct RoundEditor: View {
                 }
                 Section {
                     Button(action: save) {
-                        ListCell("Done")
+                        Text("Done")
+                            .frame(maxWidth: .infinity)
                     }
                     .disabled(!round.isValid)
-                    .listCellStyle(.defaultButtonStyle)
                 }
                 .multilineTextAlignment(.center)
             }

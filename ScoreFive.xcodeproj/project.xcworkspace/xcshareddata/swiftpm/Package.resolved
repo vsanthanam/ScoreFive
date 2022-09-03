@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "listcell",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vsanthanam/ListCell.git",
-      "state" : {
-        "revision" : "b602b086093fbb2b3a629e200825a18b7b097edb",
-        "version" : "0.0.3"
-      }
-    },
-    {
       "identity" : "mailview",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vsanthanam/MailView.git",

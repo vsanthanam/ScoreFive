@@ -1,5 +1,5 @@
 // ScoreFive
-// PlayerTextField.swift
+// AppDelegate.swift
 //
 // MIT License
 //
@@ -23,33 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import Foundation
+import UIKit
 
-struct PlayerTextField: View {
-
-    // MARK: - Initializers
-
-    init(index: Int,
-         player: Binding<String>,
-         submitLabel: SubmitLabel = .next) {
-        self.index = index
-        self.player = player
-        self.submitLabel = submitLabel
-    }
-
-    // MARK: - View
-
-    var body: some View {
-        TextField("Player \(index + 1)", text: player)
-            .autocapitalization(.words)
-            .keyboardType(.default)
-            .disableAutocorrection(true)
-            .submitLabel(submitLabel)
-    }
-
-    // MARK: - Private
-
-    private let index: Int
-    private let player: Binding<String>
-    private let submitLabel: SubmitLabel
-}
+final class AppDelegate: NSObject, UIApplicationDelegate {}

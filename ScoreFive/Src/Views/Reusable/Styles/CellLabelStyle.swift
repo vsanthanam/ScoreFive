@@ -1,5 +1,5 @@
 // ScoreFive
-// PlayerTextField.swift
+// CellLabelStyle.swift
 //
 // MIT License
 //
@@ -23,33 +23,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Foundation
 import SwiftUI
 
-struct PlayerTextField: View {
+struct CellLabelStyle: LabelStyle {
 
-    // MARK: - Initializers
-
-    init(index: Int,
-         player: Binding<String>,
-         submitLabel: SubmitLabel = .next) {
-        self.index = index
-        self.player = player
-        self.submitLabel = submitLabel
+    func makeBody(configuration: Configuration) -> some View {
+        Label(title: {
+            configuration.title.foregroundColor(.label)
+        }, icon: {
+            configuration.icon.foregroundColor(.tintColor)
+        })
     }
 
-    // MARK: - View
+}
 
-    var body: some View {
-        TextField("Player \(index + 1)", text: player)
-            .autocapitalization(.words)
-            .keyboardType(.default)
-            .disableAutocorrection(true)
-            .submitLabel(submitLabel)
-    }
+extension LabelStyle where Self == CellLabelStyle {
 
-    // MARK: - Private
+    static var cell: CellLabelStyle { .init() }
 
-    private let index: Int
-    private let player: Binding<String>
-    private let submitLabel: SubmitLabel
 }

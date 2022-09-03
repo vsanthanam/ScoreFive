@@ -24,7 +24,6 @@
 // SOFTWARE.
 
 import Combine
-import ListCell
 import MailView
 import Network
 import Outils
@@ -36,18 +35,21 @@ struct MoreView: View {
 
     // MARK: - View
 
+    private var twitterIcon: some View {
+        Image("Twitter")
+            .renderingMode(.template)
+            .resizable()
+            .frame(width: 20, height: 20, alignment: .center)
+            .foregroundColor(.accentColor)
+    }
+
     var body: some View {
         NavigationView {
             List {
                 Section {
                     HStack {
                         Toggle(isOn: $indexByPlayer) {
-                            Label {
-                                Text("Index By Player")
-                                    .foregroundColor(.label)
-                            } icon: {
-                                Image(systemName: "list.number")
-                            }
+                            Label("Index By Player", systemImage: "list.number")
                         }
                     }
                 } header: {
@@ -57,34 +59,42 @@ struct MoreView: View {
                     if let url = URL(string: MoreView.twitterUrlString),
                        UIApplication.shared.canOpenURL(url) {
                         Button(action: {
-                            UIApplication.shared.open(url)
+                            Task {
+                                await UIApplication.shared.open(url)
+                            }
                         }) {
-                            ListCell("Twitter", icon: {
-                                Image("Twitter")
-                                    .renderingMode(.template)
-                                    .resizable()
-                                    .frame(width: 20, height: 20, alignment: .center)
-                                    .foregroundColor(.accentColor)
-                            }, disclosureIndicator: true)
+                            HStack {
+                                Label(title: {
+                                    Text("Twitter")
+                                }, icon: {
+                                    twitterIcon
+                                })
+                                Spacer()
+                                Chevron()
+                            }
                         }
                     }
                     if MailView.canSendMail || isUITest {
-                        Button(action: {
-                            showMail.toggle()
-                        }) {
-                            ListCell("Email", systemImage: "envelope", disclosureIndicator: true)
+                        Button(action: { showMail.toggle() }) {
+                            HStack {
+                                Label("Email", systemImage: "envelope")
+                                Spacer()
+                                Chevron()
+                            }
                         }
                     }
-                    Button(action: {
-                        safariUrl = URL(string: MoreView.instructionsUrlString)
-                    }) {
-                        ListCell("Instructions", systemImage: "book", disclosureIndicator: true)
+                    Button(action: { safariUrl = URL(string: MoreView.instructionsUrlString) }) {
+                        HStack {
+                            Label("Instructions", systemImage: "book")
+                            Spacer()
+                            Chevron()
+                        }
                     }
-                    if let url = URL(string: MoreView.privacyUrlString) {
-                        Button(action: {
-                            safariUrl = url
-                        }) {
-                            ListCell("Privacy", systemImage: "shield.lefthalf.filled", disclosureIndicator: true)
+                    Button(action: { safariUrl = URL(string: MoreView.privacyUrlString) }) {
+                        HStack {
+                            Label("Privacy", systemImage: "shield.lefthalf.filled")
+                            Spacer()
+                            Chevron()
                         }
                     }
                 } header: {
@@ -92,30 +102,42 @@ struct MoreView: View {
                 }
                 Section {
                     Button(action: shareApp) {
-                        ListCell("Tell a Friend", systemImage: "square.and.arrow.up", disclosureIndicator: true)
+                        HStack {
+                            Label("Tell a Friend", systemImage: "square.and.arrow.up")
+                            Spacer()
+                            Chevron()
+                        }
                     }
                     Button(action: leaveReview) {
-                        ListCell("Rate & Review", systemImage: "star.bubble", disclosureIndicator: true)
+                        HStack {
+                            Label("Rate & Review", systemImage: "star.bubble")
+                            Spacer()
+                            Chevron()
+                        }
                     }
                 } header: {
                     Text("Support ScoreFive")
                 }
                 Section {
-                    ListCell("Version", systemImage: "info.circle", badge: "\(AppInfo.version) (\(AppInfo.build))")
+                    Label("Version", systemImage: "info.circle")
+                        .badge("\(AppInfo.version) (\(AppInfo.build))")
                     NavigationLink(destination: {
                         Acknowledgements()
                     }) {
-                        ListCell("Acknowledgements", systemImage: "heart.text.square")
+                        Label("Acknowledgements", systemImage: "heart.text.square")
                     }
-                    Button(action: {
-                        safariUrl = URL(string: MoreView.sourceCodeUrlString)
-                    }) {
-                        ListCell("Source Code", systemImage: "chevron.left.forwardslash.chevron.right", disclosureIndicator: true)
+                    Button(action: { safariUrl = URL(string: MoreView.sourceCodeUrlString) }) {
+                        HStack {
+                            Label("Source Code", systemImage: "chevron.left.forwardslash.chevron.right")
+                            Spacer()
+                            Chevron()
+                        }
                     }
                 } header: {
                     Text("About")
                 }
             }
+            .labelStyle(.cell)
             .navigationTitle("More")
             .closeButton { dismiss() }
         }

@@ -23,24 +23,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import ListCell
 import SwiftUI
 
 struct AcknowledgementRow: View {
 
     // MARK: - Initializers
 
-    init(item: Acknowledgement,
-         onTap: @escaping (Acknowledgement) -> Void) {
+    init(item: Acknowledgement, action: @escaping (Acknowledgement) -> Void) {
         self.item = item
-        self.onTap = onTap
+        self.action = action
     }
 
     // MARK: - View
 
     var body: some View {
-        Button(action: { onTap(item) }) {
-            ListCell(content: {
+        Button(action: {
+            action(item)
+        }) {
+            HStack {
                 VStack(alignment: .leading) {
                     Text(item.title)
                         .font(.body)
@@ -49,13 +49,14 @@ struct AcknowledgementRow: View {
                         .font(.caption)
                         .foregroundColor(.secondaryLabel)
                 }
-            }, disclosureIndicator: true)
+                Spacer()
+                Chevron()
+            }
         }
     }
 
     // MARK: - Private
 
     private let item: Acknowledgement
-
-    private let onTap: (Acknowledgement) -> Void
+    private let action: (Acknowledgement) -> Void
 }
