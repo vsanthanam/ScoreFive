@@ -70,7 +70,14 @@ struct ScoreCard: View {
             .notepadLine()
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
-            .closeButton(action: close)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: showGameInfo) {
+                        Image(systemName: "info.circle")
+                    }
+                }
+            }
+            .closeButton(.leading, action: close)
         }
         .sheet(item: $editingRound) { roundAndIndex in
             RoundEditor(game: $game, previousIndex: roundAndIndex.index)
@@ -78,8 +85,11 @@ struct ScoreCard: View {
         .sheet(isPresented: $showingAddRound) {
             RoundEditor(game: $game)
         }
-        .alert("Cannot delete this round", isPresented: $roundAlert) {
-            Button("OK") { roundAlert = false }
+        .sheet(isPresented: $showingGameInfo) {
+            GameInfo()
+        }
+        .alert("Cannot delete this round", isPresented: $showingDeleteRoundAlert) {
+            Button("OK") { showingDeleteRoundAlert = false }
         } message: {
             Text("Please delete newer rounds first")
         }
@@ -112,7 +122,10 @@ struct ScoreCard: View {
     private var editingRound: RoundAndIndex?
 
     @State
-    private var roundAlert: Bool = false
+    private var showingDeleteRoundAlert: Bool = false
+
+    @State
+    private var showingGameInfo: Bool = false
 
     @Environment(\.isUITest)
     private var isUITest: Bool
@@ -144,12 +157,16 @@ struct ScoreCard: View {
         showingAddRound = true
     }
 
+    private func showGameInfo() {
+        showingGameInfo = true
+    }
+
     private func deleteItems(offsets: IndexSet) {
         for index in offsets {
             if game.canDeleteRound(atIndex: index) {
                 game.deleteRound(atIndex: index)
             } else {
-                roundAlert = true
+                showingDeleteRoundAlert = true
             }
         }
     }

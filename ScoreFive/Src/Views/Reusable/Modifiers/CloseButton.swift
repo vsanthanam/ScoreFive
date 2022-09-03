@@ -28,15 +28,15 @@ import SwiftUI
 import UIKit
 
 extension View {
-    func closeButton(_ placement: CloseButtonPlacement = .left, action: @escaping () -> Void) -> some View {
+    func closeButton(_ placement: CloseButtonPlacement = .trailing, action: @escaping () -> Void) -> some View {
         let modifier = CloseButtonModifier(placement: placement, action: action)
         return ModifiedContent(content: self, modifier: modifier)
     }
 }
 
 enum CloseButtonPlacement {
-    case left
-    case right
+    case leading
+    case trailing
 }
 
 private struct CloseButtonModifier: ViewModifier {
@@ -56,13 +56,22 @@ private struct CloseButtonModifier: ViewModifier {
                                                 primaryAction: UIAction { _ in
                                                     action()
                                                 }, menu: nil)
-                switch placement {
-                case .left:
+                switch (direction, placement) {
+                case (.leftToRight, .leading):
                     viewController.navigationItem.leftBarButtonItem = closeItem
-                case .right:
+                case (.rightToLeft, .leading):
+                    viewController.navigationItem.rightBarButtonItem = closeItem
+                case (.leftToRight, .trailing):
+                    viewController.navigationItem.rightBarButtonItem = closeItem
+                case (.rightToLeft, .trailing):
+                    viewController.navigationItem.leftBarButtonItem = closeItem
+                @unknown default:
                     viewController.navigationItem.rightBarButtonItem = closeItem
                 }
             }
     }
+
+    @Environment(\.layoutDirection)
+    private var direction: LayoutDirection
 
 }
