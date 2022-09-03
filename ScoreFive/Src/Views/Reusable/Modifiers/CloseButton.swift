@@ -28,10 +28,13 @@ import SwiftUI
 import UIKit
 
 extension View {
-    func closeButton(_ placement: CloseButtonPlacement = .trailing, action: @escaping () -> Void) -> some View {
+
+    func closeButton(_ placement: CloseButtonPlacement = .trailing,
+                     action: @escaping () -> Void) -> some View {
         let modifier = CloseButtonModifier(placement: placement, action: action)
         return ModifiedContent(content: self, modifier: modifier)
     }
+
 }
 
 enum CloseButtonPlacement {
@@ -49,6 +52,7 @@ private struct CloseButtonModifier: ViewModifier {
 
     // MARK: - ViewModifier
 
+    @ViewBuilder
     func body(content: Content) -> some View {
         content
             .introspectViewController { viewController in
@@ -70,6 +74,8 @@ private struct CloseButtonModifier: ViewModifier {
                 }
             }
     }
+
+    // MARK: - Private
 
     @Environment(\.layoutDirection)
     private var direction: LayoutDirection
