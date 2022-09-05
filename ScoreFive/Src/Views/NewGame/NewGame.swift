@@ -174,8 +174,8 @@ struct NewGame: View {
                 let game = Game(players: mappedPlayers, scoreLimit: scoreLimit)
                 let record = try gameManager.storeNewGame(game)
                 dismiss()
-                try gameManager.activateGame(with: record)
                 try gameManager.save()
+                try gameManager.activateGame(with: record)
             }
         } catch {
             showOperationError = true

@@ -40,34 +40,43 @@ struct ScoreCard: View {
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                Divider()
-                PlayerBar(players: game.allPlayers,
-                          activePlayers: game.activePlayers)
-                Divider()
-                List {
-                    ForEach(game.rounds, content: makeRound)
-                        .onDelete(perform: deleteItems)
-
-                    if !game.isComplete {
-                        Button(action: showAddRound) {
-                            AddRow(signpost: signpost(for: game.rounds.count))
-                        }
+            ZStack(alignment: .leading) {
+                VStack(spacing: 0) {
+                    Divider()
+                    PlayerBar(players: game.allPlayers,
+                              activePlayers: game.activePlayers)
                         .scoreCardRow()
-                        .sheet(isPresented: $showingAddRound) {
-                            RoundEditor(game: $game)
+                    Divider()
+                    List {
+                        ForEach(game.rounds, content: makeRound)
+                            .onDelete(perform: deleteItems)
+
+                        if !game.isComplete {
+                            Button(action: showAddRound) {
+                                AddRow(signpost: signpost(for: game.rounds.count))
+                            }
+                            .scoreCardRow()
+                            .sheet(isPresented: $showingAddRound) {
+                                RoundEditor(game: $game)
+                            }
                         }
+                        Spacer()
+                            .frame(maxWidth: .infinity, maxHeight: 44)
+                            .listRowSeparator(.hidden)
                     }
-                    Spacer()
-                        .frame(maxWidth: .infinity, maxHeight: 44)
-                        .listRowSeparator(.hidden)
+                    .listStyle(.plain)
+                    Divider()
+                        .padding(.init(top: 0, leading: 48, bottom: 0, trailing: 0))
+                    TotalScoreBar(game: $game)
+                        .scoreCardRow()
                 }
-                .listStyle(.plain)
-                Divider()
+                Rectangle()
+                    .fill(Color.tintColor)
+                    .frame(maxWidth: 0.5, maxHeight: .infinity)
                     .padding(.init(top: 0, leading: 48, bottom: 0, trailing: 0))
-                TotalScoreBar(game: $game)
+                    .ignoresSafeArea(.all, edges: [.bottom])
+                    .opacity(0.7)
             }
-            .notepadLine()
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

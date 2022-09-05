@@ -34,19 +34,23 @@ struct AddRow: View {
     // MARK: - View
 
     var body: some View {
-        HStack {
-            VStack(alignment: .center) {
-                Text(signpost)
-                    .bold()
-                    .multilineTextAlignment(.center)
+        VStack(spacing: 0) {
+            Spacer()
+            HStack {
+                VStack(alignment: .center) {
+                    Text(signpost)
+                        .bold()
+                        .multilineTextAlignment(.center)
+                }
+                .frame(width: 48)
+                VStack(alignment: .center) {
+                    Text("Add Scores")
+                        .frame(maxWidth: .infinity)
+                }
             }
-            .frame(width: 48)
-            VStack(alignment: .center) {
-                Text("Add Scores")
-                    .frame(maxWidth: .infinity)
-            }
+            .foregroundColor(.tertiaryLabel)
+            Spacer()
         }
-        .foregroundColor(.tertiaryLabel)
     }
 }
 
