@@ -79,23 +79,13 @@ struct ScoreCard: View {
             }
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: showGameInfo) {
-                        Image(systemName: "info.circle")
-                    }
-                }
-            }
-            .closeButton(.leading, action: close)
+            .closeButton(.trailing, action: close)
         }
         .sheet(item: $editingRound) { roundAndIndex in
             RoundEditor(game: $game, previousIndex: roundAndIndex.index)
         }
         .sheet(isPresented: $showingAddRound) {
             RoundEditor(game: $game)
-        }
-        .sheet(isPresented: $showingGameInfo) {
-            GameInfo()
         }
         .alert("Cannot delete this round", isPresented: $showingDeleteRoundAlert) {
             Button("OK") { showingDeleteRoundAlert = false }
@@ -109,7 +99,7 @@ struct ScoreCard: View {
         }
         .onChange(of: game, perform: persist(game:))
         .onAppear(perform: promptForReviewIfNeeded)
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(.stack)
     }
 
     // MARK: - Private
@@ -125,9 +115,6 @@ struct ScoreCard: View {
 
     @State
     private var showingDeleteRoundAlert: Bool = false
-
-    @State
-    private var showingGameInfo: Bool = false
 
     @State
     private var showOperationError = false
@@ -172,10 +159,6 @@ struct ScoreCard: View {
 
     private func showAddRound() {
         showingAddRound = true
-    }
-
-    private func showGameInfo() {
-        showingGameInfo = true
     }
 
     private func deleteItems(offsets: IndexSet) {
