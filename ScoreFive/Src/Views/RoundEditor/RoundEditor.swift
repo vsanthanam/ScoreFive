@@ -80,7 +80,7 @@ struct RoundEditor: View {
             .navigationBarTitleDisplayMode(.inline)
             .animation(.default, value: statusMessage)
             .alert("Error", isPresented: $showingAlert) {
-                Button("OK") {}
+                Button("OK") { showingAlert = false }
             } message: {
                 Text("You cannot change a round this much!")
             }

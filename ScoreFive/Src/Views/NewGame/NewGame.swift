@@ -85,6 +85,11 @@ struct NewGame: View {
             .navigationTitle("New Game")
             .closeButton { dismiss() }
         }
+        .alert("Operation Failed", isPresented: $showOperationError) {
+            Button("OK") { showOperationError = false }
+        } message: {
+            Text("Cannot Perform Operation")
+        }
     }
 
     // MARK: - Private
@@ -115,6 +120,9 @@ struct NewGame: View {
 
     @State
     private var scoreLimit = 250
+
+    @State
+    private var showOperationError = false
 
     private var scoreLimitBinding: Binding<String> {
         .init {
@@ -152,21 +160,25 @@ struct NewGame: View {
     }
 
     private func save() {
-        withAnimation {
-            let mappedPlayers = players
-                .indices
-                .map { index -> Game.Player in
-                    if players[index].name.isEmpty {
-                        return "Player \(index + 1)"
-                    } else {
-                        return players[index].name
+        do {
+            try withAnimation {
+                let mappedPlayers = players
+                    .indices
+                    .map { index -> Game.Player in
+                        if players[index].name.isEmpty {
+                            return "Player \(index + 1)"
+                        } else {
+                            return players[index].name
+                        }
                     }
-                }
-            let game = Game(players: mappedPlayers, scoreLimit: scoreLimit)
-            let record = try! gameManager.storeNewGame(game)
-            dismiss()
-            try! gameManager.activateGame(with: record)
-            try! gameManager.save()
+                let game = Game(players: mappedPlayers, scoreLimit: scoreLimit)
+                let record = try gameManager.storeNewGame(game)
+                dismiss()
+                try gameManager.activateGame(with: record)
+                try gameManager.save()
+            }
+        } catch {
+            showOperationError = true
         }
     }
 

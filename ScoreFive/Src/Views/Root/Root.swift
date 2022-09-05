@@ -33,8 +33,9 @@ struct Root: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            if let record = gameManager.activeGameRecord {
-                ScoreCard(game: try! record.recordedGame)
+            if let record = gameManager.activeGameRecord,
+               let game = try? record.recordedGame {
+                ScoreCard(game: game)
             } else {
                 Menu(showLoadGameButton: !gameRecords.isEmpty) { tap in
                     switch tap {
@@ -60,7 +61,7 @@ struct Root: View {
             MoreView()
         }
         .alert("Operation Failed", isPresented: $showOperationError) {
-            Button("OK") {}
+            Button("OK") { showOperationError = false }
         } message: {
             Text("Cannot perform operation")
         }

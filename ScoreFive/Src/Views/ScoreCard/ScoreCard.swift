@@ -93,24 +93,17 @@ struct ScoreCard: View {
         } message: {
             Text("Please delete newer rounds first")
         }
+        .alert("Operation Failed", isPresented: $showOperationError) {
+            Button("OK") { showOperationError = false }
+        } message: {
+            Text("Cannot perform operation")
+        }
         .onChange(of: game, perform: persist(game:))
         .onAppear(perform: promptForReviewIfNeeded)
         .navigationViewStyle(StackNavigationViewStyle())
     }
 
     // MARK: - Private
-
-    @AppStorage("index_by_player")
-    private var indexByPlayer = true
-
-    @AppStorage("requested_review")
-    private var requestedReview = false
-
-    @AppStorage("launch_count")
-    private var launchCount = 0
-
-    @EnvironmentObject
-    private var gameManager: GameManager
 
     @State
     private var game: Game
@@ -127,11 +120,26 @@ struct ScoreCard: View {
     @State
     private var showingGameInfo: Bool = false
 
+    @State
+    private var showOperationError = false
+
     @Environment(\.isUITest)
     private var isUITest: Bool
 
+    @EnvironmentObject
+    private var gameManager: GameManager
+
+    @AppStorage("index_by_player")
+    private var indexByPlayer = true
+
+    @AppStorage("requested_review")
+    private var requestedReview = false
+
+    @AppStorage("launch_count")
+    private var launchCount = 0
+
     private var totalScores: [Int] {
-        game.allPlayers.map { game.totalScore(forPlayer: $0) }
+        game.allPlayers.map(game.totalScore(forPlayer:))
     }
 
     @ViewBuilder
@@ -162,24 +170,33 @@ struct ScoreCard: View {
     }
 
     private func deleteItems(offsets: IndexSet) {
-        for index in offsets {
-            if game.canDeleteRound(atIndex: index) {
-                game.deleteRound(atIndex: index)
-            } else {
-                showingDeleteRoundAlert = true
+        offsets
+            .forEach { index in
+                if game.canDeleteRound(atIndex: index) {
+                    game.deleteRound(atIndex: index)
+                } else {
+                    showingDeleteRoundAlert = true
+                }
             }
-        }
     }
 
     private func close() {
-        withAnimation {
-            try! gameManager.deactivateGame()
+        do {
+            try withAnimation {
+                try gameManager.deactivateGame()
+            }
+        } catch {
+            showOperationError = true
         }
     }
 
     private func persist(game: Game) {
-        try! gameManager.updateGame(game)
-        try! gameManager.save()
+        do {
+            try gameManager.updateGame(game)
+            try gameManager.save()
+        } catch {
+            showOperationError = true
+        }
     }
 
     private func promptForReviewIfNeeded() {
@@ -195,8 +212,6 @@ struct ScoreCard: View {
     private struct RoundAndIndex: Identifiable {
         let round: Round
         let index: Int
-
-        // MARK: - Identifiable
 
         var id: String { round.id }
     }
