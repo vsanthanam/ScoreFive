@@ -23,6 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CloudStorage
 import Combine
 import MailView
 import Network
@@ -173,7 +174,7 @@ struct MoreView: View {
     @State
     private var showMail = false
 
-    @AppStorage("index_by_player")
+    @CloudStorage("index_by_player")
     private var indexByPlayer = true
 
     @AppStorage("requested_review")

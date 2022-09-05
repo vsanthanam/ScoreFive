@@ -23,6 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CloudStorage
 import Collections
 import Five
 import StoreKit
@@ -125,7 +126,7 @@ struct ScoreCard: View {
     @EnvironmentObject
     private var gameManager: GameManager
 
-    @AppStorage("index_by_player")
+    @CloudStorage("index_by_player")
     private var indexByPlayer = true
 
     @AppStorage("requested_review")

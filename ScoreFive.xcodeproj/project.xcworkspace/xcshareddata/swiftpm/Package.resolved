@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "cloudstorage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vsanthanam/CloudStorage.git",
+      "state" : {
+        "revision" : "fd55a543bbfa20e341d6e857e1252b533cd207bc",
+        "version" : "0.0.1"
+      }
+    },
+    {
       "identity" : "mailview",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vsanthanam/MailView.git",

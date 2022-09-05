@@ -34,4 +34,8 @@ final class SceneDelegate: NSObject, UISceneDelegate {
         try? GameManager.shared.save()
     }
 
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        NSUB
+    }
+
 }
