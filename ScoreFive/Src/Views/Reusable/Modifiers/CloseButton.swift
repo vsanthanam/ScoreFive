@@ -52,7 +52,6 @@ private struct CloseButtonModifier: ViewModifier {
 
     // MARK: - ViewModifier
 
-    @ViewBuilder
     func body(content: Content) -> some View {
         content
             .introspectViewController { viewController in

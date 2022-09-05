@@ -55,7 +55,8 @@ struct ScoreRow: View {
                 .frame(width: 48)
                 HStack {
                     ForEach(players, id: \.self) { player in
-                        if round.players.contains(player), let score = round[player] {
+                        if round.players.contains(player),
+                           let score = round[player] {
                             Text(String(score))
                                 .foregroundColor(color(for: score))
                                 .opacity(opacity(for: player))
@@ -128,7 +129,7 @@ struct ScoreRow_Previews: PreviewProvider {
                      players: ["Mom", "Dad", "God", "Bro"],
                      activePlayers: ["Mom", "Dad", "Bro"])
                 .scoreCardRow()
-                .colorScheme(scheme)
+                .preferredColorScheme(scheme)
         }
         .previewLayout(PreviewLayout.sizeThatFits)
     }

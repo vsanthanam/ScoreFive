@@ -55,8 +55,8 @@ struct AddRow_Previews: PreviewProvider {
         ForEach(ColorScheme.allCases, id: \.self) { scheme in
             AddRow(signpost: "X")
                 .scoreCardRow()
+                .preferredColorScheme(scheme)
                 .previewLayout(PreviewLayout.sizeThatFits)
-                .colorScheme(scheme)
         }
     }
 }
