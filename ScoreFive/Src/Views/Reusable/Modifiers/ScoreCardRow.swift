@@ -42,7 +42,6 @@ private struct ScoreCardRowModifier: ViewModifier {
 
     // MARK: - ViewModifier
 
-    @ViewBuilder
     func body(content: Content) -> some View {
         content
             .padding(.vertical, 0)

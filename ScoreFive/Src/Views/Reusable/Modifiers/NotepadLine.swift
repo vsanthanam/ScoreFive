@@ -38,7 +38,6 @@ private struct NotepadLineModifier: ViewModifier {
 
     // MARK: - ViewModifier
 
-    @ViewBuilder
     func body(content: Content) -> some View {
         ZStack(alignment: .leading) {
             content
