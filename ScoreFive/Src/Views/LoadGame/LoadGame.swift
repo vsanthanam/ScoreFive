@@ -72,7 +72,7 @@ struct LoadGame: View {
                 }
             }
             .alert("Operation Failed", isPresented: $showOperationError) {
-                Button("OK") {}
+                Button("OK") { showOperationError = false }
             } message: {
                 Text("Cannot perform operation")
             }
@@ -88,7 +88,9 @@ struct LoadGame: View {
             }
             .environment(\.editMode, $listEditMode)
             .navigationTitle("Load Game")
-            .closeButton { dismiss() }
+            .closeButton(.leading) {
+                dismiss()
+            }
         }
         .onReceive(didSave) { _ in
             if gameRecords.isEmpty {

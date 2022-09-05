@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vsanthanam/Outils.git",
       "state" : {
-        "revision" : "8ec91e78f573e371d062f2c6c7f8519cd9c89bb3",
-        "version" : "0.0.1"
+        "revision" : "c3b6402fbc2aed34eeb8305d991c4d8c84e54d18",
+        "version" : "0.0.3"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections.git",
       "state" : {
-        "revision" : "48254824bb4248676bf7ce56014ff57b142b77eb",
-        "version" : "1.0.2"
+        "revision" : "f504716c27d2e5d4144fa4794b12129301d17729",
+        "version" : "1.0.3"
       }
     },
     {
