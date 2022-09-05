@@ -38,21 +38,23 @@ struct PlayerBar: View {
     // MARK: - View
 
     var body: some View {
-        HStack {
-            VStack(alignment: .center) {
-                Text("")
-            }
-            .frame(width: 48)
+        VStack(spacing: 0) {
+            Spacer()
             HStack {
-                ForEach(players, id: \.self) { player in
-                    Text(player.signpost(for: players))
-                        .bold()
-                        .opacity(opacity(for: player))
+                Rectangle()
+                    .fill(.clear)
+                    .frame(width: 48)
+                HStack {
+                    ForEach(players, id: \.self) { player in
+                        Text(player.signpost(for: players))
+                            .bold()
+                            .opacity(opacity(for: player))
+                    }
+                    .frame(maxWidth: .infinity)
                 }
-                .frame(maxWidth: .infinity)
             }
+            Spacer()
         }
-        .padding(.vertical, 12)
     }
 
     // MARK: - Private
@@ -64,8 +66,12 @@ struct PlayerBar: View {
 
 struct PlayerBar_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerBar(players: ["Mom", "Dad", "God", "Bro"],
-                  activePlayers: ["Mom", "Dad", "Bro"])
-            .previewLayout(PreviewLayout.sizeThatFits)
+        ForEach(ColorScheme.allCases, id: \.self) { scheme in
+            PlayerBar(players: ["Mom", "Dad", "God", "Bro"],
+                      activePlayers: ["Mom", "Dad", "Bro"])
+                .previewLayout(PreviewLayout.sizeThatFits)
+                .scoreCardRow()
+                .preferredColorScheme(scheme)
+        }
     }
 }

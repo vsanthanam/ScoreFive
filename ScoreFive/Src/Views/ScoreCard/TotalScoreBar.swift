@@ -36,22 +36,25 @@ struct TotalScoreBar: View {
     // MARK: - View
 
     var body: some View {
-        HStack {
-            VStack(alignment: .center) {
-                Text("")
-            }
-            .frame(width: 48)
+        VStack(spacing: 0) {
+            Spacer()
             HStack {
-                ForEach(game.allPlayers, id: \.self) { player in
-                    Text(game[player].description)
-                        .bold()
-                        .foregroundColor(color(for: player))
-                        .opacity(opacity(for: player))
+                VStack(alignment: .center) {
+                    Text("")
                 }
-                .frame(maxWidth: .infinity)
+                .frame(width: 48)
+                HStack {
+                    ForEach(game.allPlayers, id: \.self) { player in
+                        Text(game[player].description)
+                            .bold()
+                            .foregroundColor(color(for: player))
+                            .opacity(opacity(for: player))
+                    }
+                    .frame(maxWidth: .infinity)
+                }
             }
+            Spacer()
         }
-        .padding(.vertical, 12)
     }
 
     // MARK: - Private
@@ -89,8 +92,9 @@ struct TotalScoreBar_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) { scheme in
             TotalScoreBar(game: .constant(previewGame))
+                .scoreCardRow()
                 .previewLayout(PreviewLayout.sizeThatFits)
-                .colorScheme(scheme)
+                .preferredColorScheme(scheme)
         }
     }
 }
