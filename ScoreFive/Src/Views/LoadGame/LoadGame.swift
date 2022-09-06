@@ -23,6 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CloudStorage
 import CoreData
 import Outils
 import SwiftUI
@@ -120,7 +121,7 @@ struct LoadGame: View {
     @State
     private var showOperationError = false
 
-    @AppStorage("show_complete_games")
+    @CloudStorage("show_complete_games")
     private var showCompleteGames: Bool = false
 
     @Environment(\.gameRecordDateFormatter)

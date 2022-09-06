@@ -70,14 +70,17 @@ struct Root: View {
             launchCount += 1
         }
         .onReceive(gameManager.cloudPublisher) { _ in
-            if !isPreview,
-               !isUITest,
-               gameManager.activeGameRecord != nil {
-                do {
+            do {
+                if !isPreview,
+                   !isUITest,
+                   let activeIdentifier = gameManager.activeGameRecord?.gameIdentifier {
                     try gameManager.deactivateGame()
-                } catch {
-                    showOperationError = true
+                    if let newRecord = gameRecords.first(where: { $0.gameIdentifier == activeIdentifier }) {
+                        try gameManager.activateGame(with: newRecord)
+                    }
                 }
+            } catch {
+                showOperationError = true
             }
         }
     }
