@@ -36,7 +36,7 @@ struct MoreView: View {
     // MARK: - View
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section {
                     HStack {
@@ -84,7 +84,7 @@ struct MoreView: View {
                     Text("Help")
                 }
                 Section {
-                    Button(action: shareApp) {
+                    ShareLink(item: URL(string: "https://itunes.apple.com/app/id1637035385")!) {
                         HStack {
                             Label("Tell a Friend", systemImage: "square.and.arrow.up")
                             Spacer()
@@ -161,6 +161,9 @@ struct MoreView: View {
     @Environment(\.dismiss)
     private var dismiss: DismissAction
 
+    @Environment(\.requestReview)
+    private var requestReview: RequestReviewAction
+
     @Environment(\.isUITest)
     private var isUITest: Bool
 
@@ -193,31 +196,17 @@ struct MoreView: View {
     }
 
     private func leaveReview() {
-        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           !requestedReview {
-            SKStoreReviewController.requestReview(in: scene)
-            requestedReview = true
+        if !requestedReview {
+            Task {
+                await requestReview()
+                await MainActor.run {
+                    requestedReview = true
+                }
+            }
         } else if let url = URL(string: "https://itunes.apple.com/app/id1637035385?action=write-review"),
                   UIApplication.shared.canOpenURL(url) {
             openURL(url)
         }
-    }
-
-    private func shareApp() {
-        guard let url = URL(string: "https://itunes.apple.com/app/id1637035385"),
-              let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = scene.windows.first,
-              let vc = window.rootViewController?.presentedViewController else {
-            return
-        }
-        print(String(describing: vc.self))
-        print(vc.view.subviews)
-        let av = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            av.popoverPresentationController?.sourceView = vc.view
-            av.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height, width: 0, height: 0)
-        }
-        vc.present(av, animated: true, completion: nil)
     }
 
     private func viewPrivacy() {

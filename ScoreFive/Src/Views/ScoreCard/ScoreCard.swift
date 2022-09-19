@@ -33,13 +33,13 @@ struct ScoreCard: View {
     // MARK: - Initializers
 
     init(game: Game) {
-        self.game = game
+        _game = .init(initialValue: game)
     }
 
     // MARK: - View
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack(alignment: .leading) {
                 VStack(spacing: 0) {
                     Divider()
@@ -99,7 +99,6 @@ struct ScoreCard: View {
         }
         .onChange(of: game, perform: persist(game:))
         .onAppear(perform: promptForReviewIfNeeded)
-        .navigationViewStyle(.stack)
     }
 
     // MARK: - Private
@@ -121,6 +120,9 @@ struct ScoreCard: View {
 
     @Environment(\.isUITest)
     private var isUITest: Bool
+
+    @Environment(\.requestReview)
+    private var requestReview: RequestReviewAction
 
     @EnvironmentObject
     private var gameManager: GameManager
@@ -194,9 +196,8 @@ struct ScoreCard: View {
     private func promptForReviewIfNeeded() {
         guard !isUITest else { return }
         if launchCount >= 3,
-           !requestedReview,
-           let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            SKStoreReviewController.requestReview(in: scene)
+           !requestedReview {
+            requestReview()
             requestedReview = true
         }
     }

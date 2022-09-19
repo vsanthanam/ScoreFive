@@ -94,7 +94,7 @@ struct Acknowledgements: View {
 struct Acknowledgements_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) { scheme in
-            NavigationView {
+            NavigationStack {
                 Acknowledgements()
             }
             .colorScheme(scheme)

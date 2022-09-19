@@ -33,7 +33,7 @@ struct LoadGame: View {
     // MARK: - View
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section {
                     Toggle("Show Complete Games", isOn: $showCompleteGames.animation(.default))

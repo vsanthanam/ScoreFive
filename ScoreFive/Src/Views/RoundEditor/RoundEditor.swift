@@ -50,7 +50,7 @@ struct RoundEditor: View {
     // MARK: - View
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     ForEach(round.players, id: \.self) { player in

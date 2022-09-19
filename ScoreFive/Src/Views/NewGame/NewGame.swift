@@ -33,7 +33,7 @@ struct NewGame: View {
     // MARK: - View
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     TextField("Score Limit", text: scoreLimitBinding)
