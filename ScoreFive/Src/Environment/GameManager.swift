@@ -85,13 +85,13 @@ final class GameManager: ObservableObject {
     }
 
     func destroyAllRecords() throws {
-        try? deactivateGame()
         let fetchRequest = GameRecord.fetchRequest()
         fetchRequest.returnsObjectsAsFaults = false
         let results = try viewContext.fetch(fetchRequest)
         for result in results {
             viewContext.delete(result)
         }
+        try? deactivateGame()
     }
 
     public var cloudPublisher: AnyPublisher<Notification, Never> {
