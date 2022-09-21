@@ -160,28 +160,31 @@ struct NewGame: View {
     }
 
     private func save() {
-        do {
-            try withAnimation {
-                let mappedPlayers = players
-                    .indices
-                    .map { index -> Game.Player in
-                        if players[index].name.isEmpty {
-                            return "Player \(index + 1)"
-                        } else {
-                            return players[index].name
-                        }
+        Task {
+            await MainActor.run {
+                do {
+                    try withAnimation {
+                        let mappedPlayers = players
+                            .indices
+                            .map { index -> Game.Player in
+                                if players[index].name.isEmpty {
+                                    return "Player \(index + 1)"
+                                } else {
+                                    return players[index].name
+                                }
+                            }
+                        let game = Game(players: mappedPlayers, scoreLimit: scoreLimit)
+                        let record = try gameManager.storeNewGame(game)
+                        dismiss()
+                        try gameManager.save()
+                        try gameManager.activateGame(with: record)
                     }
-                let game = Game(players: mappedPlayers, scoreLimit: scoreLimit)
-                let record = try gameManager.storeNewGame(game)
-                dismiss()
-                try gameManager.save()
-                try gameManager.activateGame(with: record)
+                } catch {
+                    showOperationError = true
+                }
             }
-        } catch {
-            showOperationError = true
         }
     }
-
 }
 
 struct NewGame_Previews: PreviewProvider {

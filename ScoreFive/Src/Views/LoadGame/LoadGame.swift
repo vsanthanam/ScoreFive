@@ -164,14 +164,18 @@ struct LoadGame: View {
     }
 
     private func openGame(withRecord record: GameRecord) {
-        do {
-            guard !listEditMode.isEditing else { return }
-            try withAnimation {
-                try gameManager.activateGame(with: record)
+        Task {
+            await MainActor.run {
+                do {
+                    guard !listEditMode.isEditing else { return }
+                    try withAnimation {
+                        try gameManager.activateGame(with: record)
+                    }
+                    dismiss()
+                } catch {
+                    showOperationError = true
+                }
             }
-            dismiss()
-        } catch {
-            showOperationError = true
         }
     }
 
